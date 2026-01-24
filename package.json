@@ -1,5 +1,5 @@
 {
-  "name": "scrapedduck",
+  "name": "scrapedPoGo",
   "version": "1.0.0",
   "description": "Scrape LeekDuck.com for relevant information about Pokemon GO",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "combinedetails": "node ./src/scrapers/combinedetails.js",
     "scrapeshinies": "node ./src/scrapers/scrapeShinies.js"
   },
-  "author": "bigfoott",
+  "author": "quantNebula",
   "license": "MIT",
   "dependencies": {
     "jsdom": "21.1.1",

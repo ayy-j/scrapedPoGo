@@ -74,7 +74,7 @@ Depending on the use case, many parsers (ex: Javascript's `Date.parse()`) will h
 
 ## Event Type Specific Fields
 
-All events include `hasSpawns` and `hasFieldResearchTasks` boolean fields (added in [#18](https://github.com/bigfoott/ScrapedDuck/pull/18)).
+All events include `hasSpawns` and `hasFieldResearchTasks` boolean fields (added in [#18](https://github.com/quantNebula/scrapedPoGo/pull/18)).
 
 For certain event types, additional fields are included directly in the event object to provide more detailed information. These fields are specific to each event type and appear at the top level of the event object.
 

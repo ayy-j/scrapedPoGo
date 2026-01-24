@@ -92,7 +92,7 @@ All scraped data is saved to the `data/` directory as JSON files:
 ## Project Structure
 
 ```
-ScrapedDuck/
+scrapedPoGo/
 ├── src/                    # Source code
 │   ├── scrapers/           # Main scraper scripts
 │   ├── pages/              # Page-specific scraper modules

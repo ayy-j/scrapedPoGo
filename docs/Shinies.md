@@ -138,7 +138,7 @@ This dual-check ensures maximum accuracy.
 
 ### Check if a specific Pokémon has shiny
 ```javascript
-fetch('https://bigfoott.github.io/ScrapedDuck/shinies.json')
+fetch('https://quantnebula.github.io/scrapedPoGo/shinies.json')
   .then(r => r.json())
   .then(data => {
     const bulbasaur = data.shinies.find(p => 
@@ -150,7 +150,7 @@ fetch('https://bigfoott.github.io/ScrapedDuck/shinies.json')
 
 ### Get all Pokémon with costume variants
 ```javascript
-fetch('https://bigfoott.github.io/ScrapedDuck/shinies.json')
+fetch('https://quantnebula.github.io/scrapedPoGo/shinies.json')
   .then(r => r.json())
   .then(data => {
     const withCostumes = data.shinies.filter(p => 
@@ -162,7 +162,7 @@ fetch('https://bigfoott.github.io/ScrapedDuck/shinies.json')
 
 ### Find all Alolan shinies
 ```javascript
-fetch('https://bigfoott.github.io/ScrapedDuck/shinies.json')
+fetch('https://quantnebula.github.io/scrapedPoGo/shinies.json')
   .then(r => r.json())
   .then(data => {
     const alolan = data.shinies.filter(p => p.typeCode === '_61');
@@ -173,7 +173,7 @@ fetch('https://bigfoott.github.io/ScrapedDuck/shinies.json')
 
 ### Get shinies released in a specific year
 ```javascript
-fetch('https://bigfoott.github.io/ScrapedDuck/shinies.json')
+fetch('https://quantnebula.github.io/scrapedPoGo/shinies.json')
   .then(r => r.json())
   .then(data => {
     const year2018 = data.shinies.filter(p => 
