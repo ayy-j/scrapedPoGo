@@ -1,6 +1,6 @@
 # Shinies Endpoint
 
-**URL**: `https://bigfoott.github.io/ScrapedDuck/shinies.json`  
+**URL**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.json`  
 **Data Source**: [LeekDuck.com](https://leekduck.com/shiny/)
 
 ## Overview

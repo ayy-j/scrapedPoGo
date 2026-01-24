@@ -15,7 +15,7 @@ function main()
 
     var events = JSON.parse(fs.readFileSync("./data/events.min.json"));
 
-    https.get("https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.min.json", (res) =>
+    https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json", (res) =>
     {
         let body = "";
         res.on("data", (chunk) => { body += chunk; });

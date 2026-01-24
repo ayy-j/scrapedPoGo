@@ -58,33 +58,33 @@ All scraped data is saved to the `data/` directory as JSON files:
 ## API Endpoints
 
 ### Events
-- Formatted: [`GET /data/events.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.json)
-- Minimized: [`GET /data/events.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json`
 - [Documentation](docs/Events.md)
 
 ### Raids
-- Formatted: [`GET /data/raids.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/raids.json)
-- Minimized: [`GET /data/raids.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/raids.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.min.json`
 - [Documentation](docs/Raids.md)
 
 ### Research
-- Formatted: [`GET /data/research.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/research.json)
-- Minimized: [`GET /data/research.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/research.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.min.json`
 - [Documentation](docs/Research.md)
 
 ### Eggs
-- Formatted: [`GET /data/eggs.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/eggs.json)
-- Minimized: [`GET /data/eggs.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/eggs.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.min.json`
 - [Documentation](docs/Eggs.md)
 
 ### Rocket Lineups
-- Formatted: [`GET /data/rocketLineups.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/rocketLineups.json)
-- Minimized: [`GET /data/rocketLineups.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/rocketLineups.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json`
 - [Documentation](docs/RocketLineups.md)
 
 ### Shinies
-- Formatted: [`GET /data/shinies.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/shinies.json)
-- Minimized: [`GET /data/shinies.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/shinies.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min.json`
 - [Documentation](docs/Shinies.md)
 
 ---

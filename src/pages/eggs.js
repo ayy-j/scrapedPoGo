@@ -101,7 +101,7 @@ function get()
         }).catch(_err =>
             {
                 console.log(_err);
-                https.get("https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/eggs.min.json", (res) =>
+                https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.min.json", (res) =>
                 {
                     let body = "";
                     res.on("data", (chunk) => { body += chunk; });

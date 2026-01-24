@@ -1,7 +1,7 @@
 # Endpoints
 
-- Formatted: [`GET /data/rocketLineups.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/rocketLineups.json)
-- Minimized: [`GET /data/rocketLineups.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/rocketLineups.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json`
 
 # Example Rocket Lineup Object
 

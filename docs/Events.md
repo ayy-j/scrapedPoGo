@@ -1,7 +1,7 @@
 # Endpoints
 
-- Formatted: [`GET /data/events.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.json)
-- Minimized: [`GET /data/events.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/events.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json`
 
 # Example Event Object
 

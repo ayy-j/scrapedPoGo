@@ -1,7 +1,7 @@
 # Endpoints
 
-- Formatted: [`GET /data/eggs.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/eggs.json)
-- Minimized: [`GET /data/eggs.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/eggs.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.min.json`
 
 # Example Egg Object
 

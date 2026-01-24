@@ -1,7 +1,7 @@
 # Endpoints
 
-- Formatted: [`GET /data/raids.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/raids.json)
-- Minimized: [`GET /data/raids.min.json`](https://raw.githubusercontent.com/bigfoott/ScrapedDuck/data/raids.min.json)
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.min.json`
 
 # Example Raid Object
 
