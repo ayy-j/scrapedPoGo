@@ -4,8 +4,8 @@ The `contextual.json` file is a unified, player-focused aggregation of all scrap
 
 ## File Locations
 
-- Full: `data/contextual.json`
-- Minified: `data/contextual.min.json`
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/contextual.json`
+- Minified: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/contextual.min.json`
 
 ## Schema Overview
 
