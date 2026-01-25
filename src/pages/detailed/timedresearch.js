@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Timed Research event scraper.
+ * Extracts timed research tasks, rewards, availability window,
+ * and pricing for ticketed research.
+ * @module pages/detailed/timedresearch
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -9,8 +16,38 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Timed Research events.
- * Extracts research tasks, rewards, availability window, pricing if ticketed.
+ * @typedef {Object} TimedAvailability
+ * @property {string} start - Start date/time description
+ * @property {string} end - End date/time description
+ */
+
+/**
+ * @typedef {Object} TimedResearchData
+ * @property {string} name - Research name from page title
+ * @property {string} description - Research description
+ * @property {boolean} isPaid - Whether this research requires purchase
+ * @property {number|null} price - Price in USD if paid, null otherwise
+ * @property {Object[]} tasks - Research task steps or individual tasks
+ * @property {string[]} rewards - List of rewards
+ * @property {Object[]} encounters - Pokemon encounter rewards
+ * @property {TimedAvailability} availability - Time window for completion
+ */
+
+/**
+ * Scrapes Timed Research event data from LeekDuck.
+ * Extracts time-limited research including tasks, rewards, encounter
+ * Pokemon, availability windows, and pricing for ticketed content.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/timed-research-furfrou/', 'timed-research-furfrou', backupData);
  */
 async function get(url, id, bkp) {
     try {

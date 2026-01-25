@@ -1,23 +1,39 @@
+/**
+ * @fileoverview Image Dimensions Utility for Pokemon GO scrapers.
+ * Fetches actual image dimensions from remote URLs by reading image headers.
+ * Supports PNG, JPEG/JPG, GIF, WebP, SVG, BMP, ICO, and more formats.
+ * Uses the image-size package which parses headers without downloading full images.
+ * @module utils/imageDimensions
+ */
+
 const https = require('https');
 const http = require('http');
 const { imageSize } = require('image-size');
 
 /**
- * Image Dimensions Utility
- * 
- * Fetches actual image dimensions from remote URLs by reading image headers.
- * Supports PNG, JPEG/JPG, GIF, WebP, SVG, BMP, ICO, and more formats.
- * Uses the image-size package which parses headers without downloading full images.
+ * @typedef {Object} ImageDimensions
+ * @property {number} width - Image width in pixels
+ * @property {number} height - Image height in pixels
+ * @property {string} type - Image format type (e.g., "png", "jpg", "webp")
  */
 
-// Cache to avoid redundant fetches for the same URL
+/** @type {Map<string, ImageDimensions>} Cache to avoid redundant fetches */
 const dimensionCache = new Map();
 
 /**
- * Fetch image dimensions from a URL.
- * @param {string} url - The image URL
+ * Fetches image dimensions from a URL by reading image headers.
+ * Results are cached to avoid redundant network requests.
+ * 
+ * @async
+ * @param {string} url - The image URL to fetch dimensions for
  * @param {number} [timeout=5000] - Request timeout in milliseconds
- * @returns {Promise<{width: number, height: number, type: string}|null>}
+ * @returns {Promise<ImageDimensions|null>} Dimensions object or null on failure
+ * 
+ * @example
+ * const dims = await getImageDimensions('https://example.com/image.png');
+ * if (dims) {
+ *   console.log(`${dims.width}x${dims.height} ${dims.type}`);
+ * }
  */
 async function getImageDimensions(url, timeout = 5000) {
     if (!url) return null;
@@ -57,11 +73,13 @@ async function getImageDimensions(url, timeout = 5000) {
 }
 
 /**
- * Fetch image buffer from URL.
+ * Fetches image data buffer from URL.
  * Only fetches enough bytes to determine dimensions (up to 128KB for safety).
- * @param {string} url - The image URL
- * @param {number} timeout - Request timeout
- * @returns {Promise<Buffer|null>}
+ * Handles HTTP redirects automatically.
+ * 
+ * @param {string} url - The image URL to fetch
+ * @param {number} timeout - Request timeout in milliseconds
+ * @returns {Promise<Buffer|null>} Image data buffer or null on failure
  */
 function fetchImageBuffer(url, timeout) {
     return new Promise((resolve) => {
@@ -114,11 +132,21 @@ function fetchImageBuffer(url, timeout) {
 }
 
 /**
- * Get dimensions for multiple image URLs in parallel.
+ * Gets dimensions for multiple image URLs in parallel with batching.
  * Processes in batches to avoid overwhelming the network.
- * @param {string[]} urls - Array of image URLs
- * @param {number} [batchSize=10] - Number of concurrent requests
- * @returns {Promise<Map<string, {width: number, height: number, type: string}>>}
+ * Deduplicates URLs and caches results.
+ * 
+ * @async
+ * @param {string[]} urls - Array of image URLs to process
+ * @param {number} [batchSize=10] - Number of concurrent requests per batch
+ * @returns {Promise<Map<string, ImageDimensions>>} Map of URL to dimensions
+ * 
+ * @example
+ * const urls = ['https://example.com/img1.png', 'https://example.com/img2.png'];
+ * const dimsMap = await getMultipleImageDimensions(urls);
+ * dimsMap.forEach((dims, url) => {
+ *   console.log(`${url}: ${dims.width}x${dims.height}`);
+ * });
  */
 async function getMultipleImageDimensions(urls, batchSize = 10) {
     const results = new Map();
@@ -145,16 +173,19 @@ async function getMultipleImageDimensions(urls, batchSize = 10) {
 }
 
 /**
- * Clear the dimension cache.
- * Useful between scrapes to free memory.
+ * Clears the image dimension cache.
+ * Useful between scrapes to free memory or force fresh fetches.
+ * 
+ * @returns {void}
  */
 function clearCache() {
     dimensionCache.clear();
 }
 
 /**
- * Get current cache size.
- * @returns {number}
+ * Gets the current number of cached dimension entries.
+ * 
+ * @returns {number} Number of cached URLs
  */
 function getCacheSize() {
     return dimensionCache.size;

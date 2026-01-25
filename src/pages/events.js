@@ -1,9 +1,45 @@
+/**
+ * @fileoverview Events page scraper for Pokemon GO data.
+ * Scrapes current and upcoming event information from LeekDuck including
+ * event names, types, images, and date ranges.
+ * @module pages/events
+ */
+
 const fs = require('fs');
 const moment = require('moment');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
 
+/**
+ * @typedef {Object} GameEvent
+ * @property {string} eventID - Unique event identifier (URL slug)
+ * @property {string} name - Display name of the event
+ * @property {string} eventType - Event category (e.g., "community-day", "raid-battles", "spotlight")
+ * @property {string} image - URL to event banner image
+ * @property {string|null} start - ISO 8601 start datetime or null if unknown
+ * @property {string|null} end - ISO 8601 end datetime or null if unknown
+ */
+
+/**
+ * Scrapes event data from LeekDuck and writes to data files.
+ * 
+ * First fetches the events JSON feed to get accurate date/time information,
+ * then scrapes the events page for current and upcoming events. Merges
+ * date information with scraped event details and handles events that
+ * span multiple date ranges.
+ * 
+ * @async
+ * @function get
+ * @returns {void} Writes data asynchronously, no return value
+ * @throws {Error} On network failure, falls back to cached CDN data
+ * 
+ * @example
+ * // Scrape events data
+ * const events = require('./pages/events');
+ * events.get();
+ * // Creates data/events.json and data/events.min.json
+ */
 function get()
 {
     https.get("https://leekduck.com/feeds/events.json", (res) =>

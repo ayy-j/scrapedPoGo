@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Team GO Rocket event scraper.
+ * Extracts grunt lineups, leader info, shadow Pokemon availability,
+ * Giovanni encounters, and event bonuses.
+ * @module pages/detailed/teamgorocket
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -8,8 +15,38 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Team GO Rocket events.
- * Extracts grunt lineups, leader info, shadow Pokemon, Giovanni encounters.
+ * @typedef {Object} RocketLeaders
+ * @property {Object[]} arlo - Arlo's Pokemon lineup
+ * @property {Object[]} cliff - Cliff's Pokemon lineup
+ * @property {Object[]} sierra - Sierra's Pokemon lineup
+ */
+
+/**
+ * @typedef {Object} RocketData
+ * @property {Object[]} shadowPokemon - All shadow Pokemon available during event
+ * @property {RocketLeaders} leaders - Leader-specific lineups
+ * @property {(Object|{info: string})[]} giovanni - Giovanni's lineup and info
+ * @property {Object[]} grunts - Grunt Pokemon
+ * @property {string[]} bonuses - Event bonuses
+ * @property {string[]} specialResearch - Special research descriptions
+ */
+
+/**
+ * Scrapes Team GO Rocket event data from LeekDuck.
+ * Extracts comprehensive Rocket event information including shadow
+ * Pokemon availability, individual leader lineups, Giovanni's current
+ * shadow legendary, grunt Pokemon, and event bonuses.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/team-go-rocket-takeover/', 'team-go-rocket-takeover', backupData);
  */
 async function get(url, id, bkp) {
     try {

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Eggs page scraper for Pokemon GO data.
+ * Scrapes egg hatch data from LeekDuck including Pokemon available in different egg types,
+ * CP ranges, shiny availability, and rarity tiers.
+ * @module pages/eggs
+ */
+
 const fs = require('fs');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
@@ -5,6 +12,46 @@ const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
 const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 
+/**
+ * @typedef {Object} CombatPower
+ * @property {number} min - Minimum CP at hatch
+ * @property {number} max - Maximum CP at hatch
+ */
+
+/**
+ * @typedef {Object} EggPokemon
+ * @property {string} name - Pokemon name
+ * @property {string} eggType - Egg distance type (e.g., "2km", "5km", "10km")
+ * @property {boolean} isAdventureSync - Whether this Pokemon is from Adventure Sync rewards
+ * @property {string} image - URL to Pokemon image
+ * @property {boolean} canBeShiny - Whether this Pokemon can be shiny
+ * @property {CombatPower} combatPower - CP range at hatch
+ * @property {boolean} isRegional - Whether this is a regional Pokemon
+ * @property {boolean} isGiftExchange - Whether this Pokemon is from Route Gift eggs
+ * @property {number} rarity - Rarity tier (number of mini-eggs displayed)
+ * @property {number} [imageWidth] - Image width in pixels
+ * @property {number} [imageHeight] - Image height in pixels
+ * @property {string} [imageType] - Image format type
+ */
+
+/**
+ * Scrapes egg hatch data from LeekDuck and writes to data files.
+ * 
+ * Fetches the eggs page, parses Pokemon available in each egg type,
+ * cross-references shiny data, fetches image dimensions, and writes
+ * both formatted and minified JSON output files.
+ * 
+ * @async
+ * @function get
+ * @returns {Promise<void>} Resolves when data has been written to files
+ * @throws {Error} On network failure, falls back to cached CDN data
+ * 
+ * @example
+ * // Scrape eggs data
+ * const eggs = require('./pages/eggs');
+ * await eggs.get();
+ * // Creates data/eggs.json and data/eggs.min.json
+ */
 function get()
 {
     return new Promise(resolve => {

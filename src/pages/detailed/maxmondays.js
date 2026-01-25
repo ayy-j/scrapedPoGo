@@ -1,9 +1,33 @@
+/**
+ * @fileoverview Max Mondays event scraper.
+ * Extracts featured weekly Dynamax Pokemon and associated bonuses.
+ * @module pages/detailed/maxmondays
+ */
+
 const { JSDOM } = require('jsdom');
 const { writeTempFile, handleScraperError, extractPokemonList } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Max Mondays events.
- * Extracts featured weekly Dynamax Pokémon.
+ * @typedef {Object} MaxMondaysData
+ * @property {Object|null} featured - Featured Dynamax Pokemon for the week
+ * @property {string} bonus - Weekly bonus description
+ */
+
+/**
+ * Scrapes Max Mondays event data from LeekDuck.
+ * Lightweight extraction of the weekly featured Dynamax Pokemon
+ * and any associated bonus.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/max-mondays-jan-13/', 'max-mondays-jan-13', backupData);
  */
 async function get(url, id, bkp) {
     try {

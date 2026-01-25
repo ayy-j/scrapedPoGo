@@ -1,6 +1,43 @@
+/**
+ * @fileoverview Shiny Pokemon data scraper for Pokemon GO.
+ * Fetches shiny Pokemon information from LeekDuck's data files and
+ * cross-references with PogoAssets for image URLs.
+ * @module pages/shinies
+ */
+
 const https = require('https');
 
-// Helper to fetch JSON from URL
+/**
+ * @typedef {Object} ShinyForm
+ * @property {string} name - Form name (e.g., "Male", "White Striped")
+ * @property {string} imageUrl - URL to shiny form image
+ * @property {number} width - Image width in pixels
+ * @property {number} height - Image height in pixels
+ */
+
+/**
+ * @typedef {Object} ShinyPokemon
+ * @property {number} dexNumber - National Pokedex number
+ * @property {string} name - Pokemon name with regional prefix if applicable
+ * @property {string} imageUrl - URL to shiny sprite image
+ * @property {string|null} releasedDate - Release date in "YYYY/MM/DD" format or null
+ * @property {number|null} family - Evolution family ID or null
+ * @property {string|null} typeCode - Regional type code (e.g., "_61" for Alolan) or null
+ * @property {number} width - Image width in pixels (256)
+ * @property {number} height - Image height in pixels (256)
+ * @property {ShinyForm[]} [forms] - Array of alternate forms if applicable
+ */
+
+/**
+ * Fetches JSON data from a URL.
+ * 
+ * @param {string} url - URL to fetch JSON from
+ * @returns {Promise<Object>} Parsed JSON data
+ * @throws {Error} On network failure or JSON parse error
+ * 
+ * @example
+ * const data = await fetchJson('https://example.com/data.json');
+ */
 function fetchJson(url) {
 	return new Promise((resolve, reject) => {
 		https.get(url, (res) => {
@@ -17,6 +54,24 @@ function fetchJson(url) {
 	});
 }
 
+/**
+ * Scrapes shiny Pokemon data from LeekDuck and PogoAssets.
+ * 
+ * Fetches both the Pokemon data file and English names file from LeekDuck,
+ * filters for Pokemon with shiny releases, and constructs image URLs
+ * using the PogoAssets CDN. Handles regional variants, gender forms,
+ * and special forms like Mega and Gigantamax.
+ * 
+ * @async
+ * @function scrapeShinies
+ * @returns {Promise<ShinyPokemon[]>} Array of shiny Pokemon data sorted by dex number
+ * @throws {Error} On network failure or data processing error
+ * 
+ * @example
+ * const shinies = require('./pages/shinies');
+ * const data = await shinies();
+ * console.log(`Found ${data.length} shiny Pokemon`);
+ */
 async function scrapeShinies() {
 	console.log('Fetching shiny Pokemon data from LeekDuck...');
 	

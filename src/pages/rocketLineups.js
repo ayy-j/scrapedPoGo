@@ -1,8 +1,59 @@
+/**
+ * @fileoverview Team GO Rocket lineups page scraper for Pokemon GO data.
+ * Scrapes grunt and leader lineup information from LeekDuck including
+ * Pokemon teams, types, weaknesses, and catchable shadow Pokemon.
+ * @module pages/rocketLineups
+ */
+
 const fs = require('fs');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
 
+/**
+ * @typedef {Object} WeaknessInfo
+ * @property {string[]} double - Types this Pokemon is doubly weak to (4x damage)
+ * @property {string[]} single - Types this Pokemon is weak to (2x damage)
+ */
+
+/**
+ * @typedef {Object} ShadowPokemon
+ * @property {string} name - Pokemon name
+ * @property {string} image - URL to Pokemon image
+ * @property {string[]} types - Array of Pokemon types in lowercase
+ * @property {WeaknessInfo} weaknesses - Type weaknesses organized by severity
+ * @property {boolean} isEncounter - Whether this Pokemon can be caught after battle
+ * @property {boolean} canBeShiny - Whether the shadow form can be shiny
+ */
+
+/**
+ * @typedef {Object} RocketLineup
+ * @property {string} name - Trainer name (e.g., "Giovanni", "Cliff", or grunt type)
+ * @property {string} title - Display title (e.g., "Team GO Rocket Leader")
+ * @property {string} type - Grunt type for typed grunts (e.g., "fire", "water") or empty
+ * @property {ShadowPokemon[]} firstPokemon - Possible Pokemon in slot 1
+ * @property {ShadowPokemon[]} secondPokemon - Possible Pokemon in slot 2
+ * @property {ShadowPokemon[]} thirdPokemon - Possible Pokemon in slot 3
+ */
+
+/**
+ * Scrapes Team GO Rocket lineup data from LeekDuck and writes to data files.
+ * 
+ * Fetches the rocket lineups page, parses all grunt and leader profiles,
+ * extracts Pokemon slots with their types and weaknesses, and identifies
+ * which Pokemon can be caught after defeating the trainer.
+ * 
+ * @async
+ * @function get
+ * @returns {Promise<void>} Resolves when data has been written to files
+ * @throws {Error} On network failure, falls back to cached CDN data
+ * 
+ * @example
+ * // Scrape rocket lineups data
+ * const rocketLineups = require('./pages/rocketLineups');
+ * await rocketLineups.get();
+ * // Creates data/rocketLineups.json and data/rocketLineups.min.json
+ */
 function get() {
     return new Promise(resolve => {
         JSDOM.fromURL("https://leekduck.com/rocket-lineups/", {

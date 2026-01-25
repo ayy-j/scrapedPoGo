@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Raid Day event scraper.
+ * Extracts raid day information including featured bosses, exclusive attacks,
+ * ticket bonuses, and special mechanics like fusion.
+ * @module pages/detailed/raidday
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -10,8 +17,41 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Raid Day events.
- * Extracts alternating raid bosses, featured attacks, ticket bonuses, fusion info.
+ * @typedef {Object} RaidDayRaids
+ * @property {Object[]} fiveStar - 5-star raid bosses
+ * @property {Object[]} mega - Mega raid bosses
+ * @property {Object[]} other - Other tier raid bosses
+ */
+
+/**
+ * @typedef {Object} RaidDayData
+ * @property {Object[]} featured - Featured raid boss Pokemon
+ * @property {string[]} featuredAttacks - Exclusive move descriptions
+ * @property {RaidDayRaids} raids - Raid bosses by tier
+ * @property {Object[]} shinies - Shiny-eligible Pokemon
+ * @property {Object[]} bonuses - Active event bonuses
+ * @property {string[]} ticketBonuses - Ticket-holder exclusive bonuses
+ * @property {number|null} ticketPrice - Ticket price in USD
+ * @property {string} alternationPattern - Boss rotation schedule
+ * @property {string[]} specialMechanics - Special features (fusion, mega, etc.)
+ */
+
+/**
+ * Scrapes Raid Day event data from LeekDuck.
+ * Comprehensive extraction of raid day features including alternating
+ * bosses, featured exclusive attacks, free and ticketed bonuses,
+ * and special mechanics like fusion or mega evolution.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/raid-day-january/', 'raid-day-january', backupData);
  */
 async function get(url, id, bkp) {
     try {

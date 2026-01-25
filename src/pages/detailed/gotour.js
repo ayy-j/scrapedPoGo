@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Pokemon GO Tour event scraper.
+ * Complex multi-section handler for large-scale in-person events.
+ * Extracts habitats, raids, eggs, research, shiny debuts, and ticket add-ons.
+ * @module pages/detailed/gotour
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -12,9 +19,62 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Pokémon GO Tour In-Person Events.
- * Complex multi-section handler for large-scale events.
- * Extracts habitats, raids, eggs, research, shiny debuts, ticket add-ons.
+ * @typedef {Object} EventInfo
+ * @property {string} name - Event name from page title
+ * @property {string} location - Event venue/city
+ * @property {string} dates - Event date range
+ * @property {string} time - Event hours
+ * @property {number|null} ticketPrice - Base ticket price in USD
+ * @property {string} ticketUrl - URL to purchase tickets
+ */
+
+/**
+ * @typedef {Object} Habitat
+ * @property {Object[]} spawns - Pokemon spawning in this habitat
+ * @property {Object[]} rareSpawns - Rare Pokemon in this habitat
+ */
+
+/**
+ * @typedef {Object} ResearchInfo
+ * @property {Object[]} field - Field research encounters and info
+ * @property {string[]} special - Special research descriptions
+ * @property {string[]} timed - Timed research descriptions
+ * @property {string[]} masterwork - Masterwork research descriptions
+ */
+
+/**
+ * @typedef {Object} GOTourData
+ * @property {EventInfo} eventInfo - Basic event information
+ * @property {string[]} exclusiveBonuses - Ticket-exclusive bonuses
+ * @property {string[]} ticketAddOns - Available add-on purchases
+ * @property {string[]} whatsNew - New features for this tour
+ * @property {Object.<string, Habitat>} habitats - Habitats keyed by name
+ * @property {Object[]} incenseEncounters - Incense-exclusive spawns
+ * @property {Object} eggs - Egg pools by distance
+ * @property {Object} raids - Raid bosses by tier
+ * @property {ResearchInfo} research - Research task information
+ * @property {Object[]} shinyDebuts - Pokemon with shiny debut
+ * @property {Object[]} shinies - All available shinies
+ * @property {string[]} sales - Merchandise/sale info
+ * @property {Object[]} costumedPokemon - Event-costumed Pokemon
+ */
+
+/**
+ * Scrapes Pokemon GO Tour event data from LeekDuck.
+ * Comprehensive extraction for large-scale in-person events including
+ * multiple habitats, raid tiers, egg pools, various research types,
+ * shiny debuts, and ticket information.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/pokemon-go-tour-sinnoh/', 'pokemon-go-tour-sinnoh', backupData);
  */
 async function get(url, id, bkp) {
     try {

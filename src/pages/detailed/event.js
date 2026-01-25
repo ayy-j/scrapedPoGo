@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Generic event type scraper.
+ * Handles miscellaneous event types like Winter Weekend, Summer events,
+ * and other non-specific event categories.
+ * @module pages/detailed/event
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -9,8 +16,31 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for generic "Event" type (Winter Weekend, etc.)
- * Extracts bonuses, features, shiny info, and custom event sections.
+ * @typedef {Object} EventData
+ * @property {Object[]} bonuses - Active event bonuses
+ * @property {string[]} bonusDisclaimers - Bonus restriction disclaimers
+ * @property {string[]} features - Event feature descriptions
+ * @property {Object[]} shinies - Shiny Pokemon available
+ * @property {Object[]} spawns - Wild Pokemon spawns
+ * @property {Object.<string, Object>} customSections - Dynamically extracted sections
+ */
+
+/**
+ * Scrapes generic event data from LeekDuck.
+ * Handles event types that don't fit specific categories, extracting
+ * bonuses, features, shiny info, spawns, and any custom sections
+ * present on the event page.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/winter-weekend-2024/', 'winter-weekend-2024', backupData);
  */
 async function get(url, id, bkp) {
     try {

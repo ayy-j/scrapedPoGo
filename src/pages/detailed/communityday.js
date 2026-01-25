@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Community Day event scraper.
+ * Extracts comprehensive Community Day data including spawns, bonuses,
+ * shinies, special research, featured attacks, and ticketed content.
+ * @module pages/detailed/communityday
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -10,8 +17,54 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Community Day events.
- * Extracts spawns, bonuses, shinies, special research, and additional CD-specific features.
+ * @typedef {Object} FeaturedAttack
+ * @property {string} description - Description of the exclusive move
+ * @property {string[]} stats - Array of move statistics and effects
+ */
+
+/**
+ * @typedef {Object} Photobomb
+ * @property {string} description - Description of photobomb feature
+ * @property {Object[]} pokemon - Pokemon that can photobomb
+ */
+
+/**
+ * @typedef {Object} TicketedResearch
+ * @property {number} price - Ticket price in USD
+ * @property {string} description - Description of ticketed content
+ */
+
+/**
+ * @typedef {Object} CommunityDayData
+ * @property {Object[]} spawns - Featured wild spawns
+ * @property {Object[]} bonuses - Active bonuses during the event
+ * @property {string[]} bonusDisclaimers - Disclaimers for bonuses (e.g., regional restrictions)
+ * @property {Object[]} shinies - Shiny Pokemon available
+ * @property {Object[]} specialresearch - Special research task steps
+ * @property {FeaturedAttack|null} featuredAttack - Exclusive move information
+ * @property {Photobomb|null} photobomb - Photobomb feature details
+ * @property {Object[]} pokestopShowcases - PokeStop Showcase Pokemon
+ * @property {Object[]} fieldResearchTasks - Event-specific field research
+ * @property {string|null} lureModuleBonus - Lure module bonus description
+ * @property {TicketedResearch|null} ticketedResearch - Paid research ticket info
+ */
+
+/**
+ * Scrapes Community Day event data from LeekDuck.
+ * Comprehensive extraction of all Community Day features including spawns,
+ * bonuses, shinies, special research, featured attacks, photobombs,
+ * PokeStop showcases, field research, and ticketed content.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/january-2024-community-day/', 'january-2024-community-day', backupData);
  */
 async function get(url, id, bkp) {
     try {

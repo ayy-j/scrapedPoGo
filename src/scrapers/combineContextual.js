@@ -1,16 +1,70 @@
 const fs = require('fs');
 
 /**
- * Contextual Pokemon GO Data Aggregator
- * 
- * Cross-references all scraped data sources into player-focused contextual groupings,
- * answering "What's available now, from where, and when does it end?"
+ * @fileoverview Contextual Pokemon GO Data Aggregator.
+ * Cross-references all scraped data sources into player-focused contextual
+ * groupings, answering "What's available now, from where, and when does it end?"
+ * @module scrapers/combineContextual
+ */
+
+const fs = require('fs');
+
+/**
+ * @typedef {Object} TimelineEvent
+ * @property {string} eventID - Unique event identifier
+ * @property {string} name - Event display name
+ * @property {string} eventType - Event category type
+ * @property {string} image - Event banner image URL
+ * @property {string} start - ISO 8601 start datetime
+ * @property {string} end - ISO 8601 end datetime
+ * @property {number} priority - Calculated priority score
+ * @property {boolean} hasShiny - Event has shiny opportunities
+ * @property {boolean} hasRaids - Event has raid content
+ * @property {boolean} hasEggs - Event has egg pool changes
+ * @property {boolean} hasBonuses - Event has active bonuses
+ * @property {boolean} hasSpawns - Event has wild spawn changes
+ * @property {boolean} hasFieldResearchTasks - Event has field research
+ */
+
+/**
+ * @typedef {Object} Timeline
+ * @property {TimelineEvent[]} endingSoon - Events ending within 24 hours
+ * @property {TimelineEvent[]} active - Currently active events
+ * @property {TimelineEvent[]} upcoming - Events starting within 7 days
+ */
+
+/**
+ * @typedef {Object} PokemonIndexEntry
+ * @property {string} name - Pokemon display name
+ * @property {Object[]} sources - Array of availability sources
+ * @property {boolean} shinyEligible - Whether shiny is available
+ * @property {{min: number|null, max: number|null}} cpRange - CP range across sources
+ * @property {Object} [shinyData] - Shiny release information if available
+ * @property {string[]} [activeEventIDs] - Currently active related events
+ * @property {string} [baseSpecies] - Base species name for forms
+ */
+
+/**
+ * @typedef {Object} ContextualData
+ * @property {Timeline} timeline - Events grouped by time urgency
+ * @property {Object} currentAvailability - Current Pokemon availability by source
+ * @property {PokemonIndexEntry[]} pokemonIndex - Per-Pokemon lookup of all sources
+ * @property {Object} shinyOpportunities - Shiny hunting opportunities
  */
 
 // ============================================================================
 // Data Loading
 // ============================================================================
 
+/**
+ * Loads and parses a JSON data file from the data directory.
+ * 
+ * @param {string} filename - Name of the file in ./data/ directory
+ * @returns {Object|null} Parsed JSON data or null on error
+ * 
+ * @example
+ * const events = loadDataFile('events.json');
+ */
 function loadDataFile(filename) {
     try {
         const data = fs.readFileSync(`./data/${filename}`, 'utf8');
@@ -21,6 +75,13 @@ function loadDataFile(filename) {
     }
 }
 
+/**
+ * Gets the last modified timestamp of a data file.
+ * Used for versioning and cache invalidation.
+ * 
+ * @param {string} filename - Name of the file in ./data/ directory
+ * @returns {string|null} ISO 8601 timestamp or null on error
+ */
 function getFileVersion(filename) {
     try {
         const stats = fs.statSync(`./data/${filename}`);
@@ -35,10 +96,16 @@ function getFileVersion(filename) {
 // ============================================================================
 
 /**
- * Categorize events into endingSoon (<24h), active, and upcoming (7 days)
- * @param {Array} events - Events array from events.json
- * @param {Date} now - Current timestamp
- * @returns {Object} Timeline grouped events
+ * Categorizes events into time-based urgency groups.
+ * Events are sorted by priority within each group.
+ * 
+ * @param {Object[]} events - Events array from events.json
+ * @param {Date} now - Current timestamp for comparison
+ * @returns {Timeline} Events grouped by urgency
+ * 
+ * @example
+ * const timeline = buildTimeline(events, new Date());
+ * // Returns { endingSoon: [...], active: [...], upcoming: [...] }
  */
 function buildTimeline(events, now) {
     const HOUR = 60 * 60 * 1000;
@@ -102,7 +169,13 @@ function buildTimeline(events, now) {
 }
 
 /**
- * Calculate priority score for an event
+ * Calculates priority score for an event based on type and timing.
+ * Higher scores indicate more important/urgent events for players.
+ * 
+ * @param {Object} event - Event object with eventType and feature flags
+ * @param {number} timeUntilEnd - Milliseconds until event ends
+ * @param {number} timeUntilStart - Milliseconds until event starts
+ * @returns {number} Priority score (higher = more important)
  */
 function calculateEventPriority(event, timeUntilEnd, timeUntilStart) {
     let priority = 0;
@@ -141,7 +214,10 @@ function calculateEventPriority(event, timeUntilEnd, timeUntilStart) {
 }
 
 /**
- * Format duration in human-readable form
+ * Formats milliseconds duration into human-readable form.
+ * 
+ * @param {number} ms - Duration in milliseconds
+ * @returns {string} Formatted duration (e.g., "2d 5h" or "12h")
  */
 function formatDuration(ms) {
     const hours = Math.floor(ms / (60 * 60 * 1000));
@@ -159,7 +235,16 @@ function formatDuration(ms) {
 // ============================================================================
 
 /**
- * Build unified availability object from all sources
+ * Builds unified availability object from all data sources.
+ * Combines raids, eggs, research, and rocket data with event context.
+ * 
+ * @param {Object[]} raids - Raid boss data
+ * @param {Object[]} eggs - Egg pool data
+ * @param {Object[]} research - Research task data
+ * @param {Object[]} rocketLineups - Team GO Rocket lineup data
+ * @param {Object[]} events - Events data for context
+ * @param {Date} now - Current timestamp
+ * @returns {Object} Availability grouped by source type
  */
 function buildCurrentAvailability(raids, eggs, research, rocketLineups, events, now) {
     const availability = {
@@ -173,7 +258,13 @@ function buildCurrentAvailability(raids, eggs, research, rocketLineups, events, 
 }
 
 /**
- * Group raids by tier with event context
+ * Groups raid bosses by tier with event context.
+ * Links active raid events to relevant bosses.
+ * 
+ * @param {Object[]} raids - Raid boss data
+ * @param {Object[]} events - Events data
+ * @param {Date} now - Current timestamp
+ * @returns {Object} Raids organized by tier keys
  */
 function buildRaidAvailability(raids, events, now) {
     const tiers = {
@@ -223,6 +314,12 @@ function buildRaidAvailability(raids, events, now) {
     return tiers;
 }
 
+/**
+ * Normalizes raid tier header text to consistent key.
+ * 
+ * @param {string} tier - Tier text from raid page
+ * @returns {string|null} Normalized tier key or null if unrecognized
+ */
 function normalizeTierKey(tier) {
     if (!tier) return null;
     const tierLower = tier.toLowerCase();
@@ -234,7 +331,13 @@ function normalizeTierKey(tier) {
 }
 
 /**
- * Group eggs by distance with event pool overrides
+ * Groups eggs by distance pool with event override detection.
+ * Identifies when active events modify the standard egg pools.
+ * 
+ * @param {Object[]} eggs - Egg pool data
+ * @param {Object[]} events - Events data
+ * @param {Date} now - Current timestamp
+ * @returns {Object} Eggs organized by distance pool keys
  */
 function buildEggAvailability(eggs, events, now) {
     const pools = {
@@ -278,6 +381,13 @@ function buildEggAvailability(eggs, events, now) {
     return pools;
 }
 
+/**
+ * Normalizes egg type text to consistent pool key.
+ * 
+ * @param {string} eggType - Egg type text (e.g., "2km", "5 km")
+ * @param {boolean} isAdventureSync - Whether this is an Adventure Sync egg
+ * @returns {string|null} Normalized pool key or null if unrecognized
+ */
 function normalizeEggPool(eggType, isAdventureSync) {
     if (!eggType) return null;
     const distance = eggType.replace(/\s/g, '').toLowerCase();
@@ -297,7 +407,11 @@ function normalizeEggPool(eggType, isAdventureSync) {
 }
 
 /**
- * Build research encounters availability
+ * Builds research encounter and item availability from tasks.
+ * Deduplicates encounters and groups by Pokemon.
+ * 
+ * @param {Object[]} research - Research task data
+ * @returns {Object} Research rewards with encounters and items
  */
 function buildResearchAvailability(research) {
     const encounters = [];
@@ -363,7 +477,11 @@ function buildResearchAvailability(research) {
 }
 
 /**
- * Build Rocket lineup availability
+ * Builds Team GO Rocket lineup availability.
+ * Separates leaders from grunts with catchable Pokemon info.
+ * 
+ * @param {Object[]} rocketLineups - Rocket lineup data
+ * @returns {Object} Rocket availability with leaders and grunts arrays
  */
 function buildRocketAvailability(rocketLineups) {
     const availability = {
@@ -418,7 +536,18 @@ function buildRocketAvailability(rocketLineups) {
 // ============================================================================
 
 /**
- * Generate per-Pokemon lookup showing every source
+ * Generates per-Pokemon lookup showing every availability source.
+ * Cross-references all data sources to build a comprehensive index
+ * of where each Pokemon can be obtained.
+ * 
+ * @param {Object[]} raids - Raid boss data
+ * @param {Object[]} eggs - Egg pool data
+ * @param {Object[]} research - Research task data
+ * @param {Object[]} rocketLineups - Team GO Rocket lineup data
+ * @param {Object} shinies - Shiny Pokemon data
+ * @param {Object[]} events - Events data for context
+ * @param {Date} now - Current timestamp
+ * @returns {PokemonIndexEntry[]} Sorted array of Pokemon index entries
  */
 function buildPokemonIndex(raids, eggs, research, rocketLineups, shinies, events, now) {
     const index = new Map();
@@ -578,10 +707,24 @@ function buildPokemonIndex(raids, eggs, research, rocketLineups, shinies, events
     return result;
 }
 
+/**
+ * Normalizes Pokemon name to consistent lowercase key for lookup.
+ * 
+ * @param {string} name - Pokemon name to normalize
+ * @returns {string} Lowercase trimmed key
+ */
 function normalizePokemonKey(name) {
     return name.toLowerCase().trim();
 }
 
+/**
+ * Gets or creates an index entry for a Pokemon key.
+ * 
+ * @param {Map} index - Pokemon index map
+ * @param {string} key - Normalized Pokemon key
+ * @param {string} name - Display name to use if creating new entry
+ * @returns {PokemonIndexEntry} Index entry (existing or newly created)
+ */
 function getOrCreateIndexEntry(index, key, name) {
     if (!index.has(key)) {
         index.set(key, {
@@ -594,6 +737,13 @@ function getOrCreateIndexEntry(index, key, name) {
     return index.get(key);
 }
 
+/**
+ * Updates CP range bounds from combat power data.
+ * Expands the range if new values are outside current bounds.
+ * 
+ * @param {PokemonIndexEntry} entry - Index entry to update
+ * @param {Object} combatPower - CP data with min/max or normal/boosted
+ */
 function updateCPRange(entry, combatPower) {
     if (!combatPower) return;
     
@@ -617,6 +767,17 @@ function updateCPRange(entry, combatPower) {
     }
 }
 
+/**
+ * Extracts base species name from a Pokemon name with form indicators.
+ * Strips regional prefixes, form suffixes, and modifiers.
+ * 
+ * @param {string} name - Full Pokemon name
+ * @returns {string} Base species name
+ * 
+ * @example
+ * extractBaseSpecies("Alolan Ninetales"); // Returns "Ninetales"
+ * extractBaseSpecies("Giratina (Origin)"); // Returns "Giratina"
+ */
 function extractBaseSpecies(name) {
     // Remove form indicators
     const formPatterns = [
@@ -642,7 +803,17 @@ function extractBaseSpecies(name) {
 // ============================================================================
 
 /**
- * Cross-reference shinies with current availability
+ * Cross-references shinies with current availability to find hunting opportunities.
+ * Categorizes into recent debuts, boosted rates, and permanently available.
+ * 
+ * @param {Object[]} shinies - Shiny Pokemon data
+ * @param {Object[]} raids - Raid boss data
+ * @param {Object[]} eggs - Egg pool data
+ * @param {Object[]} research - Research task data
+ * @param {Object[]} rocketLineups - Team GO Rocket lineup data
+ * @param {Object[]} events - Events data
+ * @param {Date} now - Current timestamp
+ * @returns {Object} Shiny opportunities grouped by category
  */
 function buildShinyOpportunities(shinies, raids, eggs, research, rocketLineups, events, now) {
     const opportunities = {
@@ -744,6 +915,12 @@ function buildShinyOpportunities(shinies, raids, eggs, research, rocketLineups, 
     return opportunities;
 }
 
+/**
+ * Parses shiny release date string into Date object.
+ * 
+ * @param {string} dateStr - Date in "YYYY/MM/DD" format
+ * @returns {Date|null} Parsed Date or null if invalid
+ */
 function parseShinyDate(dateStr) {
     if (!dateStr) return null;
     // Format: "2018/03/25"
@@ -756,6 +933,19 @@ function parseShinyDate(dateStr) {
 // Main Generator
 // ============================================================================
 
+/**
+ * Main function that generates contextual.json from all data sources.
+ * Loads all scraped data, builds contextual aggregations, and writes output files.
+ * 
+ * @function main
+ * @returns {void}
+ * @throws {Error} Logs error and exits with code 1 on failure
+ * 
+ * @example
+ * // Run after all scrapers complete:
+ * // node src/scrapers/combineContextual.js
+ * // Creates data/contextual.json and data/contextual.min.json
+ */
 function main() {
     console.log('Generating contextual.json...');
     

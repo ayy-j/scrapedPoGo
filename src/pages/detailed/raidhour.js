@@ -1,9 +1,33 @@
+/**
+ * @fileoverview Raid Hour event scraper.
+ * Lightweight scraper for weekly Raid Hour events featuring a single boss.
+ * @module pages/detailed/raidhour
+ */
+
 const { JSDOM } = require('jsdom');
 const { writeTempFile, handleScraperError, extractPokemonList } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Raid Hour events.
- * Extracts single featured raid boss (lightweight handler).
+ * @typedef {Object} RaidHourData
+ * @property {Object|null} featured - Featured raid boss Pokemon with name, image, shiny info
+ * @property {boolean} canBeShiny - Whether the featured boss can be shiny
+ */
+
+/**
+ * Scrapes Raid Hour event data from LeekDuck.
+ * Lightweight extraction of the single featured raid boss for the
+ * weekly Raid Hour event.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/raid-hour-jan-17/', 'raid-hour-jan-17', backupData);
  */
 async function get(url, id, bkp) {
     try {

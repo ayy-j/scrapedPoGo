@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Max Battles (Dynamax Weekend) event scraper.
+ * Extracts featured Dynamax and Gigantamax boss information and bonuses.
+ * @module pages/detailed/maxbattles
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -8,8 +14,28 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Max Battles (Dynamax Weekend) events.
- * Extracts featured Dynamax/Gigantamax boss, bonuses.
+ * @typedef {Object} MaxBattlesData
+ * @property {Object[]} featured - Featured Max Battle Pokemon
+ * @property {string[]} bonuses - Active event bonuses
+ * @property {Object[]} gigantamax - Gigantamax Pokemon available
+ * @property {Object[]} dynamax - Dynamax Pokemon available
+ */
+
+/**
+ * Scrapes Max Battles event data from LeekDuck.
+ * Extracts featured Dynamax/Gigantamax Pokemon, associated bonuses,
+ * and categorizes by battle type.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/dynamax-weekend/', 'dynamax-weekend', backupData);
  */
 async function get(url, id, bkp) {
     try {

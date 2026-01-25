@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Field Research page scraper for Pokemon GO data.
+ * Scrapes current field research tasks and rewards from LeekDuck including
+ * encounter rewards, item rewards, CP ranges, and shiny availability.
+ * @module pages/research
+ */
+
 const fs = require('fs');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
@@ -6,9 +13,47 @@ const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyDat
 const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 
 /**
- * Infers task type from task text if category type is not available
- * @param {string} text - The task text
- * @returns {string|null} - The inferred type or null
+ * @typedef {Object} EncounterReward
+ * @property {"encounter"} type - Reward type identifier
+ * @property {string} name - Pokemon name
+ * @property {string} image - URL to Pokemon image
+ * @property {boolean} canBeShiny - Whether encounter can be shiny
+ * @property {{min: number, max: number}} combatPower - CP range for encounter
+ * @property {number} [imageWidth] - Image width in pixels
+ * @property {number} [imageHeight] - Image height in pixels
+ * @property {string} [imageType] - Image format type
+ */
+
+/**
+ * @typedef {Object} ItemReward
+ * @property {"item"|"resource"} type - Reward type identifier
+ * @property {string} name - Item name
+ * @property {number} quantity - Number of items rewarded
+ * @property {string} image - URL to item image
+ * @property {number} [imageWidth] - Image width in pixels
+ * @property {number} [imageHeight] - Image height in pixels
+ * @property {string} [imageType] - Image format type
+ */
+
+/**
+ * @typedef {Object} ResearchTask
+ * @property {string} text - Task description text
+ * @property {string} type - Task category (e.g., "catch", "throw", "battle", "explore")
+ * @property {(EncounterReward|ItemReward)[]} rewards - Array of possible rewards
+ * @property {string} [categoryIcon] - URL to category icon if available
+ */
+
+/**
+ * Infers task type from task text if category type is not available.
+ * Uses keyword matching to categorize tasks into types.
+ * 
+ * @param {string} text - The task description text
+ * @returns {string|null} Inferred task type or null if unknown
+ * 
+ * @example
+ * inferTaskType("Catch 5 Fire-type Pokemon"); // Returns "catch"
+ * inferTaskType("Make 3 Great Throws"); // Returns "throw"
+ * inferTaskType("Win a raid"); // Returns "battle"
  */
 function inferTaskType(text) {
     const lowerText = text.toLowerCase();
@@ -68,6 +113,24 @@ function inferTaskType(text) {
     return null;
 }
 
+/**
+ * Scrapes field research data from LeekDuck and writes to data files.
+ * 
+ * Fetches the research page, parses all task categories, extracts task text,
+ * categorizes tasks by type, and collects all possible rewards. For encounter
+ * rewards, cross-references shiny data and extracts CP ranges.
+ * 
+ * @async
+ * @function get
+ * @returns {Promise<void>} Resolves when data has been written to files
+ * @throws {Error} On network failure, falls back to cached CDN data
+ * 
+ * @example
+ * // Scrape research data
+ * const research = require('./pages/research');
+ * await research.get();
+ * // Creates data/research.json and data/research.min.json
+ */
 function get()
 {
     return new Promise(resolve => {

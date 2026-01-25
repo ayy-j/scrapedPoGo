@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Detailed event scraper orchestrator.
+ * Iterates through all events and dispatches to appropriate detailed
+ * scrapers based on event type, writing temporary data files.
+ * @module scrapers/detailedscrape
+ */
+
 const fs = require('fs');
 const https = require('https');
 
@@ -20,6 +27,40 @@ const gopass = require('../pages/detailed/gopass')
 const pokestopshowcase = require('../pages/detailed/pokestopshowcase')
 const event = require('../pages/detailed/event')
 
+/**
+ * Main function that orchestrates detailed event scraping.
+ * Creates temp directory, loads events list, fetches backup data from CDN,
+ * then dispatches each event to the appropriate detailed scraper based
+ * on its eventType. Always runs generic scraper for metadata.
+ * 
+ * Scraper dispatch by eventType:
+ * - research-breakthrough -> breakthrough
+ * - pokemon-spotlight-hour -> spotlight
+ * - community-day -> communityday
+ * - raid-battles -> raidbattles
+ * - raid-hour -> raidhour
+ * - raid-day -> raidday
+ * - team-go-rocket, go-rocket-takeover -> teamgorocket
+ * - go-battle-league -> gobattleleague
+ * - season -> season
+ * - pokemon-go-tour -> gotour
+ * - timed-research, special-research -> timedresearch
+ * - max-battles -> maxbattles
+ * - max-mondays -> maxmondays
+ * - go-pass -> gopass
+ * - pokestop-showcase -> pokestopshowcase
+ * - research -> research
+ * - event -> event
+ * 
+ * @function main
+ * @returns {void}
+ * @throws {Error} Logs error and exits with code 1 on failure
+ * 
+ * @example
+ * // Run after scrape.js completes:
+ * // node src/scrapers/detailedscrape.js
+ * // Creates data/temp/*.json files for each event
+ */
 function main()
 {
     if (!fs.existsSync('data/temp'))

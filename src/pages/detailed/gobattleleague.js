@@ -1,3 +1,10 @@
+/**
+ * @fileoverview GO Battle League event scraper.
+ * Extracts league information including brackets, CP caps,
+ * type restrictions, and special rules.
+ * @module pages/detailed/gobattleleague
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -7,8 +14,33 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for GO Battle League events.
- * Extracts league brackets, CP restrictions, type restrictions.
+ * @typedef {Object} LeagueInfo
+ * @property {string} name - League name (e.g., "Great League", "Little Jungle Cup")
+ * @property {number|null} cpCap - Maximum CP allowed (e.g., 1500, 2500) or null for no limit
+ * @property {string[]} typeRestrictions - Required Pokemon types (empty for unrestricted)
+ * @property {string[]} rules - Array of league-specific rules and restrictions
+ */
+
+/**
+ * @typedef {Object} GBLData
+ * @property {LeagueInfo[]} leagues - Array of active league configurations
+ */
+
+/**
+ * Scrapes GO Battle League event data from LeekDuck.
+ * Extracts information about active leagues including CP caps,
+ * type restrictions, and special rules for themed cups.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/go-battle-league-jan/', 'go-battle-league-jan', backupData);
  */
 async function get(url, id, bkp) {
     try {

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Season event scraper.
+ * Extracts comprehensive seasonal data including bonuses, spawns, eggs,
+ * research, community days, and seasonal features.
+ * @module pages/detailed/season
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -9,8 +16,49 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Season events.
- * Extracts seasonal bonuses, spawns, eggs, research, community days, special features.
+ * @typedef {Object} SeasonEggs
+ * @property {Object[]} 2km - 2km egg pool
+ * @property {Object[]} 5km - 5km egg pool
+ * @property {Object[]} 7km - 7km egg pool (Gift eggs)
+ * @property {Object[]} 10km - 10km egg pool
+ * @property {Object[]} 12km - 12km egg pool (Strange eggs)
+ * @property {Object[]} route - Route egg pool
+ * @property {Object[]} adventure - Adventure Sync egg pool
+ */
+
+/**
+ * @typedef {Object} SeasonData
+ * @property {string} name - Season name from page title
+ * @property {string[]} bonuses - Seasonal bonuses
+ * @property {Object[]} spawns - Wild Pokemon spawns
+ * @property {SeasonEggs} eggs - Egg pools by distance type
+ * @property {Object[]} researchBreakthrough - Research breakthrough rewards
+ * @property {(Object|string)[]} specialResearch - Special research info
+ * @property {string[]} masterworkResearch - Masterwork research descriptions
+ * @property {string[]} communityDays - Scheduled Community Days
+ * @property {string[]} features - Season feature descriptions
+ * @property {string} goBattleLeague - GBL season info
+ * @property {string[]} goPass - GO Pass information
+ * @property {(Object|string)[]} pokemonDebuts - New Pokemon debuts
+ * @property {(Object|string)[]} maxPokemonDebuts - New Max Pokemon debuts
+ */
+
+/**
+ * Scrapes Season event data from LeekDuck.
+ * Comprehensive extraction of seasonal content including bonuses,
+ * wild spawns, egg pools, various research types, community day
+ * schedule, and new Pokemon/feature debuts.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/season-of-adventures-abound/', 'season-of-adventures-abound', backupData);
  */
 async function get(url, id, bkp) {
     try {

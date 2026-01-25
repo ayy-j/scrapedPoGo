@@ -1,6 +1,22 @@
+/**
+ * @fileoverview LeekDuck page structure explorer.
+ * Utility script for inspecting page structures and discovering
+ * new data fields or format changes on LeekDuck pages.
+ * @module scrapers/explore
+ */
+
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
 
+/**
+ * Explores the events page structure and a sample event detail page.
+ * Logs sample event data and section headers found on detail pages.
+ * Useful for discovering format changes or new sections.
+ * 
+ * @async
+ * @function exploreEventsPage
+ * @returns {Promise<void>}
+ */
 async function exploreEventsPage() {
   const dom = await JSDOM.fromURL('https://leekduck.com/events/');
   const doc = dom.window.document;
@@ -36,6 +52,14 @@ async function exploreEventsPage() {
   }
 }
 
+/**
+ * Explores the research page structure to discover reward types.
+ * Logs examples of different reward types found in research tasks.
+ * 
+ * @async
+ * @function exploreResearchPage
+ * @returns {Promise<void>}
+ */
 async function exploreResearchPage() {
   const dom = await JSDOM.fromURL('https://leekduck.com/research/');
   const doc = dom.window.document;
@@ -56,6 +80,14 @@ async function exploreResearchPage() {
   console.log('[research] reward types and examples:', summary);
 }
 
+/**
+ * Explores the eggs page structure for Pokemon card data.
+ * Logs sample candy, stardust, and other fields from egg cards.
+ * 
+ * @async
+ * @function exploreEggsPage
+ * @returns {Promise<void>}
+ */
 async function exploreEggsPage() {
   const dom = await JSDOM.fromURL('https://leekduck.com/eggs/');
   const doc = dom.window.document;
@@ -77,6 +109,14 @@ async function exploreEggsPage() {
   console.log('[eggs] sample stardust icon:', stardustIcon);
 }
 
+/**
+ * Explores the raid bosses page structure.
+ * Logs sample boss card data including forms, genders, and moves.
+ * 
+ * @async
+ * @function exploreRaidsPage
+ * @returns {Promise<void>}
+ */
 async function exploreRaidsPage() {
   const dom = await JSDOM.fromURL('https://leekduck.com/boss/');
   const doc = dom.window.document;
@@ -100,6 +140,14 @@ async function exploreRaidsPage() {
   console.log('[raids] sample boss moves:', bossMoves.slice(0, 6));
 }
 
+/**
+ * Explores the Team GO Rocket lineups page structure.
+ * Logs sample reward data from Rocket encounters.
+ * 
+ * @async
+ * @function exploreRocketPage
+ * @returns {Promise<void>}
+ */
 async function exploreRocketPage() {
   const dom = await JSDOM.fromURL('https://leekduck.com/rocket-lineups/');
   const doc = dom.window.document;
@@ -117,6 +165,19 @@ async function exploreRocketPage() {
   console.log('[rocket] sample rewards:', rewards.slice(0, 5));
 }
 
+/**
+ * Main entry point that runs all page explorers.
+ * Executes exploration functions in sequence and logs results.
+ * 
+ * @async
+ * @function main
+ * @returns {Promise<void>}
+ * @throws {Error} Logs error and exits with code 1 on failure
+ * 
+ * @example
+ * // Run to inspect current page structures:
+ * // node src/scrapers/explore.js
+ */
 async function main() {
   await exploreEventsPage();
   await exploreResearchPage();

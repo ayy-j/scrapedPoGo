@@ -1,9 +1,32 @@
+/**
+ * @fileoverview Shiny Pokemon data utilities.
+ * Provides functions for loading and cross-referencing shiny Pokemon data
+ * with scraped content to verify shiny availability.
+ * @module utils/shinyData
+ */
+
 const fs = require('fs');
 const path = require('path');
 
 /**
- * Loads shiny data from the shinies.json file
- * @returns {Map<number, object>} Map of dex numbers to shiny data
+ * @typedef {Object} ShinyEntry
+ * @property {number} dexNumber - National Pokedex number
+ * @property {string} name - Pokemon name
+ * @property {boolean} hasShiny - Whether shiny is available in-game
+ * @property {string} [releasedDate] - Shiny release date
+ * @property {number} [family] - Evolution family ID
+ */
+
+/**
+ * Loads shiny data from the shinies.json file into a Map for fast lookup.
+ * 
+ * @returns {Map<number, ShinyEntry>} Map of dex numbers to shiny data entries
+ * 
+ * @example
+ * const shinyMap = loadShinyData();
+ * if (shinyMap.has(25)) {
+ *   console.log('Pikachu shiny data:', shinyMap.get(25));
+ * }
  */
 function loadShinyData() {
 	try {
@@ -31,9 +54,15 @@ function loadShinyData() {
 }
 
 /**
- * Extracts dex number from LeekDuck image URL
- * @param {string} imageUrl - e.g., "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm1.icon.png"
- * @returns {number|null} The dex number or null if not found
+ * Extracts Pokedex number from a LeekDuck image URL.
+ * Parses the filename pattern "pmXXX.icon.png" to get the dex number.
+ * 
+ * @param {string} imageUrl - LeekDuck Pokemon image URL
+ * @returns {number|null} Extracted dex number or null if pattern not found
+ * 
+ * @example
+ * const dexNum = extractDexNumber('https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm25.icon.png');
+ * // Returns 25 (Pikachu)
  */
 function extractDexNumber(imageUrl) {
 	if (!imageUrl) return null;
@@ -43,11 +72,22 @@ function extractDexNumber(imageUrl) {
 }
 
 /**
- * Checks if a Pokemon has a shiny variant based on dex number and form
- * @param {Map} shinyMap - The loaded shiny data map
- * @param {number} dexNumber - Pokemon dex number
- * @param {string|null} form - Pokemon form (optional)
- * @returns {boolean} Whether this Pokemon/form has a shiny variant
+ * Checks if a Pokemon has a shiny variant available based on dex number.
+ * Optionally validates against a specific form.
+ * 
+ * @param {Map<number, ShinyEntry>} shinyMap - Loaded shiny data map from loadShinyData()
+ * @param {number} dexNumber - Pokemon National Pokedex number
+ * @param {string|null} [form=null] - Optional Pokemon form to validate
+ * @returns {boolean} True if the Pokemon (and optionally form) has shiny available
+ * 
+ * @example
+ * const shinyMap = loadShinyData();
+ * if (hasShiny(shinyMap, 150)) {
+ *   console.log('Mewtwo can be shiny!');
+ * }
+ * if (hasShiny(shinyMap, 487, 'Origin Forme')) {
+ *   console.log('Origin Forme Giratina can be shiny!');
+ * }
  */
 function hasShiny(shinyMap, dexNumber, form = null) {
 	if (!shinyMap || !dexNumber) return false;

@@ -1,9 +1,38 @@
+/**
+ * @fileoverview Pokemon Spotlight Hour event scraper.
+ * Extracts featured Pokemon and bonus information for weekly Spotlight Hours.
+ * @module pages/detailed/spotlight
+ */
+
 const { JSDOM } = require('jsdom');
 const { writeTempFile, handleScraperError, extractPokemonList } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Pokemon Spotlight Hour events.
- * Extracts featured Pokemon and bonus information.
+ * @typedef {Object} SpotlightData
+ * @property {string} name - Featured Pokemon name
+ * @property {boolean} canBeShiny - Whether the featured Pokemon can be shiny
+ * @property {string} image - URL to Pokemon image
+ * @property {number} [imageWidth] - Image width in pixels
+ * @property {number} [imageHeight] - Image height in pixels
+ * @property {string} bonus - Event bonus description (e.g., "2× Catch XP")
+ * @property {Object[]} list - Full list of featured Pokemon (usually one)
+ */
+
+/**
+ * Scrapes Pokemon Spotlight Hour event data from LeekDuck.
+ * Extracts the featured Pokemon and the weekly bonus for the
+ * Tuesday Spotlight Hour event.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/spotlight-hour-jan-21/', 'spotlight-hour-jan-21', backupData);
  */
 async function get(url, id, bkp) {
     try {

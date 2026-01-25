@@ -1,10 +1,36 @@
+/**
+ * @fileoverview Shared utility functions for LeekDuck scrapers.
+ * Provides standardized extraction methods, error handling, and file operations
+ * used across all detailed event scrapers.
+ * @module utils/scraperUtils
+ */
+
 const fs = require('fs');
 const path = require('path');
 const { getMultipleImageDimensions, clearCache } = require('./imageDimensions');
 
 /**
- * Shared utility functions for LeekDuck scrapers.
- * Provides standardized extraction, error handling, and file operations.
+ * @typedef {Object} Pokemon
+ * @property {string} name - Pokemon display name
+ * @property {string} image - URL to Pokemon image
+ * @property {boolean} canBeShiny - Whether this Pokemon can be shiny
+ * @property {number} [imageWidth] - Image width in pixels
+ * @property {number} [imageHeight] - Image height in pixels
+ * @property {string} [imageType] - Image format type
+ */
+
+/**
+ * @typedef {Object} Bonus
+ * @property {string} text - Bonus description text
+ * @property {string} image - URL to bonus icon image
+ */
+
+/**
+ * @typedef {Object} SectionContent
+ * @property {string[]} paragraphs - Paragraph text content
+ * @property {string[][]} lists - Array of list item arrays
+ * @property {Pokemon[]} pokemon - Extracted Pokemon data
+ * @property {Object[]} tables - Extracted table data
  */
 
 // ============================================================================
@@ -12,11 +38,21 @@ const { getMultipleImageDimensions, clearCache } = require('./imageDimensions');
 // ============================================================================
 
 /**
- * Write a temporary JSON file for scraped event data.
- * @param {string} id - Event ID
- * @param {string} type - Event type (e.g., 'community-day', 'raid-battles')
- * @param {object} data - Scraped data object
+ * Writes a temporary JSON file for scraped event data.
+ * Files are written to data/temp/ directory and later combined by combinedetails.js.
+ * 
+ * @param {string} id - Event ID (URL slug)
+ * @param {string} type - Event type identifier (e.g., 'community-day', 'raid-battles')
+ * @param {Object} data - Scraped data object to serialize
  * @param {string} [suffix=''] - Optional filename suffix (e.g., '_generic', '_codes')
+ * @returns {void}
+ * 
+ * @example
+ * writeTempFile('january-community-day', 'community-day', { spawns: [...] });
+ * // Creates: data/temp/january-community-day.json
+ * 
+ * writeTempFile('event-id', 'promo-codes', ['CODE1', 'CODE2'], '_codes');
+ * // Creates: data/temp/event-id_codes.json
  */
 function writeTempFile(id, type, data, suffix = '') {
     const filename = `data/temp/${id}${suffix}.json`;
@@ -30,13 +66,23 @@ function writeTempFile(id, type, data, suffix = '') {
 }
 
 /**
- * Centralized error handler for scrapers.
- * Falls back to backup data when scraping fails.
- * @param {Error} err - The error that occurred
- * @param {string} id - Event ID
+ * Centralized error handler for scrapers with fallback to backup data.
+ * When scraping fails, searches backup data for previously scraped content
+ * and writes it to maintain data availability.
+ * 
+ * @param {Error} err - The error that occurred during scraping
+ * @param {string} id - Event ID (URL slug)
  * @param {string} type - Event type for the output file
- * @param {Array} bkp - Backup data array from events_min.json
+ * @param {Object[]} bkp - Backup data array from events_min.json (CDN fallback)
  * @param {string} scraperKey - Key to look up in extraData (e.g., 'communityday', 'raidbattles')
+ * @returns {void}
+ * 
+ * @example
+ * try {
+ *   // scraping code
+ * } catch (err) {
+ *   handleScraperError(err, 'event-id', 'community-day', backupData, 'communityday');
+ * }
  */
 function handleScraperError(err, id, type, bkp, scraperKey) {
     // Log error for debugging
@@ -60,12 +106,19 @@ function handleScraperError(err, id, type, bkp, scraperKey) {
 // ============================================================================
 
 /**
- * Extract a list of Pokémon from a .pkmn-list-flex element.
- * Fetches actual image dimensions from remote URLs.
+ * Extracts a list of Pokemon from a .pkmn-list-flex container element.
+ * Parses name, image, shiny status, and optionally fetches image dimensions.
+ * 
+ * @async
  * @param {Element} container - DOM element containing .pkmn-list-item elements
- * @param {object} [options] - Options for extraction
+ * @param {Object} [options] - Extraction options
  * @param {boolean} [options.fetchDimensions=true] - Whether to fetch image dimensions from URLs
- * @returns {Promise<Array>} Array of Pokemon objects with name, image, canBeShiny, dimensions
+ * @returns {Promise<Pokemon[]>} Array of Pokemon objects
+ * 
+ * @example
+ * const pokemonList = doc.querySelector('.pkmn-list-flex');
+ * const pokemon = await extractPokemonList(pokemonList);
+ * // Returns: [{ name: 'Pikachu', image: '...', canBeShiny: true, ... }, ...]
  */
 async function extractPokemonList(container, options = {}) {
     const { fetchDimensions = true } = options;
@@ -133,9 +186,15 @@ async function extractPokemonList(container, options = {}) {
 // ============================================================================
 
 /**
- * Get all section header IDs from a page.
- * @param {Document} doc - DOM document
- * @returns {Array<string>} Array of section IDs
+ * Gets all section header IDs from a page document.
+ * Finds event-section-header elements and h2/h3 elements with IDs.
+ * 
+ * @param {Document} doc - DOM document to search
+ * @returns {string[]} Array of section ID strings
+ * 
+ * @example
+ * const sections = getSectionHeaders(doc);
+ * // Returns: ['spawns', 'bonuses', 'shiny', 'raids', ...]
  */
 function getSectionHeaders(doc) {
     const headers = doc.querySelectorAll('.event-section-header, h2[id], h3[id]');
@@ -151,10 +210,19 @@ function getSectionHeaders(doc) {
 }
 
 /**
- * Extract content from a specific section by ID.
+ * Extracts content from a specific section by header ID.
+ * Walks through sibling elements until the next section header,
+ * collecting paragraphs, lists, pokemon, and tables.
+ * 
+ * @async
  * @param {Document} doc - DOM document
- * @param {string} sectionId - Section header ID
- * @returns {Promise<object>} Object with paragraphs, lists, pokemon arrays
+ * @param {string} sectionId - Section header ID to extract from
+ * @returns {Promise<SectionContent>} Object with paragraphs, lists, pokemon, tables arrays
+ * 
+ * @example
+ * const spawnSection = await extractSection(doc, 'spawns');
+ * console.log(spawnSection.pokemon); // Array of Pokemon in spawns section
+ * console.log(spawnSection.paragraphs); // Text descriptions
  */
 async function extractSection(doc, sectionId) {
     const result = {
@@ -211,9 +279,15 @@ async function extractSection(doc, sectionId) {
 }
 
 /**
- * Extract data from a table element.
+ * Extracts data from a table element into structured format.
+ * Parses header row and body rows into separate arrays.
+ * 
  * @param {Element} table - Table DOM element
- * @returns {object} Object with headers and rows arrays
+ * @returns {{headers: string[], rows: string[][]}} Object with headers and rows arrays
+ * 
+ * @example
+ * const tableData = extractTable(tableElement);
+ * // Returns: { headers: ['Pokemon', 'CP Range'], rows: [['Pikachu', '200-400'], ...] }
  */
 function extractTable(table) {
     const data = { headers: [], rows: [] };
@@ -244,9 +318,17 @@ function extractTable(table) {
 // ============================================================================
 
 /**
- * Extract bonuses from a page.
+ * Extracts bonus items from a page's .bonus-list section.
+ * Also extracts disclaimer paragraphs if any bonus has an asterisk.
+ * 
+ * @async
  * @param {Document} doc - DOM document
- * @returns {Promise<object>} Object with bonuses array and disclaimers array
+ * @returns {Promise<{bonuses: Bonus[], disclaimers: string[]}>} Bonuses and their disclaimers
+ * 
+ * @example
+ * const { bonuses, disclaimers } = await extractBonuses(doc);
+ * // bonuses: [{ text: '2× Catch XP', image: '...' }, ...]
+ * // disclaimers: ['*Bonus only available in certain regions']
  */
 async function extractBonuses(doc) {
     const result = {
@@ -305,9 +387,17 @@ async function extractBonuses(doc) {
 // ============================================================================
 
 /**
- * Extract raid information including boss tiers.
+ * Extracts raid information from a page including boss tiers.
+ * Categorizes Pokemon lists by their section headers into appropriate tiers.
+ * 
+ * @async
  * @param {Document} doc - DOM document
- * @returns {Promise<object>} Object with tiers, bosses, shinies
+ * @returns {Promise<{tiers: {mega: Pokemon[], fiveStar: Pokemon[], threeStar: Pokemon[], oneStar: Pokemon[]}, bosses: Pokemon[], shinies: Pokemon[]}>} Raid data organized by tier
+ * 
+ * @example
+ * const raidInfo = await extractRaidInfo(doc);
+ * console.log(raidInfo.tiers.fiveStar); // 5-star raid bosses
+ * console.log(raidInfo.tiers.mega); // Mega raid bosses
  */
 async function extractRaidInfo(doc) {
     const result = {
@@ -369,10 +459,21 @@ async function extractRaidInfo(doc) {
 // ============================================================================
 
 /**
- * Extract research tasks from a page.
+ * Extracts research tasks from a page.
+ * Handles Special Research with multi-step format and simpler Field Research.
+ * 
+ * @async
  * @param {Document} doc - DOM document
  * @param {string} [researchType='special'] - Type: 'special', 'timed', 'masterwork', 'field'
- * @returns {Promise<object>} Object with tasks, steps, rewards arrays
+ * @returns {Promise<{tasks: Object[], steps: Object[], rewards: string[]}>} Research data
+ * 
+ * @example
+ * const research = await extractResearchTasks(doc, 'special');
+ * // For special research with steps:
+ * // research.steps = [{ name: 'Step 1', step: 1, tasks: [...], rewards: [...] }, ...]
+ * 
+ * // For field research:
+ * // research.tasks = [{ task: 'Catch 5 Pokemon', reward: 'Pikachu encounter' }, ...]
  */
 async function extractResearchTasks(doc, researchType = 'special') {
     const result = {
@@ -494,9 +595,16 @@ async function extractResearchTasks(doc, researchType = 'special') {
 // ============================================================================
 
 /**
- * Extract price information from text.
- * @param {string} text - Text that may contain price
- * @returns {object|null} Object with price and currency, or null
+ * Extracts price information from text content.
+ * Supports USD ($), EUR (€), and GBP (£) formats.
+ * 
+ * @param {string} text - Text that may contain price information
+ * @returns {{price: number, currency: string}|null} Price object or null if not found
+ * 
+ * @example
+ * extractPrice('Get access for US$4.99!'); // { price: 4.99, currency: 'USD' }
+ * extractPrice('Only €2.99'); // { price: 2.99, currency: 'EUR' }
+ * extractPrice('No price here'); // null
  */
 function extractPrice(text) {
     const patterns = [
@@ -525,9 +633,15 @@ function extractPrice(text) {
 }
 
 /**
- * Extract promo codes from page links.
+ * Extracts promo codes from page links.
+ * Finds links to Pokemon GO Web Store offer redemption and extracts passcodes.
+ * 
  * @param {Document} doc - DOM document
- * @returns {Array<string>} Array of promo code strings
+ * @returns {string[]} Array of promo code strings
+ * 
+ * @example
+ * const codes = extractPromoCodes(doc);
+ * // Returns: ['PROMOCODE1', 'ANOTHERCODE', ...]
  */
 function extractPromoCodes(doc) {
     const codes = [];
@@ -549,9 +663,16 @@ function extractPromoCodes(doc) {
 // ============================================================================
 
 /**
- * Extract egg pool data organized by distance tier.
+ * Extracts egg pool data organized by distance tier.
+ * Parses the eggs section and categorizes Pokemon by egg distance.
+ * 
+ * @async
  * @param {Document} doc - DOM document
- * @returns {Promise<object>} Object with egg tiers as keys
+ * @returns {Promise<{[key: string]: Pokemon[]}>} Eggs organized by distance tier keys
+ * 
+ * @example
+ * const eggs = await extractEggPools(doc);
+ * // Returns: { '2km': [...], '5km': [...], '10km': [...], 'adventure': [...] }
  */
 async function extractEggPools(doc) {
     const eggs = {

@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Raid Battles event scraper.
+ * Extracts raid boss information by tier, shinies, alternation patterns,
+ * and featured exclusive attacks.
+ * @module pages/detailed/raidbattles
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -9,8 +16,38 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Raid Battles events.
- * Extracts raid bosses by tier, shinies, alternation patterns, and featured attacks.
+ * @typedef {Object} RaidTiers
+ * @property {Object[]} mega - Mega raid bosses
+ * @property {Object[]} fiveStar - 5-star raid bosses
+ * @property {Object[]} threeStar - 3-star raid bosses
+ * @property {Object[]} oneStar - 1-star raid bosses
+ */
+
+/**
+ * @typedef {Object} RaidBattlesData
+ * @property {Object[]} bosses - All raid bosses (legacy format)
+ * @property {Object[]} shinies - Shiny-eligible bosses
+ * @property {RaidTiers} tiers - Bosses organized by tier
+ * @property {string} alternationPattern - Boss rotation schedule description
+ * @property {string[]} featuredAttacks - Exclusive move descriptions
+ */
+
+/**
+ * Scrapes Raid Battles event data from LeekDuck.
+ * Extracts raid bosses organized by tier, identifies shiny-eligible
+ * bosses, captures any alternation/rotation patterns, and notes
+ * featured exclusive attacks.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/raid-battles-legendaries/', 'raid-battles-legendaries', backupData);
  */
 async function get(url, id, bkp) {
     try {

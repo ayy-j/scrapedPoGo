@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Research event scraper (Special/Masterwork Research).
+ * Extracts research tasks, rewards, promo codes, and pricing for
+ * Special Research, Masterwork Research, and paid research events.
+ * @module pages/detailed/research
+ */
+
 const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
@@ -10,8 +17,44 @@ const {
 } = require('../../utils/scraperUtils');
 
 /**
- * Handler for Research events (Masterwork Research, Special Research, etc.)
- * Extracts research tasks, rewards, promo codes, pricing info.
+ * @typedef {Object} ResearchAvailability
+ * @property {string} start - Start date/time description
+ * @property {string} end - End date/time description
+ */
+
+/**
+ * @typedef {Object} ResearchData
+ * @property {string} name - Research story name from page title
+ * @property {"special"|"masterwork"|"timed"} researchType - Type of research
+ * @property {boolean} isPaid - Whether this research requires purchase
+ * @property {number|null} price - Price in USD if paid, null otherwise
+ * @property {string} description - Research description
+ * @property {Object[]} tasks - Research task steps or individual tasks
+ * @property {string[]} rewards - List of rewards
+ * @property {Object[]} encounters - Pokemon encounter rewards
+ * @property {string[]} promoCodes - Extracted promo codes from page links
+ * @property {boolean} expires - Whether the research expires
+ * @property {string} webStoreInfo - Web store purchase information
+ */
+
+/**
+ * Scrapes research event data from LeekDuck.
+ * Extracts comprehensive research information including structured tasks,
+ * rewards, promo codes, pricing for paid research, and availability windows.
+ * Also writes a separate file for promo codes if found.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file(s) on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/masterwork-research-mew/', 'masterwork-research-mew', backupData);
+ * // Creates: data/temp/masterwork-research-mew.json
+ * // May also create: data/temp/masterwork-research-mew_codes.json
  */
 async function get(url, id, bkp) {
     try {

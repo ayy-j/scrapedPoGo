@@ -1,9 +1,33 @@
+/**
+ * @fileoverview PokeStop Showcase event scraper.
+ * Extracts featured Pokemon for showcase competitions at PokeStops.
+ * @module pages/detailed/pokestopshowcase
+ */
+
 const { JSDOM } = require('jsdom');
 const { writeTempFile, handleScraperError, extractPokemonList, extractSection } = require('../../utils/scraperUtils');
 
 /**
- * Handler for PokéStop Showcase events.
- * Extracts featured Pokémon for showcase.
+ * @typedef {Object} ShowcaseData
+ * @property {Object[]} featured - Pokemon featured in showcases
+ * @property {string} description - Showcase event description
+ */
+
+/**
+ * Scrapes PokeStop Showcase event data from LeekDuck.
+ * Extracts Pokemon that will be featured in PokeStop showcase
+ * competitions during the event period.
+ * 
+ * @async
+ * @function get
+ * @param {string} url - Full URL to the event page
+ * @param {string} id - Event ID (URL slug)
+ * @param {Object[]} bkp - Backup data array for fallback on scraping failure
+ * @returns {Promise<void>} Writes temp file on success
+ * @throws {Error} Falls back to backup data on failure
+ * 
+ * @example
+ * await get('https://leekduck.com/events/pokestop-showcase-jan/', 'pokestop-showcase-jan', backupData);
  */
 async function get(url, id, bkp) {
     try {

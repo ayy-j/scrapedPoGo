@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Raid bosses page scraper for Pokemon GO data.
+ * Scrapes current raid boss information from LeekDuck including regular
+ * and shadow raids, CP ranges, types, weather boosts, and shiny availability.
+ * @module pages/raids
+ */
+
 const fs = require('fs');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
@@ -6,10 +13,54 @@ const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyDat
 const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 
 /**
- * Determines event status for a raid boss by checking events data
- * @param {string} bossName - Name of the raid boss
+ * @typedef {Object} RaidCombatPower
+ * @property {{min: number, max: number}} normal - CP range at level 20
+ * @property {{min: number, max: number}} boosted - CP range at level 25 (weather boosted)
+ */
+
+/**
+ * @typedef {Object} PokemonType
+ * @property {string} name - Type name in lowercase (e.g., "fire", "water")
+ * @property {string} image - URL to type icon image
+ */
+
+/**
+ * @typedef {Object} WeatherBoost
+ * @property {string} name - Weather condition name in lowercase
+ * @property {string} image - URL to weather icon image
+ */
+
+/**
+ * @typedef {Object} RaidBoss
+ * @property {string} name - Pokemon name (cleaned of form/gender suffixes)
+ * @property {string} originalName - Full Pokemon name as displayed
+ * @property {string|null} form - Pokemon form (e.g., "Origin Forme") or null
+ * @property {"male"|"female"|null} gender - Pokemon gender or null
+ * @property {string} tier - Raid tier (e.g., "Mega Raids", "5-Star Raids")
+ * @property {boolean} isShadowRaid - Whether this is a shadow raid boss
+ * @property {string} eventStatus - Status: "ongoing", "upcoming", "inactive", or "unknown"
+ * @property {boolean} canBeShiny - Whether this Pokemon can be shiny
+ * @property {PokemonType[]} types - Array of Pokemon types
+ * @property {RaidCombatPower} combatPower - CP ranges for normal and weather-boosted catches
+ * @property {WeatherBoost[]} boostedWeather - Weather conditions that boost this Pokemon
+ * @property {string} image - URL to Pokemon image
+ * @property {number} [imageWidth] - Image width in pixels
+ * @property {number} [imageHeight] - Image height in pixels
+ * @property {string} [imageType] - Image format type
+ */
+
+/**
+ * Determines event status for a raid boss by checking events data.
+ * Looks up matching raid-related events and compares current time against
+ * event start/end dates.
+ * 
+ * @param {string} bossName - Name of the raid boss to check
  * @param {boolean} isShadowRaid - Whether this is a shadow raid
- * @returns {string} - "ongoing", "upcoming", "inactive", or "unknown"
+ * @returns {string} Event status: "ongoing", "upcoming", "inactive", or "unknown"
+ * 
+ * @example
+ * const status = determineEventStatus("Giratina", false);
+ * // Returns "ongoing" if Giratina raid event is currently active
  */
 function determineEventStatus(bossName, isShadowRaid) {
     try {
@@ -61,9 +112,15 @@ function determineEventStatus(bossName, isShadowRaid) {
 }
 
 /**
- * Parses form from Pokemon name (e.g., "Giratina (Origin Forme)" -> "Origin Forme")
- * @param {string} name 
- * @returns {string|null}
+ * Parses form from Pokemon name (e.g., "Giratina (Origin Forme)" -> "Origin Forme").
+ * Extracts text within parentheses.
+ * 
+ * @param {string} name - Full Pokemon name potentially containing form info
+ * @returns {string|null} The form name if found, null otherwise
+ * 
+ * @example
+ * parseForm("Giratina (Origin Forme)"); // Returns "Origin Forme"
+ * parseForm("Pikachu"); // Returns null
  */
 function parseForm(name) {
     const match = name.match(/\(([^)]+)\)/);
@@ -71,9 +128,15 @@ function parseForm(name) {
 }
 
 /**
- * Parses gender from Pokemon name
- * @param {string} name 
- * @returns {"male"|"female"|null}
+ * Parses gender from Pokemon name by detecting gender symbols.
+ * 
+ * @param {string} name - Pokemon name potentially containing gender symbol
+ * @returns {"male"|"female"|null} Gender if symbol found, null otherwise
+ * 
+ * @example
+ * parseGender("Nidoran♂"); // Returns "male"
+ * parseGender("Nidoran♀"); // Returns "female"
+ * parseGender("Pikachu"); // Returns null
  */
 function parseGender(name) {
     if (name.includes('♂')) return 'male';
@@ -82,9 +145,15 @@ function parseGender(name) {
 }
 
 /**
- * Cleans Pokemon name by removing form/gender suffixes
- * @param {string} name 
- * @returns {string}
+ * Cleans Pokemon name by removing form suffixes and gender symbols.
+ * Returns the base Pokemon name suitable for display and matching.
+ * 
+ * @param {string} name - Full Pokemon name with potential form/gender info
+ * @returns {string} Cleaned Pokemon name
+ * 
+ * @example
+ * cleanName("Giratina (Origin Forme)"); // Returns "Giratina"
+ * cleanName("Nidoran♂"); // Returns "Nidoran"
  */
 function cleanName(name) {
     return name
@@ -93,6 +162,24 @@ function cleanName(name) {
         .trim();
 }
 
+/**
+ * Scrapes raid boss data from LeekDuck and writes to data files.
+ * 
+ * Fetches the raid bosses page, parses both regular and shadow raid bosses,
+ * extracts tier information, types, CP ranges, weather boosts, and shiny
+ * availability. Cross-references with shiny data and fetches image dimensions.
+ * 
+ * @async
+ * @function get
+ * @returns {Promise<RaidBoss[]>} Resolves with array of raid boss data
+ * @throws {Error} On network failure, falls back to cached CDN data
+ * 
+ * @example
+ * // Scrape raids data
+ * const raids = require('./pages/raids');
+ * const bosses = await raids.get();
+ * // Creates data/raids.json and data/raids.min.json
+ */
 function get() {
     return new Promise(resolve => {
         JSDOM.fromURL("https://leekduck.com/raid-bosses/", {
