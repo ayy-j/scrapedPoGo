@@ -1,13 +1,13 @@
-# Contextual Data
-
-The `contextual.json` file is a unified, player-focused aggregation of all scraped data sources. It answers "What's available now, from where, and when does it end?"
-
-## File Locations
+# Endpoints
 
 - Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/contextual.json`
 - Minified: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/contextual.min.json`
 
-## Schema Overview
+# Overview
+
+The `contextual.json` file is a unified, player-focused aggregation of all scraped data sources. It answers "What's available now, from where, and when does it end?"
+
+# Schema Overview
 
 ```json
 {
@@ -19,11 +19,21 @@ The `contextual.json` file is a unified, player-focused aggregation of all scrap
 }
 ```
 
-## Sections
+# Fields
 
-### Metadata
+The contextual file contains five main sections:
 
-Generation timestamp and source file versions for cache invalidation.
+| Field | Type | Description |
+|-------|------|-------------|
+| `metadata` | object | Generation timestamp and source versions |
+| `timeline` | object | Events categorized by urgency |
+| `currentAvailability` | object | Unified availability by source type |
+| `pokemonIndex` | array | Cross-reference for all Pokemon sources |
+| `shinyOpportunities` | object | Shiny availability with current sources |
+
+## Metadata
+
+Provides generation timestamp and source file versions for cache invalidation.
 
 ```json
 {
@@ -39,9 +49,18 @@ Generation timestamp and source file versions for cache invalidation.
 }
 ```
 
-### Timeline
+### Fields
 
-Events categorized by urgency with priority scoring:
+| Field | Type | Description |
+|-------|------|-------------|
+| `generatedAt` | string (ISO 8601) | Timestamp when the data was generated |
+| `sourceVersions` | object | Object containing timestamps of source files (events, raids, eggs, research, rocketLineups, shinies) |
+
+## Timeline
+
+Events categorized by urgency with priority scoring.
+
+### Timeline Categories
 
 | Category | Definition |
 |----------|------------|
@@ -49,16 +68,26 @@ Events categorized by urgency with priority scoring:
 | `active` | Currently running events (>24h remaining) |
 | `upcoming` | Events starting within 7 days |
 
-**Event Entry Fields:**
-- `eventID` - Unique identifier
-- `name` - Display name
-- `eventType` - Type (raid-day, community-day, event, etc.)
-- `start` / `end` - ISO timestamps
-- `priority` - Calculated score (higher = more important)
-- `endsIn` / `startsIn` - Human-readable duration
-- `hasShiny`, `hasRaids`, `hasEggs`, `hasBonuses`, `hasSpawns`, `hasFieldResearchTasks` - Feature flags
+### Event Entry Fields
 
-**Priority Scoring:**
+| Field | Type | Description |
+|-------|------|-------------|
+| `eventID` | string | Unique identifier |
+| `name` | string | Display name |
+| `eventType` | string | Type (raid-day, community-day, event, etc.) |
+| `start` / `end` | string (ISO 8601) | ISO timestamps |
+| `priority` | number | Calculated score (higher = more important) |
+| `endsIn` / `startsIn` | string | Human-readable duration |
+| `hasShiny` | boolean | Event has shiny opportunities |
+| `hasRaids` | boolean | Event has raid-related content |
+| `hasEggs` | boolean | Event has egg-related content |
+| `hasBonuses` | boolean | Event has bonuses |
+| `hasSpawns` | boolean | Event has special spawns |
+| `hasFieldResearchTasks` | boolean | Event has field research tasks |
+
+### Priority Scoring
+
+Priority scores are calculated based on event type and features:
 - Community Day: 100
 - GO Tour/Fest: 95
 - Raid Day: 90
@@ -72,11 +101,11 @@ Events categorized by urgency with priority scoring:
 - +10 bonus for active bonuses
 - +25 urgency bonus for events ending <24h
 
-### Current Availability
+## Current Availability
 
-Unified availability object by source type.
+Unified availability object organized by source type.
 
-#### Raids (`currentAvailability.raids`)
+### Raids (`currentAvailability.raids`)
 
 Grouped by tier:
 - `mega` - Mega Raids
@@ -95,7 +124,7 @@ Each raid includes:
 - `boostedWeather` - Weather conditions
 - `activeEventIDs` - Related active events
 
-#### Eggs (`currentAvailability.eggs`)
+### Eggs (`currentAvailability.eggs`)
 
 Grouped by distance:
 - `2km`, `5km`, `7km`, `10km`, `12km`
@@ -109,7 +138,7 @@ Each egg entry includes:
 - `isRegional`, `isGiftExchange`
 - `eventOverride` - Active event IDs affecting egg pools
 
-#### Research (`currentAvailability.research`)
+### Research (`currentAvailability.research`)
 
 Contains:
 - `encounters` - Deduplicated Pokemon encounters with all source tasks
@@ -128,7 +157,7 @@ Encounter format:
 }
 ```
 
-#### Rocket (`currentAvailability.rocket`)
+### Rocket (`currentAvailability.rocket`)
 
 Contains:
 - `leaders` - Giovanni, Cliff, Arlo, Sierra
@@ -139,7 +168,7 @@ Each entry includes:
 - `catchablePokemon` - Array of encounterable Pokemon
 - `lineup` - First/second/third slot Pokemon names
 
-### Pokemon Index
+## Pokemon Index
 
 Cross-reference array showing every source for each Pokemon.
 
@@ -162,20 +191,22 @@ Cross-reference array showing every source for each Pokemon.
 }
 ```
 
-**Source Types:**
+### Source Types
 - `raid` - Include tier, isShadow
 - `egg` - Include eggType, isAdventureSync, rarity
 - `research` - Include task text and taskType
 - `rocket` - Include leader name, isShadow flag
 
-**Form Handling:**
+### Form Handling
 Pokemon with forms (Shadow, Mega, Alolan, Galarian, Hisuian, Paldean, or parenthetical forms like "Incarnate") have:
 - Separate index entries
 - `baseSpecies` field linking to the base Pokemon
 
-### Shiny Opportunities
+## Shiny Opportunities
 
 Cross-references shiny availability with current sources.
+
+### Shiny Categories
 
 | Category | Definition |
 |----------|------------|
@@ -194,9 +225,19 @@ Cross-references shiny availability with current sources.
 }
 ```
 
-Boosted rate entries include `boostSource` array of event IDs.
+### Shiny Entry Fields
 
-## Generation
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | Pokemon name |
+| `dexNumber` | number | National Pokedex number |
+| `releasedDate` | string | Date when shiny was released (YYYY/MM/DD) |
+| `imageUrl` | string | Image URL |
+| `family` | string | Evolution family |
+| `debutType` | string | Type of debut (recent, boosted, etc.) |
+| `boostSource` | array | (Optional) Array of event IDs providing boost |
+
+# Generation
 
 The contextual data is regenerated on every scrape run, after `combinedetails` completes.
 
@@ -204,7 +245,7 @@ The contextual data is regenerated on every scrape run, after `combinedetails` c
 npm run combinecontextual
 ```
 
-## Use Cases
+# Use Cases
 
 1. **"What raids are available right now?"** → `currentAvailability.raids`
 2. **"What's ending soon?"** → `timeline.endingSoon`
