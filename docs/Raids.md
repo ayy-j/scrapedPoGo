@@ -1,7 +1,6 @@
-# Endpoints
+# Endpoint
 
-- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.json`
-- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.min.json`
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.min.json`
 
 # Example Raid Object
 

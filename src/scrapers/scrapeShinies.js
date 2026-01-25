@@ -31,19 +31,12 @@ function main()
     console.log('Scraping shiny Pokemon data from PogoAssets...');
     
     shinies().then(data => {
-        fs.writeFile('data/shinies.json', JSON.stringify(data, null, 4), err => {
-            if (err) {
-                console.error('Error writing shinies.json:', err);
-                return;
-            }
-            console.log(`Successfully saved ${data.length} shinies to data/shinies.json`);
-        });
-        
         fs.writeFile('data/shinies.min.json', JSON.stringify(data), err => {
             if (err) {
                 console.error('Error writing shinies.min.json:', err);
                 return;
             }
+            console.log(`Successfully saved ${data.length} shinies to data/shinies.min.json`);
         });
     }).catch(error => {
         console.error('Failed to scrape shinies:', error);

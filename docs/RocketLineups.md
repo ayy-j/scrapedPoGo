@@ -1,7 +1,6 @@
-# Endpoints
+# Endpoint
 
-- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.json`
-- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json`
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json`
 
 # Example Rocket Lineup Object
 

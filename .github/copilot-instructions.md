@@ -10,7 +10,7 @@
 ## Project conventions
 - **Detailed scrapers** export `get(url, id, bkp)` and use `writeTempFile()` + `handleScraperError()` from `src/utils/scraperUtils.js` for fallback to CDN backup (`extraData`).
 - **Event type strings** in `detailedscrape.js` and `combinedetails.js` must stay in sync when adding a new detailed scraper.
-- **Outputs** always write both pretty and minified JSON in `data/` (see `scrapeShinies.js`, `combinedetails.js`, `combineContextual.js`).
+- **Outputs** write minified JSON only to `data/` (see `scrapeShinies.js`, `combinedetails.js`, `combineContextual.js`).
 - **Shiny flags** come from `data/shinies.json` (see `src/utils/shinyData.js`); image URL parsing is used to infer dex numbers.
 - **Image metadata** (width/height/type) is populated via `utils/imageDimensions` inside `extractPokemonList()`; pass `{ fetchDimensions: false }` to skip.
 - **Debugging**: set `DEBUG=1` to surface scraper fallback errors in `handleScraperError()`.

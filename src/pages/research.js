@@ -286,12 +286,6 @@ function get()
                 });
             });
 
-            fs.writeFile('data/research.json', JSON.stringify(research, null, 4), err => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-            });
             fs.writeFile('data/research.min.json', JSON.stringify(research), err => {
                 if (err) {
                     console.error(err);
@@ -311,12 +305,6 @@ function get()
                         {
                             let json = JSON.parse(body);
     
-                            fs.writeFile('data/research.json', JSON.stringify(json, null, 4), err => {
-                                if (err) {
-                                    console.error(err);
-                                    return;
-                                }
-                            });
                             fs.writeFile('data/research.min.json', JSON.stringify(json), err => {
                                 if (err) {
                                     console.error(err);

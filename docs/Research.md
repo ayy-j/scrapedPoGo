@@ -1,7 +1,6 @@
-# Endpoints
+# Endpoint
 
-- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.json`
-- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.min.json`
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.min.json`
 
 # Example Research Object
 

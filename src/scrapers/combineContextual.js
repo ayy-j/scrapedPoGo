@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 /**
  * @fileoverview Contextual Pokemon GO Data Aggregator.
  * Cross-references all scraped data sources into player-focused contextual
@@ -952,12 +950,24 @@ function main() {
     const now = new Date();
     
     // Load all data files
-    const events = loadDataFile('events.json');
-    const raids = loadDataFile('raids.json');
-    const eggs = loadDataFile('eggs.json');
-    const research = loadDataFile('research.json');
-    const rocketLineups = loadDataFile('rocketLineups.json');
-    const shinies = loadDataFile('shinies.json');
+    const eventsData = loadDataFile('events.min.json');
+    
+    // Flatten eventType-keyed structure into array
+    let events = [];
+    if (eventsData && typeof eventsData === 'object') {
+        // New structure: { "event-type": [...], "another-type": [...] }
+        Object.values(eventsData).forEach(typeArray => {
+            if (Array.isArray(typeArray)) {
+                events = events.concat(typeArray);
+            }
+        });
+    }
+    
+    const raids = loadDataFile('raids.min.json');
+    const eggs = loadDataFile('eggs.min.json');
+    const research = loadDataFile('research.min.json');
+    const rocketLineups = loadDataFile('rocketLineups.min.json');
+    const shinies = loadDataFile('shinies.min.json');
     
     // Validate required data
     if (!events || !raids || !eggs || !research || !rocketLineups) {
@@ -974,14 +984,6 @@ function main() {
     };
     
     // Write output files
-    fs.writeFile('data/contextual.json', JSON.stringify(contextual, null, 4), err => {
-        if (err) {
-            console.error('Error writing contextual.json:', err);
-            process.exit(1);
-        }
-        console.log('Created data/contextual.json');
-    });
-    
     fs.writeFile('data/contextual.min.json', JSON.stringify(contextual), err => {
         if (err) {
             console.error('Error writing contextual.min.json:', err);

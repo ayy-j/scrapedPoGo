@@ -7,7 +7,7 @@
 
 The `contextual.json` file is a unified, player-focused aggregation of all scraped data sources. It answers "What's available now, from where, and when does it end?"
 
-# Schema Overview
+## Schema Overview
 
 ```json
 {

@@ -1,7 +1,6 @@
-# Endpoints
+# Endpoint
 
-- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.json`
-- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.min.json`
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.min.json`
 
 # Example Egg Object
 

@@ -285,12 +285,6 @@ function get() {
                     }
                 });
 
-                fs.writeFile('data/raids.json', JSON.stringify(bosses, null, 4), err => {
-                    if (err) {
-                        console.error(err);
-                        return;
-                    }
-                });
                 fs.writeFile('data/raids.min.json', JSON.stringify(bosses), err => {
                     if (err) {
                         console.error(err);
@@ -308,12 +302,6 @@ function get() {
                         try {
                             let json = JSON.parse(body);
 
-                            fs.writeFile('data/raids.json', JSON.stringify(json, null, 4), err => {
-                                if (err) {
-                                    console.error(err);
-                                    return;
-                                }
-                            });
                             fs.writeFile('data/raids.min.json', JSON.stringify(json), err => {
                                 if (err) {
                                     console.error(err);

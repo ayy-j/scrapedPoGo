@@ -66,7 +66,18 @@ function main()
     if (!fs.existsSync('data/temp'))
         fs.mkdirSync('data/temp');
 
-    var events = JSON.parse(fs.readFileSync("./data/events.min.json"));
+    const eventsData = JSON.parse(fs.readFileSync("./data/events.min.json"));
+    
+    // Flatten eventType-keyed structure into array
+    let events = [];
+    if (eventsData && typeof eventsData === 'object') {
+        // New structure: { "event-type": [...], "another-type": [...] }
+        Object.values(eventsData).forEach(typeArray => {
+            if (Array.isArray(typeArray)) {
+                events = events.concat(typeArray);
+            }
+        });
+    }
 
     https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json", (res) =>
     {
@@ -76,7 +87,23 @@ function main()
         res.on("end", () => {
             try
             {
-                let bkp = JSON.parse(body);
+                let bkpData = JSON.parse(body);
+                
+                // Flatten backup data if it's in new structure
+                let bkp = [];
+                if (bkpData && typeof bkpData === 'object') {
+                    if (Array.isArray(bkpData)) {
+                        // Old structure: already an array
+                        bkp = bkpData;
+                    } else {
+                        // New structure: { "event-type": [...], "another-type": [...] }
+                        Object.values(bkpData).forEach(typeArray => {
+                            if (Array.isArray(typeArray)) {
+                                bkp = bkp.concat(typeArray);
+                            }
+                        });
+                    }
+                }
 
                 events.forEach(e => {
                     // Construct the event link from eventID

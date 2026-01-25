@@ -1,17 +1,7 @@
 ---
-name: Plan
-description: Researches and outlines multi-step plans
-argument-hint: Outline the goal or problem to research
-tools: ['vscode', 'execute', 'read', 'edit', 'search', 'web', 'github/*', 'copilot-container-tools/*', 'awesome-copilot/*', 'deepwiki/*', 'io.github.chromedevtools/chrome-devtools-mcp/*', 'memory/*', 'neon/*', 'netlify/*', 'openaideveloperdocs/*', 'perplexity/*', 'playwright/*', 'sequentialthinking/*', 'upstash/context7/*', 'vercel/*', 'agent', 'memory', 'ms-python.python/getPythonEnvironmentInfo', 'ms-python.python/getPythonExecutableCommand', 'ms-python.python/installPythonPackage', 'ms-python.python/configurePythonEnvironment', 'ms-vscode.vscode-websearchforcopilot/websearch', 'todo']
-handoffs:
-  - label: Start Implementation
-    agent: agent
-    prompt: Start implementation
-  - label: Open in Editor
-    agent: agent
-    prompt: '#createFile the plan as is into an untitled file (`untitled:plan-${camelCaseName}.prompt.md` without frontmatter) for further refinement.'
-    showContinueOn: false
-    send: true
+name: research
+description: Research the topic
+argument-hint: Hey use me to research
 ---
 You are a PLANNING AGENT, NOT an implementation agent.
 

@@ -99,6 +99,12 @@ function get()
                             var eventType = (eventItemWrapper.classList + "").replace("event-item-wrapper ", "").replace(" skeleton-loading", "");
                             eventType = eventType.replace("é", "e");
 
+                            // Generate heading from event type
+                            var heading = eventType
+                                .split('-')
+                                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                .join(' ');
+
                             var start = eventDates[eventID]?.start || null;
                             var end = eventDates[eventID]?.end || null;
 
@@ -111,7 +117,7 @@ function get()
                                 end = "" + new Date(Date.parse(end)).toISOString();
                             }
         
-                            allEvents.push({ "eventID": eventID, "name": name, "eventType": eventType, "image": image, "start": start, "end": end });
+                            allEvents.push({ "eventID": eventID, "name": name, "eventType": eventType, "heading": heading, "image": image, "start": start, "end": end });
                         });
                     });
         
@@ -140,12 +146,6 @@ function get()
                         }
                     }
         
-                    fs.writeFile('data/events.json', JSON.stringify(allEvents, null, 4), err => {
-                        if (err) {
-                            console.error(err);
-                            return;
-                        }
-                    });
                     fs.writeFile('data/events.min.json', JSON.stringify(allEvents), err => {
                         if (err) {
                             console.error(err);
@@ -165,12 +165,6 @@ function get()
                             {
                                 let json = JSON.parse(body);
         
-                                fs.writeFile('data/events.json', JSON.stringify(json, null, 4), err => {
-                                    if (err) {
-                                        console.error(err);
-                                        return;
-                                    }
-                                });
                                 fs.writeFile('data/events.min.json', JSON.stringify(json), err => {
                                     if (err) {
                                         console.error(err);
