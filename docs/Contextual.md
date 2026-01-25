@@ -49,8 +49,6 @@ Provides generation timestamp and source file versions for cache invalidation.
 }
 ```
 
-### Fields
-
 | Field | Type | Description |
 |-------|------|-------------|
 | `generatedAt` | string (ISO 8601) | Timestamp when the data was generated |
