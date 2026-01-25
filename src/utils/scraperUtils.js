@@ -724,6 +724,98 @@ async function extractEggPools(doc) {
 }
 
 // ============================================================================
+// Date Handling
+// ============================================================================
+
+/**
+ * Normalizes a date string to ISO 8601 format.
+ * 
+ * LeekDuck provides dates in three formats:
+ * 1. Local time (no offset): "2022-06-01T18:00:00.000" - for events based on user's local timezone
+ * 2. With timezone offset: "2022-06-01T13:00:00.000-0800" - for global events (converted to UTC)
+ * 3. UTC (Z suffix): "2022-06-01T21:00:00.000Z" - already in UTC
+ * 
+ * This function:
+ * - Preserves local time strings (no modification needed)
+ * - Converts timezone offset strings to UTC with Z suffix
+ * - Passes through UTC strings unchanged
+ * 
+ * @param {string|null} dateStr - Date string from LeekDuck feed
+ * @returns {string|null} Normalized ISO 8601 date string, or null if input is null/undefined
+ * 
+ * @example
+ * normalizeDate("2022-06-01T18:00:00.000")         // "2022-06-01T18:00:00.000" (local, unchanged)
+ * normalizeDate("2022-06-01T13:00:00.000-0800")    // "2022-06-01T21:00:00.000Z" (converted to UTC)
+ * normalizeDate("2022-06-01T21:00:00.000Z")        // "2022-06-01T21:00:00.000Z" (UTC, unchanged)
+ * normalizeDate(null)                               // null
+ */
+function normalizeDate(dateStr) {
+    if (!dateStr) return null;
+    
+    // Standard local time format is 24 characters: "2022-06-01T18:00:00.000"
+    // Dates with timezone offsets are longer (e.g., "2022-06-01T13:00:00.000-0800" = 29 chars)
+    // UTC dates end with Z and are 25 characters: "2022-06-01T18:00:00.000Z"
+    const LOCAL_DATE_LENGTH = 24;
+    
+    if (dateStr.length <= LOCAL_DATE_LENGTH) {
+        // Local time format - return as-is
+        return dateStr;
+    }
+    
+    if (dateStr.endsWith('Z')) {
+        // Already UTC - return as-is
+        return dateStr;
+    }
+    
+    // Has timezone offset - convert to UTC
+    try {
+        return new Date(Date.parse(dateStr)).toISOString();
+    } catch (e) {
+        console.warn(`Failed to parse date: ${dateStr}`);
+        return dateStr;
+    }
+}
+
+/**
+ * Checks if a date string represents a global (UTC) event.
+ * Global events have the "Z" suffix and occur at the same moment worldwide.
+ * Local events occur at the stated time in each user's local timezone.
+ * 
+ * @param {string|null} dateStr - Normalized ISO 8601 date string
+ * @returns {boolean} True if date is UTC/global, false if local or null
+ * 
+ * @example
+ * isGlobalEvent("2022-06-01T21:00:00.000Z")  // true (global)
+ * isGlobalEvent("2022-06-01T18:00:00.000")   // false (local)
+ * isGlobalEvent(null)                         // false
+ */
+function isGlobalEvent(dateStr) {
+    return dateStr ? dateStr.endsWith('Z') : false;
+}
+
+/**
+ * Normalizes both start and end dates for an event object.
+ * Convenience wrapper around normalizeDate for event processing.
+ * 
+ * @param {string|null} start - Start date string
+ * @param {string|null} end - End date string
+ * @returns {{start: string|null, end: string|null}} Object with normalized dates
+ * 
+ * @example
+ * const { start, end } = normalizeDatePair(
+ *     "2022-06-01T13:00:00.000-0800",
+ *     "2022-06-08T13:00:00.000-0800"
+ * );
+ * // start = "2022-06-01T21:00:00.000Z", end = "2022-06-08T21:00:00.000Z"
+ */
+function normalizeDatePair(start, end) {
+    return {
+        start: normalizeDate(start),
+        end: normalizeDate(end)
+    };
+}
+
+// ============================================================================
 // Exports
 // ============================================================================
 
@@ -757,5 +849,10 @@ module.exports = {
     extractPromoCodes,
     
     // Egg extraction
-    extractEggPools
+    extractEggPools,
+    
+    // Date handling
+    normalizeDate,
+    normalizeDatePair,
+    isGlobalEvent
 };

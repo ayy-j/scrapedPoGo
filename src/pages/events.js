@@ -10,6 +10,7 @@ const moment = require('moment');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
+const { normalizeDatePair } = require('../utils/scraperUtils');
 
 /**
  * @typedef {Object} GameEvent
@@ -108,14 +109,10 @@ function get()
                             var start = eventDates[eventID]?.start || null;
                             var end = eventDates[eventID]?.end || null;
 
-                            if (start?.length > 24)
-                            {
-                                start = "" + new Date(Date.parse(start)).toISOString();
-                            }
-                            if (end?.length > 24)
-                            {
-                                end = "" + new Date(Date.parse(end)).toISOString();
-                            }
+                            // Normalize dates: convert timezone offsets to UTC, preserve local times
+                            const normalized = normalizeDatePair(start, end);
+                            start = normalized.start;
+                            end = normalized.end;
         
                             allEvents.push({ "eventID": eventID, "name": name, "eventType": eventType, "heading": heading, "image": image, "start": start, "end": end });
                         });

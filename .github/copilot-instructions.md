@@ -14,6 +14,7 @@
 - **Shiny flags** come from `data/shinies.json` (see `src/utils/shinyData.js`); image URL parsing is used to infer dex numbers.
 - **Image metadata** (width/height/type) is populated via `utils/imageDimensions` inside `extractPokemonList()`; pass `{ fetchDimensions: false }` to skip.
 - **Debugging**: set `DEBUG=1` to surface scraper fallback errors in `handleScraperError()`.
+- **Date handling**: Use `normalizeDate()`, `normalizeDatePair()`, and `isGlobalEvent()` from `scraperUtils.js`. Local events have no "Z" suffix; global events (GBL, city tours) have UTC "Z" suffix. LeekDuck feed dates with timezone offsets are auto-converted to UTC.
 
 ## Workflows & commands
 - `npm run scrape` → basic data in `data/*.json`.

@@ -7,36 +7,40 @@
 
 ## Overview
 
-scrapedPoGo provides scraped Pokémon GO event data from LeekDuck.com as JSON endpoints. All data is available in two formats:
-- **Formatted** (`.json`) - Human-readable with indentation
-- **Minified** (`.min.json`) - Compressed for production use
+scrapedPoGo provides comprehensive Pokémon GO event data, raid information, research tasks, egg pools, Team GO Rocket lineups, and shiny availability as JSON endpoints.
 
 ### Base URL
 ```
 https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/
 ```
 
+### Data Format
+All endpoints return minified JSON (`.min.json`) optimized for production use.
+
 ---
 
 ## Quick Reference - All Endpoints
 
-| Endpoint | Formatted URL | Minified URL |
-|----------|---------------|--------------|
-| Events | `data/events.json` | `data/events.min.json` |
-| Raids | `data/raids.json` | `data/raids.min.json` |
-| Research | `data/research.json` | `data/research.min.json` |
-| Eggs | `data/eggs.json` | `data/eggs.min.json` |
-| Rocket Lineups | `data/rocketLineups.json` | `data/rocketLineups.min.json` |
-| Shinies | `data/shinies.json` | `data/shinies.min.json` |
+| Endpoint | URL |
+|----------|-----|
+| Events | `data/events.min.json` |
+| Raids | `data/raids.min.json` |
+| Research | `data/research.min.json` |
+| Eggs | `data/eggs.min.json` |
+| Rocket Lineups | `data/rocketLineups.min.json` |
+| Shinies | `data/shinies.min.json` |
 
-**Note**: The Shinies endpoint is updated less frequently as it sources data from game asset files. It's used internally by other endpoints to augment shiny availability data.
+**Note**: The Shinies endpoint is updated less frequently as shiny releases occur periodically in the game. It's used internally by other endpoints to augment shiny availability data.
 
 ---
 
 ## Events Endpoint
 
-### Endpoints
-- **Minimized**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json`
+### Endpoint
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json`
+
+### Description
+Provides comprehensive event information including active, upcoming, and past events with details about spawns, bonuses, raids, research, and more.
 
 ### Example Event Object
 
@@ -139,7 +143,13 @@ The `start` and `end` fields are DateTime objects encoded in [ISO 8601](https://
 - **Local time events**: DateTime string WITHOUT "Z" suffix (e.g., `2022-06-01T18:00:00.000`) - interpreted in user's local timezone
 - **Global events**: DateTime string WITH "Z" suffix (e.g., `2022-06-01T18:00:00.000Z`) - UTC time, same moment worldwide
 
-Most parsers (e.g., JavaScript's `Date.parse()`) handle this automatically.
+**Implementation Note**: LeekDuck's raw feed may include timezone offsets (e.g., `2022-06-01T13:00:00.000-0800`). These are automatically normalized to UTC with the "Z" suffix during scraping using `normalizeDate()` from `src/utils/scraperUtils.js`.
+
+| Event Type | Timing |
+|-----------|--------|
+| Community Day, Spotlight Hour, Raid Hour | Local (no Z) |
+| GO Battle League, Pokémon GO Tour (city events) | Global (with Z) |
+| Pokémon GO Tour (global event) | Local (no Z) |
 
 ### Event Type Specific Fields
 
@@ -554,9 +564,11 @@ Most parsers (e.g., JavaScript's `Date.parse()`) handle this automatically.
 
 ## Raids Endpoint
 
-### Endpoints
-- **Formatted**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.json`
-- **Minimized**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.min.json`
+### Endpoint
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.min.json`
+
+### Description
+Provides current and upcoming raid boss information including tiers, CP ranges, types, weather boosts, and shiny availability.
 
 ### Example Raid Object
 
@@ -678,9 +690,11 @@ Most parsers (e.g., JavaScript's `Date.parse()`) handle this automatically.
 
 ## Research Endpoint
 
-### Endpoints
-- **Formatted**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.json`
-- **Minimized**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.min.json`
+### Endpoint
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.min.json`
+
+### Description
+Provides field research task information including task requirements, reward types (encounters, items, resources), and Pokemon encounter details.
 
 ### Example Research Object (Item Reward)
 
@@ -767,9 +781,11 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`.
 
 ## Eggs Endpoint
 
-### Endpoints
-- **Formatted**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.json`
-- **Minimized**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.min.json`
+### Endpoint
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.min.json`
+
+### Description
+Provides egg pool information for all egg types (2km, 5km, 7km, 10km, 12km) including hatch possibilities, CP ranges, rarity, and shiny availability.
 
 ### Example Egg Object
 
@@ -809,9 +825,11 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`.
 
 ## Rocket Lineups Endpoint
 
-### Endpoints
-- **Formatted**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.json`
-- **Minimized**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json`
+### Endpoint
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json`
+
+### Description
+Provides Team GO Rocket battle lineup information for Giovanni, Leaders (Cliff, Arlo, Sierra), and Grunts, including Pokemon rosters, type weaknesses, and encounter possibilities.
 
 ### Example Rocket Lineup Object
 
@@ -919,15 +937,12 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`.
 
 ## Shinies Endpoint
 
-### Endpoints
-- **Formatted**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.json`
-- **Minimized**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min.json`
+### Endpoint
+`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min.json`
 
-**Data Source**: [LeekDuck Shiny Database](https://leekduck.com/shiny/)
+### Description
 
-### Overview
-
-The Shinies endpoint provides comprehensive data about which Pokémon have shiny variants available in Pokémon GO, including Pokémon names, release dates, regional variants, and form information.
+Provides comprehensive data about which Pokémon have shiny variants available in Pokémon GO, including Pokémon names, release dates, regional variants, and form information.
 
 This data is used internally by other endpoints (Raids, Eggs, Research) to augment their `canBeShiny` fields with authoritative information.
 
@@ -947,9 +962,9 @@ This data is used internally by other endpoints (Raids, Eggs, Research) to augme
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `lastUpdated` | `string` (ISO 8601) | Timestamp of when the data was last scraped. |
-| `source` | `string` | Name of the source. |
-| `sourceUrl` | `string` | URL to the source page. |
+| `lastUpdated` | `string` (ISO 8601) | Timestamp of when the data was last updated. |
+| `source` | `string` | Data source identifier. |
+| `sourceUrl` | `string` | URL to the source reference. |
 | `totalShinies` | `number` | Total count of unique Pokémon entries with shiny variants. |
 | `shinies` | `array` | Array of Pokémon with shiny data. |
 
@@ -1032,15 +1047,9 @@ This data is used internally by other endpoints (Raids, Eggs, Research) to augme
 ### Integration with Other Endpoints
 
 The shiny data is automatically integrated into these endpoints:
-- **Raids** (`/raids.json`) - Each boss has `canBeShiny` cross-referenced
-- **Eggs** (`/eggs.json`) - Each Pokémon has `canBeShiny` cross-referenced
-- **Research** (`/research.json`) - Each encounter reward has `canBeShiny` cross-referenced
-
-The `canBeShiny` field in these endpoints uses **both**:
-1. The shiny icon indicator from LeekDuck's website
-2. The authoritative shiny data from this endpoint
-
-This dual-check ensures maximum accuracy.
+- **Raids** (`/raids.min.json`) - Each boss has `canBeShiny` cross-referenced
+- **Eggs** (`/eggs.min.json`) - Each Pokémon has `canBeShiny` cross-referenced
+- **Research** (`/research.min.json`) - Each encounter reward has `canBeShiny` cross-referenced
 
 ---
 
@@ -1096,91 +1105,6 @@ Used for ticketed events:
 
 ---
 
-## Usage Examples
-
-### JavaScript - Fetch Events
-
-```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.json')
-    .then(r => r.json())
-    .then(events => {
-        // Filter for ongoing Community Days
-        const communityDays = events.filter(e => 
-            e.eventType === 'community-day' && 
-            new Date(e.end) > new Date()
-        );
-        console.log(communityDays);
-    });
-```
-
-### JavaScript - Check Shiny Availability
-
-```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.json')
-    .then(r => r.json())
-    .then(data => {
-        const bulbasaur = data.shinies.find(p => 
-            p.dexNumber === 1 && !p.typeCode
-        );
-        console.log(`Bulbasaur shiny released: ${bulbasaur?.releasedDate}`);
-    });
-```
-
-### JavaScript - Get Raid Bosses by Tier
-
-```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.json')
-    .then(r => r.json())
-    .then(raids => {
-        const fiveStarRaids = raids.filter(r => 
-            r.tier === '5-Star Raids' && 
-            r.eventStatus === 'ongoing'
-        );
-        console.log(fiveStarRaids);
-    });
-```
-
-### JavaScript - Find Research Encounters
-
-```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.json')
-    .then(r => r.json())
-    .then(research => {
-        const encounters = research.filter(r => 
-            r.rewards.some(reward => reward.type === 'encounter')
-        );
-        console.log(encounters);
-    });
-```
-
-### JavaScript - Get All Alolan Shinies
-
-```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.json')
-    .then(r => r.json())
-    .then(data => {
-        const alolan = data.shinies.filter(p => p.typeCode === '_61');
-        console.log(`${alolan.length} Alolan Pokémon have shinies`);
-        alolan.forEach(p => console.log(p.name));
-    });
-```
-
-### JavaScript - Get Rocket Leader Counters
-
-```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.json')
-    .then(r => r.json())
-    .then(lineups => {
-        const cliff = lineups.find(l => l.name === 'Cliff');
-        console.log('Cliff first slot weaknesses:');
-        cliff.firstPokemon.forEach(p => {
-            console.log(`${p.name}: ${[...p.weaknesses.double, ...p.weaknesses.single].join(', ')}`);
-        });
-    });
-```
-
----
-
 ## Appendix: Full Event Types Reference
 
 | Category | Event Type | Description |
@@ -1223,5 +1147,3 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineu
 | Rocket | `giovanni-special-research` | Giovanni research events |
 
 ---
-
-*This consolidated documentation was generated from the individual endpoint documentation files in the scrapedPoGo repository.*

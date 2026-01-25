@@ -260,6 +260,27 @@ Most events in Pokemon GO occur based around a user's local timezone. However, t
 
 If an event starts/ends at the same time globally, the `start` and `end` fields will have strings ending with "Z", signifying the DateTime is in UTC. Otherwise, the DateTime displayed is based on the user's local timezone.
 
+### Event Type Date Formats
+
+| Event Type | Format | Notes |
+|-----------|--------|-------|
+| Community Day | Local | `2022-06-01T14:00:00.000` - occurs 2-5pm local |
+| Spotlight Hour | Local | `2022-06-01T18:00:00.000` - occurs 6-7pm local |
+| Raid Hour | Local | `2022-06-01T18:00:00.000` - occurs 6-7pm local |
+| GO Battle League | UTC | `2022-06-01T21:00:00.000Z` - same moment worldwide |
+| Pokémon GO Tour (city) | UTC | `2022-02-20T17:00:00.000Z` - specific city timezone |
+| Pokémon GO Tour (global) | Local | `2022-02-28T10:00:00.000` - 10am-6pm local |
+
+### Implementation Details
+
+LeekDuck's raw feed may include timezone offsets (e.g., `2022-06-01T13:00:00.000-0800`). These are automatically normalized during scraping:
+
+- **Local times** (24 chars): Preserved as-is
+- **Timezone offsets** (>24 chars): Converted to UTC with "Z" suffix
+- **UTC times** (ending with Z): Preserved as-is
+
+See `normalizeDate()` in `src/utils/scraperUtils.js` for the implementation.
+
 Depending on the use case, many parsers (ex: Javascript's `Date.parse()`) will handle this automatically.
 
 ## Event Type Specific Fields
