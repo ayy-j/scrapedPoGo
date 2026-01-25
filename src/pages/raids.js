@@ -3,6 +3,7 @@ const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
+const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 
 /**
  * Determines event status for a raid boss by checking events data
@@ -96,7 +97,7 @@ function get() {
     return new Promise(resolve => {
         JSDOM.fromURL("https://leekduck.com/raid-bosses/", {
         })
-            .then((dom) => {
+            .then(async (dom) => {
 
                 let bosses = [];
                 
@@ -181,6 +182,20 @@ function get() {
                             bosses.push(boss);
                         });
                     });
+                });
+
+                // Fetch image dimensions for all boss images
+                const imageUrls = bosses.map(b => b.image).filter(Boolean);
+                const dimensionsMap = await getMultipleImageDimensions(imageUrls);
+                
+                // Assign dimensions back to bosses
+                bosses.forEach(boss => {
+                    if (boss.image && dimensionsMap.has(boss.image)) {
+                        const dims = dimensionsMap.get(boss.image);
+                        boss.imageWidth = dims.width;
+                        boss.imageHeight = dims.height;
+                        boss.imageType = dims.type;
+                    }
                 });
 
                 fs.writeFile('data/raids.json', JSON.stringify(bosses, null, 4), err => {

@@ -11,7 +11,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 107,
+        "imageHeight": 126,
+        "imageType": "png"
     },
     {
         "name": "Charmander",
@@ -25,7 +28,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 91,
+        "imageHeight": 110,
+        "imageType": "png"
     },
     {
         "name": "Squirtle",
@@ -39,7 +45,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 95,
+        "imageHeight": 101,
+        "imageType": "png"
     },
     {
         "name": "Chikorita",
@@ -53,7 +62,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 57,
+        "imageHeight": 115,
+        "imageType": "png"
     },
     {
         "name": "Cyndaquil",
@@ -67,7 +79,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 86,
+        "imageHeight": 99,
+        "imageType": "png"
     },
     {
         "name": "Totodile",
@@ -81,7 +96,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 99,
+        "imageHeight": 113,
+        "imageType": "png"
     },
     {
         "name": "Treecko",
@@ -95,7 +113,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 85,
+        "imageHeight": 108,
+        "imageType": "png"
     },
     {
         "name": "Torchic",
@@ -109,7 +130,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 54,
+        "imageHeight": 103,
+        "imageType": "png"
     },
     {
         "name": "Mudkip",
@@ -123,7 +147,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 68,
+        "imageHeight": 100,
+        "imageType": "png"
     },
     {
         "name": "Turtwig",
@@ -137,7 +164,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 68,
+        "imageHeight": 101,
+        "imageType": "png"
     },
     {
         "name": "Chimchar",
@@ -151,7 +181,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 62,
+        "imageHeight": 108,
+        "imageType": "png"
     },
     {
         "name": "Piplup",
@@ -165,7 +198,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 88,
+        "imageHeight": 99,
+        "imageType": "png"
     },
     {
         "name": "Snivy",
@@ -179,7 +215,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 82,
+        "imageHeight": 79,
+        "imageType": "png"
     },
     {
         "name": "Tepig",
@@ -193,7 +232,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 79,
+        "imageHeight": 111,
+        "imageType": "png"
     },
     {
         "name": "Oshawott",
@@ -207,7 +249,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 91,
+        "imageHeight": 108,
+        "imageType": "png"
     },
     {
         "name": "Chespin",
@@ -221,7 +266,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 80,
+        "imageHeight": 112,
+        "imageType": "png"
     },
     {
         "name": "Fennekin",
@@ -235,7 +283,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 100,
+        "imageHeight": 112,
+        "imageType": "png"
     },
     {
         "name": "Froakie",
@@ -249,7 +300,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 89,
+        "imageHeight": 100,
+        "imageType": "png"
     },
     {
         "name": "Rowlet",
@@ -263,7 +317,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 81,
+        "imageHeight": 94,
+        "imageType": "png"
     },
     {
         "name": "Litten",
@@ -277,7 +334,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 95,
+        "imageHeight": 121,
+        "imageType": "png"
     },
     {
         "name": "Popplio",
@@ -291,20 +351,27 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 108,
+        "imageHeight": 98,
+        "imageType": "png"
     },
     {
         "name": "Grookey",
         "eggType": "1 km",
         "isAdventureSync": false,
         "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm810.icon.png",
+        "canBeShiny": false,
         "combatPower": {
             "min": 620,
             "max": 620
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 75,
+        "imageHeight": 97,
+        "imageType": "png"
     },
     {
         "name": "Scorbunny",
@@ -318,7 +385,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 60,
+        "imageHeight": 113,
+        "imageType": "png"
     },
     {
         "name": "Sobble",
@@ -332,7 +402,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 64,
+        "imageHeight": 98,
+        "imageType": "png"
     },
     {
         "name": "Sprigatito",
@@ -346,7 +419,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 66,
+        "imageHeight": 99,
+        "imageType": "png"
     },
     {
         "name": "Fuecoco",
@@ -360,7 +436,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 75,
+        "imageHeight": 103,
+        "imageType": "png"
     },
     {
         "name": "Quaxly",
@@ -374,7 +453,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 75,
+        "imageHeight": 105,
+        "imageType": "png"
     },
     {
         "name": "Bonsly",
@@ -388,7 +470,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 66,
+        "imageHeight": 107,
+        "imageType": "png"
     },
     {
         "name": "Ducklett",
@@ -402,7 +487,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 72,
+        "imageHeight": 103,
+        "imageType": "png"
     },
     {
         "name": "Litleo",
@@ -416,7 +504,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 94,
+        "imageHeight": 121,
+        "imageType": "png"
     },
     {
         "name": "Smoliv",
@@ -430,7 +521,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 68,
+        "imageHeight": 91,
+        "imageType": "png"
     },
     {
         "name": "Meditite",
@@ -444,7 +538,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 97,
+        "imageHeight": 115,
+        "imageType": "png"
     },
     {
         "name": "Petilil",
@@ -458,7 +555,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 54,
+        "imageHeight": 94,
+        "imageType": "png"
     },
     {
         "name": "Bergmite",
@@ -472,7 +572,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 124,
+        "imageHeight": 151,
+        "imageType": "png"
     },
     {
         "name": "Wimpod",
@@ -486,7 +589,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 136,
+        "imageHeight": 61,
+        "imageType": "png"
     },
     {
         "name": "Cleffa",
@@ -500,7 +606,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 89,
+        "imageHeight": 83,
+        "imageType": "png"
     },
     {
         "name": "Igglybuff",
@@ -514,7 +623,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 64,
+        "imageHeight": 74,
+        "imageType": "png"
     },
     {
         "name": "Smoochum",
@@ -528,7 +640,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 4
+        "rarity": 4,
+        "imageWidth": 76,
+        "imageHeight": 106,
+        "imageType": "png"
     },
     {
         "name": "Larvesta",
@@ -542,7 +657,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 5
+        "rarity": 5,
+        "imageWidth": 122,
+        "imageHeight": 130,
+        "imageType": "png"
     },
     {
         "name": "Inkay",
@@ -556,7 +674,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 66,
+        "imageHeight": 81,
+        "imageType": "png"
     },
     {
         "name": "Crabrawler",
@@ -570,7 +691,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 118,
+        "imageHeight": 96,
+        "imageType": "png"
     },
     {
         "name": "Komala",
@@ -584,7 +708,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 104,
+        "imageHeight": 91,
+        "imageType": "png"
     },
     {
         "name": "Togedemaru",
@@ -598,7 +725,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 99,
+        "imageHeight": 97,
+        "imageType": "png"
     },
     {
         "name": "Audino",
@@ -612,7 +742,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 2
+        "rarity": 2,
+        "imageWidth": 120,
+        "imageHeight": 153,
+        "imageType": "png"
     },
     {
         "name": "Elgyem",
@@ -626,7 +759,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 2
+        "rarity": 2,
+        "imageWidth": 61,
+        "imageHeight": 123,
+        "imageType": "png"
     },
     {
         "name": "Munchlax",
@@ -640,7 +776,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 91,
+        "imageHeight": 118,
+        "imageType": "png"
     },
     {
         "name": "Snom",
@@ -654,7 +793,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 88,
+        "imageHeight": 74,
+        "imageType": "png"
     },
     {
         "name": "Indeedee (Male)",
@@ -668,7 +810,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 78,
+        "imageHeight": 140,
+        "imageType": "png"
     },
     {
         "name": "Indeedee (Female)",
@@ -682,7 +827,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 92,
+        "imageHeight": 134,
+        "imageType": "png"
     },
     {
         "name": "Larvesta",
@@ -696,7 +844,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 5
+        "rarity": 5,
+        "imageWidth": 122,
+        "imageHeight": 130,
+        "imageType": "png"
     },
     {
         "name": "Riolu",
@@ -710,7 +861,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 87,
+        "imageHeight": 123,
+        "imageType": "png"
     },
     {
         "name": "Bonsly",
@@ -724,7 +878,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 66,
+        "imageHeight": 107,
+        "imageType": "png"
     },
     {
         "name": "Tirtouga",
@@ -738,7 +895,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 187,
+        "imageHeight": 63,
+        "imageType": "png"
     },
     {
         "name": "Skarmory",
@@ -752,7 +912,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 192,
+        "imageHeight": 133,
+        "imageType": "png"
     },
     {
         "name": "Archen",
@@ -766,7 +929,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 180,
+        "imageHeight": 97,
+        "imageType": "png"
     },
     {
         "name": "Galarian Meowth",
@@ -780,7 +946,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 87,
+        "imageHeight": 108,
+        "imageType": "png"
     },
     {
         "name": "Galarian Zigzagoon",
@@ -794,7 +963,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 127,
+        "imageHeight": 128,
+        "imageType": "png"
     },
     {
         "name": "Galarian Darumaka",
@@ -808,7 +980,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 121,
+        "imageHeight": 122,
+        "imageType": "png"
     },
     {
         "name": "Galarian Stunfisk",
@@ -822,7 +997,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 121,
+        "imageHeight": 75,
+        "imageType": "png"
     },
     {
         "name": "Galarian Corsola",
@@ -836,7 +1014,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 109,
+        "imageHeight": 111,
+        "imageType": "png"
     },
     {
         "name": "Alolan Geodude",
@@ -850,7 +1031,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 157,
+        "imageHeight": 102,
+        "imageType": "png"
     },
     {
         "name": "Alolan Diglett",
@@ -864,7 +1048,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 90,
+        "imageHeight": 89,
+        "imageType": "png"
     },
     {
         "name": "Galarian Corsola",
@@ -878,7 +1065,10 @@
         },
         "isRegional": false,
         "isGiftExchange": true,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 109,
+        "imageHeight": 111,
+        "imageType": "png"
     },
     {
         "name": "Galarian Slowpoke",
@@ -892,7 +1082,10 @@
         },
         "isRegional": false,
         "isGiftExchange": true,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 140,
+        "imageHeight": 97,
+        "imageType": "png"
     },
     {
         "name": "Hisuian Sneasel",
@@ -906,7 +1099,10 @@
         },
         "isRegional": false,
         "isGiftExchange": true,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 110,
+        "imageHeight": 127,
+        "imageType": "png"
     },
     {
         "name": "Hisuian Growlithe",
@@ -920,7 +1116,10 @@
         },
         "isRegional": false,
         "isGiftExchange": true,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 112,
+        "imageHeight": 132,
+        "imageType": "png"
     },
     {
         "name": "Basculin (White Striped)",
@@ -934,7 +1133,10 @@
         },
         "isRegional": false,
         "isGiftExchange": true,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 115,
+        "imageHeight": 108,
+        "imageType": "png"
     },
     {
         "name": "Beldum",
@@ -948,7 +1150,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 68,
+        "imageHeight": 52,
+        "imageType": "png"
     },
     {
         "name": "Pawniard",
@@ -962,7 +1167,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 65,
+        "imageHeight": 97,
+        "imageType": "png"
     },
     {
         "name": "Carbink",
@@ -976,7 +1184,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 120,
+        "imageHeight": 112,
+        "imageType": "png"
     },
     {
         "name": "Toxel",
@@ -990,7 +1201,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 75,
+        "imageHeight": 94,
+        "imageType": "png"
     },
     {
         "name": "Honedge",
@@ -1004,7 +1218,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 107,
+        "imageHeight": 109,
+        "imageType": "png"
     },
     {
         "name": "Jangmo-o",
@@ -1018,7 +1235,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 85,
+        "imageHeight": 116,
+        "imageType": "png"
     },
     {
         "name": "Dreepy",
@@ -1032,7 +1252,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 67,
+        "imageHeight": 60,
+        "imageType": "png"
     },
     {
         "name": "Charcadet",
@@ -1046,7 +1269,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 53,
+        "imageHeight": 127,
+        "imageType": "png"
     },
     {
         "name": "Tinkatink",
@@ -1060,7 +1286,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 108,
+        "imageHeight": 83,
+        "imageType": "png"
     },
     {
         "name": "Frigibax",
@@ -1074,7 +1303,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 3
+        "rarity": 3,
+        "imageWidth": 97,
+        "imageHeight": 100,
+        "imageType": "png"
     },
     {
         "name": "Larvesta",
@@ -1088,7 +1320,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 5
+        "rarity": 5,
+        "imageWidth": 122,
+        "imageHeight": 130,
+        "imageType": "png"
     },
     {
         "name": "Dreepy",
@@ -1102,7 +1337,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 67,
+        "imageHeight": 60,
+        "imageType": "png"
     },
     {
         "name": "Beldum",
@@ -1116,7 +1354,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 68,
+        "imageHeight": 52,
+        "imageType": "png"
     },
     {
         "name": "Drampa",
@@ -1130,7 +1371,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 157,
+        "imageHeight": 173,
+        "imageType": "png"
     },
     {
         "name": "Turtonator",
@@ -1144,7 +1388,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 168,
+        "imageHeight": 199,
+        "imageType": "png"
     },
     {
         "name": "Gible",
@@ -1158,7 +1405,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 113,
+        "imageHeight": 131,
+        "imageType": "png"
     },
     {
         "name": "Sandile",
@@ -1172,7 +1422,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 112,
+        "imageHeight": 79,
+        "imageType": "png"
     },
     {
         "name": "Vullaby",
@@ -1186,7 +1439,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 98,
+        "imageHeight": 105,
+        "imageType": "png"
     },
     {
         "name": "Shroodle",
@@ -1200,7 +1456,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 71,
+        "imageHeight": 87,
+        "imageType": "png"
     },
     {
         "name": "Pancham",
@@ -1214,7 +1473,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 89,
+        "imageHeight": 117,
+        "imageType": "png"
     },
     {
         "name": "Salandit",
@@ -1228,7 +1490,10 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 137,
+        "imageHeight": 93,
+        "imageType": "png"
     },
     {
         "name": "Varoom",
@@ -1242,6 +1507,9 @@
         },
         "isRegional": false,
         "isGiftExchange": false,
-        "rarity": 1
+        "rarity": 1,
+        "imageWidth": 162,
+        "imageHeight": 110,
+        "imageType": "png"
     }
 ]

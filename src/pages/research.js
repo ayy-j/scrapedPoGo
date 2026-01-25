@@ -3,6 +3,7 @@ const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
+const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 
 /**
  * Infers task type from task text if category type is not available
@@ -72,7 +73,7 @@ function get()
     return new Promise(resolve => {
         JSDOM.fromURL("https://leekduck.com/research/", {
         })
-        .then((dom) => {
+        .then(async (dom) => {
             // Load shiny data for cross-referencing
             const shinyMap = loadShinyData();
 
@@ -195,6 +196,29 @@ function get()
                             }
                             research.push(taskData);
                         }
+                    }
+                });
+            });
+
+            // Collect all image URLs from rewards
+            const imageUrls = [];
+            research.forEach(task => {
+                task.rewards.forEach(reward => {
+                    if (reward.image) imageUrls.push(reward.image);
+                });
+            });
+            
+            // Fetch dimensions for all unique images
+            const dimensionsMap = await getMultipleImageDimensions(imageUrls);
+            
+            // Assign dimensions back to rewards
+            research.forEach(task => {
+                task.rewards.forEach(reward => {
+                    if (reward.image && dimensionsMap.has(reward.image)) {
+                        const dims = dimensionsMap.get(reward.image);
+                        reward.imageWidth = dims.width;
+                        reward.imageHeight = dims.height;
+                        reward.imageType = dims.type;
                     }
                 });
             });

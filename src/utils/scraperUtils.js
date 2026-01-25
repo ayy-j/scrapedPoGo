@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { getMultipleImageDimensions, clearCache } = require('./imageDimensions');
 
 /**
  * Shared utility functions for LeekDuck scrapers.
@@ -60,15 +61,21 @@ function handleScraperError(err, id, type, bkp, scraperKey) {
 
 /**
  * Extract a list of Pokémon from a .pkmn-list-flex element.
+ * Fetches actual image dimensions from remote URLs.
  * @param {Element} container - DOM element containing .pkmn-list-item elements
+ * @param {object} [options] - Options for extraction
+ * @param {boolean} [options.fetchDimensions=true] - Whether to fetch image dimensions from URLs
  * @returns {Promise<Array>} Array of Pokemon objects with name, image, canBeShiny, dimensions
  */
-async function extractPokemonList(container) {
+async function extractPokemonList(container, options = {}) {
+    const { fetchDimensions = true } = options;
+    
     if (!container) return [];
     
     const pokemon = [];
     const items = container.querySelectorAll(':scope > .pkmn-list-item');
     
+    // First pass: extract all Pokemon data
     items.forEach(item => {
         const poke = {};
         
@@ -80,8 +87,6 @@ async function extractPokemonList(container) {
         const imgEl = item.querySelector(':scope > .pkmn-list-img > img');
         if (imgEl) {
             poke.image = imgEl.src || '';
-            poke.imageWidth = imgEl.width || null;
-            poke.imageHeight = imgEl.height || null;
         } else {
             poke.image = '';
         }
@@ -100,6 +105,25 @@ async function extractPokemonList(container) {
             pokemon.push(poke);
         }
     });
+    
+    // Second pass: fetch dimensions for all images
+    if (fetchDimensions && pokemon.length > 0) {
+        const imageUrls = pokemon.map(p => p.image).filter(Boolean);
+        
+        if (imageUrls.length > 0) {
+            const dimensionsMap = await getMultipleImageDimensions(imageUrls);
+            
+            // Assign dimensions back to Pokemon objects
+            pokemon.forEach(poke => {
+                if (poke.image && dimensionsMap.has(poke.image)) {
+                    const dims = dimensionsMap.get(poke.image);
+                    poke.imageWidth = dims.width;
+                    poke.imageHeight = dims.height;
+                    poke.imageType = dims.type;
+                }
+            });
+        }
+    }
     
     return pokemon;
 }
@@ -301,27 +325,37 @@ async function extractRaidInfo(doc) {
     if (!pageContent) return result;
     
     let lastHeader = '';
+    let lastHeaderText = '';
     
     for (const node of pageContent.childNodes) {
         if (node.className?.includes('event-section-header')) {
             lastHeader = node.id || '';
+            lastHeaderText = node.textContent?.toLowerCase() || '';
         }
         
         if (node.className === 'pkmn-list-flex') {
             const pokemon = await extractPokemonList(node);
             
-            // Categorize by section header
-            if (lastHeader.includes('mega')) {
+            // Categorize by section header ID and text content
+            const headerLower = lastHeader.toLowerCase();
+            const textLower = lastHeaderText;
+            
+            if (headerLower.includes('mega') || textLower.includes('mega')) {
                 result.tiers.mega.push(...pokemon);
-            } else if (lastHeader.includes('5-star') || lastHeader.includes('five-star') || lastHeader.includes('legendary')) {
+            } else if (headerLower.includes('5-star') || headerLower.includes('five-star') || 
+                       textLower.includes('5-star') || textLower.includes('five-star') ||
+                       headerLower.includes('legendary') || textLower.includes('legendary')) {
                 result.tiers.fiveStar.push(...pokemon);
-            } else if (lastHeader.includes('3-star') || lastHeader.includes('three-star')) {
+            } else if (headerLower.includes('3-star') || headerLower.includes('three-star') ||
+                       textLower.includes('3-star') || textLower.includes('three-star')) {
                 result.tiers.threeStar.push(...pokemon);
-            } else if (lastHeader.includes('1-star') || lastHeader.includes('one-star')) {
+            } else if (headerLower.includes('1-star') || headerLower.includes('one-star') ||
+                       textLower.includes('1-star') || textLower.includes('one-star')) {
                 result.tiers.oneStar.push(...pokemon);
-            } else if (lastHeader.includes('raids') || lastHeader.includes('boss')) {
+            } else if (headerLower.includes('raids') || headerLower.includes('boss') ||
+                       textLower.includes('raids') || textLower.includes('appearing in')) {
                 result.bosses.push(...pokemon);
-            } else if (lastHeader.includes('shiny')) {
+            } else if (headerLower.includes('shiny') || textLower.includes('shiny')) {
                 result.shinies.push(...pokemon);
             }
         }
@@ -579,6 +613,9 @@ module.exports = {
     
     // Pokemon extraction
     extractPokemonList,
+    
+    // Image dimension cache management
+    clearImageDimensionCache: clearCache,
     
     // Section extraction
     getSectionHeaders,

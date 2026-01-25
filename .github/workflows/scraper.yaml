@@ -25,20 +25,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       
-      - name: Run scrape
-        run: npm run scrape
-        continue-on-error: true
-      
-      - name: Run shiny scrape
-        run: npm run scrapeshinies
-        continue-on-error: true
-      
-      - name: Run detailed scrape
-        run: npm run detailedscrape
-        continue-on-error: true
-      
-      - name: Combine details
-        run: npm run combinedetails
+      - name: Run scraper pipeline
+        run: npm run pipeline
         continue-on-error: true
       
       - name: Commit and push changes

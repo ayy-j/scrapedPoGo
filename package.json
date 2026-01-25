@@ -7,11 +7,14 @@
     "scrape": "node ./src/scrapers/scrape.js",
     "detailedscrape": "node ./src/scrapers/detailedscrape.js",
     "combinedetails": "node ./src/scrapers/combinedetails.js",
-    "scrapeshinies": "node ./src/scrapers/scrapeShinies.js"
+    "combinecontextual": "node ./src/scrapers/combineContextual.js",
+    "scrapeshinies": "node ./src/scrapers/scrapeShinies.js",
+    "pipeline": "npm run scrape && npm run scrapeshinies && npm run detailedscrape && npm run combinedetails && npm run combinecontextual"
   },
   "author": "quantNebula",
   "license": "MIT",
   "dependencies": {
+    "image-size": "^2.0.2",
     "jsdom": "21.1.1",
     "moment": "latest"
   }

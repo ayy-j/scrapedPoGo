@@ -37,13 +37,7 @@ async function scrapeShinies() {
 
 		if (shinyPokemon.length === 0) {
 			console.warn('No shiny Pokemon found in the data.');
-			return {
-				lastUpdated: new Date().toISOString(),
-				source: 'LeekDuck',
-				sourceUrl: 'https://leekduck.com/shiny/',
-				totalShinies: 0,
-				shinies: []
-			};
+			return [];
 		}
 
 		const entries = [];
@@ -185,13 +179,7 @@ async function scrapeShinies() {
 
 		console.log(`Successfully processed ${output.length} unique shiny Pokemon with ${entries.length} total forms`);
 
-		return {
-			lastUpdated: new Date().toISOString(),
-			source: 'LeekDuck',
-			sourceUrl: 'https://leekduck.com/shiny/',
-			totalShinies: output.length,
-			shinies: output
-		};
+		return output;
 
 	} catch (error) {
 		console.error('Error fetching shiny data:', error.message);

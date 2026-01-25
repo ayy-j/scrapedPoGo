@@ -14,7 +14,7 @@ function main()
                 console.error('Error writing shinies.json:', err);
                 return;
             }
-            console.log(`Successfully saved ${data.totalShinies} shinies to data/shinies.json`);
+            console.log(`Successfully saved ${data.length} shinies to data/shinies.json`);
         });
         
         fs.writeFile('data/shinies.min.json', JSON.stringify(data), err => {

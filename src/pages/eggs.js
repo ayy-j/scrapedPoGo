@@ -3,13 +3,14 @@ const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
+const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 
 function get()
 {
     return new Promise(resolve => {
         JSDOM.fromURL("https://leekduck.com/eggs/", {
         })
-        .then((dom) => {
+        .then(async (dom) => {
 
             var content = dom.window.document.querySelector('.page-content').childNodes;
 
@@ -85,6 +86,20 @@ function get()
                     });
                 }
             })
+
+            // Fetch image dimensions for all egg Pokemon
+            const imageUrls = eggs.map(e => e.image).filter(Boolean);
+            const dimensionsMap = await getMultipleImageDimensions(imageUrls);
+            
+            // Assign dimensions back to eggs
+            eggs.forEach(egg => {
+                if (egg.image && dimensionsMap.has(egg.image)) {
+                    const dims = dimensionsMap.get(egg.image);
+                    egg.imageWidth = dims.width;
+                    egg.imageHeight = dims.height;
+                    egg.imageType = dims.type;
+                }
+            });
 
             fs.writeFile('data/eggs.json', JSON.stringify(eggs, null, 4), err => {
                 if (err) {

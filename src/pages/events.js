@@ -44,7 +44,6 @@ function get()
         
                         events.forEach (e =>
                         {
-                            var heading = e.querySelector(":scope > .event-item-wrapper > p").innerHTML;
                             var name = e.querySelector(":scope > .event-item-wrapper > .event-item > .event-text-container > .event-text > h2").innerHTML;
                             var image = e.querySelector(":scope > .event-item-wrapper > .event-item > .event-img-wrapper > img").src;
                             if (image.includes("cdn-cgi"))
@@ -76,7 +75,7 @@ function get()
                                 end = "" + new Date(Date.parse(end)).toISOString();
                             }
         
-                            allEvents.push({ "eventID": eventID, "name": name, "eventType": eventType, "heading": heading, "image": image, "start": start, "end": end });
+                            allEvents.push({ "eventID": eventID, "name": name, "eventType": eventType, "image": image, "start": start, "end": end });
                         });
                     });
         

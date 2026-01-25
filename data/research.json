@@ -7,7 +7,10 @@
                 "type": "item",
                 "name": "Mysterious Component",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Mysterious%20Component.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Mysterious%20Component.png",
+                "imageWidth": 512,
+                "imageHeight": 512,
+                "imageType": "png"
             }
         ]
     },
@@ -19,13 +22,19 @@
                 "type": "item",
                 "name": "Fast TM",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Fast%20TM.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Fast%20TM.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Charged TM",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Charged%20TM.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Charged%20TM.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -41,7 +50,10 @@
                 "combatPower": {
                     "min": 389,
                     "max": 422
-                }
+                },
+                "imageWidth": 91,
+                "imageHeight": 79,
+                "imageType": "png"
             }
         ]
     },
@@ -53,19 +65,28 @@
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Nanab Berry",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Nanab%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Nanab%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -81,7 +102,10 @@
                 "combatPower": {
                     "min": 458,
                     "max": 493
-                }
+                },
+                "imageWidth": 102,
+                "imageHeight": 73,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -91,7 +115,10 @@
                 "combatPower": {
                     "min": 424,
                     "max": 459
-                }
+                },
+                "imageWidth": 97,
+                "imageHeight": 82,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -101,7 +128,10 @@
                 "combatPower": {
                     "min": 244,
                     "max": 272
-                }
+                },
+                "imageWidth": 79,
+                "imageHeight": 91,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -111,7 +141,10 @@
                 "combatPower": {
                     "min": 507,
                     "max": 546
-                }
+                },
+                "imageWidth": 132,
+                "imageHeight": 99,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -121,7 +154,10 @@
                 "combatPower": {
                     "min": 547,
                     "max": 586
-                }
+                },
+                "imageWidth": 94,
+                "imageHeight": 114,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -131,7 +167,10 @@
                 "combatPower": {
                     "min": 258,
                     "max": 285
-                }
+                },
+                "imageWidth": 92,
+                "imageHeight": 111,
+                "imageType": "png"
             }
         ]
     },
@@ -147,7 +186,10 @@
                 "combatPower": {
                     "min": 99,
                     "max": 117
-                }
+                },
+                "imageWidth": 112,
+                "imageHeight": 83,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -157,7 +199,10 @@
                 "combatPower": {
                     "min": 540,
                     "max": 579
-                }
+                },
+                "imageWidth": 97,
+                "imageHeight": 95,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -167,7 +212,10 @@
                 "combatPower": {
                     "min": 191,
                     "max": 215
-                }
+                },
+                "imageWidth": 136,
+                "imageHeight": 61,
+                "imageType": "png"
             }
         ]
     },
@@ -179,25 +227,37 @@
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 200,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Golden Razz Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Poké Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -213,7 +273,10 @@
                 "combatPower": {
                     "min": 397,
                     "max": 430
-                }
+                },
+                "imageWidth": 88,
+                "imageHeight": 129,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -223,7 +286,10 @@
                 "combatPower": {
                     "min": 459,
                     "max": 495
-                }
+                },
+                "imageWidth": 67,
+                "imageHeight": 118,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -233,31 +299,46 @@
                 "combatPower": {
                     "min": 547,
                     "max": 586
-                }
+                },
+                "imageWidth": 94,
+                "imageHeight": 114,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 1500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Golden Razz Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Ultra Ball",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -269,25 +350,37 @@
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 1500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Golden Razz Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Ultra Ball",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -299,31 +392,46 @@
                 "type": "resource",
                 "name": "Pidgeot Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Pidgeot%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Pidgeot%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -335,37 +443,55 @@
                 "type": "resource",
                 "name": "Charizard Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Charizard%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Charizard%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Blaziken Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Blaziken%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Blaziken%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -377,37 +503,55 @@
                 "type": "resource",
                 "name": "Venusaur Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Venusaur%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Venusaur%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Sceptile Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Sceptile%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Sceptile%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -419,37 +563,55 @@
                 "type": "resource",
                 "name": "Blastoise Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Blastoise%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Blastoise%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Swampert Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Swampert%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Swampert%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -465,7 +627,10 @@
                 "combatPower": {
                     "min": 534,
                     "max": 575
-                }
+                },
+                "imageWidth": 134,
+                "imageHeight": 117,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -475,7 +640,10 @@
                 "combatPower": {
                     "min": 262,
                     "max": 290
-                }
+                },
+                "imageWidth": 139,
+                "imageHeight": 127,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -485,7 +653,10 @@
                 "combatPower": {
                     "min": 469,
                     "max": 506
-                }
+                },
+                "imageWidth": 61,
+                "imageHeight": 93,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -495,7 +666,10 @@
                 "combatPower": {
                     "min": 325,
                     "max": 357
-                }
+                },
+                "imageWidth": 94,
+                "imageHeight": 102,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -505,7 +679,10 @@
                 "combatPower": {
                     "min": 365,
                     "max": 397
-                }
+                },
+                "imageWidth": 66,
+                "imageHeight": 81,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -515,7 +692,10 @@
                 "combatPower": {
                     "min": 344,
                     "max": 377
-                }
+                },
+                "imageWidth": 162,
+                "imageHeight": 90,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -525,7 +705,10 @@
                 "combatPower": {
                     "min": 540,
                     "max": 579
-                }
+                },
+                "imageWidth": 97,
+                "imageHeight": 95,
+                "imageType": "png"
             }
         ]
     },
@@ -541,7 +724,10 @@
                 "combatPower": {
                     "min": 347,
                     "max": 378
-                }
+                },
+                "imageWidth": 120,
+                "imageHeight": 114,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -551,7 +737,10 @@
                 "combatPower": {
                     "min": 324,
                     "max": 355
-                }
+                },
+                "imageWidth": 138,
+                "imageHeight": 115,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -561,7 +750,10 @@
                 "combatPower": {
                     "min": 298,
                     "max": 328
-                }
+                },
+                "imageWidth": 157,
+                "imageHeight": 39,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -571,7 +763,10 @@
                 "combatPower": {
                     "min": 542,
                     "max": 582
-                }
+                },
+                "imageWidth": 148,
+                "imageHeight": 129,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -581,7 +776,10 @@
                 "combatPower": {
                     "min": 460,
                     "max": 497
-                }
+                },
+                "imageWidth": 164,
+                "imageHeight": 118,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -591,7 +789,10 @@
                 "combatPower": {
                     "min": 479,
                     "max": 516
-                }
+                },
+                "imageWidth": 63,
+                "imageHeight": 91,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -601,31 +802,46 @@
                 "combatPower": {
                     "min": 409,
                     "max": 443
-                }
+                },
+                "imageWidth": 55,
+                "imageHeight": 82,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 200,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Poké Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -637,25 +853,37 @@
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -667,25 +895,37 @@
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -697,25 +937,37 @@
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -731,7 +983,10 @@
                 "combatPower": {
                     "min": 262,
                     "max": 289
-                }
+                },
+                "imageWidth": 88,
+                "imageHeight": 70,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -741,7 +996,10 @@
                 "combatPower": {
                     "min": 264,
                     "max": 292
-                }
+                },
+                "imageWidth": 90,
+                "imageHeight": 89,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -751,31 +1009,46 @@
                 "combatPower": {
                     "min": 871,
                     "max": 920
-                }
+                },
+                "imageWidth": 138,
+                "imageHeight": 158,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 200,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Poké Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -787,25 +1060,37 @@
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Ultra Ball",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -817,25 +1102,37 @@
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 200,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Poké Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -851,7 +1148,10 @@
                 "combatPower": {
                     "min": 620,
                     "max": 662
-                }
+                },
+                "imageWidth": 97,
+                "imageHeight": 108,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -861,7 +1161,10 @@
                 "combatPower": {
                     "min": 548,
                     "max": 587
-                }
+                },
+                "imageWidth": 106,
+                "imageHeight": 76,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -871,7 +1174,10 @@
                 "combatPower": {
                     "min": 507,
                     "max": 544
-                }
+                },
+                "imageWidth": 100,
+                "imageHeight": 96,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -881,7 +1187,10 @@
                 "combatPower": {
                     "min": 554,
                     "max": 593
-                }
+                },
+                "imageWidth": 61,
+                "imageHeight": 123,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -891,31 +1200,46 @@
                 "combatPower": {
                     "min": 373,
                     "max": 405
-                }
+                },
+                "imageWidth": 93,
+                "imageHeight": 113,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 200,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Poké Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -931,7 +1255,10 @@
                 "combatPower": {
                     "min": 515,
                     "max": 553
-                }
+                },
+                "imageWidth": 116,
+                "imageHeight": 140,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -941,43 +1268,64 @@
                 "combatPower": {
                     "min": 613,
                     "max": 655
-                }
+                },
+                "imageWidth": 127,
+                "imageHeight": 85,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Poké Ball",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Ultra Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 9,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 1000,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -989,37 +1337,55 @@
                 "type": "item",
                 "name": "Poké Ball",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Ultra Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 9,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 1000,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1031,25 +1397,37 @@
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 1500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Golden Razz Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Ultra Ball",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1065,7 +1443,10 @@
                 "combatPower": {
                     "min": 486,
                     "max": 523
-                }
+                },
+                "imageWidth": 122,
+                "imageHeight": 148,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1075,7 +1456,10 @@
                 "combatPower": {
                     "min": 486,
                     "max": 523
-                }
+                },
+                "imageWidth": 122,
+                "imageHeight": 148,
+                "imageType": "png"
             }
         ]
     },
@@ -1087,25 +1471,37 @@
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Ultra Ball",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1121,7 +1517,10 @@
                 "combatPower": {
                     "min": 382,
                     "max": 415
-                }
+                },
+                "imageWidth": 85,
+                "imageHeight": 116,
+                "imageType": "png"
             }
         ]
     },
@@ -1137,7 +1536,10 @@
                 "combatPower": {
                     "min": 411,
                     "max": 445
-                }
+                },
+                "imageWidth": 80,
+                "imageHeight": 112,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1147,7 +1549,10 @@
                 "combatPower": {
                     "min": 385,
                     "max": 418
-                }
+                },
+                "imageWidth": 68,
+                "imageHeight": 52,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1157,7 +1562,10 @@
                 "combatPower": {
                     "min": 441,
                     "max": 477
-                }
+                },
+                "imageWidth": 113,
+                "imageHeight": 131,
+                "imageType": "png"
             }
         ]
     },
@@ -1169,7 +1577,10 @@
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1179,7 +1590,10 @@
                 "combatPower": {
                     "min": 247,
                     "max": 275
-                }
+                },
+                "imageWidth": 101,
+                "imageHeight": 84,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1189,7 +1603,10 @@
                 "combatPower": {
                     "min": 273,
                     "max": 302
-                }
+                },
+                "imageWidth": 86,
+                "imageHeight": 106,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1199,7 +1616,10 @@
                 "combatPower": {
                     "min": 501,
                     "max": 539
-                }
+                },
+                "imageWidth": 112,
+                "imageHeight": 132,
+                "imageType": "png"
             }
         ]
     },
@@ -1215,7 +1635,10 @@
                 "combatPower": {
                     "min": 1076,
                     "max": 1131
-                }
+                },
+                "imageWidth": 224,
+                "imageHeight": 177,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1225,7 +1648,10 @@
                 "combatPower": {
                     "min": 524,
                     "max": 563
-                }
+                },
+                "imageWidth": 111,
+                "imageHeight": 107,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1235,7 +1661,10 @@
                 "combatPower": {
                     "min": 877,
                     "max": 929
-                }
+                },
+                "imageWidth": 74,
+                "imageHeight": 140,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1245,7 +1674,10 @@
                 "combatPower": {
                     "min": 374,
                     "max": 407
-                }
+                },
+                "imageWidth": 81,
+                "imageHeight": 113,
+                "imageType": "png"
             }
         ]
     },
@@ -1261,13 +1693,19 @@
                 "combatPower": {
                     "min": 958,
                     "max": 1010
-                }
+                },
+                "imageWidth": 223,
+                "imageHeight": 88,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 2500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1283,7 +1721,10 @@
                 "combatPower": {
                     "min": 597,
                     "max": 638
-                }
+                },
+                "imageWidth": 187,
+                "imageHeight": 63,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1293,7 +1734,10 @@
                 "combatPower": {
                     "min": 741,
                     "max": 789
-                }
+                },
+                "imageWidth": 180,
+                "imageHeight": 97,
+                "imageType": "png"
             }
         ]
     },
@@ -1309,7 +1753,10 @@
                 "combatPower": {
                     "min": 1233,
                     "max": 1292
-                }
+                },
+                "imageWidth": 107,
+                "imageHeight": 219,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1319,7 +1766,10 @@
                 "combatPower": {
                     "min": 741,
                     "max": 786
-                }
+                },
+                "imageWidth": 193,
+                "imageHeight": 199,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1329,31 +1779,46 @@
                 "combatPower": {
                     "min": 1136,
                     "max": 1193
-                }
+                },
+                "imageWidth": 217,
+                "imageHeight": 166,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 1500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Golden Razz Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Ultra Ball",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Ultra%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1365,7 +1830,10 @@
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 1000,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1381,7 +1849,10 @@
                 "combatPower": {
                     "min": 1104,
                     "max": 1160
-                }
+                },
+                "imageWidth": 196,
+                "imageHeight": 170,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1391,7 +1862,10 @@
                 "combatPower": {
                     "min": 871,
                     "max": 920
-                }
+                },
+                "imageWidth": 138,
+                "imageHeight": 158,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1401,7 +1875,10 @@
                 "combatPower": {
                     "min": 299,
                     "max": 329
-                }
+                },
+                "imageWidth": 109,
+                "imageHeight": 59,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1411,7 +1888,10 @@
                 "combatPower": {
                     "min": 395,
                     "max": 428
-                }
+                },
+                "imageWidth": 159,
+                "imageHeight": 125,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1421,7 +1901,10 @@
                 "combatPower": {
                     "min": 351,
                     "max": 383
-                }
+                },
+                "imageWidth": 114,
+                "imageHeight": 123,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1431,7 +1914,10 @@
                 "combatPower": {
                     "min": 380,
                     "max": 413
-                }
+                },
+                "imageWidth": 127,
+                "imageHeight": 129,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1441,7 +1927,10 @@
                 "combatPower": {
                     "min": 418,
                     "max": 453
-                }
+                },
+                "imageWidth": 111,
+                "imageHeight": 120,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1451,7 +1940,10 @@
                 "combatPower": {
                     "min": 99,
                     "max": 117
-                }
+                },
+                "imageWidth": 78,
+                "imageHeight": 85,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1461,7 +1953,10 @@
                 "combatPower": {
                     "min": 188,
                     "max": 212
-                }
+                },
+                "imageWidth": 124,
+                "imageHeight": 59,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1471,7 +1966,10 @@
                 "combatPower": {
                     "min": 415,
                     "max": 449
-                }
+                },
+                "imageWidth": 148,
+                "imageHeight": 56,
+                "imageType": "png"
             }
         ]
     },
@@ -1487,7 +1985,10 @@
                 "combatPower": {
                     "min": 831,
                     "max": 879
-                }
+                },
+                "imageWidth": 89,
+                "imageHeight": 137,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1497,7 +1998,10 @@
                 "combatPower": {
                     "min": 658,
                     "max": 700
-                }
+                },
+                "imageWidth": 142,
+                "imageHeight": 102,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1507,7 +2011,10 @@
                 "combatPower": {
                     "min": 99,
                     "max": 117
-                }
+                },
+                "imageWidth": 78,
+                "imageHeight": 85,
+                "imageType": "png"
             }
         ]
     },
@@ -1519,10 +2026,14 @@
                 "type": "encounter",
                 "name": "Pidgeotto",
                 "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm17.icon.png",
+                "canBeShiny": false,
                 "combatPower": {
                     "min": 475,
                     "max": 512
-                }
+                },
+                "imageWidth": 160,
+                "imageHeight": 171,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1532,7 +2043,10 @@
                 "combatPower": {
                     "min": 298,
                     "max": 328
-                }
+                },
+                "imageWidth": 157,
+                "imageHeight": 39,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1542,7 +2056,10 @@
                 "combatPower": {
                     "min": 309,
                     "max": 339
-                }
+                },
+                "imageWidth": 133,
+                "imageHeight": 107,
+                "imageType": "png"
             }
         ]
     },
@@ -1558,7 +2075,10 @@
                 "combatPower": {
                     "min": 477,
                     "max": 514
-                }
+                },
+                "imageWidth": 90,
+                "imageHeight": 166,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1568,7 +2088,10 @@
                 "combatPower": {
                     "min": 358,
                     "max": 391
-                }
+                },
+                "imageWidth": 111,
+                "imageHeight": 157,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1578,7 +2101,10 @@
                 "combatPower": {
                     "min": 206,
                     "max": 231
-                }
+                },
+                "imageWidth": 59,
+                "imageHeight": 98,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1588,31 +2114,46 @@
                 "combatPower": {
                     "min": 522,
                     "max": 560
-                }
+                },
+                "imageWidth": 87,
+                "imageHeight": 97,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1628,7 +2169,10 @@
                 "combatPower": {
                     "min": 495,
                     "max": 533
-                }
+                },
+                "imageWidth": 105,
+                "imageHeight": 130,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1638,7 +2182,10 @@
                 "combatPower": {
                     "min": 527,
                     "max": 566
-                }
+                },
+                "imageWidth": 112,
+                "imageHeight": 132,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1648,7 +2195,10 @@
                 "combatPower": {
                     "min": 487,
                     "max": 525
-                }
+                },
+                "imageWidth": 124,
+                "imageHeight": 166,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1658,7 +2208,10 @@
                 "combatPower": {
                     "min": 487,
                     "max": 525
-                }
+                },
+                "imageWidth": 140,
+                "imageHeight": 97,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1668,7 +2221,10 @@
                 "combatPower": {
                     "min": 292,
                     "max": 320
-                }
+                },
+                "imageWidth": 83,
+                "imageHeight": 101,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1678,7 +2234,10 @@
                 "combatPower": {
                     "min": 312,
                     "max": 341
-                }
+                },
+                "imageWidth": 101,
+                "imageHeight": 100,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1688,19 +2247,28 @@
                 "combatPower": {
                     "min": 409,
                     "max": 443
-                }
+                },
+                "imageWidth": 87,
+                "imageHeight": 108,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1716,7 +2284,10 @@
                 "combatPower": {
                     "min": 507,
                     "max": 546
-                }
+                },
+                "imageWidth": 132,
+                "imageHeight": 99,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1726,7 +2297,10 @@
                 "combatPower": {
                     "min": 375,
                     "max": 408
-                }
+                },
+                "imageWidth": 124,
+                "imageHeight": 102,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1736,31 +2310,46 @@
                 "combatPower": {
                     "min": 271,
                     "max": 300
-                }
+                },
+                "imageWidth": 116,
+                "imageHeight": 67,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1776,7 +2365,10 @@
                 "combatPower": {
                     "min": 424,
                     "max": 459
-                }
+                },
+                "imageWidth": 97,
+                "imageHeight": 82,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1786,7 +2378,10 @@
                 "combatPower": {
                     "min": 307,
                     "max": 337
-                }
+                },
+                "imageWidth": 87,
+                "imageHeight": 98,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1796,7 +2391,10 @@
                 "combatPower": {
                     "min": 244,
                     "max": 272
-                }
+                },
+                "imageWidth": 79,
+                "imageHeight": 91,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1806,7 +2404,10 @@
                 "combatPower": {
                     "min": 389,
                     "max": 422
-                }
+                },
+                "imageWidth": 91,
+                "imageHeight": 79,
+                "imageType": "png"
             }
         ]
     },
@@ -1818,7 +2419,10 @@
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1834,7 +2438,10 @@
                 "combatPower": {
                     "min": 442,
                     "max": 477
-                }
+                },
+                "imageWidth": 107,
+                "imageHeight": 126,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1844,7 +2451,10 @@
                 "combatPower": {
                     "min": 387,
                     "max": 420
-                }
+                },
+                "imageWidth": 91,
+                "imageHeight": 110,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1854,31 +2464,46 @@
                 "combatPower": {
                     "min": 372,
                     "max": 405
-                }
+                },
+                "imageWidth": 95,
+                "imageHeight": 101,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -1894,7 +2519,10 @@
                 "combatPower": {
                     "min": 333,
                     "max": 364
-                }
+                },
+                "imageWidth": 82,
+                "imageHeight": 79,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1904,7 +2532,10 @@
                 "combatPower": {
                     "min": 428,
                     "max": 464
-                }
+                },
+                "imageWidth": 79,
+                "imageHeight": 111,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1914,49 +2545,73 @@
                 "combatPower": {
                     "min": 413,
                     "max": 448
-                }
+                },
+                "imageWidth": 91,
+                "imageHeight": 108,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Venusaur Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Venusaur%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Venusaur%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Charizard Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Charizard%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Charizard%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Blastoise Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Blastoise%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Blastoise%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Beedrill Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Beedrill%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Beedrill%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Pidgeot Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Pidgeot%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Pidgeot%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Manectric Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Manectric%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Manectric%20Mega%20Energy.png",
+                "imageWidth": 125,
+                "imageHeight": 125,
+                "imageType": "png"
             },
             {
                 "type": "resource",
                 "name": "Aggron Mega Energy",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Aggron%20Mega%20Energy.png"
+                "image": "https://cdn.leekduck.com/assets/img/mega_energy/Aggron%20Mega%20Energy.png",
+                "imageWidth": 150,
+                "imageHeight": 150,
+                "imageType": "png"
             }
         ]
     },
@@ -1972,7 +2627,10 @@
                 "combatPower": {
                     "min": 418,
                     "max": 453
-                }
+                },
+                "imageWidth": 81,
+                "imageHeight": 94,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1982,7 +2640,10 @@
                 "combatPower": {
                     "min": 409,
                     "max": 443
-                }
+                },
+                "imageWidth": 95,
+                "imageHeight": 121,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -1992,7 +2653,10 @@
                 "combatPower": {
                     "min": 448,
                     "max": 483
-                }
+                },
+                "imageWidth": 108,
+                "imageHeight": 98,
+                "imageType": "png"
             }
         ]
     },
@@ -2004,7 +2668,10 @@
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 3,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -2016,7 +2683,10 @@
                 "type": "item",
                 "name": "Golden Razz Berry",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Golden%20Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -2028,7 +2698,10 @@
                 "type": "item",
                 "name": "Silver Pinap Berry",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Silver%20Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Silver%20Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -2044,7 +2717,10 @@
                 "combatPower": {
                     "min": 277,
                     "max": 310
-                }
+                },
+                "imageWidth": 108,
+                "imageHeight": 114,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2054,7 +2730,10 @@
                 "combatPower": {
                     "min": 501,
                     "max": 539
-                }
+                },
+                "imageWidth": 75,
+                "imageHeight": 114,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2064,7 +2743,10 @@
                 "combatPower": {
                     "min": 367,
                     "max": 400
-                }
+                },
+                "imageWidth": 127,
+                "imageHeight": 149,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2074,7 +2756,10 @@
                 "combatPower": {
                     "min": 212,
                     "max": 237
-                }
+                },
+                "imageWidth": 77,
+                "imageHeight": 121,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2084,7 +2769,10 @@
                 "combatPower": {
                     "min": 571,
                     "max": 611
-                }
+                },
+                "imageWidth": 94,
+                "imageHeight": 121,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2094,31 +2782,46 @@
                 "combatPower": {
                     "min": 743,
                     "max": 789
-                }
+                },
+                "imageWidth": 104,
+                "imageHeight": 82,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 500,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Razz Berry",
                 "quantity": 6,
-                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Razz%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Pinap Berry",
                 "quantity": 2,
-                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Pinap%20Berry.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -2134,7 +2837,10 @@
                 "combatPower": {
                     "min": 876,
                     "max": 926
-                }
+                },
+                "imageWidth": 120,
+                "imageHeight": 30,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2144,7 +2850,10 @@
                 "combatPower": {
                     "min": 876,
                     "max": 926
-                }
+                },
+                "imageWidth": 121,
+                "imageHeight": 75,
+                "imageType": "png"
             }
         ]
     },
@@ -2160,7 +2869,10 @@
                 "combatPower": {
                     "min": 467,
                     "max": 503
-                }
+                },
+                "imageWidth": 153,
+                "imageHeight": 63,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2170,7 +2882,10 @@
                 "combatPower": {
                     "min": 490,
                     "max": 537
-                }
+                },
+                "imageWidth": 156,
+                "imageHeight": 137,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2180,7 +2895,10 @@
                 "combatPower": {
                     "min": 743,
                     "max": 789
-                }
+                },
+                "imageWidth": 104,
+                "imageHeight": 82,
+                "imageType": "png"
             }
         ]
     },
@@ -2196,7 +2914,10 @@
                 "combatPower": {
                     "min": 193,
                     "max": 218
-                }
+                },
+                "imageWidth": 127,
+                "imageHeight": 128,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2206,7 +2927,10 @@
                 "combatPower": {
                     "min": 287,
                     "max": 316
-                }
+                },
+                "imageWidth": 133,
+                "imageHeight": 117,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2216,7 +2940,10 @@
                 "combatPower": {
                     "min": 322,
                     "max": 353
-                }
+                },
+                "imageWidth": 154,
+                "imageHeight": 82,
+                "imageType": "png"
             }
         ]
     },
@@ -2232,7 +2959,10 @@
                 "combatPower": {
                     "min": 399,
                     "max": 440
-                }
+                },
+                "imageWidth": 92,
+                "imageHeight": 152,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2242,7 +2972,10 @@
                 "combatPower": {
                     "min": 658,
                     "max": 700
-                }
+                },
+                "imageWidth": 142,
+                "imageHeight": 102,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2252,7 +2985,10 @@
                 "combatPower": {
                     "min": 1027,
                     "max": 1083
-                }
+                },
+                "imageWidth": 98,
+                "imageHeight": 156,
+                "imageType": "png"
             }
         ]
     },
@@ -2268,7 +3004,10 @@
                 "combatPower": {
                     "min": 433,
                     "max": 469
-                }
+                },
+                "imageWidth": 117,
+                "imageHeight": 140,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2278,7 +3017,10 @@
                 "combatPower": {
                     "min": 374,
                     "max": 407
-                }
+                },
+                "imageWidth": 85,
+                "imageHeight": 99,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2288,7 +3030,10 @@
                 "combatPower": {
                     "min": 498,
                     "max": 536
-                }
+                },
+                "imageWidth": 100,
+                "imageHeight": 138,
+                "imageType": "png"
             }
         ]
     },
@@ -2300,10 +3045,14 @@
                 "type": "encounter",
                 "name": "Arbok",
                 "image": "https://cdn.leekduck.com/assets/img/pokemon_icons_crop/pm24.icon.png",
+                "canBeShiny": false,
                 "combatPower": {
                     "min": 777,
                     "max": 823
-                }
+                },
+                "imageWidth": 123,
+                "imageHeight": 172,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2313,7 +3062,10 @@
                 "combatPower": {
                     "min": 230,
                     "max": 256
-                }
+                },
+                "imageWidth": 144,
+                "imageHeight": 84,
+                "imageType": "png"
             },
             {
                 "type": "encounter",
@@ -2323,7 +3075,10 @@
                 "combatPower": {
                     "min": 367,
                     "max": 400
-                }
+                },
+                "imageWidth": 127,
+                "imageHeight": 149,
+                "imageType": "png"
             }
         ]
     },
@@ -2335,13 +3090,19 @@
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 1000,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -2353,13 +3114,19 @@
                 "type": "item",
                 "name": "Stardust",
                 "quantity": 1000,
-                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Stardust.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Rare Candy",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Rare%20Candy.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     },
@@ -2371,19 +3138,28 @@
                 "type": "item",
                 "name": "Poké Ball",
                 "quantity": 10,
-                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Poke%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Great Ball",
                 "quantity": 5,
-                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Great%20Ball.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             },
             {
                 "type": "item",
                 "name": "Poffin",
                 "quantity": 1,
-                "image": "https://cdn.leekduck.com/assets/img/items/Poffin.png"
+                "image": "https://cdn.leekduck.com/assets/img/items/Poffin.png",
+                "imageWidth": 256,
+                "imageHeight": 256,
+                "imageType": "png"
             }
         ]
     }

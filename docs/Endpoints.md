@@ -53,3 +53,14 @@ View the documentation for the `shinies` endpoint [here](Shinies.md).
 **Note**: This endpoint is updated less frequently (weekly) as it sources data from game asset files. It's used internally by other endpoints to augment shiny availability data.
 
 ---
+
+### Contextual (Unified)
+
+- Formatted: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/contextual.json`
+- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/contextual.min.json`
+
+View the documentation for the `contextual` endpoint [here](Contextual.md).
+
+**Note**: This endpoint aggregates all other data sources into a player-focused format. It includes timeline groupings, cross-referenced Pokemon availability, and shiny opportunities. Regenerated on every scrape.
+
+---
