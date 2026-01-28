@@ -27,7 +27,10 @@ function sanitizeType(type) {
  * All data fields are placed at the top level (no details wrapper).
  * No flags object is computed - consumers can check for field presence directly.
  * 
- * @param {Object} event - Event object with flat structure
+ * This function is idempotent - if the event is already in flattened format,
+ * it will preserve the existing structure.
+ * 
+ * @param {Object} event - Event object with flat structure or pre-flattened structure
  * @returns {Object} Event with flattened structure, all fields at top level
  */
 function segmentEventData(event) {
@@ -40,6 +43,29 @@ function segmentEventData(event) {
         start: event.start,
         end: event.end
     };
+
+    // If event already has consolidated fields (already flattened),
+    // AND doesn't have the pre-flatten fields,
+    // preserve it as-is to make this function idempotent
+    // Use 'in' operator to check for property existence regardless of value
+    const hasConsolidatedFields = ('pokemon' in event) || ('raids' in event) || 
+                                   ('battle' in event) || ('rocket' in event) || 
+                                   ('research' in event) || ('rewards' in event);
+    const hasPreFlattenFields = ('spawns' in event) || ('featured' in event) || 
+                                 ('incenseEncounters' in event) || ('costumedPokemon' in event) || 
+                                 ('pokemonDebuts' in event) || ('maxPokemonDebuts' in event) ||
+                                 ('bosses' in event) || ('tiers' in event);
+    const isAlreadyFlattened = hasConsolidatedFields && !hasPreFlattenFields;
+    
+    if (isAlreadyFlattened) {
+        // Event is already in flattened format - copy all fields except core ones
+        Object.keys(event).forEach(key => {
+            if (!Object.hasOwn(flattened, key)) {
+                flattened[key] = event[key];
+            }
+        });
+        return flattened;
+    }
 
     // Helper to filter valid pokemon objects (must have name property)
     const isValidPokemon = (p) => p && typeof p === 'object' && p.name;
