@@ -27,7 +27,10 @@ function sanitizeType(type) {
  * All data fields are placed at the top level (no details wrapper).
  * No flags object is computed - consumers can check for field presence directly.
  * 
- * @param {Object} event - Event object with flat structure
+ * This function is idempotent - if the event is already in flattened format,
+ * it will preserve the existing structure.
+ * 
+ * @param {Object} event - Event object with flat structure or pre-flattened structure
  * @returns {Object} Event with flattened structure, all fields at top level
  */
 function segmentEventData(event) {
@@ -40,6 +43,23 @@ function segmentEventData(event) {
         start: event.start,
         end: event.end
     };
+
+    // If event already has consolidated pokemon/raids (already flattened),
+    // AND doesn't have the pre-flatten fields like spawns/featured/bosses,
+    // preserve it as-is to make this function idempotent
+    const hasConsolidatedFields = event.pokemon || event.raids;
+    const hasPreFlattenFields = event.spawns || event.featured || event.bosses || event.tiers;
+    const isAlreadyFlattened = hasConsolidatedFields && !hasPreFlattenFields;
+    
+    if (isAlreadyFlattened) {
+        // Event is already in flattened format - copy all fields except core ones
+        Object.keys(event).forEach(key => {
+            if (!flattened.hasOwnProperty(key)) {
+                flattened[key] = event[key];
+            }
+        });
+        return flattened;
+    }
 
     // Helper to filter valid pokemon objects (must have name property)
     const isValidPokemon = (p) => p && typeof p === 'object' && p.name;
