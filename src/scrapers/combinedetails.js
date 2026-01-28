@@ -292,25 +292,14 @@ function main()
     const eventsData = JSON.parse(fs.readFileSync("./data/events.min.json"));
     
     // Flatten events data - handle both array format and eventType-keyed object format
-    // This handles array format (new flat format) and object format (legacy or per-type structure)
     let events = [];
     if (Array.isArray(eventsData)) {
-        // New flat format or fresh scrape: already an array
-        // Strip out any existing flattened structure to get base events for re-merging
-        eventsData.forEach(e => {
-            const flatEvent = {
-                eventID: e.eventID,
-                name: e.name,
-                eventType: e.eventType,
-                heading: e.heading,
-                image: e.image,
-                start: e.start,
-                end: e.end
-            };
-            events.push(flatEvent);
-        });
+        // Array format: use as-is (already has complete event data)
+        // Don't strip data - this preserves detailed fields from previous runs
+        events = eventsData;
     } else if (eventsData && typeof eventsData === 'object') {
-        // Legacy format: { "event-type": [...], "another-type": [...] }
+        // Legacy object format: { "event-type": [...], "another-type": [...] }
+        // Extract just core fields for re-merging with temp detail files
         Object.values(eventsData).forEach(typeArray => {
             if (Array.isArray(typeArray)) {
                 typeArray.forEach(e => {
