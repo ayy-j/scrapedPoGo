@@ -118,7 +118,7 @@ function get()
                         });
                     });
 
-                    // Optimization: Deduplicate events using a Map to avoid O(N^2) complexity
+                    // Optimization: Deduplicate events using a Map to reduce iterations and lookups
                     const eventsByID = new Map();
                     allEvents.forEach(e => {
                         if (!eventsByID.has(e.eventID)) {
