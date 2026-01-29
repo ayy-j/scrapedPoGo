@@ -5,14 +5,23 @@
  * @module utils/logger
  */
 
-const colors = {
+// Check if colors should be enabled (TTY support and NO_COLOR not set)
+const colorsEnabled = process.stdout.isTTY && !process.env.NO_COLOR;
+
+const colors = colorsEnabled ? {
     reset: "\x1b[0m",
     red: "\x1b[31m",
     green: "\x1b[32m",
     yellow: "\x1b[33m",
     blue: "\x1b[34m",
-    cyan: "\x1b[36m",
-    dim: "\x1b[2m"
+    cyan: "\x1b[36m"
+} : {
+    reset: "",
+    red: "",
+    green: "",
+    yellow: "",
+    blue: "",
+    cyan: ""
 };
 
 const logger = {
