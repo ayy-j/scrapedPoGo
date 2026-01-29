@@ -30,16 +30,20 @@ const { normalizeDatePair } = require('../utils/scraperUtils');
  * date information with scraped event details and handles events that
  * span multiple date ranges.
  * 
+ * **IMPORTANT**: This scraper writes to `events.basic.min.json` (not `events.min.json`).
+ * The MASTER `events.min.json` file is created by `combinedetails.js` after merging
+ * detailed event data.
+ * 
  * @async
  * @function get
  * @returns {void} Writes data asynchronously, no return value
  * @throws {Error} On network failure, falls back to cached CDN data
  * 
  * @example
- * // Scrape events data
+ * // Scrape basic events data
  * const events = require('./pages/events');
  * events.get();
- * // Creates data/events.json and data/events.min.json
+ * // Creates data/events.basic.min.json (basic event data only)
  */
 function get()
 {
@@ -143,16 +147,17 @@ function get()
                         }
                     }
         
-                    fs.writeFile('data/events.min.json', JSON.stringify(allEvents), err => {
+                    fs.writeFile('data/events.basic.min.json', JSON.stringify(allEvents), err => {
                         if (err) {
                             console.error(err);
                             return;
                         }
+                        console.log(`Created data/events.basic.min.json with ${allEvents.length} events`);
                     });
                 }).catch(_err =>
                 {
                     console.log(_err);
-                    https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json", (res) =>
+                    https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.basic.min.json", (res) =>
                     {
                         let body = "";
                         res.on("data", (chunk) => { body += chunk; });
@@ -162,11 +167,12 @@ function get()
                             {
                                 let json = JSON.parse(body);
         
-                                fs.writeFile('data/events.min.json', JSON.stringify(json), err => {
+                                fs.writeFile('data/events.basic.min.json', JSON.stringify(json), err => {
                                     if (err) {
                                         console.error(err);
                                         return;
                                     }
+                                    console.log('Fallback: Created data/events.basic.min.json from CDN backup');
                                 });
                             }
                             catch (error)

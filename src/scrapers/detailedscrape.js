@@ -29,9 +29,9 @@ const event = require('../pages/detailed/event')
 
 /**
  * Main function that orchestrates detailed event scraping.
- * Creates temp directory, loads events list, fetches backup data from CDN,
- * then dispatches each event to the appropriate detailed scraper based
- * on its eventType. Always runs generic scraper for metadata.
+ * Creates temp directory, loads events list from events.basic.min.json,
+ * fetches backup data from CDN, then dispatches each event to the appropriate 
+ * detailed scraper based on its eventType. Always runs generic scraper for metadata.
  * 
  * Scraper dispatch by eventType:
  * - research-breakthrough -> breakthrough
@@ -66,7 +66,7 @@ function main()
     if (!fs.existsSync('data/temp'))
         fs.mkdirSync('data/temp');
 
-    const eventsData = JSON.parse(fs.readFileSync("./data/events.min.json"));
+    const eventsData = JSON.parse(fs.readFileSync("./data/events.basic.min.json"));
     
     // Handle both array format and eventType-keyed object format
     let events = [];

@@ -42,9 +42,15 @@ npm run combinedetails
 For the most comprehensive event data:
 
 ```bash
-npm run scrape              # Get basic event data
-npm run detailedscrape      # Get detailed event info
-npm run combinedetails      # Merge details + generate per-eventType files
+npm run scrape              # Get basic event data → creates events.basic.min.json
+npm run detailedscrape      # Get detailed event info → creates data/temp/*.json
+npm run combinedetails      # Merge details → creates MASTER events.min.json + per-eventType files
+```
+
+Or run the full pipeline:
+
+```bash
+npm run pipeline            # Runs all steps in sequence
 ```
 
 ### Output
@@ -52,6 +58,11 @@ npm run combinedetails      # Merge details + generate per-eventType files
 All scraped data is saved to the `data/` directory as JSON files:
 - `.json` - Formatted for readability
 - `.min.json` - Minified for production use
+
+**Key Files:**
+- `events.basic.min.json` - Basic event data (scraped directly from LeekDuck)
+- `events.min.json` - **MASTER file** with complete event data including all details
+- `eventTypes/*.min.json` - Per-event-type files for filtering by event type
 
 ---
 

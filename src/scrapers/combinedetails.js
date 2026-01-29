@@ -291,8 +291,12 @@ function generateEventTypeFiles(eventsByType) {
 /**
  * Main function that combines detailed event data with base events.
  * Reads all temporary JSON files from data/temp, matches them to events
- * by ID, merges the detailed data, writes updated events files,
- * generates per-eventType files, and finally cleans up the temporary directory.
+ * by ID, merges the detailed data, writes the MASTER events.min.json file
+ * with all event data, generates per-eventType files, and finally cleans up 
+ * the temporary directory.
+ * 
+ * **IMPORTANT**: This creates the MASTER `events.min.json` file with complete
+ * event data. This file includes all basic fields plus detailed scraped data.
  * 
  * Supported event types for merging:
  * - generic (meta flags)
@@ -310,18 +314,17 @@ function generateEventTypeFiles(eventsByType) {
  * @example
  * // Run after detailedscrape.js completes:
  * // node src/scrapers/combinedetails.js
- * // Updates data/events.json with detailed event data
+ * // Creates MASTER data/events.min.json with complete event data
  * // Generates data/eventTypes/*.json files
  */
 function main()
 {
-    const eventsData = JSON.parse(fs.readFileSync("./data/events.min.json"));
+    const eventsData = JSON.parse(fs.readFileSync("./data/events.basic.min.json"));
     
     // Flatten events data - handle both array format and eventType-keyed object format
     let events = [];
     if (Array.isArray(eventsData)) {
-        // Array format: use as-is (already has complete event data)
-        // Don't strip data - this preserves detailed fields from previous runs
+        // Array format: use as-is (basic event data from scrape.js)
         events = eventsData;
     } else if (eventsData && typeof eventsData === 'object') {
         // Legacy object format: { "event-type": [...], "another-type": [...] }
@@ -439,7 +442,7 @@ function writeSegmentedOutput(events) {
             console.error(err);
             return;
         }
-        console.log('Created data/events.min.json as flat array with ' + allEvents.length + ' events');
+        console.log('Created MASTER data/events.min.json with complete data for ' + allEvents.length + ' events');
     });
 
     // Group by eventType for per-type files (backward compatibility)
