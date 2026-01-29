@@ -11,6 +11,7 @@ const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
 const { normalizeDatePair } = require('../utils/scraperUtils');
+const logger = require('../utils/logger');
 
 /**
  * @typedef {Object} GameEvent
@@ -24,17 +25,17 @@ const { normalizeDatePair } = require('../utils/scraperUtils');
 
 /**
  * Scrapes event data from LeekDuck and writes to data files.
- * 
+ *
  * First fetches the events JSON feed to get accurate date/time information,
  * then scrapes the events page for current and upcoming events. Merges
  * date information with scraped event details and handles events that
  * span multiple date ranges.
- * 
+ *
  * @async
  * @function get
  * @returns {void} Writes data asynchronously, no return value
  * @throws {Error} On network failure, falls back to cached CDN data
- * 
+ *
  * @example
  * // Scrape events data
  * const events = require('./pages/events');
@@ -46,9 +47,9 @@ function get()
     https.get("https://leekduck.com/feeds/events.json", (res) =>
     {
         var body = "";
-        var eventDates = []; 
+        var eventDates = [];
         res.on("data", (chunk) => { body += chunk; });
-    
+
         res.on("end", () => {
             try
             {
@@ -65,20 +66,20 @@ function get()
             }
             catch (error)
             {
-                console.error(error.message);
+                logger.error(error.message);
             };
 
             return new Promise(resolve => {
                 JSDOM.fromURL("https://leekduck.com/events/", {
                 })
                 .then((dom) => {
-        
+
                     var allEvents = [];
-        
+
                     ["current","upcoming"].forEach(category => {
-                        
+
                         var events = dom.window.document.querySelectorAll(`div.events-list.${category}-events a.event-item-link`);
-        
+
                         events.forEach (e =>
                         {
                             var name = e.querySelector(":scope > .event-item-wrapper > .event-item > .event-text-container > .event-text > h2").innerHTML;
@@ -93,9 +94,9 @@ function get()
 
                             if (!(eventID in eventDates))
                             {
-                                console.warn(`WARNING: Event '${eventID}' not present in events feed. Date values will be null.`);
+                                logger.warn(`Event '${eventID}' not present in events feed. Date values will be null.`);
                             }
-                            
+
                             var eventItemWrapper = e.querySelector(":scope > .event-item-wrapper");
                             var eventType = (eventItemWrapper.classList + "").replace("event-item-wrapper ", "").replace(" skeleton-loading", "");
                             eventType = eventType.replace("é", "e");
@@ -113,18 +114,18 @@ function get()
                             const normalized = normalizeDatePair(start, end);
                             start = normalized.start;
                             end = normalized.end;
-        
+
                             allEvents.push({ "eventID": eventID, "name": name, "eventType": eventType, "heading": heading, "image": image, "start": start, "end": end });
                         });
                     });
-        
+
                     for (var i = 0; i < allEvents.length; i++)
                     {
                         var event = allEvents[i];
                         if (allEvents.filter(e => e.eventID == event.eventID).length > 1)
                         {
                             var allWithID = allEvents.filter(_e => _e.eventID == event.eventID);
-        
+
                             if (allWithID[0].start)
                             {
                                 event.start = allWithID[0].start;
@@ -135,55 +136,55 @@ function get()
                                 event.start = allWithID[1].start;
                                 event.end = allWithID[0].end;
                             }
-        
+
                             allEvents = allEvents.filter(e => e.eventID != event.eventID);
                             allEvents.splice(i, 0, event);
-        
+
                             i--;
                         }
                     }
-        
+
                     fs.writeFile('data/events.min.json', JSON.stringify(allEvents), err => {
                         if (err) {
-                            console.error(err);
+                            logger.error(err);
                             return;
                         }
                     });
                 }).catch(_err =>
                 {
-                    console.log(_err);
+                    logger.error(_err);
                     https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json", (res) =>
                     {
                         let body = "";
                         res.on("data", (chunk) => { body += chunk; });
-                    
+
                         res.on("end", () => {
                             try
                             {
                                 let json = JSON.parse(body);
-        
+
                                 fs.writeFile('data/events.min.json', JSON.stringify(json), err => {
                                     if (err) {
-                                        console.error(err);
+                                        logger.error(err);
                                         return;
                                     }
                                 });
                             }
                             catch (error)
                             {
-                                console.error(error.message);
+                                logger.error(error.message);
                             };
                         });
-                    
+
                     }).on("error", (error) => {
-                        console.error(error.message);
+                        logger.error(error.message);
                     });
                 });
             })
         });
-    
+
     }).on("error", (error) => {
-        console.error(error.message);
+        logger.error(error.message);
     });
 }
 
