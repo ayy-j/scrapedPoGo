@@ -40,7 +40,7 @@ function main()
     eggs.get();
     rocketLineups.get();
 
-    logger.success("Scrapers initiated successfully.");
+    logger.info("Scrapers initiated.");
 }
 
 try

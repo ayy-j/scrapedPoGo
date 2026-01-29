@@ -6,7 +6,6 @@
  */
 
 const fs = require('fs');
-const moment = require('moment');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
@@ -119,30 +118,39 @@ function get()
                         });
                     });
 
-                    for (var i = 0; i < allEvents.length; i++)
-                    {
-                        var event = allEvents[i];
-                        if (allEvents.filter(e => e.eventID == event.eventID).length > 1)
-                        {
-                            var allWithID = allEvents.filter(_e => _e.eventID == event.eventID);
+                    // Optimization: Deduplicate events using a Map to reduce iterations and lookups
+                    const eventsByID = new Map();
+                    allEvents.forEach(e => {
+                        if (!eventsByID.has(e.eventID)) {
+                            eventsByID.set(e.eventID, []);
+                        }
+                        eventsByID.get(e.eventID).push(e);
+                    });
 
-                            if (allWithID[0].start)
+                    const deduplicatedEvents = [];
+
+                    for (const duplicates of eventsByID.values()) {
+                        if (duplicates.length > 1) {
+                            const mergedEvent = duplicates[0]; // Use the first occurrence
+
+                            if (duplicates[0].start)
                             {
-                                event.start = allWithID[0].start;
-                                event.end = allWithID[1].end;
+                                mergedEvent.start = duplicates[0].start;
+                                mergedEvent.end = duplicates[1].end;
                             }
                             else
                             {
-                                event.start = allWithID[1].start;
-                                event.end = allWithID[0].end;
+                                mergedEvent.start = duplicates[1].start;
+                                mergedEvent.end = duplicates[0].end;
                             }
 
-                            allEvents = allEvents.filter(e => e.eventID != event.eventID);
-                            allEvents.splice(i, 0, event);
-
-                            i--;
+                            deduplicatedEvents.push(mergedEvent);
+                        } else {
+                            deduplicatedEvents.push(duplicates[0]);
                         }
                     }
+
+                    allEvents = deduplicatedEvents;
 
                     fs.writeFile('data/events.min.json', JSON.stringify(allEvents), err => {
                         if (err) {
