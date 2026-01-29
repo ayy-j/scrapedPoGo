@@ -347,6 +347,7 @@ Detailed API documentation for each endpoint:
 - [Eggs](docs/Eggs.md) - Egg hatch pools by distance
 - [Rocket Lineups](docs/RocketLineups.md) - Team GO Rocket lineups
 - [Shinies](docs/Shinies.md) - Shiny Pokemon availability
+- [Architecture Diagrams](docs/architecture-diagrams.md) - Mermaid system and flow diagrams
 
 ---
 
