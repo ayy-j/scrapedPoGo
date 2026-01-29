@@ -417,6 +417,8 @@ async function extractRaidInfo(doc) {
     let lastHeader = '';
     let lastHeaderText = '';
     
+    const tasks = [];
+
     for (const node of pageContent.childNodes) {
         if (node.className?.includes('event-section-header')) {
             lastHeader = node.id || '';
@@ -424,30 +426,39 @@ async function extractRaidInfo(doc) {
         }
         
         if (node.className === 'pkmn-list-flex') {
-            const pokemon = await extractPokemonList(node);
-            
-            // Categorize by section header ID and text content
             const headerLower = lastHeader.toLowerCase();
             const textLower = lastHeaderText;
-            
-            if (headerLower.includes('mega') || textLower.includes('mega')) {
-                result.tiers.mega.push(...pokemon);
-            } else if (headerLower.includes('5-star') || headerLower.includes('five-star') || 
-                       textLower.includes('5-star') || textLower.includes('five-star') ||
-                       headerLower.includes('legendary') || textLower.includes('legendary')) {
-                result.tiers.fiveStar.push(...pokemon);
-            } else if (headerLower.includes('3-star') || headerLower.includes('three-star') ||
-                       textLower.includes('3-star') || textLower.includes('three-star')) {
-                result.tiers.threeStar.push(...pokemon);
-            } else if (headerLower.includes('1-star') || headerLower.includes('one-star') ||
-                       textLower.includes('1-star') || textLower.includes('one-star')) {
-                result.tiers.oneStar.push(...pokemon);
-            } else if (headerLower.includes('raids') || headerLower.includes('boss') ||
-                       textLower.includes('raids') || textLower.includes('appearing in')) {
-                result.bosses.push(...pokemon);
-            } else if (headerLower.includes('shiny') || textLower.includes('shiny')) {
-                result.shinies.push(...pokemon);
-            }
+
+            tasks.push(
+                extractPokemonList(node).then(pokemon => ({
+                    pokemon,
+                    headerLower,
+                    textLower
+                }))
+            );
+        }
+    }
+
+    const results = await Promise.all(tasks);
+
+    for (const { pokemon, headerLower, textLower } of results) {
+        if (headerLower.includes('mega') || textLower.includes('mega')) {
+            result.tiers.mega.push(...pokemon);
+        } else if (headerLower.includes('5-star') || headerLower.includes('five-star') ||
+                   textLower.includes('5-star') || textLower.includes('five-star') ||
+                   headerLower.includes('legendary') || textLower.includes('legendary')) {
+            result.tiers.fiveStar.push(...pokemon);
+        } else if (headerLower.includes('3-star') || headerLower.includes('three-star') ||
+                   textLower.includes('3-star') || textLower.includes('three-star')) {
+            result.tiers.threeStar.push(...pokemon);
+        } else if (headerLower.includes('1-star') || headerLower.includes('one-star') ||
+                   textLower.includes('1-star') || textLower.includes('one-star')) {
+            result.tiers.oneStar.push(...pokemon);
+        } else if (headerLower.includes('raids') || headerLower.includes('boss') ||
+                   textLower.includes('raids') || textLower.includes('appearing in')) {
+            result.bosses.push(...pokemon);
+        } else if (headerLower.includes('shiny') || textLower.includes('shiny')) {
+            result.shinies.push(...pokemon);
         }
     }
     

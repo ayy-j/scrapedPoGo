@@ -6,6 +6,7 @@
  */
 
 const fs = require('fs');
+const moment = require('moment');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
@@ -66,6 +67,7 @@ function get()
             catch (error)
             {
                 logger.error(error.message);
+                console.error(error.message);
             };
 
             return new Promise(resolve => {
@@ -94,6 +96,7 @@ function get()
                             if (!(eventID in eventDates))
                             {
                                 logger.warn(`Event '${eventID}' not present in events feed. Date values will be null.`);
+                                console.warn(`WARNING: Event '${eventID}' not present in events feed. Date values will be null.`);
                             }
 
                             var eventItemWrapper = e.querySelector(":scope > .event-item-wrapper");
@@ -155,12 +158,14 @@ function get()
                     fs.writeFile('data/events.min.json', JSON.stringify(allEvents), err => {
                         if (err) {
                             logger.error(err);
+                            console.error(err);
                             return;
                         }
                     });
                 }).catch(_err =>
                 {
                     logger.error(_err);
+                    console.log(_err);
                     https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json", (res) =>
                     {
                         let body = "";
@@ -174,6 +179,7 @@ function get()
                                 fs.writeFile('data/events.min.json', JSON.stringify(json), err => {
                                     if (err) {
                                         logger.error(err);
+                                        console.error(err);
                                         return;
                                     }
                                 });
@@ -181,11 +187,13 @@ function get()
                             catch (error)
                             {
                                 logger.error(error.message);
+                                console.error(error.message);
                             };
                         });
 
                     }).on("error", (error) => {
                         logger.error(error.message);
+                        console.error(error.message);
                     });
                 });
             })
@@ -193,6 +201,11 @@ function get()
 
     }).on("error", (error) => {
         logger.error(error.message);
+    });
+}
+
+module.exports = { get }
+        console.error(error.message);
     });
 }
 
