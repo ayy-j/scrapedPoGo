@@ -118,7 +118,7 @@ function get()
                         });
                     });
 
-                    // Optimization: Deduplicate events using a Map to avoid O(N^2) complexity
+                    // Optimization: Deduplicate events using a Map to reduce iterations and lookups
                     const eventsByID = new Map();
                     allEvents.forEach(e => {
                         if (!eventsByID.has(e.eventID)) {
@@ -128,15 +128,10 @@ function get()
                     });
 
                     const deduplicatedEvents = [];
-                    const processedIDs = new Set();
 
-                    allEvents.forEach(e => {
-                        if (processedIDs.has(e.eventID)) return;
-
-                        const duplicates = eventsByID.get(e.eventID);
-
+                    for (const duplicates of eventsByID.values()) {
                         if (duplicates.length > 1) {
-                            const mergedEvent = e; // Use the first occurrence
+                            const mergedEvent = duplicates[0]; // Use the first occurrence
 
                             if (duplicates[0].start)
                             {
@@ -151,10 +146,9 @@ function get()
 
                             deduplicatedEvents.push(mergedEvent);
                         } else {
-                            deduplicatedEvents.push(e);
+                            deduplicatedEvents.push(duplicates[0]);
                         }
-                        processedIDs.add(e.eventID);
-                    });
+                    }
 
                     allEvents = deduplicatedEvents;
 
