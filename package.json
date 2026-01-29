@@ -16,5 +16,8 @@
     "image-size": "^2.0.2",
     "jsdom": "27.4.0",
     "moment": "latest"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0"
   }
 }

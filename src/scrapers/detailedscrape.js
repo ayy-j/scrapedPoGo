@@ -27,6 +27,28 @@ const gopass = require('../pages/detailed/gopass')
 const pokestopshowcase = require('../pages/detailed/pokestopshowcase')
 const event = require('../pages/detailed/event')
 
+const SCRAPER_MAP = {
+    "research-breakthrough": breakthrough,
+    "pokemon-spotlight-hour": spotlight,
+    "community-day": communityday,
+    "raid-battles": raidbattles,
+    "raid-hour": raidhour,
+    "raid-day": raidday,
+    "team-go-rocket": teamgorocket,
+    "go-rocket-takeover": teamgorocket,
+    "go-battle-league": gobattleleague,
+    "season": season,
+    "pokemon-go-tour": gotour,
+    "timed-research": timedresearch,
+    "special-research": timedresearch,
+    "max-battles": maxbattles,
+    "max-mondays": maxmondays,
+    "go-pass": gopass,
+    "pokestop-showcase": pokestopshowcase,
+    "research": research,
+    "event": event
+};
+
 /**
  * Main function that orchestrates detailed event scraping.
  * Creates temp directory, loads events list, fetches backup data from CDN,
@@ -116,74 +138,11 @@ function main()
                     
                     // get generic extra data independend from event type
                     promises.push(generic.get(link, e.eventID, bkp));
+
                     // get event type specific extra data
-                    if (e.eventType == "research-breakthrough")
-                    {
-                        promises.push(breakthrough.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "pokemon-spotlight-hour")
-                    {
-                        promises.push(spotlight.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "community-day")
-                    {
-                        promises.push(communityday.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "raid-battles")
-                    {
-                        promises.push(raidbattles.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "raid-hour")
-                    {
-                        promises.push(raidhour.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "raid-day")
-                    {
-                        promises.push(raidday.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "team-go-rocket" || e.eventType == "go-rocket-takeover")
-                    {
-                        promises.push(teamgorocket.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "go-battle-league")
-                    {
-                        promises.push(gobattleleague.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "season")
-                    {
-                        promises.push(season.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "pokemon-go-tour")
-                    {
-                        promises.push(gotour.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "timed-research" || e.eventType == "special-research")
-                    {
-                        promises.push(timedresearch.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "max-battles")
-                    {
-                        promises.push(maxbattles.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "max-mondays")
-                    {
-                        promises.push(maxmondays.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "go-pass")
-                    {
-                        promises.push(gopass.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "pokestop-showcase")
-                    {
-                        promises.push(pokestopshowcase.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "research")
-                    {
-                        promises.push(research.get(link, e.eventID, bkp));
-                    }
-                    else if (e.eventType == "event")
-                    {
-                        promises.push(event.get(link, e.eventID, bkp));
+                    const scraper = SCRAPER_MAP[e.eventType];
+                    if (scraper) {
+                        promises.push(scraper.get(link, e.eventID, bkp));
                     }
                 });
                 
@@ -205,12 +164,16 @@ function main()
     });
 }
 
-try
-{
-    main();
+if (require.main === module) {
+    try
+    {
+        main();
+    }
+    catch (e)
+    {
+        console.error("ERROR: " + e);
+        process.exit(1);
+    }
 }
-catch (e)
-{
-    console.error("ERROR: " + e);
-    process.exit(1);
-}
+
+module.exports = { main };
