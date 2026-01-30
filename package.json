@@ -9,7 +9,8 @@
     "combinedetails": "node ./src/scrapers/combinedetails.js",
     "scrapeshinies": "node ./src/scrapers/scrapeShinies.js",
     "pipeline": "npm run scrapeshinies && npm run scrape && npm run detailedscrape && npm run combinedetails",
-    "validate": "node ./scripts/validate-schemas.js"
+    "validate": "node scripts/validate-schemas.js",
+    "imagesize": "node scripts/calculate-image-size.js"
   },
   "author": "quantNebula",
   "license": "MIT",

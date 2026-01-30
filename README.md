@@ -36,6 +36,9 @@ npm run detailedscrape
 
 # Combine detailed data with basic events (also generates per-eventType files)
 npm run combinedetails
+
+# Calculate total size of images referenced in data (if stored locally)
+npm run imagesize
 ```
 
 ### Complete Workflow
@@ -117,6 +120,24 @@ Validate all data files against their schemas:
 ```bash
 npm run validate
 ```
+
+### Image Size Analysis
+
+Calculate the total size of images referenced in scraped data (what disk space they would consume if stored locally):
+
+```bash
+# Basic summary
+npm run imagesize
+
+# Verbose output with per-image details
+npm run imagesize -- --verbose
+```
+
+This analyzes all image URLs in the data files and reports:
+- Total unique images and their combined size
+- Breakdown by CDN domain
+- Size statistics (average, min, max)
+- Individual file sizes (with `--verbose`)
 
 ### Usage
 
