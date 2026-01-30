@@ -44,9 +44,18 @@ jobs:
         run: npm run combinedetails
         continue-on-error: true
       
-      - name: Upload images to Blob Storage
+      - name: Upload new images to Blob Storage
         if: env.BLOB_READ_WRITE_TOKEN != ''
-        run: npm run blob:upload
+        run: |
+          echo "📤 Uploading new images to Vercel Blob..."
+          npm run blob:upload || echo "⚠ Some uploads failed (source images may be unavailable)"
+        continue-on-error: true
+      
+      - name: Transform URLs to use Blob Storage
+        if: env.BLOB_READ_WRITE_TOKEN != ''
+        run: |
+          echo "🔄 Transforming image URLs to Blob URLs..."
+          npm run blob:transform
         continue-on-error: true
       
       - name: Commit and push changes

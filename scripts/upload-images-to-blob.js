@@ -205,10 +205,27 @@ async function main() {
     if (fs.existsSync(URL_MAP_FILE)) {
         try {
             urlMap = JSON.parse(fs.readFileSync(URL_MAP_FILE, 'utf8'));
-            console.log(`📋 Loaded ${Object.keys(urlMap).length} existing URL mappings\n`);
+            console.log(`📋 Loaded ${Object.keys(urlMap).length} existing URL mappings`);
         } catch (err) {
-            console.warn(`⚠ Could not load URL map: ${err.message}\n`);
+            console.warn(`⚠ Could not load URL map: ${err.message}`);
         }
+    }
+
+    // Filter out URLs that are already mapped (unless forcing)
+    const urlsToProcess = FORCE 
+        ? uniqueUrls 
+        : uniqueUrls.filter(url => !urlMap[url]);
+    
+    const alreadyMapped = uniqueUrls.length - urlsToProcess.length;
+    if (alreadyMapped > 0) {
+        console.log(`   ⏭ ${alreadyMapped} URLs already in blob storage (skipping)`);
+    }
+    console.log(`   📤 ${urlsToProcess.length} new URLs to upload\n`);
+
+    // Early exit if nothing to upload
+    if (urlsToProcess.length === 0 && !DRY_RUN) {
+        console.log('✅ All images already uploaded! Nothing to do.\n');
+        return;
     }
 
     // Process URLs in batches
@@ -217,21 +234,12 @@ async function main() {
 
     console.log('📤 Uploading images...\n');
 
-    for (let i = 0; i < uniqueUrls.length; i += PARALLEL_UPLOADS) {
-        const batch = uniqueUrls.slice(i, i + PARALLEL_UPLOADS);
+    for (let i = 0; i < urlsToProcess.length; i += PARALLEL_UPLOADS) {
+        const batch = urlsToProcess.slice(i, i + PARALLEL_UPLOADS);
 
         await Promise.all(
             batch.map(async (url) => {
                 const pathname = urlToPathname(url);
-
-                // Skip if already mapped and not forcing
-                if (urlMap[url] && !FORCE) {
-                    if (VERBOSE) {
-                        console.log(`  ⏭ Skipped (exists): ${pathname}`);
-                    }
-                    results.skipped++;
-                    return;
-                }
 
                 // Dry run mode
                 if (DRY_RUN) {
@@ -241,20 +249,6 @@ async function main() {
                 }
 
                 try {
-                    // Check if blob already exists (optional, for efficiency)
-                    if (!FORCE) {
-                        try {
-                            await head(pathname);
-                            if (VERBOSE) {
-                                console.log(`  ⏭ Skipped (exists): ${pathname}`);
-                            }
-                            results.skipped++;
-                            return;
-                        } catch (err) {
-                            // Blob doesn't exist, continue with upload
-                        }
-                    }
-
                     // Download image
                     const imageBuffer = await downloadImage(url);
                     const contentType = getContentType(url);
@@ -287,9 +281,9 @@ async function main() {
         );
 
         // Progress indicator
-        const progress = Math.min(i + PARALLEL_UPLOADS, uniqueUrls.length);
-        const percent = ((progress / uniqueUrls.length) * 100).toFixed(0);
-        process.stdout.write(`\r   Progress: ${progress}/${uniqueUrls.length} (${percent}%)`);
+        const progress = Math.min(i + PARALLEL_UPLOADS, urlsToProcess.length);
+        const percent = ((progress / urlsToProcess.length) * 100).toFixed(0);
+        process.stdout.write(`\r   Progress: ${progress}/${urlsToProcess.length} (${percent}%)`);
     }
 
     console.log('\n');
@@ -304,9 +298,10 @@ async function main() {
     console.log('━'.repeat(50));
     console.log('📊 Summary');
     console.log('━'.repeat(50));
-    console.log(`   ✓ Uploaded: ${results.success}`);
-    console.log(`   ⏭ Skipped:  ${results.skipped}`);
-    console.log(`   ✗ Failed:   ${results.failed}`);
+    console.log(`   📦 Total unique URLs: ${uniqueUrls.length}`);
+    console.log(`   ⏭ Already mapped:    ${alreadyMapped}`);
+    console.log(`   ✓ Newly uploaded:    ${results.success}`);
+    console.log(`   ✗ Failed:            ${results.failed}`);
 
     if (errors.length > 0 && errors.length <= 10) {
         console.log('\n❌ Failed uploads:');
