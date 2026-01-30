@@ -1,6 +1,6 @@
 # Endpoint
 
-`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/pokestop-showcase.min.json`
+`https://pokemn.quest/data/eventTypes/pokestop-showcase.min.json`
 
 ## Description
 

@@ -10,11 +10,17 @@
     "scrapeshinies": "node ./src/scrapers/scrapeShinies.js",
     "pipeline": "npm run scrapeshinies && npm run scrape && npm run detailedscrape && npm run combinedetails",
     "validate": "node scripts/validate-schemas.js",
-    "imagesize": "node scripts/calculate-image-size.js"
+    "imagesize": "node scripts/calculate-image-size.js",
+    "blob:upload": "node scripts/upload-images-to-blob.js",
+    "blob:upload:dry": "node scripts/upload-images-to-blob.js --dry-run",
+    "blob:upload:force": "node scripts/upload-images-to-blob.js --force",
+    "blob:transform": "node scripts/transform-urls-to-blob.js",
+    "blob:transform:dry": "node scripts/transform-urls-to-blob.js --dry-run"
   },
   "author": "quantNebula",
   "license": "MIT",
   "dependencies": {
+    "@vercel/blob": "^2.0.1",
     "image-size": "^2.0.2",
     "jsdom": "27.4.0",
     "moment": "latest"

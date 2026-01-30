@@ -1,6 +1,6 @@
 # Endpoint
 
-`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/pokemon-spotlight-hour.min.json`
+`https://pokemn.quest/data/eventTypes/pokemon-spotlight-hour.min.json`
 
 ## Description
 

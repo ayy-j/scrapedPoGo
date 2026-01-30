@@ -1,6 +1,6 @@
 # Endpoint
 
-`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/max-mondays.min.json`
+`https://pokemn.quest/data/eventTypes/max-mondays.min.json`
 
 ## Description
 

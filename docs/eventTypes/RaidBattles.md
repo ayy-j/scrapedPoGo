@@ -1,6 +1,6 @@
 # Endpoint
 
-`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/raid-battles.min.json`
+`https://pokemn.quest/data/eventTypes/raid-battles.min.json`
 
 ## Description
 

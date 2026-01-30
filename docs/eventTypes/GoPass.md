@@ -1,6 +1,6 @@
 # Endpoint
 
-`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/go-pass.min.json`
+`https://pokemn.quest/data/eventTypes/go-pass.min.json`
 
 ## Description
 

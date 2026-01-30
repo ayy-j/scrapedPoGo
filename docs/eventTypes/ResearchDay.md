@@ -1,6 +1,6 @@
 # Endpoint
 
-`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/research-day.min.json`
+`https://pokemn.quest/data/eventTypes/research-day.min.json`
 
 ## Description
 

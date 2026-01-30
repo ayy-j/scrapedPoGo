@@ -1,6 +1,6 @@
 # Endpoint
 
-`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/go-battle-league.min.json`
+`https://pokemn.quest/data/eventTypes/go-battle-league.min.json`
 
 ## Description
 

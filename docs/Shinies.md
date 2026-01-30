@@ -1,6 +1,6 @@
 # Shinies Data
 
-**URL**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min.json`  
+**URL**: `https://pokemn.quest/data/shinies.min.json`  
 
 ## JSON Schema
 
@@ -142,7 +142,7 @@ This dual-check ensures maximum accuracy.
 
 ### Check if a specific Pokémon has shiny
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min.json')
+fetch('https://pokemn.quest/data/shinies.min.json')
   .then(r => r.json())
   .then(data => {
     const bulbasaur = data.find(p => 
@@ -154,7 +154,7 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min
 
 ### Get all Pokémon with costume variants
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min.json')
+fetch('https://pokemn.quest/data/shinies.min.json')
   .then(r => r.json())
   .then(data => {
     const withCostumes = data.filter(p => 
@@ -166,7 +166,7 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min
 
 ### Find all Alolan shinies
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min.json')
+fetch('https://pokemn.quest/data/shinies.min.json')
   .then(r => r.json())
   .then(data => {
     const alolan = data.filter(p => p.typeCode === '_61');
@@ -177,7 +177,7 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min
 
 ### Get shinies released in a specific year
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/shinies.min.json')
+fetch('https://pokemn.quest/data/shinies.min.json')
   .then(r => r.json())
   .then(data => {
     const year2018 = data.filter(p => 

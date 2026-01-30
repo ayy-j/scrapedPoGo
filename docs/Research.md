@@ -2,7 +2,7 @@
 
 ## Endpoint
 
-`https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.min.json`
+`https://pokemn.quest/data/research.min.json`
 
 ## JSON Schema
 

@@ -1,6 +1,6 @@
 # Events Data
 
-**URL**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json`
+**URL**: `https://pokemn.quest/data/events.min.json`
 
 ## JSON Schema
 
@@ -320,9 +320,9 @@ Events are categorized by type. Each type has its own filtered endpoint and opti
 
 Each event type has its own filtered endpoint containing only events of that type:
 
-- Minimized: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/<eventType>.min.json`
+- Minimized: `https://pokemn.quest/data/eventTypes/<eventType>.min.json`
 
-**Example**: `https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/community-day.min.json`
+**Example**: `https://pokemn.quest/data/eventTypes/community-day.min.json`
 
 **Available event type endpoints**:
 - `community-day.min.json`
@@ -518,7 +518,7 @@ All dates follow ISO 8601 format with millisecond precision:
 ### Get all current and upcoming events
 
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json')
+fetch('https://pokemn.quest/data/events.min.json')
   .then(r => r.json())
   .then(events => {
     const now = new Date();
@@ -537,7 +537,7 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.
 ### Find events by type
 
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json')
+fetch('https://pokemn.quest/data/events.min.json')
   .then(r => r.json())
   .then(events => {
     const communityDays = events.filter(e => 
@@ -553,7 +553,7 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.
 ### Get events with specific Pokemon
 
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json')
+fetch('https://pokemn.quest/data/events.min.json')
   .then(r => r.json())
   .then(events => {
     const eventsWithPikachu = events.filter(e => 
@@ -567,7 +567,7 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.
 ### Get events with raids
 
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json')
+fetch('https://pokemn.quest/data/events.min.json')
   .then(r => r.json())
   .then(events => {
     const raidEvents = events.filter(e => 
@@ -586,7 +586,7 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.
 ### Get events with bonuses
 
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json')
+fetch('https://pokemn.quest/data/events.min.json')
   .then(r => r.json())
   .then(events => {
     const bonusEvents = events.filter(e => 
@@ -605,7 +605,7 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.
 ### Filter by date range
 
 ```javascript
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json')
+fetch('https://pokemn.quest/data/events.min.json')
   .then(r => r.json())
   .then(events => {
     const startDate = new Date('2026-02-01');
@@ -625,7 +625,7 @@ fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.
 
 ```javascript
 // Get only Community Day events
-fetch('https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eventTypes/community-day.min.json')
+fetch('https://pokemn.quest/data/eventTypes/community-day.min.json')
   .then(r => r.json())
   .then(communityDays => {
     const nextCD = communityDays.find(cd => 
