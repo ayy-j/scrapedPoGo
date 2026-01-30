@@ -105,7 +105,7 @@
             "source": {
               "type": "string",
               "description": "Where the Pokemon appears",
-              "enum": ["spawn", "featured", "raid", "egg", "research", "reward", "encounter"]
+              "enum": ["spawn", "featured", "incense", "costumed", "debut", "maxDebut", "raid", "egg", "research", "reward", "encounter"]
             },
             "canBeShiny": {
               "type": "boolean",
@@ -132,7 +132,18 @@
         "type": "array",
         "description": "Event bonuses (e.g., 2× XP, 2× Stardust)",
         "items": {
-          "type": "string"
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "object",
+              "properties": {
+                "text": { "type": "string" },
+                "image": { "type": "string", "format": "uri" }
+              },
+              "required": ["text"],
+              "additionalProperties": false
+            }
+          ]
         }
       },
       "raids": {
@@ -140,7 +151,7 @@
         "description": "Raid bosses featured in the event",
         "items": {
           "type": "object",
-          "required": ["name", "image", "tier"],
+          "required": ["name", "image"],
           "properties": {
             "name": {
               "type": "string",
@@ -154,54 +165,66 @@
             "tier": {
               "type": "string",
               "description": "Raid tier"
+            },
+            "canBeShiny": {
+              "type": "boolean",
+              "description": "Whether the Pokemon can be shiny"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "Image width in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "Image height in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "Image format"
             }
           },
           "additionalProperties": false
         }
       },
       "eggs": {
-        "type": "array",
-        "description": "Egg hatches featured in the event",
-        "items": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Pokemon name"
-            },
-            "eggType": {
-              "type": "string",
-              "description": "Egg distance"
-            },
-            "image": {
-              "type": "string",
-              "format": "uri",
-              "description": "Pokemon image URL"
+        "oneOf": [
+          {
+            "type": "array",
+            "description": "Egg hatches as array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
             }
           },
-          "additionalProperties": false
-        }
-      },
-      "research": {
-        "type": "array",
-        "description": "Research tasks for the event",
-        "items": {
-          "type": "object",
-          "properties": {
-            "text": {
-              "type": "string",
-              "description": "Task description"
-            },
-            "rewards": {
+          {
+            "type": "object",
+            "description": "Egg hatches keyed by distance (1km, 2km, etc.)",
+            "additionalProperties": {
               "type": "array",
-              "description": "Task rewards",
               "items": {
-                "type": "object"
+                "type": "object",
+                "additionalProperties": true
               }
             }
+          }
+        ]
+      },
+      "research": {
+        "oneOf": [
+          {
+            "type": "array",
+            "description": "Research tasks as array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
           },
-          "additionalProperties": true
-        }
+          {
+            "type": "object",
+            "description": "Research tasks as object (keyed by category)",
+            "additionalProperties": true
+          }
+        ]
       },
       "shinies": {
         "type": "array",
@@ -217,6 +240,18 @@
               "type": "string",
               "format": "uri",
               "description": "Pokemon image URL"
+            },
+            "canBeShiny": {
+              "type": "boolean"
+            },
+            "imageWidth": {
+              "type": "integer"
+            },
+            "imageHeight": {
+              "type": "integer"
+            },
+            "imageType": {
+              "type": "string"
             }
           },
           "additionalProperties": false
