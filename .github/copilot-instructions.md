@@ -69,7 +69,7 @@ npm run blob:transform    # Replace CDN URLs with Blob URLs in data files
 
 ## CI/CD
 
-GitHub Actions runs the full pipeline every 8 hours (see `scraper.yml`). Individual scrape steps use `continue-on-error: true` for resilience.
+GitHub Actions runs the full pipeline every 8 hours (see `.github/workflows/scraper.yaml`). Individual scrape steps use `continue-on-error: true` for resilience.
 
 ## External Dependencies
 
