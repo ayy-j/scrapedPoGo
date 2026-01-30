@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="api-base" content="http://localhost:4000/api" />
+  <title>Pokémon GO Data Explorer</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="app__header">
+      <div class="brand">
+        <div class="brand__icon">⚡️</div>
+        <div>
+          <h1>Pokémon GO Data Explorer</h1>
+          <p>Live view of database-backed Pokémon GO data</p>
+        </div>
+      </div>
+      <button class="config-btn" id="configBtn" type="button">Set API</button>
+    </header>
+
+    <section class="controls">
+      <div class="tabs" id="tabs"></div>
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Search by name, type, or bonus…" autocomplete="off" />
+        <select id="sortSelect">
+          <option value="start-asc">Sort: Start date ↑</option>
+          <option value="start-desc">Sort: Start date ↓</option>
+          <option value="name-asc">Sort: Name A–Z</option>
+          <option value="name-desc">Sort: Name Z–A</option>
+        </select>
+      </div>
+      <div class="filters" id="filters"></div>
+    </section>
+
+    <section class="status" id="status"></section>
+
+    <main class="content">
+      <div class="grid" id="grid"></div>
+      <aside class="detail" id="detailPanel" aria-live="polite">
+        <div class="detail__header">
+          <h2 id="detailTitle">Select a card</h2>
+          <button id="detailClose" class="icon-btn" aria-label="Close details">✕</button>
+        </div>
+        <div id="detailBody" class="detail__body">
+          <p>Choose an item to view full details.</p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <dialog id="configDialog" class="config-dialog">
+    <form method="dialog">
+      <h3>Configure API base URL</h3>
+      <p>Point this UI to your database-backed API.</p>
+      <label>
+        API Base URL
+        <input id="apiInput" type="url" placeholder="http://localhost:4000/api" required />
+      </label>
+      <menu>
+        <button value="cancel">Cancel</button>
+        <button id="apiSave" value="save">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
