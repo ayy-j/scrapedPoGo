@@ -24,6 +24,7 @@
           "event",
           "go-battle-league",
           "go-pass",
+          "go-rocket-takeover",
           "max-battles",
           "max-mondays",
           "pokemon-go-tour",
@@ -33,9 +34,12 @@
           "raid-day",
           "raid-hour",
           "research",
+          "research-breakthrough",
           "research-day",
           "season",
-          "team-go-rocket"
+          "special-research",
+          "team-go-rocket",
+          "timed-research"
         ]
       },
       "heading": {
