@@ -38,6 +38,18 @@ const { getMultipleImageDimensions, clearCache } = require('./imageDimensions');
 // ============================================================================
 
 /**
+ * Sanitizes a string to be safe for use in filenames.
+ * Replaces any character that is not a letter, number, underscore, or hyphen with an underscore.
+ *
+ * @param {string} name - The string to sanitize
+ * @returns {string} The sanitized string
+ */
+function sanitizeFilename(name) {
+    if (!name) return '';
+    return name.replace(/[^a-z0-9_\-]/gi, '_');
+}
+
+/**
  * Writes a temporary JSON file for scraped event data.
  * Files are written to data/temp/ directory and later combined by combinedetails.js.
  * 
@@ -55,7 +67,9 @@ const { getMultipleImageDimensions, clearCache } = require('./imageDimensions');
  * // Creates: data/temp/event-id_codes.json
  */
 function writeTempFile(id, type, data, suffix = '') {
-    const filename = `data/temp/${id}${suffix}.json`;
+    const safeId = sanitizeFilename(id);
+    const safeSuffix = sanitizeFilename(suffix);
+    const filename = path.join('data/temp', `${safeId}${safeSuffix}.json`);
     const content = JSON.stringify({ id, type, data });
     
     fs.writeFile(filename, content, err => {
@@ -1185,6 +1199,7 @@ function extractGoPassTiers(doc) {
 module.exports = {
     // File operations
     writeTempFile,
+    sanitizeFilename,
     handleScraperError,
     
     // Pokemon extraction
