@@ -1,0 +1,962 @@
+{
+  "generatedAt": "2026-01-30T03:26:31.116Z",
+  "total": 159,
+  "success": 141,
+  "failed": 18,
+  "models": {
+    "alibaba/qwen-3-14b": {
+      "ok": true,
+      "status": 200,
+      "content": "<think>\nOkay, the",
+      "testedAt": "2026-01-30T03:21:47.192Z"
+    },
+    "alibaba/qwen-3-235b": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:21:49.600Z"
+    },
+    "alibaba/qwen-3-30b": {
+      "ok": true,
+      "status": 200,
+      "content": "<think>\nOkay, the",
+      "testedAt": "2026-01-30T03:21:50.120Z"
+    },
+    "alibaba/qwen-3-32b": {
+      "ok": true,
+      "status": 200,
+      "content": "<think>\nOkay, the",
+      "testedAt": "2026-01-30T03:21:50.712Z"
+    },
+    "alibaba/qwen3-235b-a22b-thinking": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:21:51.367Z"
+    },
+    "alibaba/qwen3-coder": {
+      "ok": true,
+      "status": 200,
+      "content": "OK<|im_end|>",
+      "testedAt": "2026-01-30T03:21:51.876Z"
+    },
+    "alibaba/qwen3-coder-30b-a3b": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:21:52.418Z"
+    },
+    "alibaba/qwen3-coder-plus": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:21:54.631Z"
+    },
+    "alibaba/qwen3-max": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:21:56.760Z"
+    },
+    "alibaba/qwen3-max-preview": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:21:59.019Z"
+    },
+    "alibaba/qwen3-max-thinking": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:00.899Z"
+    },
+    "alibaba/qwen3-next-80b-a3b-instruct": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:01.638Z"
+    },
+    "alibaba/qwen3-next-80b-a3b-thinking": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:04.667Z"
+    },
+    "alibaba/qwen3-vl-instruct": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:05.525Z"
+    },
+    "alibaba/qwen3-vl-thinking": {
+      "ok": true,
+      "status": 200,
+      "content": "How can I assist",
+      "testedAt": "2026-01-30T03:22:14.993Z"
+    },
+    "amazon/nova-2-lite": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:15.792Z"
+    },
+    "amazon/nova-lite": {
+      "ok": true,
+      "status": 200,
+      "content": "OK, what would you",
+      "testedAt": "2026-01-30T03:22:16.547Z"
+    },
+    "amazon/nova-micro": {
+      "ok": true,
+      "status": 200,
+      "content": "Understood. If you",
+      "testedAt": "2026-01-30T03:22:17.374Z"
+    },
+    "amazon/nova-pro": {
+      "ok": true,
+      "status": 200,
+      "content": "Hello! If you have",
+      "testedAt": "2026-01-30T03:22:18.160Z"
+    },
+    "anthropic/claude-3-haiku": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:19.172Z"
+    },
+    "anthropic/claude-3-opus": {
+      "ok": true,
+      "status": 200,
+      "content": "I apologize for the",
+      "testedAt": "2026-01-30T03:22:20.685Z"
+    },
+    "anthropic/claude-3.5-haiku": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:21.671Z"
+    },
+    "anthropic/claude-3.5-sonnet": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:22.973Z"
+    },
+    "anthropic/claude-3.5-sonnet-20240620": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:24.205Z"
+    },
+    "anthropic/claude-3.7-sonnet": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:25.239Z"
+    },
+    "anthropic/claude-haiku-4.5": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:26.279Z"
+    },
+    "anthropic/claude-opus-4": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:28.045Z"
+    },
+    "anthropic/claude-opus-4.1": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:30.279Z"
+    },
+    "anthropic/claude-opus-4.5": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:32.570Z"
+    },
+    "anthropic/claude-sonnet-4": {
+      "ok": true,
+      "status": 200,
+      "content": "Great! I'm ready",
+      "testedAt": "2026-01-30T03:22:34.273Z"
+    },
+    "anthropic/claude-sonnet-4.5": {
+      "ok": true,
+      "status": 200,
+      "content": "I'm ready to help",
+      "testedAt": "2026-01-30T03:22:36.872Z"
+    },
+    "arcee-ai/trinity-large-preview": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:37.660Z"
+    },
+    "arcee-ai/trinity-mini": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:22:38.464Z"
+    },
+    "bytedance/seed-1.6": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:40.698Z"
+    },
+    "bytedance/seed-1.8": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:42.533Z"
+    },
+    "cohere/command-a": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:43.288Z"
+    },
+    "deepseek/deepseek-r1": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:22:44.268Z"
+    },
+    "deepseek/deepseek-v3": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:44.852Z"
+    },
+    "deepseek/deepseek-v3.1": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:45.572Z"
+    },
+    "deepseek/deepseek-v3.1-terminus": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:47.119Z"
+    },
+    "deepseek/deepseek-v3.2": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:48.995Z"
+    },
+    "deepseek/deepseek-v3.2-exp": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:50.188Z"
+    },
+    "deepseek/deepseek-v3.2-thinking": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:22:52.289Z"
+    },
+    "google/gemini-2.0-flash": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:53.102Z"
+    },
+    "google/gemini-2.0-flash-lite": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:53.761Z"
+    },
+    "google/gemini-2.5-flash": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:22:54.676Z"
+    },
+    "google/gemini-2.5-flash-image": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:55.640Z"
+    },
+    "google/gemini-2.5-flash-image-preview": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:56.472Z"
+    },
+    "google/gemini-2.5-flash-lite": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:57.214Z"
+    },
+    "google/gemini-2.5-flash-lite-preview-09-2025": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:57.872Z"
+    },
+    "google/gemini-2.5-flash-preview-09-2025": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:22:58.940Z"
+    },
+    "google/gemini-2.5-pro": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:00.379Z"
+    },
+    "google/gemini-3-flash": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:01.717Z"
+    },
+    "google/gemini-3-pro-image": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:06.217Z"
+    },
+    "google/gemini-3-pro-preview": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:08.884Z"
+    },
+    "inception/mercury-coder-small": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:09.587Z"
+    },
+    "kwaipilot/kat-coder-pro-v1": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:10.928Z"
+    },
+    "meituan/longcat-flash-chat": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:13.850Z"
+    },
+    "meituan/longcat-flash-thinking": {
+      "ok": false,
+      "status": 404,
+      "error": "{\"error\":{\"message\":\"Not Found\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Not Found\",\"statusCode\":404,\"name\":\"AI_APICallError\",\"message\":\"Not Found\",\"url\":\"https://llm.chutes.ai/v1/chat/completions\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"meituan/longcat-flash-thinking\",\"resolvedProvider\":\"chutes\",\"resolvedProviderApiModelId\":\"meituan-longcat/LongCat-Flash-Thinking-FP8\",\"internalResolvedModelId\":\"chutes:meituan-longcat/LongCat-Flash-Thinking-FP8\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected chutes as preferred provider for longcat-flash-thinking. 0 fallback(s) available: \",\"canonicalSlug\":\"meituan/longcat-flash-thinking\",\"attempts\":[{\"provider\":\"chutes\",\"internalModelId\":\"chutes:meituan-longcat:LongCat-Flash-Thinking-FP8\",\"providerApiModelId\":\"meituan-longcat/LongCat-Flash-Thinking-FP8\",\"credentialType\":\"system\",\"success\":false,\"error\":\"Not Found\",\"startTime\":22483.494211,\"endTime\":22753.705137,\"statusCode\":4",
+      "testedAt": "2026-01-30T03:23:14.518Z"
+    },
+    "meta/llama-3.1-70b": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:15.358Z"
+    },
+    "meta/llama-3.1-8b": {
+      "ok": true,
+      "status": 200,
+      "content": "Nothing to respond to.",
+      "testedAt": "2026-01-30T03:23:15.863Z"
+    },
+    "meta/llama-3.2-11b": {
+      "ok": true,
+      "status": 200,
+      "content": "Nothing to respond to.",
+      "testedAt": "2026-01-30T03:23:16.621Z"
+    },
+    "meta/llama-3.2-1b": {
+      "ok": true,
+      "status": 200,
+      "content": "I can't assist with",
+      "testedAt": "2026-01-30T03:23:17.276Z"
+    },
+    "meta/llama-3.2-3b": {
+      "ok": true,
+      "status": 200,
+      "content": "Can I help you with",
+      "testedAt": "2026-01-30T03:23:18.184Z"
+    },
+    "meta/llama-3.2-90b": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:18.844Z"
+    },
+    "meta/llama-3.3-70b": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:19.564Z"
+    },
+    "meta/llama-4-maverick": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:20.126Z"
+    },
+    "meta/llama-4-scout": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:20.689Z"
+    },
+    "minimax/minimax-m2": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:21.860Z"
+    },
+    "minimax/minimax-m2.1": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:24.110Z"
+    },
+    "minimax/minimax-m2.1-lightning": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:25.241Z"
+    },
+    "mistral/codestral": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:25.866Z"
+    },
+    "mistral/devstral-2": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:26.577Z"
+    },
+    "mistral/devstral-small": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:27.234Z"
+    },
+    "mistral/devstral-small-2": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:27.907Z"
+    },
+    "mistral/magistral-medium": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:28.691Z"
+    },
+    "mistral/magistral-small": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:29.279Z"
+    },
+    "mistral/ministral-14b": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:29.829Z"
+    },
+    "mistral/ministral-3b": {
+      "ok": true,
+      "status": 200,
+      "content": "Understood!",
+      "testedAt": "2026-01-30T03:23:30.376Z"
+    },
+    "mistral/ministral-8b": {
+      "ok": true,
+      "status": 200,
+      "content": "Got it! **OK",
+      "testedAt": "2026-01-30T03:23:30.968Z"
+    },
+    "mistral/mistral-large-3": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:31.816Z"
+    },
+    "mistral/mistral-medium": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:32.389Z"
+    },
+    "mistral/mistral-nemo": {
+      "ok": true,
+      "status": 200,
+      "content": "Understood.",
+      "testedAt": "2026-01-30T03:23:33.013Z"
+    },
+    "mistral/mistral-small": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:33.559Z"
+    },
+    "mistral/mixtral-8x22b-instruct": {
+      "ok": true,
+      "status": 200,
+      "content": "OK.",
+      "testedAt": "2026-01-30T03:23:34.325Z"
+    },
+    "mistral/pixtral-12b": {
+      "ok": true,
+      "status": 200,
+      "content": "Got it!",
+      "testedAt": "2026-01-30T03:23:34.961Z"
+    },
+    "mistral/pixtral-large": {
+      "ok": true,
+      "status": 200,
+      "content": "Is everything OK with you",
+      "testedAt": "2026-01-30T03:23:35.610Z"
+    },
+    "moonshotai/kimi-k2": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:36.949Z"
+    },
+    "moonshotai/kimi-k2-0905": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:37.415Z"
+    },
+    "moonshotai/kimi-k2-thinking": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:38.815Z"
+    },
+    "moonshotai/kimi-k2-thinking-turbo": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:39.924Z"
+    },
+    "moonshotai/kimi-k2-turbo": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:41.105Z"
+    },
+    "moonshotai/kimi-k2.5": {
+      "ok": true,
+      "status": 200,
+      "content": "The user has simply said",
+      "testedAt": "2026-01-30T03:23:43.878Z"
+    },
+    "morph/morph-v3-fast": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:44.620Z"
+    },
+    "morph/morph-v3-large": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:45.202Z"
+    },
+    "nvidia/nemotron-3-nano-30b-a3b": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:45.726Z"
+    },
+    "nvidia/nemotron-nano-12b-v2-vl": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:46.352Z"
+    },
+    "nvidia/nemotron-nano-9b-v2": {
+      "ok": true,
+      "status": 200,
+      "content": "Okay, the user just",
+      "testedAt": "2026-01-30T03:23:47.024Z"
+    },
+    "openai/codex-mini": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/codex-mini\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"codex-mini-latest\",\"internalResolvedModelId\":\"openai:codex-mini-latest\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for codex-mini. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/codex-mini\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:codex-mini-latest\",\"providerApiModelId\":\"codex-mini-lat",
+      "testedAt": "2026-01-30T03:23:47.542Z"
+    },
+    "openai/gpt-3.5-turbo": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-3.5-turbo\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-3.5-turbo\",\"internalResolvedModelId\":\"openai:gpt-3.5-turbo\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for gpt-3.5-turbo. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/gpt-3.5-turbo\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-3.5-turbo\",\"providerApiModelId\":\"gpt-3.5-turbo\",\"c",
+      "testedAt": "2026-01-30T03:23:48.068Z"
+    },
+    "openai/gpt-3.5-turbo-instruct": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-3.5-turbo-instruct\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-3.5-turbo-instruct\",\"internalResolvedModelId\":\"openai:gpt-3.5-turbo-instruct\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for gpt-3.5-turbo-instruct. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/gpt-3.5-turbo-instruct\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-3.5-t",
+      "testedAt": "2026-01-30T03:23:48.592Z"
+    },
+    "openai/gpt-4-turbo": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-4-turbo\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-4-turbo\",\"internalResolvedModelId\":\"openai:gpt-4-turbo\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for gpt-4-turbo. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/gpt-4-turbo\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-4-turbo\",\"providerApiModelId\":\"gpt-4-turbo\",\"credentialType\"",
+      "testedAt": "2026-01-30T03:23:49.115Z"
+    },
+    "openai/gpt-4.1": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:50.535Z"
+    },
+    "openai/gpt-4.1-mini": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:52.579Z"
+    },
+    "openai/gpt-4.1-nano": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:53.425Z"
+    },
+    "openai/gpt-4o": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:54.697Z"
+    },
+    "openai/gpt-4o-mini": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:23:55.585Z"
+    },
+    "openai/gpt-4o-mini-search-preview": {
+      "ok": true,
+      "status": 200,
+      "content": "The current time in Oklahoma City, OK, is 9:23 PM CST on Thursday, January 29, 2026.\n\n## Weather for Oklahoma City, OK:\nCurrent Conditions: Clear, 29°F (-2°C)\n\nDaily Forecast:\n* Thursday, January 29: ",
+      "testedAt": "2026-01-30T03:23:57.760Z"
+    },
+    "openai/gpt-5": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:23:59.261Z"
+    },
+    "openai/gpt-5-chat": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-5-chat\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-5-chat-latest\",\"internalResolvedModelId\":\"openai:gpt-5-chat-latest\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for gpt-5-chat. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/gpt-5-chat\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-5-chat-latest\",\"providerApiModelId\":\"gpt-5-chat-lat",
+      "testedAt": "2026-01-30T03:23:59.723Z"
+    },
+    "openai/gpt-5-codex": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://jeril-mkrr6dri-eastus2.openai.azure.com/openai/v1/responses?api-version=v1\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-5-codex\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-5-codex\",\"internalResolvedModelId\":\"openai:gpt-5-codex\",\"fallbacksAvailable\":[\"azure\"],\"internalReasoning\":\"Selected openai as preferred provider for gpt-5-codex. 1 fallback(s) available: azure\",\"canonicalSlug\":\"openai/gpt-5-codex\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-5",
+      "testedAt": "2026-01-30T03:24:00.359Z"
+    },
+    "openai/gpt-5-mini": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:01.422Z"
+    },
+    "openai/gpt-5-nano": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:02.333Z"
+    },
+    "openai/gpt-5-pro": {
+      "ok": false,
+      "status": 403,
+      "error": "{\"error\":{\"message\":\"Free credits temporarily have restricted access due to abuse. We are working on a resolution. Paid credits continue to have unrestricted access. Purchase credits at https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dtop-up\",\"type\":\"no_providers_available\",\"param\":{\"error\":\"Free credits temporarily have restricted access due to abuse. We are working on a resolution. Paid credits continue to have unrestricted access. Purchase credits at https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dtop-up\",\"type\":\"no_providers_available\",\"statusCode\":403,\"name\":\"RestrictedModelsError\",\"message\":\"Free credits temporarily have restricted access due to abuse. We are working on a resolution. Paid credits continue to have unrestricted access. Purchase credits at https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dtop-up\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-5-pro\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt",
+      "testedAt": "2026-01-30T03:24:02.836Z"
+    },
+    "openai/gpt-5.1-codex": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://jeril-mkrr6dri-eastus2.openai.azure.com/openai/v1/responses?api-version=v1\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-5.1-codex\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-5.1-codex\",\"internalResolvedModelId\":\"openai:gpt-5.1-codex\",\"fallbacksAvailable\":[\"azure\"],\"internalReasoning\":\"Selected openai as preferred provider for gpt-5.1-codex. 1 fallback(s) available: azure\",\"canonicalSlug\":\"openai/gpt-5.1-codex\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"op",
+      "testedAt": "2026-01-30T03:24:03.401Z"
+    },
+    "openai/gpt-5.1-codex-max": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-5.1-codex-max\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-5.1-codex-max\",\"internalResolvedModelId\":\"openai:gpt-5.1-codex-max\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for gpt-5.1-codex-max. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/gpt-5.1-codex-max\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-5.1-codex-max\",\"providerApiMod",
+      "testedAt": "2026-01-30T03:24:03.917Z"
+    },
+    "openai/gpt-5.1-codex-mini": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-5.1-codex-mini\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-5.1-codex-mini\",\"internalResolvedModelId\":\"openai:gpt-5.1-codex-mini\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for gpt-5.1-codex-mini. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/gpt-5.1-codex-mini\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-5.1-codex-mini\",\"provider",
+      "testedAt": "2026-01-30T03:24:04.335Z"
+    },
+    "openai/gpt-5.1-instant": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:05.374Z"
+    },
+    "openai/gpt-5.1-thinking": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:06.503Z"
+    },
+    "openai/gpt-5.2": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:24:07.736Z"
+    },
+    "openai/gpt-5.2-chat": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-5.2-chat\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-5.2-chat-latest\",\"internalResolvedModelId\":\"openai:gpt-5.2-chat-latest\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for gpt-5.2-chat. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/gpt-5.2-chat\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-5.2-chat-latest\",\"providerApiModelId\":\"gp",
+      "testedAt": "2026-01-30T03:24:08.236Z"
+    },
+    "openai/gpt-5.2-codex": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-5.2-codex\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-5.2-codex\",\"internalResolvedModelId\":\"openai:gpt-5.2-codex\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for gpt-5.2-codex. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/gpt-5.2-codex\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-5.2-codex\",\"providerApiModelId\":\"gpt-5.2-codex\",\"c",
+      "testedAt": "2026-01-30T03:24:08.777Z"
+    },
+    "openai/gpt-5.2-pro": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/gpt-5.2-pro\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"gpt-5.2-pro\",\"internalResolvedModelId\":\"openai:gpt-5.2-pro\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for gpt-5.2-pro. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/gpt-5.2-pro\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:gpt-5.2-pro\",\"providerApiModelId\":\"gpt-5.2-pro\",\"credentialType\"",
+      "testedAt": "2026-01-30T03:24:09.282Z"
+    },
+    "openai/gpt-oss-120b": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:09.840Z"
+    },
+    "openai/gpt-oss-20b": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:10.484Z"
+    },
+    "openai/gpt-oss-safeguard-20b": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:10.934Z"
+    },
+    "openai/o1": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:11.821Z"
+    },
+    "openai/o3": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/o3\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"o3\",\"internalResolvedModelId\":\"openai:o3\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for o3. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/o3\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:o3\",\"providerApiModelId\":\"o3\",\"credentialType\":\"system\",\"success\":false,\"error\":\"Invalid 'max_output_tokens':",
+      "testedAt": "2026-01-30T03:24:12.264Z"
+    },
+    "openai/o3-deep-research": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/o3-deep-research\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"o3-deep-research\",\"internalResolvedModelId\":\"openai:o3-deep-research\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for o3-deep-research. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/o3-deep-research\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:o3-deep-research\",\"providerApiModelId\":",
+      "testedAt": "2026-01-30T03:24:12.711Z"
+    },
+    "openai/o3-mini": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:13.552Z"
+    },
+    "openai/o3-pro": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"Invalid 'max_output_tokens': integer below minimum value. Expected a value >= 16, but got 5 instead.\",\"url\":\"https://api.openai.com/v1/responses\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"openai/o3-pro\",\"resolvedProvider\":\"openai\",\"resolvedProviderApiModelId\":\"o3-pro-2025-06-10\",\"internalResolvedModelId\":\"openai:o3-pro-2025-06-10\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected openai as preferred provider for o3-pro. 0 fallback(s) available: \",\"canonicalSlug\":\"openai/o3-pro\",\"attempts\":[{\"provider\":\"openai\",\"internalModelId\":\"openai:o3-pro-2025-06-10\",\"providerApiModelId\":\"o3-pro-2025-06-10\",\"creden",
+      "testedAt": "2026-01-30T03:24:14.286Z"
+    },
+    "openai/o4-mini": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:15.340Z"
+    },
+    "perplexity/sonar": {
+      "ok": true,
+      "status": 200,
+      "content": "**OK** is an",
+      "testedAt": "2026-01-30T03:24:17.112Z"
+    },
+    "perplexity/sonar-pro": {
+      "ok": true,
+      "status": 200,
+      "content": "OK is an English word",
+      "testedAt": "2026-01-30T03:24:18.699Z"
+    },
+    "perplexity/sonar-reasoning": {
+      "ok": false,
+      "status": 400,
+      "error": "{\"error\":{\"message\":\"The 'sonar-reasoning' model has been deprecated and is no longer available. Please refer to https://docs.perplexity.ai/getting-started/models for supported models.\",\"type\":\"AI_APICallError\",\"param\":{\"error\":\"The 'sonar-reasoning' model has been deprecated and is no longer available. Please refer to https://docs.perplexity.ai/getting-started/models for supported models.\",\"statusCode\":400,\"name\":\"AI_APICallError\",\"message\":\"The 'sonar-reasoning' model has been deprecated and is no longer available. Please refer to https://docs.perplexity.ai/getting-started/models for supported models.\",\"url\":\"https://api.perplexity.ai/chat/completions\",\"isRetryable\":false,\"type\":\"AI_APICallError\"}},\"providerMetadata\":{\"gateway\":{\"routing\":{\"originalModelId\":\"perplexity/sonar-reasoning\",\"resolvedProvider\":\"perplexity\",\"resolvedProviderApiModelId\":\"sonar-reasoning\",\"internalResolvedModelId\":\"perplexity:sonar-reasoning\",\"fallbacksAvailable\":[],\"internalReasoning\":\"Selected perplexity as",
+      "testedAt": "2026-01-30T03:24:19.158Z"
+    },
+    "perplexity/sonar-reasoning-pro": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:21.626Z"
+    },
+    "prime-intellect/intellect-3": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:24:22.370Z"
+    },
+    "vercel/v0-1.0-md": {
+      "ok": true,
+      "status": 200,
+      "content": "I'm ready to help",
+      "testedAt": "2026-01-30T03:24:27.701Z"
+    },
+    "vercel/v0-1.5-md": {
+      "ok": true,
+      "status": 200,
+      "content": "I'm ready to help",
+      "testedAt": "2026-01-30T03:24:34.799Z"
+    },
+    "xai/grok-2-vision": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:24:35.519Z"
+    },
+    "xai/grok-3": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:24:36.404Z"
+    },
+    "xai/grok-3-fast": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:24:37.066Z"
+    },
+    "xai/grok-3-mini": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:24:39.469Z"
+    },
+    "xai/grok-3-mini-fast": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:24:41.679Z"
+    },
+    "xai/grok-4": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:25:13.008Z"
+    },
+    "xai/grok-4-fast-non-reasoning": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:25:13.639Z"
+    },
+    "xai/grok-4-fast-reasoning": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:25:20.462Z"
+    },
+    "xai/grok-4.1-fast-non-reasoning": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:25:21.235Z"
+    },
+    "xai/grok-4.1-fast-reasoning": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:25:25.924Z"
+    },
+    "xai/grok-code-fast-1": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:25:43.315Z"
+    },
+    "xiaomi/mimo-v2-flash": {
+      "ok": true,
+      "status": 200,
+      "content": "OK",
+      "testedAt": "2026-01-30T03:25:45.315Z"
+    },
+    "zai/glm-4.5": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:25:46.604Z"
+    },
+    "zai/glm-4.5-air": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:25:47.997Z"
+    },
+    "zai/glm-4.5v": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:25:48.918Z"
+    },
+    "zai/glm-4.6": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:25:52.855Z"
+    },
+    "zai/glm-4.6v": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:25:54.132Z"
+    },
+    "zai/glm-4.6v-flash": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:25:55.817Z"
+    },
+    "zai/glm-4.7": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:25:56.545Z"
+    },
+    "zai/glm-4.7-flashx": {
+      "ok": true,
+      "status": 200,
+      "content": "",
+      "testedAt": "2026-01-30T03:26:30.913Z"
+    }
+  }
+}

@@ -2,6 +2,33 @@
 
 Below are the model IDs returned by your AI Gateway `/v1/models` endpoint, grouped by provider. These are the only ones enabled for your account right now.
 
+## Language model smoke test results
+- **Run timestamp:** 2026-01-30T03:26:31.116Z
+- **Language models tested:** 159
+- **Succeeded:** 141
+- **Failed:** 18
+- **Raw results:** `data/ai-model-tests.json`
+
+### Failed language models
+- meituan/longcat-flash-thinking
+- openai/codex-mini
+- openai/gpt-3.5-turbo
+- openai/gpt-3.5-turbo-instruct
+- openai/gpt-4-turbo
+- openai/gpt-5-chat
+- openai/gpt-5-codex
+- openai/gpt-5-pro
+- openai/gpt-5.1-codex
+- openai/gpt-5.1-codex-max
+- openai/gpt-5.1-codex-mini
+- openai/gpt-5.2-chat
+- openai/gpt-5.2-codex
+- openai/gpt-5.2-pro
+- openai/o3
+- openai/o3-deep-research
+- openai/o3-pro
+- perplexity/sonar-reasoning
+
 ### Alibaba
 - alibaba/qwen-3-14b  
 - alibaba/qwen-3-235b  
