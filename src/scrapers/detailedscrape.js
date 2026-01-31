@@ -85,14 +85,12 @@ function main()
         });
     }
 
-    const promises = [];
-
     https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json", (res) =>
     {
         let body = "";
         res.on("data", (chunk) => { body += chunk; });
     
-        res.on("end", () => {
+        res.on("end", async () => {
             try
             {
                 let bkpData = JSON.parse(body);
@@ -113,89 +111,110 @@ function main()
                     }
                 }
 
-                events.forEach(e => {
+                // Helper to process a single event
+                async function processEvent(e, bkp) {
                     // Construct the event link from eventID
                     const link = `https://www.leekduck.com/events/${e.eventID}/`;
+                    const p = [];
                     
                     // get generic extra data independend from event type
-                    promises.push(generic.get(link, e.eventID, bkp));
+                    p.push(generic.get(link, e.eventID, bkp));
+
                     // get event type specific extra data
                     if (e.eventType == "research-breakthrough")
                     {
-                        promises.push(breakthrough.get(link, e.eventID, bkp));
+                        p.push(breakthrough.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "pokemon-spotlight-hour")
                     {
-                        promises.push(spotlight.get(link, e.eventID, bkp));
+                        p.push(spotlight.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "community-day")
                     {
-                        promises.push(communityday.get(link, e.eventID, bkp));
+                        p.push(communityday.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "raid-battles")
                     {
-                        promises.push(raidbattles.get(link, e.eventID, bkp));
+                        p.push(raidbattles.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "raid-hour")
                     {
-                        promises.push(raidhour.get(link, e.eventID, bkp));
+                        p.push(raidhour.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "raid-day")
                     {
-                        promises.push(raidday.get(link, e.eventID, bkp));
+                        p.push(raidday.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "team-go-rocket" || e.eventType == "go-rocket-takeover")
                     {
-                        promises.push(teamgorocket.get(link, e.eventID, bkp));
+                        p.push(teamgorocket.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "go-battle-league")
                     {
-                        promises.push(gobattleleague.get(link, e.eventID, bkp));
+                        p.push(gobattleleague.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "season")
                     {
-                        promises.push(season.get(link, e.eventID, bkp));
+                        p.push(season.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "pokemon-go-tour")
                     {
-                        promises.push(gotour.get(link, e.eventID, bkp));
+                        p.push(gotour.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "timed-research" || e.eventType == "special-research" || e.eventType == "research-day")
                     {
-                        promises.push(timedresearch.get(link, e.eventID, bkp));
+                        p.push(timedresearch.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "max-battles")
                     {
-                        promises.push(maxbattles.get(link, e.eventID, bkp));
+                        p.push(maxbattles.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "max-mondays")
                     {
-                        promises.push(maxmondays.get(link, e.eventID, bkp));
+                        p.push(maxmondays.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "go-pass")
                     {
-                        promises.push(gopass.get(link, e.eventID, bkp));
+                        p.push(gopass.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "pokestop-showcase")
                     {
-                        promises.push(pokestopshowcase.get(link, e.eventID, bkp));
+                        p.push(pokestopshowcase.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "research")
                     {
-                        promises.push(research.get(link, e.eventID, bkp));
+                        p.push(research.get(link, e.eventID, bkp));
                     }
                     else if (e.eventType == "event")
                     {
-                        promises.push(event.get(link, e.eventID, bkp));
+                        p.push(event.get(link, e.eventID, bkp));
                     }
-                });
-                
-                // Wait for all scrapers to complete
-                Promise.all(promises).then(() => {
-                    logger.success(`Completed scraping ${promises.length} detailed event pages`);
-                }).catch(err => {
-                    logger.error('Error during detailed scraping:', err.message);
-                });
+
+                    await Promise.all(p);
+                }
+
+                // Helper for concurrency
+                async function runWithConcurrency(items, limit, fn) {
+                    const executing = [];
+                    const promises = [];
+
+                    for (const item of items) {
+                        const p = Promise.resolve().then(() => fn(item));
+                        promises.push(p);
+
+                        const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+                        executing.push(e);
+
+                        if (executing.length >= limit) {
+                            await Promise.race(executing);
+                        }
+                    }
+                    return Promise.all(promises);
+                }
+
+                // Run with concurrency limit of 5
+                await runWithConcurrency(events, 5, (e) => processEvent(e, bkp));
+                logger.success(`Completed scraping detailed event pages`);
             }
             catch (error)
             {
