@@ -56,6 +56,7 @@ const elements = {
   configDialog: document.getElementById("configDialog"),
   apiInput: document.getElementById("apiInput"),
   apiSave: document.getElementById("apiSave"),
+  calendarBtn: document.getElementById("calendarBtn"),
 };
 
 const apiMeta = document.querySelector("meta[name='api-base']");
@@ -64,6 +65,13 @@ let apiBaseUrl = storedApiBase || (apiMeta ? apiMeta.content : "");
 
 function getApiUrl(datasetId) {
   return `${apiBaseUrl.replace(/\/$/, "")}/${datasetId}`;
+}
+
+function updateCalendarLink() {
+  if (elements.calendarBtn) {
+    const baseUrl = apiBaseUrl.replace(/\/$/, "");
+    elements.calendarBtn.href = `${baseUrl}/events.ics`;
+  }
 }
 
 function formatDate(value) {
@@ -379,6 +387,7 @@ function openConfig() {
 function saveConfig() {
   apiBaseUrl = elements.apiInput.value.trim();
   window.localStorage.setItem("pogoApiBase", apiBaseUrl);
+  updateCalendarLink();
   loadDataset(state.active);
 }
 
@@ -405,6 +414,7 @@ function init() {
     elements.configDialog.close();
   });
 
+  updateCalendarLink();
   render();
   ensureDatasetLoaded(state.active);
 }

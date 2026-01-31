@@ -100,6 +100,10 @@ Each `eventType` has its own file containing only events of that type (automatic
 - Minimized: `https://pokemn.quest/data/shinies.min.json`
 - [Documentation](docs/Shinies.md)
 
+### Calendar Feed
+- ICS Format: `https://pokemn.quest/data/events.ics`
+- Subscribe to this URL in Google Calendar, Outlook, or Apple Calendar to see upcoming events.
+
 ---
 
 ## JSON Schemas
@@ -357,6 +361,7 @@ module.exports = { get };
 | `npm run scrapeshinies` | Run shiny Pokemon scraper |
 | `npm run detailedscrape` | Scrape detailed event information |
 | `npm run combinedetails` | Combine detailed data with basic events and generate per-eventType files |
+| `npm run generate-ics` | Generate iCalendar (.ics) feed from event data |
 | `npm run blob:upload` | Upload images to Vercel Blob Storage |
 | `npm run blob:upload:dry` | Preview uploads without actually uploading |
 | `npm run blob:upload:force` | Re-upload all images (overwrite existing) |

@@ -1,0 +1,538 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//PokemonGO Data Explorer//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Pokémon GO Events
+BEGIN:VEVENT
+UID:masterwork-research-a-precious-catch@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20251202T100000
+DTEND:20260303T100000
+SUMMARY:Research: Masterwork Research: A Precious Catch
+DESCRIPTION:Type: research\n\nMore info: https://leekduck.com/events/masterwork-research-a-precious-catch/
+URL:https://leekduck.com/events/masterwork-research-a-precious-catch/
+END:VEVENT
+BEGIN:VEVENT
+UID:season-21-precious-paths@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20251202T100000
+DTEND:20260303T100000
+SUMMARY:Season: Precious Paths
+DESCRIPTION:Type: season\nBonuses: One additional Special Trade per day, Increased Stardust for the first catch of the day, Increased friendship bonus damage dealt by Pokémon in raids\n\nMore info: https://leekduck.com/events/season-21-precious-paths/
+URL:https://leekduck.com/events/season-21-precious-paths/
+END:VEVENT
+BEGIN:VEVENT
+UID:shadow-cresselia-in-shadow-raids-january-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260102T060000
+DTEND:20260201T220000
+SUMMARY:Raid Battles: Shadow Cresselia in Shadow Raids
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/shadow-cresselia-in-shadow-raids-january-february-2026/
+URL:https://leekduck.com/events/shadow-cresselia-in-shadow-raids-january-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:go-pass-january-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260106T100000
+DTEND:20260203T100000
+SUMMARY:Go Pass: GO Pass: January
+DESCRIPTION:Type: go-pass\n\nMore info: https://leekduck.com/events/go-pass-january-2026/
+URL:https://leekduck.com/events/go-pass-january-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:mega-ampharos-in-mega-raids-january-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260125T100000
+DTEND:20260204T100000
+SUMMARY:Raid Battles: Mega Ampharos in Mega Raids
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/mega-ampharos-in-mega-raids-january-2026/
+URL:https://leekduck.com/events/mega-ampharos-in-mega-raids-january-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:tornadus-incarnate-forme-in-5-star-raid-battles-january-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260125T100000
+DTEND:20260204T100000
+SUMMARY:Raid Battles: Tornadus (Incarnate Forme) in 5-star Raid Battles
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/tornadus-incarnate-forme-in-5-star-raid-battles-january-2026/
+URL:https://leekduck.com/events/tornadus-incarnate-forme-in-5-star-raid-battles-january-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:into-the-depths-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260127T100000
+DTEND:20260201T200000
+SUMMARY:Event: Into the Depths
+DESCRIPTION:Type: event\nBonuses: 3× XP from completing Routes, 1/2 Egg Hatch Distance\n\nMore info: https://leekduck.com/events/into-the-depths-2026/
+URL:https://leekduck.com/events/into-the-depths-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:gbl-precious-paths_great-league_ultra-league_master-league-split-3@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260127T210000Z
+DTEND:20260203T210000Z
+SUMMARY:Go Battle League: Great League, Ultra League, and Master League | Precious Paths
+DESCRIPTION:Type: go-battle-league\n\nMore info: https://leekduck.com/events/gbl-precious-paths_great-league_ultra-league_master-league-split-3/
+URL:https://leekduck.com/events/gbl-precious-paths_great-league_ultra-league_master-league-split-3/
+END:VEVENT
+BEGIN:VEVENT
+UID:dynamax-ho-oh-max-battle-weekend@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260131T060000
+DTEND:20260201T210000
+SUMMARY:Max Battles: Dynamax Ho-Oh Max Battle Weekend
+DESCRIPTION:Type: max-battles\nBonuses: The following bonuses will be active during the event.\n\nMore info: https://leekduck.com/events/dynamax-ho-oh-max-battle-weekend/
+URL:https://leekduck.com/events/dynamax-ho-oh-max-battle-weekend/
+END:VEVENT
+BEGIN:VEVENT
+UID:shadow-regigigas-in-shadow-raids-february-march-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260201T060000
+DTEND:20260304T220000
+SUMMARY:Raid Battles: Shadow Regigigas in Shadow Raids
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/shadow-regigigas-in-shadow-raids-february-march-2026/
+URL:https://leekduck.com/events/shadow-regigigas-in-shadow-raids-february-march-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:february-communityday2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260201T140000
+DTEND:20260201T170000
+SUMMARY:Community Day: Vulpix Community Day
+DESCRIPTION:Type: community-day\nBonuses: Increased Spawns, 3x Catch XP, 3-hour Incense, 1-hour Lures, 2x Catch Candy, 2x Chance to receive Candy XL from catching Pokémon, One additional Special Trade can be made for a maximum of three for the day*, Trades made will require 50% less Stardust*\n\nMore info: https://leekduck.com/events/february-communityday2026/
+URL:https://leekduck.com/events/february-communityday2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:max-mondays-2026-02-02@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260202T180000
+DTEND:20260202T190000
+SUMMARY:Max Mondays: Dynamax Wailmer during Max Monday
+DESCRIPTION:Type: max-mondays\n\nMore info: https://leekduck.com/events/max-mondays-2026-02-02/
+URL:https://leekduck.com/events/max-mondays-2026-02-02/
+END:VEVENT
+BEGIN:VEVENT
+UID:carnival-of-flamigo@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260203T100000
+DTEND:20260208T200000
+SUMMARY:Event: Carnival of Flamigo
+DESCRIPTION:Type: event\nBonuses: 2× Incense duration, 2× Daily Adventure Incense duration, 500 Additional Stardust for catching Flamigo, Increased chance to encounter Shiny Lotad, Shiny Spritzee, and Shiny Pikipek\n\nMore info: https://leekduck.com/events/carnival-of-flamigo/
+URL:https://leekduck.com/events/carnival-of-flamigo/
+END:VEVENT
+BEGIN:VEVENT
+UID:go-pass-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260203T100000
+DTEND:20260303T100000
+SUMMARY:Go Pass: GO Pass: February
+DESCRIPTION:Type: go-pass\n\nMore info: https://leekduck.com/events/go-pass-february-2026/
+URL:https://leekduck.com/events/go-pass-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:pokemonspotlighthour2026-02-03@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260203T180000
+DTEND:20260203T190000
+SUMMARY:Pokemon Spotlight Hour: Whismur
+DESCRIPTION:Type: pokemon-spotlight-hour\n\nMore info: https://leekduck.com/events/pokemonspotlighthour2026-02-03/
+URL:https://leekduck.com/events/pokemonspotlighthour2026-02-03/
+END:VEVENT
+BEGIN:VEVENT
+UID:gbl-precious-paths_ultra-league_2026-championship-series-cup@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260203T210000Z
+DTEND:20260210T210000Z
+SUMMARY:Go Battle League: Ultra League and 2026 Championship Series Cup | Precious Paths
+DESCRIPTION:Type: go-battle-league\n\nMore info: https://leekduck.com/events/gbl-precious-paths_ultra-league_2026-championship-series-cup/
+URL:https://leekduck.com/events/gbl-precious-paths_ultra-league_2026-championship-series-cup/
+END:VEVENT
+BEGIN:VEVENT
+UID:landorus-incarnate-forme-in-5-star-raid-battles-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260204T100000
+DTEND:20260216T100000
+SUMMARY:Raid Battles: Dialga and Palkia in 5-star Raid Battles
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/landorus-incarnate-forme-in-5-star-raid-battles-february-2026/
+URL:https://leekduck.com/events/landorus-incarnate-forme-in-5-star-raid-battles-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:mega-pidgeot-in-mega-raids-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260204T100000
+DTEND:20260216T100000
+SUMMARY:Raid Battles: Mega Pidgeot in Mega Raids
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/mega-pidgeot-in-mega-raids-february-2026/
+URL:https://leekduck.com/events/mega-pidgeot-in-mega-raids-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:raidhour20260204@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260204T180000
+DTEND:20260204T190000
+SUMMARY:Raid Hour: Dialga and Palkia Raid Hour
+DESCRIPTION:Type: raid-hour\n\nMore info: https://leekduck.com/events/raidhour20260204/
+URL:https://leekduck.com/events/raidhour20260204/
+END:VEVENT
+BEGIN:VEVENT
+UID:oricorio-catch-mastery-day-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260207T100000
+DTEND:20260207T200000
+SUMMARY:Event: Oricorio Catch Mastery
+DESCRIPTION:Type: event\nBonuses: 2× XP for successfully catching Pokémon with Nice Throws or better, Increased Candy for successfully catching Pokémon with Nice Throws or better\n\nMore info: https://leekduck.com/events/oricorio-catch-mastery-day-february-2026/
+URL:https://leekduck.com/events/oricorio-catch-mastery-day-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:max-mondays-2026-02-09@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260209T180000
+DTEND:20260209T190000
+SUMMARY:Max Mondays: Dynamax Growlithe during Max Monday
+DESCRIPTION:Type: max-mondays\n\nMore info: https://leekduck.com/events/max-mondays-2026-02-09/
+URL:https://leekduck.com/events/max-mondays-2026-02-09/
+END:VEVENT
+BEGIN:VEVENT
+UID:valentines-day-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260210T100000
+DTEND:20260215T200000
+SUMMARY:Event: Valentine's Day 2026
+DESCRIPTION:Type: event\nBonuses: 2× XP for catching Pokémon, 2× Stardust from opening Gifts, Increased chance to encounter Shiny Nidoran♀ and Shiny Nidoran♂, Increased chance to hatch Shiny Nidoran♀, Shiny Nidoran♂, and Shiny Cherubi, Free Timed Research awarding encounters with Spinda with a heart pattern, Successfully catching a Pokémon with a Curveball Throw will award 750 XP, Gifts may include Rare Candy\n\nMore info: https://leekduck.com/events/valentines-day-2026/
+URL:https://leekduck.com/events/valentines-day-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:pokemonspotlighthour2026-02-10@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260210T180000
+DTEND:20260210T190000
+SUMMARY:Pokemon Spotlight Hour: Munna
+DESCRIPTION:Type: pokemon-spotlight-hour\n\nMore info: https://leekduck.com/events/pokemonspotlighthour2026-02-10/
+URL:https://leekduck.com/events/pokemonspotlighthour2026-02-10/
+END:VEVENT
+BEGIN:VEVENT
+UID:gbl-precious-paths_master-league_2026-championship-series-cup@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260210T210000Z
+DTEND:20260217T210000Z
+SUMMARY:Go Battle League: Master League and 2026 Championship Series Cup | Precious Paths
+DESCRIPTION:Type: go-battle-league\n\nMore info: https://leekduck.com/events/gbl-precious-paths_master-league_2026-championship-series-cup/
+URL:https://leekduck.com/events/gbl-precious-paths_master-league_2026-championship-series-cup/
+END:VEVENT
+BEGIN:VEVENT
+UID:raidhour20260211@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260211T180000
+DTEND:20260211T190000
+SUMMARY:Raid Hour: Dialga and Palkia Raid Hour
+DESCRIPTION:Type: raid-hour\n\nMore info: https://leekduck.com/events/raidhour20260211/
+URL:https://leekduck.com/events/raidhour20260211/
+END:VEVENT
+BEGIN:VEVENT
+UID:raid-day-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260214T140000
+DTEND:20260214T170000
+SUMMARY:Raid Day: Raid Day
+DESCRIPTION:Type: raid-day\n\nMore info: https://leekduck.com/events/raid-day-february-2026/
+URL:https://leekduck.com/events/raid-day-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:max-battle-day-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260215T140000
+DTEND:20260215T170000
+SUMMARY:Max Battles: Max Battle Day
+DESCRIPTION:Type: max-battles\n\nMore info: https://leekduck.com/events/max-battle-day-february-2026/
+URL:https://leekduck.com/events/max-battle-day-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:mega-sableye-in-mega-raids-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260216T100000
+DTEND:20260221T100000
+SUMMARY:Raid Battles: Mega Sableye in Mega Raids
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/mega-sableye-in-mega-raids-february-2026/
+URL:https://leekduck.com/events/mega-sableye-in-mega-raids-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:solgaleo-in-5-star-raid-battles-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260216T100000
+DTEND:20260221T100000
+SUMMARY:Raid Battles: Solgaleo in 5-star Raid Battles
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/solgaleo-in-5-star-raid-battles-february-2026/
+URL:https://leekduck.com/events/solgaleo-in-5-star-raid-battles-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:max-mondays-2026-02-16@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260216T180000
+DTEND:20260216T190000
+SUMMARY:Max Mondays: Dynamax Machop during Max Monday
+DESCRIPTION:Type: max-mondays\n\nMore info: https://leekduck.com/events/max-mondays-2026-02-16/
+URL:https://leekduck.com/events/max-mondays-2026-02-16/
+END:VEVENT
+BEGIN:VEVENT
+UID:lunar-new-year-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260217T100000
+DTEND:20260221T200000
+SUMMARY:Event: Lunar New Year 2026
+DESCRIPTION:Type: event\n\nMore info: https://leekduck.com/events/lunar-new-year-2026/
+URL:https://leekduck.com/events/lunar-new-year-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:pokemonspotlighthour2026-02-17@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260217T180000
+DTEND:20260217T190000
+SUMMARY:Pokemon Spotlight Hour: Horsea
+DESCRIPTION:Type: pokemon-spotlight-hour\n\nMore info: https://leekduck.com/events/pokemonspotlighthour2026-02-17/
+URL:https://leekduck.com/events/pokemonspotlighthour2026-02-17/
+END:VEVENT
+BEGIN:VEVENT
+UID:gbl-precious-paths_great-league_love-cup-great-league-edition@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260217T210000Z
+DTEND:20260224T210000Z
+SUMMARY:Go Battle League: Great League and Love Cup: Great League Edition | Precious Paths
+DESCRIPTION:Type: go-battle-league\n\nMore info: https://leekduck.com/events/gbl-precious-paths_great-league_love-cup-great-league-edition/
+URL:https://leekduck.com/events/gbl-precious-paths_great-league_love-cup-great-league-edition/
+END:VEVENT
+BEGIN:VEVENT
+UID:raidhour20260218@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260218T180000
+DTEND:20260218T190000
+SUMMARY:Raid Hour: Solgaleo Raid Hour
+DESCRIPTION:Type: raid-hour\n\nMore info: https://leekduck.com/events/raidhour20260218/
+URL:https://leekduck.com/events/raidhour20260218/
+END:VEVENT
+BEGIN:VEVENT
+UID:pokemon-go-tour-kalos-tainan-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260220T010000Z
+DTEND:20260222T090000Z
+SUMMARY:Pokemon Go Tour: Pokémon GO Tour: Kalos - Tainan 2026
+DESCRIPTION:Type: pokemon-go-tour\n\nMore info: https://leekduck.com/events/pokemon-go-tour-kalos-tainan-2026/
+URL:https://leekduck.com/events/pokemon-go-tour-kalos-tainan-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:mega-night-pokemon-go-tour-kalos-tainan-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260220T090000Z
+DTEND:20260222T110000Z
+SUMMARY:Pokemon Go Tour: Mega Night at Pokémon GO Tour: Kalos - Tainan 2026
+DESCRIPTION:Type: pokemon-go-tour\n\nMore info: https://leekduck.com/events/mega-night-pokemon-go-tour-kalos-tainan-2026/
+URL:https://leekduck.com/events/mega-night-pokemon-go-tour-kalos-tainan-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:pokemon-go-tour-kalos-los-angeles-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260220T170000Z
+DTEND:20260223T010000Z
+SUMMARY:Pokemon Go Tour: Pokémon GO Tour: Kalos - Los Angeles 2026
+DESCRIPTION:Type: pokemon-go-tour\n\nMore info: https://leekduck.com/events/pokemon-go-tour-kalos-los-angeles-2026/
+URL:https://leekduck.com/events/pokemon-go-tour-kalos-los-angeles-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:mega-night-pokemon-go-tour-kalos-los-angeles-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260221T020000Z
+DTEND:20260223T040000Z
+SUMMARY:Pokemon Go Tour: Mega Night at Pokémon GO Tour: Kalos - Los Angeles 2026
+DESCRIPTION:Type: pokemon-go-tour\n\nMore info: https://leekduck.com/events/mega-night-pokemon-go-tour-kalos-los-angeles-2026/
+URL:https://leekduck.com/events/mega-night-pokemon-go-tour-kalos-los-angeles-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:lunala-in-5-star-raid-battles-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260221T100000
+DTEND:20260304T100000
+SUMMARY:Raid Battles: Lunala in 5-star Raid Battles
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/lunala-in-5-star-raid-battles-february-2026/
+URL:https://leekduck.com/events/lunala-in-5-star-raid-battles-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:mega-absol-in-mega-raids-february-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260221T100000
+DTEND:20260304T100000
+SUMMARY:Raid Battles: Mega Absol in Mega Raids
+DESCRIPTION:Type: raid-battles\n\nMore info: https://leekduck.com/events/mega-absol-in-mega-raids-february-2026/
+URL:https://leekduck.com/events/mega-absol-in-mega-raids-february-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:road-to-kalos@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260223T000000
+DTEND:20260227T235900
+SUMMARY:Event: Road to Kalos
+DESCRIPTION:Type: event\nBonuses: 1/2 Egg Hatch Distance when Eggs are placed in an Incubator during the event period, The Remote Raid Pass limit will be increased to 30 from Monday, February 23 to Friday, February 27, 2026, There will be no limit on Remote Raids from Saturday, February 28, to Sunday, March 1, 2026\n\nMore info: https://leekduck.com/events/road-to-kalos/
+URL:https://leekduck.com/events/road-to-kalos/
+END:VEVENT
+BEGIN:VEVENT
+UID:go-pass-road-to-kalos@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260223T100000
+DTEND:20260301T180000
+SUMMARY:Go Pass: GO Pass: Road to Kalos
+DESCRIPTION:Type: go-pass\n\nMore info: https://leekduck.com/events/go-pass-road-to-kalos/
+URL:https://leekduck.com/events/go-pass-road-to-kalos/
+END:VEVENT
+BEGIN:VEVENT
+UID:max-mondays-2026-02-23@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260223T180000
+DTEND:20260223T190000
+SUMMARY:Max Mondays: Unannounced Max Monday
+DESCRIPTION:Type: max-mondays\n\nMore info: https://leekduck.com/events/max-mondays-2026-02-23/
+URL:https://leekduck.com/events/max-mondays-2026-02-23/
+END:VEVENT
+BEGIN:VEVENT
+UID:pokemonspotlighthour2026-02-24@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260224T180000
+DTEND:20260224T190000
+SUMMARY:Pokemon Spotlight Hour: Totodile
+DESCRIPTION:Type: pokemon-spotlight-hour\n\nMore info: https://leekduck.com/events/pokemonspotlighthour2026-02-24/
+URL:https://leekduck.com/events/pokemonspotlighthour2026-02-24/
+END:VEVENT
+BEGIN:VEVENT
+UID:gbl-precious-paths_great-league_ultra-league_master-league-mega-edition@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260224T210000Z
+DTEND:20260303T210000Z
+SUMMARY:Go Battle League: Great League, Ultra League, and Master League: Mega Edition | Precious Paths
+DESCRIPTION:Type: go-battle-league\n\nMore info: https://leekduck.com/events/gbl-precious-paths_great-league_ultra-league_master-league-mega-edition/
+URL:https://leekduck.com/events/gbl-precious-paths_great-league_ultra-league_master-league-mega-edition/
+END:VEVENT
+BEGIN:VEVENT
+UID:raidhour20260225@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260225T180000
+DTEND:20260225T190000
+SUMMARY:Raid Hour: Lunala Raid Hour
+DESCRIPTION:Type: raid-hour\n\nMore info: https://leekduck.com/events/raidhour20260225/
+URL:https://leekduck.com/events/raidhour20260225/
+END:VEVENT
+BEGIN:VEVENT
+UID:pokemon-go-tour-kalos-global-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260228T100000
+DTEND:20260301T180000
+SUMMARY:Pokemon Go Tour: Pokémon GO Tour: Kalos - Global 2026
+DESCRIPTION:Type: pokemon-go-tour\n\nMore info: https://leekduck.com/events/pokemon-go-tour-kalos-global-2026/
+URL:https://leekduck.com/events/pokemon-go-tour-kalos-global-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:season-event-march-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260307T100000
+DTEND:20260309T200000
+SUMMARY:Season: Season Event
+DESCRIPTION:Type: season\n\nMore info: https://leekduck.com/events/season-event-march-2026/
+URL:https://leekduck.com/events/season-event-march-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:march-communityday2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260314T140000
+DTEND:20260314T170000
+SUMMARY:Community Day: March Community Day
+DESCRIPTION:Type: community-day\n\nMore info: https://leekduck.com/events/march-communityday2026/
+URL:https://leekduck.com/events/march-communityday2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:research-day-march-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260321T140000
+DTEND:20260321T170000
+SUMMARY:Research Day: Research Day
+DESCRIPTION:Type: research-day\n\nMore info: https://leekduck.com/events/research-day-march-2026/
+URL:https://leekduck.com/events/research-day-march-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:max-battle-day-march-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260328T140000
+DTEND:20260328T170000
+SUMMARY:Max Battles: Max Battle Day
+DESCRIPTION:Type: max-battles\n\nMore info: https://leekduck.com/events/max-battle-day-march-2026/
+URL:https://leekduck.com/events/max-battle-day-march-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:raid-day-april-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260404T140000
+DTEND:20260404T170000
+SUMMARY:Raid Day: Raid Day
+DESCRIPTION:Type: raid-day\n\nMore info: https://leekduck.com/events/raid-day-april-2026/
+URL:https://leekduck.com/events/raid-day-april-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:april-communityday2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260411T140000
+DTEND:20260411T170000
+SUMMARY:Community Day: April Community Day
+DESCRIPTION:Type: community-day\n\nMore info: https://leekduck.com/events/april-communityday2026/
+URL:https://leekduck.com/events/april-communityday2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:hatch-day-april-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260418T140000
+DTEND:20260418T170000
+SUMMARY:Event: Hatch Day
+DESCRIPTION:Type: event\n\nMore info: https://leekduck.com/events/hatch-day-april-2026/
+URL:https://leekduck.com/events/hatch-day-april-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:max-battle-day-april-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260425T140000
+DTEND:20260425T170000
+SUMMARY:Max Battles: Max Battle Day
+DESCRIPTION:Type: max-battles\n\nMore info: https://leekduck.com/events/max-battle-day-april-2026/
+URL:https://leekduck.com/events/max-battle-day-april-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:shadow-raid-day-may-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260502T140000
+DTEND:20260502T170000
+SUMMARY:Raid Day: Shadow Raid Day
+DESCRIPTION:Type: raid-day\n\nMore info: https://leekduck.com/events/shadow-raid-day-may-2026/
+URL:https://leekduck.com/events/shadow-raid-day-may-2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:may-communityday2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260509T140000
+DTEND:20260509T170000
+SUMMARY:Community Day: May Community Day
+DESCRIPTION:Type: community-day\n\nMore info: https://leekduck.com/events/may-communityday2026/
+URL:https://leekduck.com/events/may-communityday2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:may-communitydayclassic2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260516T140000
+DTEND:20260516T170000
+SUMMARY:Community Day: May Community Day Classic
+DESCRIPTION:Type: community-day\n\nMore info: https://leekduck.com/events/may-communitydayclassic2026/
+URL:https://leekduck.com/events/may-communitydayclassic2026/
+END:VEVENT
+BEGIN:VEVENT
+UID:raid-day-may-2026@pokemn.quest
+DTSTAMP:20260131T080228Z
+DTSTART:20260523T140000
+DTEND:20260523T170000
+SUMMARY:Raid Day: Raid Day
+DESCRIPTION:Type: raid-day\n\nMore info: https://leekduck.com/events/raid-day-may-2026/
+URL:https://leekduck.com/events/raid-day-may-2026/
+END:VEVENT
+END:VCALENDAR
