@@ -1176,6 +1176,52 @@ function extractGoPassTiers(doc) {
 }
 
 // ============================================================================
+// Event Deduplication
+// ============================================================================
+
+/**
+ * Deduplicates events by merging entries with the same eventID.
+ * Uses an O(N) approach with a Map to handle large datasets efficiently.
+ *
+ * @param {Array<Object>} events - Array of event objects
+ * @returns {Array<Object>} Deduplicated array of events
+ */
+function deduplicateEvents(events) {
+    const eventsByID = new Map();
+    events.forEach(e => {
+        if (!eventsByID.has(e.eventID)) {
+            eventsByID.set(e.eventID, []);
+        }
+        eventsByID.get(e.eventID).push(e);
+    });
+
+    const deduplicatedEvents = [];
+
+    for (const duplicates of eventsByID.values()) {
+        if (duplicates.length > 1) {
+            const mergedEvent = duplicates[0]; // Use the first occurrence
+
+            if (duplicates[0].start)
+            {
+                mergedEvent.start = duplicates[0].start;
+                mergedEvent.end = duplicates[1].end;
+            }
+            else
+            {
+                mergedEvent.start = duplicates[1].start;
+                mergedEvent.end = duplicates[0].end;
+            }
+
+            deduplicatedEvents.push(mergedEvent);
+        } else {
+            deduplicatedEvents.push(duplicates[0]);
+        }
+    }
+
+    return deduplicatedEvents;
+}
+
+// ============================================================================
 // Exports
 // ============================================================================
 
@@ -1223,5 +1269,8 @@ module.exports = {
     parseGBLCups,
     parsePokemonFromText,
     parseDeadlineFromText,
-    extractGoPassTiers
+    extractGoPassTiers,
+
+    // Event processing
+    deduplicateEvents
 };

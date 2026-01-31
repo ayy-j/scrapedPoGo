@@ -9,7 +9,7 @@ const fs = require('fs');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
-const { normalizeDatePair } = require('../utils/scraperUtils');
+const { normalizeDatePair, deduplicateEvents } = require('../utils/scraperUtils');
 const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
 
@@ -120,38 +120,7 @@ function get()
                     });
 
                     // Optimization: Deduplicate events using a Map to reduce iterations and lookups
-                    const eventsByID = new Map();
-                    allEvents.forEach(e => {
-                        if (!eventsByID.has(e.eventID)) {
-                            eventsByID.set(e.eventID, []);
-                        }
-                        eventsByID.get(e.eventID).push(e);
-                    });
-
-                    const deduplicatedEvents = [];
-
-                    for (const duplicates of eventsByID.values()) {
-                        if (duplicates.length > 1) {
-                            const mergedEvent = duplicates[0]; // Use the first occurrence
-
-                            if (duplicates[0].start)
-                            {
-                                mergedEvent.start = duplicates[0].start;
-                                mergedEvent.end = duplicates[1].end;
-                            }
-                            else
-                            {
-                                mergedEvent.start = duplicates[1].start;
-                                mergedEvent.end = duplicates[0].end;
-                            }
-
-                            deduplicatedEvents.push(mergedEvent);
-                        } else {
-                            deduplicatedEvents.push(duplicates[0]);
-                        }
-                    }
-
-                    allEvents = deduplicatedEvents;
+                    allEvents = deduplicateEvents(allEvents);
 
                     const output = transformUrls(allEvents);
 
