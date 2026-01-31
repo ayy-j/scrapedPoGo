@@ -10,6 +10,7 @@
     "scrapeshinies": "node ./src/scrapers/scrapeShinies.js",
     "pipeline": "npm run scrapeshinies && npm run scrape && npm run detailedscrape && npm run combinedetails",
     "validate": "node src/scripts/validate-schemas.js",
+    "metrics:generate": "node src/scripts/generate-metrics.js",
     "migrate:urls": "node src/scripts/migrate-jsdelivr-urls.js",
     "migrate:urls:dry": "node src/scripts/migrate-jsdelivr-urls.js --dry-run",
     "blob:upload": "node src/scripts/upload-images-to-blob.js",
