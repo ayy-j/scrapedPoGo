@@ -357,9 +357,18 @@ function renderCalendar() {
         eventEl.className = "calendar-event";
         eventEl.textContent = e.name;
         eventEl.title = `${e.name}\n${formatDate(e.start)} - ${formatDate(e.end)}`;
+        eventEl.tabIndex = 0;
+        eventEl.setAttribute('role', 'button');
         eventEl.addEventListener("click", (evt) => {
             evt.stopPropagation();
             renderDetails(e);
+        });
+        eventEl.addEventListener("keydown", (evt) => {
+            if (evt.key === "Enter" || evt.key === " ") {
+                evt.preventDefault();
+                evt.stopPropagation();
+                renderDetails(e);
+            }
         });
         el.appendChild(eventEl);
     });
