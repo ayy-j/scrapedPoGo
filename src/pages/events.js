@@ -146,7 +146,12 @@ async function get()
 
         const output = transformUrls(allEvents);
 
-        await fsPromises.writeFile('data/events.min.json', JSON.stringify(output));
+        try {
+            await fsPromises.writeFile('data/events.min.json', JSON.stringify(output));
+        } catch (writeErr) {
+            logger.error(`Error writing events data to file: ${writeErr.message}`);
+            throw writeErr;
+        }
 
     } catch (_err) {
         logger.error(`Error scraping events page: ${_err.message}`);
@@ -156,7 +161,12 @@ async function get()
             const json = await fetchJson("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json");
             const output = transformUrls(json);
 
-            await fsPromises.writeFile('data/events.min.json', JSON.stringify(output));
+            try {
+                await fsPromises.writeFile('data/events.min.json', JSON.stringify(output));
+            } catch (writeErr) {
+                logger.error(`Error writing backup events data to file: ${writeErr.message}`);
+                throw writeErr;
+            }
         } catch (error) {
             logger.error(`Backup fetch failed: ${error.message}`);
         }
