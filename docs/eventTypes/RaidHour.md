@@ -59,7 +59,7 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ## Fields
 
-All Raid Hour events inherit the [core event fields](../Events.md#core-fields) and may include additional sections described in the main [Events documentation](../Events.md).
+### Core Fields
 
 | Field           | Type      | Description
 |---------------- |---------- |---------------------
@@ -70,8 +70,24 @@ All Raid Hour events inherit the [core event fields](../Events.md#core-fields) a
 | **`image`**     | `string`  | Event header/thumbnail image URL
 | **`start`**     | `string`  | Event start time (ISO 8601 format, typically 18:00 local time)
 | **`end`**       | `string`  | Event end time (ISO 8601 format, typically 19:00 local time)
-| **`flags`**     | `object`  | Content availability flags (see [Flags Section](../Events.md#flags-section))
+| **`flags`**     | `object`  | Content availability flags (see below)
 | **`canBeShiny`**| `boolean` | Whether the featured raid boss can be shiny
+
+### Flags Object
+
+| Field                     | Type      | Description
+|-------------------------- |---------- |---------------------
+| **`hasSpawns`**           | `boolean` | Whether the event has wild spawns data
+| **`hasFieldResearchTasks`** | `boolean` | Whether the event has field research tasks
+| **`hasBonuses`**          | `boolean` | Whether the event has gameplay bonuses
+| **`hasRaids`**            | `boolean` | Whether the event has raid data
+| **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
+| **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
+| **`hasShowcases`**        | `boolean` | Whether the event has showcase data
+| **`hasRocket`**           | `boolean` | Whether the event has Team GO Rocket data
+| **`hasBattle`**           | `boolean` | Whether the event has GO Battle League data
+| **`hasResearch`**         | `boolean` | Whether the event has research data
+| **`hasRewards`**          | `boolean` | Whether the event has rewards data
 
 ## Additional Sections
 

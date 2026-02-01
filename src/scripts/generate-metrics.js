@@ -26,7 +26,7 @@ const DATASETS = [
     id: 'raids',
     file: 'data/raids.min.json',
     requiredFields: ['name', 'tier'],
-    optionalFields: ['form', 'combatPower', 'canBeShiny', 'types'],
+    optionalFields: ['combatPower', 'canBeShiny', 'types'],
     isArray: true
   },
   {
@@ -54,7 +54,7 @@ const DATASETS = [
     id: 'shinies',
     file: 'data/shinies.min.json',
     requiredFields: ['name'],
-    optionalFields: ['family', 'released', 'source', 'image'],
+    optionalFields: ['family', 'releasedDate', 'imageUrl'],
     isArray: true
   }
 ];

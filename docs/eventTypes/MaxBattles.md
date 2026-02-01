@@ -46,7 +46,7 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ## Fields
 
-All Max Battle events inherit the [core event fields](../Events.md#core-fields) and may include additional sections described in the main [Events documentation](../Events.md).
+### Core Fields
 
 | Field           | Type     | Description
 |---------------- |--------- |---------------------
@@ -57,7 +57,18 @@ All Max Battle events inherit the [core event fields](../Events.md#core-fields) 
 | **`image`**     | `string` | Event header/thumbnail image URL
 | **`start`**     | `string` | Rotation start date/time (ISO 8601 format)
 | **`end`**       | `string` | Rotation end date/time (ISO 8601 format)
-| **`flags`**     | `object` | Content availability flags (see [Flags Section](../Events.md#flags-section))
+| **`flags`**     | `object` | Content availability flags (see below)
+
+### Flags Object
+
+| Field                     | Type      | Description
+|-------------------------- |---------- |---------------------
+| **`hasSpawns`**           | `boolean` | Whether the event has wild spawns data
+| **`hasFieldResearchTasks`** | `boolean` | Whether the event has field research tasks
+| **`hasBonuses`**          | `boolean` | Whether the event has gameplay bonuses
+| **`hasRaids`**            | `boolean` | Whether the event has raid data
+| **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
+| **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
 
 ## Additional Sections
 
@@ -65,8 +76,6 @@ Max Battle events include a `details` object containing:
 
 - **`pokemon`**: Array of featured Dynamax Pokémon objects with `imageWidth`, `imageHeight`, `imageType`, and `canBeShiny` fields
 - **`bonuses`**: Array of any active bonuses during the rotation
-
-For detailed field documentation, see the main [Events documentation](../Events.md).
 
 
 

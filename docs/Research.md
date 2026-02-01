@@ -4,12 +4,6 @@
 
 `https://pokemn.quest/data/research.min.json`
 
-## JSON Schema
-
-The data structure is formally defined by the [JSON Schema](../schemas/research.schema.json).
-
-You can validate data against this schema or use it to generate types for your application.
-
 ## Example Research Object
 
 ```json

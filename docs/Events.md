@@ -2,12 +2,6 @@
 
 **URL**: `https://pokemn.quest/data/events.min.json`
 
-## JSON Schema
-
-The data structure is formally defined by the [JSON Schema](../schemas/events.schema.json).
-
-You can validate data against this schema or use it to generate types for your application.
-
 ## Overview
 
 The Events endpoint provides comprehensive data about all Pokemon GO events, including Community Days, raid rotations, research events, GO Battle League seasons, Pokemon GO Tours, seasonal events, and more. Each event includes timing, featured Pokemon, bonuses, and type-specific content.
@@ -273,26 +267,26 @@ Each league object in the `battle.leagues` array has the following structure:
 
 ## Event Types
 
-Events are categorized by type. Each type has its own filtered endpoint and optional documentation:
+Events are categorized by type. Each type has its own filtered endpoint:
 
-| Event Type | Description | Documentation |
-|------------|-------------|---------------|
-| **`community-day`** | Monthly Community Day events | [Documentation](eventTypes/CommunityDay.md) |
-| **`event`** | General/generic events | - |
-| **`go-battle-league`** | GO Battle League seasons and rotations | [Documentation](eventTypes/GoBattleLeague.md) |
-| **`go-pass`** | GO Pass subscription events | [Documentation](eventTypes/GoPass.md) |
-| **`max-battles`** | Max Battle events (Dynamax battles) | [Documentation](eventTypes/MaxBattles.md) |
-| **`max-mondays`** | Max Monday events | [Documentation](eventTypes/MaxMondays.md) |
-| **`pokemon-go-tour`** | Pokemon GO Tour events | [Documentation](eventTypes/PokemonGoTour.md) |
-| **`pokemon-spotlight-hour`** | Weekly Spotlight Hour events | [Documentation](eventTypes/PokemonSpotlightHour.md) |
-| **`pokestop-showcase`** | PokéStop Showcase events | [Documentation](eventTypes/PokestopShowcase.md) |
-| **`raid-battles`** | Raid rotation announcements | [Documentation](eventTypes/RaidBattles.md) |
-| **`raid-day`** | Special Raid Day events | [Documentation](eventTypes/RaidDay.md) |
-| **`raid-hour`** | Weekly Raid Hour events | [Documentation](eventTypes/RaidHour.md) |
-| **`research`** | Research events and quests | [Documentation](eventTypes/Research.md) |
-| **`research-day`** | Research Day events | [Documentation](eventTypes/ResearchDay.md) |
-| **`season`** | Seasonal events (3-month periods) | [Documentation](eventTypes/Season.md) |
-| **`team-go-rocket`** | Team GO Rocket takeover events | [Documentation](eventTypes/TeamGoRocket.md) |
+| Event Type | Description |
+|------------|-------------|
+| **`community-day`** | Monthly Community Day events |
+| **`event`** | General/generic events |
+| **`go-battle-league`** | GO Battle League seasons and rotations |
+| **`go-pass`** | GO Pass subscription events |
+| **`max-battles`** | Max Battle events (Dynamax battles) |
+| **`max-mondays`** | Max Monday events |
+| **`pokemon-go-tour`** | Pokemon GO Tour events |
+| **`pokemon-spotlight-hour`** | Weekly Spotlight Hour events |
+| **`pokestop-showcase`** | PokéStop Showcase events |
+| **`raid-battles`** | Raid rotation announcements |
+| **`raid-day`** | Special Raid Day events |
+| **`raid-hour`** | Weekly Raid Hour events |
+| **`research`** | Research events and quests |
+| **`research-day`** | Research Day events |
+| **`season`** | Seasonal events (3-month periods) |
+| **`team-go-rocket`** | Team GO Rocket takeover events |
 
 ## Per-Event-Type Endpoints
 
@@ -628,9 +622,9 @@ The API provides comprehensive event data including:
 
 Event data is self-contained but can be cross-referenced with other endpoints:
 
-- **[Raids](Raids.md)** - Full raid boss details including CP, types, weather boosts
-- **[Eggs](Eggs.md)** - Complete egg pool with rarity and regional info
-- **[Research](Research.md)** - Full field research task catalog
-- **[Shinies](Shinies.md)** - Authoritative shiny availability data
+- **Raids** (`https://pokemn.quest/data/raids.min.json`) - Full raid boss details including CP, types, weather boosts
+- **Eggs** (`https://pokemn.quest/data/eggs.min.json`) - Complete egg pool with rarity and regional info
+- **Research** (`https://pokemn.quest/data/research.min.json`) - Full field research task catalog
+- **Shinies** (`https://pokemn.quest/data/shinies.min.json`) - Authoritative shiny availability data
 
 Events provide context (when something is available), while other endpoints provide details (stats, mechanics, etc.).
