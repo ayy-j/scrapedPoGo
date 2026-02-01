@@ -628,3 +628,153 @@ Event data is self-contained but can be cross-referenced with other endpoints:
 - **Shinies** (`https://pokemn.quest/data/shinies.min.json`) - Authoritative shiny availability data
 
 Events provide context (when something is available), while other endpoints provide details (stats, mechanics, etc.).
+
+## JSON Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pokemon GO Events Data",
+  "description": "Schema for Pokemon GO event data from LeekDuck. Note: additionalProperties is set to true as events can have many type-specific fields.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["eventID", "name", "eventType", "heading", "image", "start", "end"],
+    "properties": {
+      "eventID": {
+        "type": "string",
+        "description": "Unique identifier for the event"
+      },
+      "name": {
+        "type": "string",
+        "description": "Name of the event"
+      },
+      "eventType": {
+        "type": "string",
+        "description": "Type of the event",
+        "enum": [
+          "community-day", "event", "go-battle-league", "go-pass", "go-rocket-takeover",
+          "max-battles", "max-mondays", "pokemon-go-tour", "pokemon-spotlight-hour",
+          "pokestop-showcase", "raid-battles", "raid-day", "raid-hour", "research",
+          "research-breakthrough", "research-day", "season", "special-research",
+          "team-go-rocket", "timed-research"
+        ]
+      },
+      "heading": {
+        "type": "string",
+        "description": "Display heading for the event"
+      },
+      "image": {
+        "type": "string",
+        "format": "uri",
+        "description": "Event header/thumbnail image URL"
+      },
+      "start": {
+        "type": "string",
+        "description": "Event start date/time (ISO 8601 format)",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}(Z)?$"
+      },
+      "end": {
+        "type": "string",
+        "description": "Event end date/time (ISO 8601 format)",
+        "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}(Z)?$"
+      },
+      "flags": {
+        "type": "object",
+        "description": "Content availability flags",
+        "properties": {
+          "hasSpawns": { "type": "boolean" },
+          "hasFieldResearchTasks": { "type": "boolean" },
+          "hasBonuses": { "type": "boolean" },
+          "hasRaids": { "type": "boolean" },
+          "hasEggs": { "type": "boolean" },
+          "hasShiny": { "type": "boolean" }
+        }
+      },
+      "pokemon": {
+        "type": "array",
+        "description": "Featured Pokemon in the event",
+        "items": {
+          "type": "object",
+          "required": ["name", "image", "source"],
+          "properties": {
+            "name": { "type": "string" },
+            "image": { "type": "string", "format": "uri" },
+            "source": {
+              "type": "string",
+              "enum": ["spawn", "featured", "incense", "costumed", "debut", "maxDebut", "raid", "egg", "research", "reward", "encounter"]
+            },
+            "canBeShiny": { "type": "boolean" },
+            "imageWidth": { "type": "integer" },
+            "imageHeight": { "type": "integer" },
+            "imageType": { "type": "string" }
+          }
+        }
+      },
+      "bonuses": {
+        "type": "array",
+        "description": "Event bonuses (e.g., 2× XP, 2× Stardust)",
+        "items": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "object", "properties": { "text": { "type": "string" }, "image": { "type": "string" } } }
+          ]
+        }
+      },
+      "raids": {
+        "type": "array",
+        "description": "Raid bosses featured in the event",
+        "items": {
+          "type": "object",
+          "required": ["name", "image"],
+          "properties": {
+            "name": { "type": "string" },
+            "image": { "type": "string", "format": "uri" },
+            "tier": { "type": "string" },
+            "canBeShiny": { "type": "boolean" },
+            "imageWidth": { "type": "integer" },
+            "imageHeight": { "type": "integer" },
+            "imageType": { "type": "string" }
+          }
+        }
+      },
+      "eggs": {
+        "oneOf": [
+          { "type": "array", "description": "Egg hatches as array" },
+          { "type": "object", "description": "Egg hatches keyed by distance (1km, 2km, etc.)" }
+        ]
+      },
+      "research": {
+        "oneOf": [
+          { "type": "array", "description": "Research tasks as array" },
+          { "type": "object", "description": "Research tasks as object (keyed by category)" }
+        ]
+      },
+      "shinies": {
+        "type": "array",
+        "description": "Shiny Pokemon available",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "image": { "type": "string", "format": "uri" },
+            "canBeShiny": { "type": "boolean" }
+          }
+        }
+      },
+      "leagues": {
+        "type": "array",
+        "description": "GO Battle League information",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "cpLimit": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "additionalProperties": true
+  }
+}
+```

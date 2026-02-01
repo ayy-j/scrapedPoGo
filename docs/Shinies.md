@@ -171,3 +171,87 @@ fetch('https://pokemn.quest/data/shinies.min.json')
     console.log(`${year2018.length} shinies released in 2018`);
   });
 ```
+
+## JSON Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pokemon GO Shinies Data",
+  "description": "Schema for Pokemon GO shiny availability data from LeekDuck",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["dexNumber", "name", "releasedDate", "family", "typeCode", "forms"],
+    "properties": {
+      "dexNumber": {
+        "type": "integer",
+        "description": "National Pokedex number",
+        "minimum": 1
+      },
+      "name": {
+        "type": "string",
+        "description": "English name of the Pokemon (includes regional prefix if applicable)"
+      },
+      "releasedDate": {
+        "type": ["string", "null"],
+        "description": "Date when the shiny was first released (YYYY/MM/DD format), or null if not yet released"
+      },
+      "family": {
+        "type": ["string", "null"],
+        "description": "Evolution family identifier"
+      },
+      "typeCode": {
+        "type": ["string", "null"],
+        "description": "Regional variant or form code (_61 = Alolan, _31 = Galarian, _51 = Hisuian, _52 = Paldean)"
+      },
+      "forms": {
+        "type": "array",
+        "description": "Array of alternative forms/costumes for this Pokemon",
+        "items": {
+          "type": "object",
+          "required": ["name", "imageUrl", "width", "height"],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Form identifier (e.g., f19 for Fall 2019, 11 for costume variant)"
+            },
+            "imageUrl": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL to the form's shiny sprite image"
+            },
+            "width": {
+              "type": "integer",
+              "description": "Image width in pixels",
+              "const": 256
+            },
+            "height": {
+              "type": "integer",
+              "description": "Image height in pixels",
+              "const": 256
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "imageUrl": {
+        "type": "string",
+        "format": "uri",
+        "description": "URL to the base shiny sprite image"
+      },
+      "width": {
+        "type": "integer",
+        "description": "Image width in pixels",
+        "const": 256
+      },
+      "height": {
+        "type": "integer",
+        "description": "Image height in pixels",
+        "const": 256
+      }
+    },
+    "additionalProperties": false
+  }
+}
+```

@@ -117,3 +117,93 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
 | Field          | Type  | Description
 |--------------- |------ |---------------------
 | **`quantity`** | `int` | The quantity of the item/resource rewarded.
+
+## JSON Schema
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pokemon GO Research Data",
+  "description": "Schema for Pokemon GO field research tasks and rewards from LeekDuck",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["text", "type", "rewards"],
+    "properties": {
+      "text": {
+        "type": "string",
+        "description": "The research task text"
+      },
+      "type": {
+        "type": ["string", "null"],
+        "description": "The type of research",
+        "enum": ["event", "catch", "throw", "battle", "explore", "training", "rocket", "buddy", "ar", "sponsored", null]
+      },
+      "rewards": {
+        "type": "array",
+        "description": "The rewards for completing the research task",
+        "items": {
+          "type": "object",
+          "required": ["type", "name", "image", "imageWidth", "imageHeight", "imageType"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The type of reward",
+              "enum": ["encounter", "item", "resource"]
+            },
+            "name": {
+              "type": "string",
+              "description": "The name of the reward (Pokemon name or item name)"
+            },
+            "image": {
+              "type": "string",
+              "format": "uri",
+              "description": "The image URL of the reward"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "The width of the image in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "The height of the image in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "The image format",
+              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+            },
+            "canBeShiny": {
+              "type": "boolean",
+              "description": "Whether or not the reward Pokemon can be shiny (encounter type only)"
+            },
+            "combatPower": {
+              "type": "object",
+              "description": "The combat power range of the reward Pokemon (encounter type only)",
+              "required": ["min", "max"],
+              "properties": {
+                "min": {
+                  "type": "integer",
+                  "description": "The minimum combat power of the reward Pokemon"
+                },
+                "max": {
+                  "type": "integer",
+                  "description": "The maximum combat power of the reward Pokemon"
+                }
+              },
+              "additionalProperties": false
+            },
+            "quantity": {
+              "type": "integer",
+              "description": "The quantity of the item/resource rewarded (item/resource type only)"
+            }
+          },
+          "additionalProperties": false
+        },
+        "minItems": 1
+      }
+    },
+    "additionalProperties": false
+  }
+}
+```
