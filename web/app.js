@@ -233,6 +233,7 @@ function renderFilters() {
     const chip = document.createElement("button");
     chip.type = "button";
     chip.className = `filter-chip ${state.filters.has(type) ? "active" : ""}`;
+    chip.setAttribute("aria-pressed", state.filters.has(type));
     chip.textContent = type;
     chip.addEventListener("click", () => {
       if (state.filters.has(type)) {
@@ -495,7 +496,9 @@ function render() {
   if (state.active === 'events') {
     elements.viewToggle.style.display = 'flex';
     Array.from(elements.viewToggle.children).forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.view === state.view);
+        const isActive = btn.dataset.view === state.view;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
     });
   } else {
     elements.viewToggle.style.display = 'none';
