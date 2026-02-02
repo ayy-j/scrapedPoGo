@@ -223,7 +223,12 @@ function renderStatus() {
   stats.forEach((stat) => {
     const badge = document.createElement("div");
     badge.className = "badge";
-    badge.innerHTML = `<strong>${stat.value}</strong> ${stat.label}`;
+
+    const strong = document.createElement("strong");
+    strong.textContent = stat.value;
+    badge.appendChild(strong);
+
+    badge.appendChild(document.createTextNode(` ${stat.label}`));
     fragment.appendChild(badge);
   });
   elements.status.appendChild(fragment);
@@ -483,7 +488,15 @@ function renderDetails(record) {
   entries.forEach(([key, value]) => {
     const row = document.createElement("div");
     row.className = "detail__row";
-    row.innerHTML = `<span>${key}</span><div>${formatValue(value)}</div>`;
+
+    const keySpan = document.createElement("span");
+    keySpan.textContent = key;
+    row.appendChild(keySpan);
+
+    const valueDiv = document.createElement("div");
+    valueDiv.textContent = formatValue(value);
+    row.appendChild(valueDiv);
+
     fragment.appendChild(row);
   });
   elements.detailBody.appendChild(fragment);

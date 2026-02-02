@@ -20,6 +20,19 @@ const elements = {
 let autoRefreshTimer = null;
 
 /**
+ * Escape HTML special characters
+ */
+function escapeHtml(text) {
+  if (text === null || text === undefined) return '';
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/**
  * Format timestamp for display
  */
 function formatTimestamp(isoString) {
@@ -56,24 +69,26 @@ function getCompletenessClass(percentage) {
  * Create dataset card HTML
  */
 function createDatasetCard(id, data) {
-  const statusBadge = `<span class="status-badge ${data.status}">${data.status}</span>`;
+  const safeId = escapeHtml(id);
+  const safeStatus = escapeHtml(data.status);
+  const statusBadge = `<span class="status-badge ${safeStatus}">${safeStatus}</span>`;
   
   const issuesHtml = data.issues.length > 0
     ? `
       <div class="issues-list">
         <h4>Issues (${data.issues.length})</h4>
         <ul>
-          ${data.issues.map(issue => `<li>${issue}</li>`).join('')}
+          ${data.issues.map(issue => `<li>${escapeHtml(issue)}</li>`).join('')}
         </ul>
       </div>
     `
     : '<div class="issues-list"><h4>No Issues</h4></div>';
 
   return `
-    <div class="metric-card ${data.status}">
+    <div class="metric-card ${safeStatus}">
       <h3>
         ${getStatusEmoji(data.status)}
-        ${id.charAt(0).toUpperCase() + id.slice(1)}
+        ${safeId.charAt(0).toUpperCase() + safeId.slice(1)}
         ${statusBadge}
       </h3>
       <div class="metric-value">${data.recordCount.toLocaleString()}</div>
