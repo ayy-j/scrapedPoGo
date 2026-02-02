@@ -70,6 +70,20 @@ const apiMeta = document.querySelector("meta[name='api-base']");
 const storedApiBase = window.localStorage.getItem("pogoApiBase");
 let apiBaseUrl = storedApiBase || (apiMeta ? apiMeta.content : "");
 
+/**
+ * ⚡ Bolt Optimization: Debounce function to limit the rate at which a function can fire.
+ * @param {Function} func - The function to debounce
+ * @param {number} wait - The delay in milliseconds
+ * @returns {Function} - The debounced function
+ */
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
 function getApiUrl(datasetId) {
   return `${apiBaseUrl.replace(/\/$/, "")}/${datasetId}`;
 }
@@ -549,10 +563,11 @@ function saveConfig() {
 }
 
 function init() {
-  elements.searchInput.addEventListener("input", (event) => {
+  // ⚡ Bolt Optimization: Debounce search input to prevent excessive re-renders
+  elements.searchInput.addEventListener("input", debounce((event) => {
     state.query = event.target.value;
     render();
-  });
+  }, 300));
 
   elements.sortSelect.addEventListener("change", (event) => {
     state.sort = event.target.value;

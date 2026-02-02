@@ -5,3 +5,7 @@
 ## 2026-02-01 - DOM Rehydration Check
 **Learning:** `element.hasChildNodes()` returns true for text nodes (whitespace), making it a fragile check for "is this container empty/populated?". Using `element.children.length === 0` is safer when checking for element nodes.
 **Action:** When optimizing re-renders by checking if DOM exists, check children count, not `hasChildNodes()`.
+
+## 2026-02-02 - Debounce Search Input
+**Learning:** The search input in `web/app.js` was triggering a full DOM re-render on every keystroke, causing unnecessary layout thrashing.
+**Action:** Implemented a generic `debounce` utility and applied it to the search handler. This pattern should be applied to any other frequent user input events that trigger expensive operations (like API calls or DOM updates).
