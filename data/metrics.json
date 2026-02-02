@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-02-02T00:43:25.247Z",
+  "generatedAt": "2026-02-02T08:53:48.066Z",
   "pipeline": {
     "status": "critical",
-    "lastSuccessful": "2026-02-02T00:43:25.248Z"
+    "lastSuccessful": "2026-02-02T08:53:48.066Z"
   },
   "datasets": {
     "events": {
-      "recordCount": 59,
-      "lastUpdated": "2026-02-02T00:43:25.115Z",
-      "completeness": 11.5,
+      "recordCount": 60,
+      "lastUpdated": "2026-02-02T08:53:47.908Z",
+      "completeness": 11.7,
       "issues": [
-        "83% missing pokemon",
-        "86% missing bonuses",
+        "82% missing pokemon",
+        "87% missing bonuses",
         "85% missing raids",
         "95% missing research",
         "93% missing eggs"
@@ -20,35 +20,35 @@
     },
     "raids": {
       "recordCount": 19,
-      "lastUpdated": "2026-02-02T00:43:15.748Z",
+      "lastUpdated": "2026-02-02T08:53:36.920Z",
       "completeness": 100,
       "issues": [],
       "status": "healthy"
     },
     "research": {
       "recordCount": 60,
-      "lastUpdated": "2026-02-02T00:43:18.772Z",
+      "lastUpdated": "2026-02-02T08:53:40.405Z",
       "completeness": 100,
       "issues": [],
       "status": "healthy"
     },
     "eggs": {
       "recordCount": 89,
-      "lastUpdated": "2026-02-02T00:43:17.427Z",
+      "lastUpdated": "2026-02-02T08:53:38.710Z",
       "completeness": 100,
       "issues": [],
       "status": "healthy"
     },
     "rocketLineups": {
       "recordCount": 26,
-      "lastUpdated": "2026-02-02T00:43:15.254Z",
+      "lastUpdated": "2026-02-02T08:53:35.932Z",
       "completeness": 100,
       "issues": [],
       "status": "healthy"
     },
     "shinies": {
       "recordCount": 1044,
-      "lastUpdated": "2026-02-02T00:43:19.091Z",
+      "lastUpdated": "2026-02-02T08:53:40.688Z",
       "completeness": 93,
       "issues": [],
       "status": "healthy"
@@ -56,7 +56,7 @@
   },
   "summary": {
     "overallHealth": "critical",
-    "totalRecords": 1297,
+    "totalRecords": 1298,
     "avgCompleteness": 84.1,
     "criticalIssues": 1,
     "warnings": 0
