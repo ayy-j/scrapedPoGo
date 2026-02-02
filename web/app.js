@@ -172,22 +172,31 @@ async function loadDataset(datasetId) {
 }
 
 function renderTabs() {
-  elements.tabs.innerHTML = "";
-  const fragment = document.createDocumentFragment();
-  datasetConfig.forEach((dataset) => {
-    const button = document.createElement("button");
-    button.className = `tab ${state.active === dataset.id ? "active" : ""}`;
-    button.textContent = dataset.label;
-    button.type = "button";
-    button.addEventListener("click", () => {
-      state.active = dataset.id;
-      state.filters.clear();
-      ensureDatasetLoaded(dataset.id);
-      render();
+  if (elements.tabs.children.length === 0) {
+    const fragment = document.createDocumentFragment();
+    datasetConfig.forEach((dataset) => {
+      const button = document.createElement("button");
+      button.className = "tab";
+      button.dataset.id = dataset.id;
+      button.textContent = dataset.label;
+      button.type = "button";
+      button.addEventListener("click", () => {
+        state.active = dataset.id;
+        state.filters.clear();
+        ensureDatasetLoaded(dataset.id);
+        render();
+      });
+      fragment.appendChild(button);
     });
-    fragment.appendChild(button);
+    elements.tabs.appendChild(fragment);
+  }
+
+  Array.from(elements.tabs.children).forEach((btn) => {
+    const isActive = btn.dataset.id === state.active;
+    if (btn.classList.contains("active") !== isActive) {
+      btn.classList.toggle("active", isActive);
+    }
   });
-  elements.tabs.appendChild(fragment);
 }
 
 function renderStatus() {
