@@ -549,6 +549,16 @@ function saveConfig() {
 }
 
 function init() {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      const tag = document.activeElement.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+
+      e.preventDefault();
+      elements.searchInput.focus();
+    }
+  });
+
   elements.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value;
     render();
