@@ -53,7 +53,7 @@ Depending on the event type and content, events may include any of the following
 | **`pokemon`** | `array` | Featured Pokemon in the event (spawns, debuts, featured encounters) |
 | **`pokemon[].name`** | `string` | Pokemon name |
 | **`pokemon[].image`** | `string` | Pokemon image URL |
-| **`pokemon[].source`** | `string` | Where the Pokemon appears.<br />Can be `spawn`, `featured`, `incense`, `costumed`, `debut`, `maxDebut` |
+| **`pokemon[].source`** | `string` | Where the Pokemon appears.<br />Values: `spawn`, `featured`, `incense`, `costumed`<br />Reserved: `debut`, `maxDebut` |
 | **`pokemon[].canBeShiny`** | `boolean` | Whether the Pokemon can be encountered as shiny |
 | **`pokemon[].imageWidth`** | `int` | Image width in pixels |
 | **`pokemon[].imageHeight`** | `int` | Image height in pixels |
@@ -63,7 +63,10 @@ Depending on the event type and content, events may include any of the following
 
 | Field | Type | Description |
 |-------|------|-------------|
-| **`bonuses`** | `array` | Event bonuses (string descriptions) |
+| **`bonuses`** | `array` | Event bonuses as objects with `text` and `image` fields |
+| **`bonuses[].text`** | `string` | Bonus description text |
+| **`bonuses[].image`** | `string` | Bonus icon image URL |
+| **`bonus`** | `string` | Single bonus text (alternative to `bonuses` array) |
 | **`bonusDisclaimers`** | `array` | Disclaimers/restrictions for bonuses (e.g., regional, ticket-only) |
 | **`lureModuleBonus`** | `string` | Lure module bonus description |
 | **`exclusiveBonuses`** | `array` | Bonuses exclusive to ticketed players |
@@ -75,7 +78,7 @@ Depending on the event type and content, events may include any of the following
 | **`raids`** | `array` | Raid bosses featured in the event |
 | **`raids[].name`** | `string` | Pokemon name |
 | **`raids[].image`** | `string` | Pokemon image URL |
-| **`raids[].tier`** | `string` | Raid tier.<br />Can be `1-Star`, `3-Star`, `5-Star`, `Mega` |
+| **`raids[].canBeShiny`** | `boolean` | Whether the raid boss can be shiny |
 | **`raids[].imageWidth`** | `int` | Image width in pixels |
 | **`raids[].imageHeight`** | `int` | Image height in pixels |
 | **`raids[].imageType`** | `string` | Image format (e.g., `png`) |
@@ -115,7 +118,7 @@ Depending on the event type and content, events may include any of the following
 
 | Field | Type | Description |
 |-------|------|-------------|
-| **`eggs`** | `array\|object` | Egg pool changes.<br />For events: Array of Pokemon.<br />For seasons: Object with distance keys (`2km`, `5km`, `7km`, `10km`, `12km`) |
+| **`eggs`** | `object` | Egg pool changes keyed by distance.<br />Keys: `1km`, `2km`, `5km`, `7km`, `10km`, `12km`, `adventure5km`, `adventure10km`, `route` |
 
 ### Shinies
 
@@ -183,12 +186,30 @@ Depending on the event type and content, events may include any of the following
 | **`maxBattles`** | `object` | Max Battle event details |
 | **`maxMondays`** | `object` | Max Monday event details |
 
+### Content Flags
+
+These boolean flags indicate what content is available for an event (flat at top level, not nested):
+
+| Field | Type | Description |
+|-------|------|-------------|
+| **`hasSpawns`** | `boolean` | Whether the event has wild Pokemon spawns |
+| **`hasBonuses`** | `boolean` | Whether the event has bonuses |
+| **`hasRaids`** | `boolean` | Whether the event has raid bosses |
+| **`hasEggs`** | `boolean` | Whether the event has egg pool changes |
+| **`hasShiny`** | `boolean` | Whether shiny Pokemon are available |
+| **`hasFieldResearchTasks`** | `boolean` | Whether field research tasks are available |
+
 ### Other
 
 | Field | Type | Description |
 |-------|------|-------------|
 | **`description`** | `string` | Event description text |
 | **`customSections`** | `object` | Additional scraped sections not matching standard fields |
+| **`availability`** | `object` | Event availability window with `start` and `end` fields |
+| **`encounters`** | `array` | Encounter Pokemon list |
+| **`isPaid`** | `boolean` | Whether the event requires payment |
+| **`price`** | `string` | Event ticket price |
+| **`tasks`** | `array` | Research tasks (alternative structure) |
 
 ## Other Objects
 
@@ -212,7 +233,7 @@ Each Pokemon object in the `pokemon` array has the following structure:
 |-------|------|-------------|
 | **`name`** | `string` | Pokemon name |
 | **`image`** | `string` | Pokemon image URL |
-| **`source`** | `string` | Source type: `spawn`, `featured`, `incense`, `costumed`, `debut`, `maxDebut` |
+| **`source`** | `string` | Source type: `spawn`, `featured`, `incense`, `costumed` |
 | **`canBeShiny`** | `boolean` | Whether the Pokemon can be shiny |
 | **`imageWidth`** | `int` | Image width in pixels |
 | **`imageHeight`** | `int` | Image height in pixels |
@@ -224,9 +245,9 @@ Each raid object in the `raids` array has the following structure:
 
 ```json
 {
-  "name": "Tornadus",
-  "image": "https://pokemn.quest/images/pokemon/pm641.png",
-  "tier": "5-Star",
+  "name": "Tornadus (Incarnate)",
+  "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_641_11.png",
+  "canBeShiny": true,
   "imageWidth": 256,
   "imageHeight": 256,
   "imageType": "png"
@@ -237,7 +258,7 @@ Each raid object in the `raids` array has the following structure:
 |-------|------|-------------|
 | **`name`** | `string` | Pokemon name |
 | **`image`** | `string` | Pokemon image URL |
-| **`tier`** | `string` | Raid tier: `1-Star`, `3-Star`, `5-Star`, `Mega` |
+| **`canBeShiny`** | `boolean` | Whether the raid boss can be shiny |
 | **`imageWidth`** | `int` | Image width in pixels |
 | **`imageHeight`** | `int` | Image height in pixels |
 | **`imageType`** | `string` | Image format (e.g., `png`) |
@@ -283,10 +304,8 @@ Events are categorized by type. Each type has its own filtered endpoint:
 | **`raid-battles`** | Raid rotation announcements |
 | **`raid-day`** | Special Raid Day events |
 | **`raid-hour`** | Weekly Raid Hour events |
-| **`research`** | Research events and quests |
 | **`research-day`** | Research Day events |
 | **`season`** | Seasonal events (3-month periods) |
-| **`team-go-rocket`** | Team GO Rocket takeover events |
 
 ## Per-Event-Type Endpoints
 
@@ -309,10 +328,8 @@ Each event type has its own filtered endpoint containing only events of that typ
 - `raid-battles.min.json`
 - `raid-day.min.json`
 - `raid-hour.min.json`
-- `research.min.json`
 - `research-day.min.json`
 - `season.min.json`
-- `team-go-rocket.min.json`
 
 ## Date Format
 
@@ -368,8 +385,14 @@ All dates follow ISO 8601 format with millisecond precision:
     }
   ],
   "bonuses": [
-    "2× Catch Stardust",
-    "2× Catch XP"
+    {
+      "text": "2× Catch Stardust",
+      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/stardust.png"
+    },
+    {
+      "text": "2× Catch XP",
+      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/xp.png"
+    }
   ]
 }
 ```
@@ -387,17 +410,17 @@ All dates follow ISO 8601 format with millisecond precision:
   "end": "2026-02-04T10:00:00.000",
   "raids": [
     {
-      "name": "Tornadus",
-      "image": "https://pokemn.quest/images/pokemon/pm641.png",
-      "tier": "5-Star",
+      "name": "Tornadus (Incarnate)",
+      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_641_11.png",
+      "canBeShiny": true,
       "imageWidth": 256,
       "imageHeight": 256,
       "imageType": "png"
     },
     {
-      "name": "Ampharos",
-      "image": "https://pokemn.quest/images/pokemon/pm181.png",
-      "tier": "Mega",
+      "name": "Mega Ampharos",
+      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_181_51.png",
+      "canBeShiny": true,
       "imageWidth": 256,
       "imageHeight": 256,
       "imageType": "png"
@@ -471,9 +494,18 @@ All dates follow ISO 8601 format with millisecond precision:
     }
   ],
   "bonuses": [
-    "3× Catch XP",
-    "2× Catch Candy",
-    "2× chance for Candy XL from catching"
+    {
+      "text": "3× Catch XP",
+      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/xp.png"
+    },
+    {
+      "text": "2× Catch Candy",
+      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/candy.png"
+    },
+    {
+      "text": "2× chance for Candy XL from catching",
+      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/xl-candy.png"
+    }
   ],
   "shinies": [
     {
@@ -549,7 +581,7 @@ fetch('https://pokemn.quest/data/events.min.json')
     raidEvents.forEach(event => {
       console.log(`${event.name}:`);
       event.raids.forEach(raid => {
-        console.log(`  - ${raid.name} (${raid.tier})`);
+        console.log(`  - ${raid.name}${raid.canBeShiny ? ' ✨' : ''}`);
       });
     });
   });
@@ -568,7 +600,7 @@ fetch('https://pokemn.quest/data/events.min.json')
     bonusEvents.forEach(event => {
       console.log(`${event.name}:`);
       event.bonuses.forEach(bonus => {
-        console.log(`  - ${bonus}`);
+        console.log(`  - ${bonus.text}`);
       });
     });
   });
@@ -653,11 +685,10 @@ Events provide context (when something is available), while other endpoints prov
         "type": "string",
         "description": "Type of the event",
         "enum": [
-          "community-day", "event", "go-battle-league", "go-pass", "go-rocket-takeover",
+          "community-day", "event", "go-battle-league", "go-pass",
           "max-battles", "max-mondays", "pokemon-go-tour", "pokemon-spotlight-hour",
-          "pokestop-showcase", "raid-battles", "raid-day", "raid-hour", "research",
-          "research-breakthrough", "research-day", "season", "special-research",
-          "team-go-rocket", "timed-research"
+          "pokestop-showcase", "raid-battles", "raid-day", "raid-hour",
+          "research-day", "season"
         ]
       },
       "heading": {
@@ -679,18 +710,12 @@ Events provide context (when something is available), while other endpoints prov
         "description": "Event end date/time (ISO 8601 format)",
         "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}(Z)?$"
       },
-      "flags": {
-        "type": "object",
-        "description": "Content availability flags",
-        "properties": {
-          "hasSpawns": { "type": "boolean" },
-          "hasFieldResearchTasks": { "type": "boolean" },
-          "hasBonuses": { "type": "boolean" },
-          "hasRaids": { "type": "boolean" },
-          "hasEggs": { "type": "boolean" },
-          "hasShiny": { "type": "boolean" }
-        }
-      },
+      "hasSpawns": { "type": "boolean", "description": "Whether the event has wild Pokemon spawns" },
+      "hasBonuses": { "type": "boolean", "description": "Whether the event has bonuses" },
+      "hasRaids": { "type": "boolean", "description": "Whether the event has raid bosses" },
+      "hasEggs": { "type": "boolean", "description": "Whether the event has egg pool changes" },
+      "hasShiny": { "type": "boolean", "description": "Whether shiny Pokemon are available" },
+      "hasFieldResearchTasks": { "type": "boolean", "description": "Whether field research tasks are available" },
       "pokemon": {
         "type": "array",
         "description": "Featured Pokemon in the event",
@@ -702,7 +727,7 @@ Events provide context (when something is available), while other endpoints prov
             "image": { "type": "string", "format": "uri" },
             "source": {
               "type": "string",
-              "enum": ["spawn", "featured", "incense", "costumed", "debut", "maxDebut", "raid", "egg", "research", "reward", "encounter"]
+              "enum": ["spawn", "featured", "incense", "costumed"]
             },
             "canBeShiny": { "type": "boolean" },
             "imageWidth": { "type": "integer" },
@@ -713,13 +738,19 @@ Events provide context (when something is available), while other endpoints prov
       },
       "bonuses": {
         "type": "array",
-        "description": "Event bonuses (e.g., 2× XP, 2× Stardust)",
+        "description": "Event bonuses with text and image",
         "items": {
-          "oneOf": [
-            { "type": "string" },
-            { "type": "object", "properties": { "text": { "type": "string" }, "image": { "type": "string" } } }
-          ]
+          "type": "object",
+          "properties": {
+            "text": { "type": "string", "description": "Bonus description" },
+            "image": { "type": "string", "format": "uri", "description": "Bonus icon URL" }
+          },
+          "required": ["text"]
         }
+      },
+      "bonus": {
+        "type": "string",
+        "description": "Single bonus text (alternative to bonuses array)"
       },
       "raids": {
         "type": "array",
@@ -730,7 +761,6 @@ Events provide context (when something is available), while other endpoints prov
           "properties": {
             "name": { "type": "string" },
             "image": { "type": "string", "format": "uri" },
-            "tier": { "type": "string" },
             "canBeShiny": { "type": "boolean" },
             "imageWidth": { "type": "integer" },
             "imageHeight": { "type": "integer" },
@@ -739,10 +769,8 @@ Events provide context (when something is available), while other endpoints prov
         }
       },
       "eggs": {
-        "oneOf": [
-          { "type": "array", "description": "Egg hatches as array" },
-          { "type": "object", "description": "Egg hatches keyed by distance (1km, 2km, etc.)" }
-        ]
+        "type": "object",
+        "description": "Egg hatches keyed by distance (1km, 2km, 5km, 7km, 10km, 12km, adventure5km, adventure10km, route)"
       },
       "research": {
         "oneOf": [
