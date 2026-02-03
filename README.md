@@ -39,7 +39,6 @@ npm run detailedscrape
 npm run combinedetails
 
 # Generate data quality metrics
-npm run metrics:generate
 ```
 
 ### Complete Workflow
@@ -117,28 +116,6 @@ The dashboard provides:
 - **Issue Detection**: Automatic identification of missing fields, invalid data, and other problems
 - **Auto-Refresh**: Updates every 5 minutes to show current data quality
 
-### Metrics API
-
-Metrics are available as JSON endpoints:
-- Formatted: `https://pokemn.quest/data/metrics.json`
-- Minimized: `https://pokemn.quest/data/metrics.min.json`
-
-### Generate Metrics Locally
-
-```bash
-npm run metrics:generate
-```
-
-This analyzes all data files and generates:
-- Completeness percentages for each dataset
-- Issue detection (missing required fields, invalid dates, empty arrays)
-- Health status classification (healthy/degraded/critical)
-- Last updated timestamps
-
-The metrics are automatically generated during the CI/CD pipeline after each scraping run.
-
----
-
 ## JSON Schemas
 
 All data files have JSON Schema definitions for validation and type generation. Schemas are available in the [`schemas/`](schemas/) directory.
@@ -159,24 +136,6 @@ Validate all data files against their schemas:
 ```bash
 npm run validate
 ```
-
-### Image Size Analysis
-
-Calculate the total size of images referenced in scraped data (what disk space they would consume if stored locally):
-
-```bash
-# Basic summary
-npm run imagesize
-
-# Verbose output with per-image details
-npm run imagesize -- --verbose
-```
-
-This analyzes all image URLs in the data files and reports:
-- Total unique images and their combined size
-- Breakdown by CDN domain
-- Size statistics (average, min, max)
-- Individual file sizes (with `--verbose`)
 
 ### Usage
 
@@ -394,7 +353,6 @@ module.exports = { get };
 | `npm run scrapeshinies` | Run shiny Pokemon scraper |
 | `npm run detailedscrape` | Scrape detailed event information |
 | `npm run combinedetails` | Combine detailed data with basic events and generate per-eventType files |
-| `npm run metrics:generate` | Generate data quality metrics dashboard |
 | `npm run validate` | Validate all data files against JSON schemas |
 | `npm run blob:upload` | Upload images to Vercel Blob Storage |
 | `npm run blob:upload:dry` | Preview uploads without actually uploading |

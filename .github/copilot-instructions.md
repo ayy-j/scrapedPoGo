@@ -64,7 +64,6 @@ async function get(url, id, bkp) {
 npm run pipeline          # Full scrape (all stages)
 npm run validate          # Validate data against JSON schemas
 npm run blob:upload       # Upload images to Vercel Blob (requires BLOB_READ_WRITE_TOKEN)
-npm run blob:transform    # Replace CDN URLs with Blob URLs in data files
 ```
 
 ## CI/CD
