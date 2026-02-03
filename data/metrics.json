@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-02-02T16:50:54.932Z",
+  "generatedAt": "2026-02-03T02:41:16.649Z",
   "pipeline": {
     "status": "critical",
-    "lastSuccessful": "2026-02-02T16:50:54.932Z"
+    "lastSuccessful": "2026-02-03T02:41:16.649Z"
   },
   "datasets": {
     "events": {
       "recordCount": 55,
-      "lastUpdated": "2026-02-02T16:50:54.780Z",
+      "lastUpdated": "2026-02-03T02:41:16.487Z",
       "completeness": 9.8,
       "issues": [
         "87% missing pokemon",
@@ -20,35 +20,35 @@
     },
     "raids": {
       "recordCount": 19,
-      "lastUpdated": "2026-02-02T16:50:44.979Z",
+      "lastUpdated": "2026-02-03T02:41:07.682Z",
       "completeness": 100,
       "issues": [],
       "status": "healthy"
     },
     "research": {
       "recordCount": 60,
-      "lastUpdated": "2026-02-02T16:50:47.868Z",
+      "lastUpdated": "2026-02-03T02:41:09.479Z",
       "completeness": 100,
       "issues": [],
       "status": "healthy"
     },
     "eggs": {
       "recordCount": 89,
-      "lastUpdated": "2026-02-02T16:50:47.003Z",
+      "lastUpdated": "2026-02-03T02:41:08.338Z",
       "completeness": 100,
       "issues": [],
       "status": "healthy"
     },
     "rocketLineups": {
       "recordCount": 26,
-      "lastUpdated": "2026-02-02T16:50:43.531Z",
+      "lastUpdated": "2026-02-03T02:41:07.446Z",
       "completeness": 100,
       "issues": [],
       "status": "healthy"
     },
     "shinies": {
       "recordCount": 1044,
-      "lastUpdated": "2026-02-02T16:50:48.219Z",
+      "lastUpdated": "2026-02-03T02:41:09.825Z",
       "completeness": 93,
       "issues": [],
       "status": "healthy"
