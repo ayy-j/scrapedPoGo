@@ -7,8 +7,9 @@
 
 const fs = require('fs');
 const path = require('path');
+const { canonicalizeExternalImageUrl } = require('./blobNaming');
 
-const URL_MAP_FILE = path.join(__dirname, '../../data/blob-url-map.json');
+const URL_MAP_FILE = path.join(__dirname, 'blob-url-map.json');
 
 /** @type {Object<string, string>|null} Cached URL mapping */
 let urlMap = null;
@@ -70,7 +71,19 @@ function getBlobUrl(externalUrl) {
     }
 
     const map = loadUrlMap();
-    return map[externalUrl] || externalUrl;
+
+    // Prefer exact match, but also try canonicalized keys so upstream host changes
+    // (e.g., raw.githubusercontent.com -> cdn.jsdelivr.net) don't break rewrites.
+    const direct = map[externalUrl];
+    if (direct) return direct;
+
+    const canonical = canonicalizeExternalImageUrl(externalUrl);
+    if (canonical && canonical !== externalUrl) {
+        const viaCanonical = map[canonical];
+        if (viaCanonical) return viaCanonical;
+    }
+
+    return externalUrl;
 }
 
 /**

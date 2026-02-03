@@ -429,7 +429,44 @@ npm run blob:upload:force
 
 Set the `USE_BLOB_URLS=true` environment variable to transform image URLs in JSON output to use Vercel Blob storage URLs instead of external CDNs.
 
-The URL mapping is stored in `data/blob-url-map.json` and automatically updated during uploads.
+The URL mapping is stored in `src/utils/blob-url-map.json` and automatically updated during uploads.
+
+### Blob Pathname Scheme
+
+Images are organized by **content type**, not by source. The folder structure is semantic and clean:
+
+```
+pokemon/<dex>-<name>/<filename> # Pokemon sprites/icons (e.g., pokemon/155-cyndaquil/pm155.icon.png)
+events/<slug>.<ext>             # Event banners (e.g., events/2026-02-28-pokemon-go-tour-kalos-global-2026.jpg)
+types/<type>.png               # Type icons (e.g., types/fire.png)
+weather/<weather>.png          # Weather icons (e.g., weather/sunny.png)
+bonuses/<bonus>.png            # Bonus icons (e.g., bonuses/candy.png)
+items/<item>.png               # Item icons
+eggs/<file>                    # Egg-related images
+raids/<file>                   # Raid-related images
+stickers/<file>                # Sticker images
+misc/<file>                    # Anything else
+```
+
+### Download Images Locally
+
+You can download a local mirror of all referenced images using the same folder structure:
+
+```bash
+# Preview what would be downloaded
+npm run images:download:dry
+
+# Download all images
+npm run images:download
+```
+
+By default, images are written under `data/blob-images/`:
+
+```
+data/blob-images/pokemon/155-cyndaquil/pm155.icon.png
+data/blob-images/events/2026-02-14-valentines-day-2026.jpg
+data/blob-images/types/fire.png
+```
 
 ---
 

@@ -61,30 +61,29 @@
         "description": "Event end date/time (ISO 8601 format)",
         "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}(Z)?$"
       },
-      "flags": {
-        "type": "object",
-        "description": "Content availability flags",
-        "properties": {
-          "hasSpawns": {
-            "type": "boolean"
-          },
-          "hasFieldResearchTasks": {
-            "type": "boolean"
-          },
-          "hasBonuses": {
-            "type": "boolean"
-          },
-          "hasRaids": {
-            "type": "boolean"
-          },
-          "hasEggs": {
-            "type": "boolean"
-          },
-          "hasShiny": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
+      "hasSpawns": {
+        "type": "boolean",
+        "description": "Whether the event has wild Pokemon spawns"
+      },
+      "hasFieldResearchTasks": {
+        "type": "boolean",
+        "description": "Whether the event has field research tasks"
+      },
+      "hasBonuses": {
+        "type": "boolean",
+        "description": "Whether the event has bonuses"
+      },
+      "hasRaids": {
+        "type": "boolean",
+        "description": "Whether the event has raids"
+      },
+      "hasEggs": {
+        "type": "boolean",
+        "description": "Whether the event has egg hatches"
+      },
+      "hasShiny": {
+        "type": "boolean",
+        "description": "Whether the event has shiny Pokemon available"
       },
       "pokemon": {
         "type": "array",

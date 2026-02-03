@@ -10,14 +10,13 @@
     "scrapeshinies": "node ./src/scrapers/scrapeShinies.js",
     "pipeline": "npm run scrapeshinies && npm run scrape && npm run detailedscrape && npm run combinedetails",
     "validate": "node src/scripts/validate-schemas.js",
-    "metrics:generate": "node src/scripts/generate-metrics.js",
     "migrate:urls": "node src/scripts/migrate-jsdelivr-urls.js",
     "migrate:urls:dry": "node src/scripts/migrate-jsdelivr-urls.js --dry-run",
     "blob:upload": "node src/scripts/upload-images-to-blob.js",
     "blob:upload:dry": "node src/scripts/upload-images-to-blob.js --dry-run",
     "blob:upload:force": "node src/scripts/upload-images-to-blob.js --force",
-    "ai:enrich-events": "node src/scripts/enrich-events-ai.js"
-  },
+    "images:download": "node src/scripts/download-images-locally.js",
+    "images:download:dry": "node src/scripts/download-images-locally.js --dry-run"  },
   "author": "quantNebula",
   "license": "MIT",
   "dependencies": {

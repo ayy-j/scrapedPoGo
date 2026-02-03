@@ -11,6 +11,7 @@ const path = require('path');
 const https = require('https');
 const http = require('http');
 const dotenv = require('dotenv');
+const { canonicalizeExternalImageUrl, externalUrlToBlobPathname } = require('../utils/blobNaming');
 
 dotenv.config();
 dotenv.config({ path: '.env.local' });
@@ -23,7 +24,7 @@ const FORCE = process.argv.includes('--force');
 const VERBOSE = process.argv.includes('--verbose') || process.argv.includes('-v');
 
 // URL Mapping storage
-const URL_MAP_FILE = path.join(__dirname, '..', '..', 'data', 'blob-url-map.json');
+const URL_MAP_FILE = path.join(__dirname, '..', 'utils', 'blob-url-map.json');
 
 /**
  * Extract all image URLs from a nested object
@@ -96,17 +97,15 @@ function downloadImage(url) {
 }
 
 /**
- * Generate blob pathname from URL
- * Preserves directory structure based on original URL
+ * Generate blob pathname from URL.
+ * Uses a readable, deterministic scheme that canonicalizes common upstream hosts.
+ *
  * @param {string} url - Original image URL
  * @returns {string} Pathname for blob storage
  */
 function urlToPathname(url) {
-    const urlObj = new URL(url);
-    const hostname = urlObj.hostname.replace(/\./g, '-');
-    // Remove leading slash and decode URI components
-    const pathname = decodeURIComponent(urlObj.pathname.replace(/^\//, ''));
-    return `images/${hostname}/${pathname}`;
+    const canonical = canonicalizeExternalImageUrl(url);
+    return externalUrlToBlobPathname(canonical);
 }
 
 /**
@@ -246,6 +245,7 @@ async function main() {
 
         await Promise.all(
             batch.map(async (url) => {
+                const canonicalUrl = canonicalizeExternalImageUrl(url);
                 const pathname = urlToPathname(url);
 
                 // Dry run mode
@@ -270,7 +270,12 @@ async function main() {
                         contentType: contentType,
                     });
 
+                    // Store mapping for the exact URL found in data...
                     urlMap[url] = blob.url;
+                    // ...and also for a canonicalized equivalent (helps if upstream host changes).
+                    if (canonicalUrl && canonicalUrl !== url) {
+                        urlMap[canonicalUrl] = blob.url;
+                    }
                     results.success++;
 
                     if (VERBOSE) {
