@@ -96,6 +96,25 @@ Depending on the event type and content, events may include any of the following
 | **`research.masterwork`** | `array` | Masterwork research quest steps |
 | **`research.breakthrough`** | `object` | Research Breakthrough encounter reward |
 
+**ResearchTask Object (Field Research):**
+- `task` (string): Task description
+- `encounter` (Pokemon, optional): Encounter reward
+- `rewards` (Array<Reward>, optional): Item/reward list
+
+**ResearchStep Object (Special/Timed/Masterwork Research):**
+- `name` (string): Step name/title
+- `step` (number): Step number
+- `tasks` (Array<Task>): Individual tasks in this step
+- `rewards` (Array<Reward>): Rewards for completing the step
+
+**Task Object:**
+- `text` (string): Task description
+- `reward` (Reward): Reward for this specific task
+
+**Reward Object:**
+- `text` (string): Reward description
+- `image` (string): Reward icon URL
+
 ### Battle (GO Battle League)
 
 | Field | Type | Description |
@@ -210,6 +229,26 @@ These boolean flags indicate what content is available for an event (flat at top
 | **`isPaid`** | `boolean` | Whether the event requires payment |
 | **`price`** | `string` | Event ticket price |
 | **`tasks`** | `array` | Research tasks (alternative structure) |
+
+**eventInfo Object Structure:**
+```json
+{
+  "name": "Pokémon GO Tour: Kalos - Global 2026",
+  "location": "",
+  "dates": "",
+  "time": "",
+  "ticketPrice": null,
+  "ticketUrl": ""
+}
+```
+
+**availability Object Structure:**
+```json
+{
+  "start": "2026-02-28T00:00:00.000",
+  "end": "2026-03-02T23:59:59.000"
+}
+```
 
 ## Other Objects
 
@@ -661,6 +700,75 @@ Event data is self-contained but can be cross-referenced with other endpoints:
 
 Events provide context (when something is available), while other endpoints provide details (stats, mechanics, etc.).
 
+## Data Quality Notes
+
+1. **Empty Arrays:** Many events will have empty arrays for certain fields (e.g., `"1km": []` in eggs). This indicates no changes to that category during the event.
+
+2. **Null vs Missing:** Fields may be `null` or entirely absent. Both should be treated as "not applicable" for that event.
+
+3. **HTML Content:** The `whatsNew` array may contain HTML tags including `<img>` and `<span>` elements.
+
+4. **Image URLs:** Image URLs typically use the `pokemn.quest` domain for hosted images or `cdn.leekduck.com` for scraped images.
+
+5. **Pokémon Naming:**
+   - Regional forms: "Alolan Diglett", "Galarian Meowth"
+   - Gender differences: "Indeedee (Male)", "Indeedee (Female)"
+   - Forms: "Red Flower Flabébé"
+   - Unown letters: "Unown O", "Unown S"
+
+6. **canBeShiny:** This field indicates if the shiny form exists in the game, not necessarily that it's available during this specific event. Cross-reference with the `shinies` or `shinyDebuts` arrays for event-specific shiny availability.
+
+7. **Minified Format:** The endpoint returns minified JSON (no whitespace) for reduced bandwidth.
+
+## Event Type Specific Structures
+
+### Seasons (`eventType: "season"`)
+
+Seasons are the longest-running events and typically contain:
+- `eggs`: Full egg pool breakdown
+- `pokemon`: Wild spawn pool
+- `raids`: Current raid boss rotation
+- `research`: Research breakthrough Pokémon
+- `shinies`: All available shinies this season
+
+### Community Day (`eventType: "community-day"`)
+
+Community Days typically include:
+- `pokemon`: Featured Pokémon (the focus of the event)
+- `bonuses`: Event bonuses (XP, Stardust, etc.)
+- `bonusDisclaimers`: Time restrictions for bonuses
+- `shinies`: Shiny forms available
+- `research`: Paid special research storyline (if available)
+
+### Raid Events (`raid-day`, `raid-battles`, `raid-hour`)
+
+Raid-focused events include:
+- `raids`: Raid boss breakdown
+- `shinies`: Shiny possibilities from raids
+- `bonuses`: Raid-specific bonuses (free passes, reduced timers, etc.)
+
+### Research Events (`research-day`)
+
+Research events include:
+- `research`: Field research tasks and rewards
+- `pokemon`: Pokémon tied to research encounters
+- `bonuses`: Research-related bonuses
+
+### Ticketed Events (`pokemon-go-tour`)
+
+Large ticketed events contain extensive data:
+- `isPaid`: true
+- `price`: Ticket cost
+- `eventInfo`: Event details and ticket URL
+- `exclusiveBonuses`: Ticket-holder only bonuses
+- `eggs`: Event-specific egg pool
+- `pokemon`: Exclusive spawns
+- `raids`: Special raid bosses
+- `shinies`: Available shinies
+- `shinyDebuts`: New shiny releases
+- `research`: Ticket-holder research
+- `whatsNew`: Feature highlights
+
 ## JSON Schema
 
 ```json
@@ -797,7 +905,9 @@ Events provide context (when something is available), while other endpoints prov
           "type": "object",
           "properties": {
             "name": { "type": "string" },
-            "cpLimit": { "type": "integer" }
+            "cpCap": { "type": ["integer", "null"] },
+            "typeRestrictions": { "type": "array" },
+            "rules": { "type": "array" }
           }
         }
       }
