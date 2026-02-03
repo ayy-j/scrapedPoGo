@@ -2,12 +2,21 @@
 
 ## Endpoint
 
-`https://pokemn.quest/data/raids.min.json`
+**URL**: `https://pokemn.quest/data/raids.min.json`
 
-## Example Raid Object
+The endpoint returns a minified JSON array of current raid boss data.
+
+## Overview
+
+The Raids endpoint provides comprehensive data about all active raid bosses in Pokemon GO, including tier information, CP ranges, type effectiveness, weather boosts, and shiny availability. The data is automatically updated as raid rotations change.
+
+## Response Structure
+
+The endpoint returns a JSON array of raid boss objects:
 
 ```json
-{
+[
+  {
     "name": "Ekans",
     "originalName": "Ekans",
     "form": null,
@@ -16,60 +25,47 @@
     "isShadowRaid": false,
     "eventStatus": "unknown",
     "canBeShiny": true,
-    "types": [
-        {
-            "name": "poison",
-            "image": "https://pokemn.quest/images/types/poison.png"
-        }
-    ],
-    "combatPower": {
-        "normal": {
-            "min": 487,
-            "max": 529
-        },
-        "boosted": {
-            "min": 609,
-            "max": 662
-        }
-    },
-    "boostedWeather": [
-        {
-            "name": "cloudy",
-            "image": "https://pokemn.quest/images/weather/cloudy.png"
-        }
-    ],
-    "image": "https://pokemn.quest/images/pokemon/pm23.png",
+    "types": [...],
+    "combatPower": {...},
+    "boostedWeather": [...],
+    "image": "https://pokemn.quest/images/pokemon/...",
     "imageWidth": 256,
     "imageHeight": 256,
     "imageType": "png"
-}
+  },
+  ...
+]
 ```
-## Fields
 
-| Field                | Type          | Description
-|--------------------- |-------------- |---------------------
-| **`name`**           | `string`      | The cleaned name of the Pokemon (form and gender removed).
-| **`originalName`**   | `string`      | The original name as displayed on the site (includes form/gender).
-| **`form`**           | `string\|null` | The form of the Pokemon (e.g., `Incarnate`, `Origin`, `Alola`), or `null` if none.
-| **`gender`**         | `string\|null` | The gender of the Pokemon (`male`, `female`), or `null` if not specified.
-| **`tier`**           | `string`      | The raid tier of the Pokemon.<br />Can be `1-Star Raids`, `3-Star Raids`, `5-Star Raids`, `Mega Raids`
-| **`isShadowRaid`**   | `boolean`     | Whether this is a Shadow Raid boss.
-| **`eventStatus`**    | `string`      | The status of the raid event.<br />Can be `ongoing`, `upcoming`, `inactive`, `unknown`
-| **`canBeShiny`**     | `boolean`     | Whether or not the Pokemon can be shiny.
-| **`types`**          | `Type[]`      | The type(s) of the Pokemon. See [Type](#Type).
-| **`combatPower`**    | `CombatPower` | The combat power range the Pokemon can be caught with. See [CombatPower](#CombatPower).
-| **`boostedWeather`** | `Weather[]`   | The type(s) of weather that boost the Pokemon's combat power. See [Weather](#Weather).
-| **`image`**          | `string`      | The image URL of the Pokemon.
-| **`imageWidth`**     | `int`         | The width of the image in pixels.
-| **`imageHeight`**    | `int`         | The height of the image in pixels.
-| **`imageType`**      | `string`      | The image format (e.g., `png`).
+## Core Fields
 
-## Other Objects
+All raid boss objects contain these fields:
+
+| Field                | Type          | Required | Description
+|--------------------- |-------------- |--------- |---------------------
+| **`name`**           | `string`      | Yes      | The cleaned name of the Pokemon (form and gender removed).
+| **`originalName`**   | `string`      | Yes      | The original name as displayed on the source (includes form/gender).
+| **`form`**           | `string\|null` | Yes      | The form of the Pokemon (e.g., `Incarnate`, `Origin`, `Alola`), or `null` if none.
+| **`gender`**         | `string\|null` | Yes      | The gender of the Pokemon (`male`, `female`), or `null` if not specified.
+| **`tier`**           | `string`      | Yes      | The raid tier. Values: `1-Star Raids`, `3-Star Raids`, `5-Star Raids`, `Mega Raids`
+| **`isShadowRaid`**   | `boolean`     | Yes      | Whether this is a Shadow Raid boss.
+| **`eventStatus`**    | `string`      | Yes      | The status of the raid event. Values: `ongoing`, `upcoming`, `inactive`, `unknown`
+| **`canBeShiny`**     | `boolean`     | Yes      | Whether or not the Pokemon can be encountered as shiny.
+| **`types`**          | `Type[]`      | Yes      | The type(s) of the Pokemon. See [Type](#type).
+| **`combatPower`**    | `CombatPower` | Yes      | The CP range for catches. See [CombatPower](#combatpower).
+| **`boostedWeather`** | `Weather[]`   | Yes      | Weather conditions that boost the Pokemon's CP. See [Weather](#weather).
+| **`image`**          | `string`      | Yes      | The image URL of the Pokemon.
+| **`imageWidth`**     | `int`         | Yes      | The width of the image in pixels.
+| **`imageHeight`**    | `int`         | Yes      | The height of the image in pixels.
+| **`imageType`**      | `string`      | Yes      | The image format (e.g., `png`).
+
+## Nested Objects
 
 ### Type
 
-#### Example Object
+Represents a Pokemon type with its icon.
 
+**Example:**
 ```json
 {
     "name": "fire",
@@ -77,17 +73,18 @@
 }
 ```
 
-#### Fields
+**Fields:**
 
 | Field       | Type     | Description
 |------------ |--------- |---------------------
-| **`name`**  | `string` | The name of the type
-| **`image`** | `string` | The image of the type. 
+| **`name`**  | `string` | The name of the type (e.g., `fire`, `water`, `grass`, `electric`, `psychic`, `fighting`, `dark`, `steel`, `fairy`, `dragon`, `ghost`, `bug`, `rock`, `ground`, `ice`, `poison`, `normal`, `flying`)
+| **`image`** | `string` | The image URL of the type icon. Format: `https://pokemn.quest/images/types/<type>.png`
 
 ### CombatPower
 
-#### Example Object
+Defines the CP (Combat Power) range for catching the raid boss.
 
+**Example:**
 ```json
 {
     "normal": {
@@ -101,19 +98,22 @@
 }
 ```
 
-#### Fields
+**Fields:**
 
 | Field             | Type  | Description
 |------------------ |------ |---------------------
-| **`normal.min`**  | `int` | The minimum normal combat power of the Pokemon.
-| **`normal.max`**  | `int` | The maximum normal combat power of the Pokemon.
-| **`boosted.min`** | `int` | The minimum boosted combat power of the Pokemon.
-| **`boosted.max`** | `int` | The maximum boosted combat power of the Pokemon.
+| **`normal.min`**  | `int` | The minimum CP when not weather boosted.
+| **`normal.max`**  | `int` | The maximum CP when not weather boosted.
+| **`boosted.min`** | `int` | The minimum CP when weather boosted.
+| **`boosted.max`** | `int` | The maximum CP when weather boosted.
+
+Weather boosting increases CP by approximately 25% and indicates better IVs (minimum 4/4/4 instead of 0/0/0).
 
 ### Weather
 
-#### Example Object
+Represents weather conditions that boost the raid boss.
 
+**Example:**
 ```json
 {
     "name": "foggy",
@@ -121,12 +121,94 @@
 }
 ```
 
-#### Fields
+**Fields:**
 
 | Field       | Type     | Description
 |------------ |--------- |---------------------
-| **`name`**  | `string` | The name of the weather type.<br />Can be `sunny`, `rainy`, `partly cloudy`, `cloudy`, `windy`, `snow`, `fog`
-| **`image`** | `string` | The image of the weather type.
+| **`name`**  | `string` | The weather type. Values: `sunny`, `rainy`, `partly cloudy`, `cloudy`, `windy`, `snow`, `fog`
+| **`image`** | `string` | The image URL of the weather icon. Format: `https://pokemn.quest/images/weather/<weather>.png`
+
+## Field Details
+
+### Name Processing
+
+- **`name`**: Standardized name without form/gender qualifiers (e.g., "Tornadus")
+- **`originalName`**: Full display name (e.g., "Tornadus (Incarnate)")
+
+This allows for easier grouping and filtering while preserving the complete information.
+
+### Forms and Variants
+
+The `form` field captures Pokemon forms and variants:
+- Regional forms: `Alola`, `Galarian`, `Hisuian`
+- Legendary forms: `Incarnate`, `Therian`, `Origin`
+- Mega/Primal: Typically included in `name` (e.g., "Mega Ampharos")
+- Other forms: `Curly`, `Droopy`, `Stretchy` (Tatsugiri)
+
+### Raid Tiers
+
+Raid difficulty is indicated by the `tier` field:
+- **1-Star Raids**: Solo-able, beginner-friendly
+- **3-Star Raids**: Require 1-3 players depending on level and counters
+- **5-Star Raids**: Legendary/Mythical, typically require 3-5+ players
+- **Mega Raids**: Mega Evolutions, difficulty varies by species
+
+### Shadow Raids
+
+Shadow Raids (`isShadowRaid: true`) are a special raid type featuring Shadow Pokemon. These raids have unique mechanics and typically require more players than standard raids of the same tier.
+
+### Event Status
+
+The `eventStatus` field indicates when the boss is available:
+- **`ongoing`**: Currently in raids
+- **`upcoming`**: Announced but not yet active
+- **`inactive`**: No longer available
+- **`unknown`**: Status not confirmed
+
+## Image Paths (`pokemn.quest`)
+
+**Public**: `https://pokemn.quest/images/<path>`
+
+### Canonical Path Scheme (blobNaming.js)
+
+| Prefix                        | Stored Content                                      | Example URL (public) |
+|------------------------------|-----------------------------------------------------|----------------------|
+| `pokemon/<dex>-<slug>/...`   | Pokémon icons/sprites                               | `.../pokemon/001-bulbasaur/pokemon_icon_001_00.png` |
+| `events/<event>.jpg`         | Event banners                                      | `.../events/into-the-depths-2026.jpg` |
+| `types/<type>.png`           | Type icons                                         | `.../types/poison.png` |
+| `weather/<weather>.png`      | Weather icons                                      | `.../weather/cloudy.png` |
+| `bonuses/<bonus>.png`        | Bonus icons                                        | `.../bonuses/2x-stardust.png` |
+| `eggs/<file>.png`            | Egg icons                                          | `.../eggs/12km.png` |
+| `raids/<file>.png`           | Raid tier/icons                                    | `.../raids/legendary.png` |
+| `items/<file>.png`           | Items                                              | `.../items/mysterious-component.png` |
+| `stickers/<file>.png`        | Stickers                                           | `.../stickers/pikachu.png` |
+| `misc/<hash-or-file>`        | Fallback                                           | `.../misc/<hash>.bin` |
+
+> Publicly served by prefixing with `https://pokemn.quest/images/`
+
+## Data Quality Notes
+
+1. **Minified Format**: The endpoint returns minified JSON (no whitespace) for reduced bandwidth.
+
+2. **Null Values**: The `form` and `gender` fields will be `null` when not applicable (most Pokemon).
+
+3. **Type Ordering**: Pokemon with two types will have both types in the `types` array. Order may vary.
+
+4. **Weather Arrays**: `boostedWeather` can contain 1-2 weather types depending on the Pokemon's types.
+
+5. **Image Dimensions**: Currently all images are 256×256 PNG files.
+
+6. **Event Status**: The `unknown` status is used when raid availability timing isn't clearly defined or is part of the regular rotation.
+
+7. **Shadow vs Regular**: Shadow versions are separate entries with `isShadowRaid: true` and typically have "Shadow" prefixed in the name.
+
+## Integration with Other Endpoints
+
+Raid data can be cross-referenced with:
+
+- **Events** (`https://pokemn.quest/data/events.min.json`) - Event-specific raid rotations and bonuses
+- **Pokemon** - Full Pokemon stats and movesets for raid preparation
+- **Types** - Type effectiveness charts for building counter teams
 
 ## JSON Schema
 
@@ -134,7 +216,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Pokemon GO Raids Data",
-  "description": "Schema for Pokemon GO raid boss data from LeekDuck",
+  "description": "Schema for Pokemon GO raid boss data",
   "type": "array",
   "items": {
     "type": "object",

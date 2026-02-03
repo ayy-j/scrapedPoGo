@@ -280,7 +280,7 @@ Each Pokemon object in the `pokemon` array has the following structure:
 |-------|------|-------------|
 | **`name`** | `string` | Pokemon name |
 | **`image`** | `string` | Pokemon image URL |
-| **`source`** | `string` | Source type: `spawn`, `featured`, `incense`, `costumed` |
+| **`source`** | `string` | Source type: `spawn`, `featured`, `incense`, `costumed` (reserved: `debut`, `maxDebut`) |
 | **`canBeShiny`** | `boolean` | Whether the Pokemon can be shiny |
 | **`imageWidth`** | `int` | Image width in pixels |
 | **`imageHeight`** | `int` | Image height in pixels |
@@ -721,6 +721,30 @@ The API provides comprehensive event data including:
 1. **Basic metadata** (name, image, type)
 2. **Accurate dates and times** (start/end times in ISO 8601 format)
 3. **Detailed content** (Pokemon, raids, bonuses, and event-specific features)
+
+## 📦 Vercel Blob Image Paths (`pokemn.quest`)
+
+**Public**: `https://pokemn.quest/images/<path>`  
+
+---
+
+### 🔧 Canonical path scheme (blobNaming.js)
+| Prefix                        | Stored content                                      | Example URL (public) |
+|------------------------------|-----------------------------------------------------|----------------------|
+| `pokemon/<dex>-<slug>/...`   | Pokémon icons/sprites                               | `.../pokemon/001-bulbasaur/pokemon_icon_001_00.png` |
+| `events/<event>.jpg`         | Event banners                                      | `.../events/into-the-depths-2026.jpg` |
+| `types/<type>.png`           | Type icons                                         | `.../types/poison.png` |
+| `weather/<weather>.png`      | Weather icons                                      | `.../weather/cloudy.png` |
+| `bonuses/<bonus>.png`        | Bonus icons                                        | `.../bonuses/2x-stardust.png` |
+| `eggs/<file>.png`            | Egg icons                                          | `.../eggs/12km.png` |
+| `raids/<file>.png`           | Raid tier/icons                                    | `.../raids/legendary.png` |
+| `items/<file>.png`           | Items                                              | `.../items/mysterious-component.png` |
+| `stickers/<file>.png`        | Stickers                                           | `.../stickers/pikachu.png` |
+| `misc/<hash-or-file>`        | Fallback                                           | `.../misc/<hash>.bin` |
+
+> Publicly served by prefixing with `https://pokemn.quest/images/`  
+
+---
 
 ## Integration with Other Endpoints
 
