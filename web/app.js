@@ -162,7 +162,15 @@ async function loadDataset(datasetId) {
       throw new Error(`HTTP ${response.status}`);
     }
     const data = await response.json();
-    state.data[datasetId] = Array.isArray(data) ? data : data.items || [];
+    const rawData = Array.isArray(data) ? data : data.items || [];
+
+    // ⚡ Bolt Optimization: Pre-calculate timestamps to avoid repeated new Date() calls during sort/render
+    state.data[datasetId] = rawData.map((item) => {
+      if (item.start) item._startTime = new Date(item.start).getTime();
+      if (item.end) item._endTime = new Date(item.end).getTime();
+      if (item.date) item._date = new Date(item.date).getTime();
+      return item;
+    });
   } catch (error) {
     setError(datasetId, error.message || "Failed to load data");
   } finally {
@@ -302,8 +310,15 @@ function sortRecords(records) {
   }
 
   sorted.sort((a, b) => {
-    const aDate = new Date(a.start || a.date || 0).getTime();
-    const bDate = new Date(b.start || b.date || 0).getTime();
+    // ⚡ Bolt Optimization: Use pre-calculated timestamps if available
+    const aDate =
+      a._startTime ||
+      a._date ||
+      (a.start || a.date ? new Date(a.start || a.date).getTime() : 0);
+    const bDate =
+      b._startTime ||
+      b._date ||
+      (b.start || b.date ? new Date(b.start || b.date).getTime() : 0);
     if (sort.endsWith("asc")) return aDate - bDate;
     return bDate - aDate;
   });
@@ -367,13 +382,18 @@ function renderCalendar() {
     el.appendChild(dateLabel);
 
     const daysEvents = events.filter((e) => {
-      const eStart = new Date(e.start).getTime();
-      const eEnd = new Date(e.end).getTime();
+      // ⚡ Bolt Optimization: Use pre-calculated timestamps
+      const eStart = e._startTime || (e.start ? new Date(e.start).getTime() : 0);
+      const eEnd = e._endTime || (e.end ? new Date(e.end).getTime() : 0);
       if (!eStart || !eEnd) return false;
       return Math.max(eStart, currentDayStart) <= Math.min(eEnd, currentDayEnd);
     });
 
-    daysEvents.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
+    daysEvents.sort((a, b) => {
+      const aStart = a._startTime || new Date(a.start).getTime();
+      const bStart = b._startTime || new Date(b.start).getTime();
+      return aStart - bStart;
+    });
 
     daysEvents.forEach(e => {
         const eventEl = document.createElement("div");
