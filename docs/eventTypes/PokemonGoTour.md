@@ -26,21 +26,43 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ```json
 {
-  "eventID": "pokemon-go-tour-johto-2026",
-  "name": "Pokémon GO Tour: Johto",
+  "eventID": "pokemon-go-tour-kalos-tainan-2026",
+  "name": "Pokémon GO Tour: Kalos - Tainan 2026",
   "eventType": "pokemon-go-tour",
-  "heading": "Pokémon GO Tour",
-  "image": "https://cdn.leekduck.com/assets/img/events/go-tour-johto-2026.jpg",
-  "start": "2026-02-21T09:00:00.000",
-  "end": "2026-02-21T21:00:00.000",
-  "flags": {
-    "hasSpawns": false,
-    "hasFieldResearchTasks": false,
-    "hasBonuses": false,
-    "hasRaids": false,
-    "hasEggs": false,
-    "hasShiny": false
-  }
+  "heading": "Pokemon GO Tour",
+  "image": "https://cdn.leekduck.com/assets/img/events/pogo-tour-kalos.jpg",
+  "start": "2026-02-20T09:00:00.000",
+  "end": "2026-02-22T17:00:00.000",
+  "eventInfo": {
+    "name": "Pokémon GO Tour: Kalos - Tainan 2026",
+    "location": "<strong></strong> Tainan Metropolitan Park, Tainan, Taiwan",
+    "dates": "<strong></strong> February 20–22, 2026",
+    "time": "<strong></strong> 9:00 a.m. – 5:00 p.m. GMT+8",
+    "ticketPrice": 733,
+    "ticketUrl": ""
+  },
+  "pokemon": [
+    {
+      "name": "Chespin",
+      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_650_00.png",
+      "canBeShiny": true,
+      "source": "spawn"
+    }
+  ],
+  "eggs": {
+    "2km": [...],
+    "5km": [...],
+    "7km": [...],
+    "10km": [...]
+  },
+  "exclusiveBonuses": ["Attendees will receive the following bonuses..."],
+  "rewards": {
+    "ticketAddOns": [...]
+  },
+  "shinies": [...],
+  "shinyDebuts": [...],
+  "whatsNew": ["For the first time in Pokémon GO, Trainers will be able to encounter Shiny Diancie!"],
+  "sales": ["A limited number of Pokémon GO Tour: Kalos T-shirts will be available..."]
 }
 ```
 
@@ -53,34 +75,24 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`eventID`**   | `string` | Unique identifier for the GO Tour event
 | **`name`**      | `string` | Name of the GO Tour (typically includes region/theme)
 | **`eventType`** | `string` | Always `"pokemon-go-tour"`
-| **`heading`**   | `string` | Always `"Pokémon GO Tour"`
+| **`heading`**   | `string` | Always `"Pokemon GO Tour"`
 | **`image`**     | `string` | Event header/thumbnail image URL
 | **`start`**     | `string` | Event start date/time (ISO 8601 format)
 | **`end`**       | `string` | Event end date/time (ISO 8601 format)
-| **`flags`**     | `object` | Content availability flags (see below)
 
-### Flags Object
+### Optional Fields
 
-| Field                     | Type      | Description
-|-------------------------- |---------- |---------------------
-| **`hasSpawns`**           | `boolean` | Whether the event has wild spawns data
-| **`hasFieldResearchTasks`** | `boolean` | Whether the event has field research tasks
-| **`hasBonuses`**          | `boolean` | Whether the event has gameplay bonuses
-| **`hasRaids`**            | `boolean` | Whether the event has raid data
-| **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
-| **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
-
-## Additional Sections
-
-Pokémon GO Tour events include a `details` object containing:
-
-- **`pokemon`**: Array of featured regional Pokémon objects with `imageWidth`, `imageHeight`, `imageType`, and `canBeShiny` fields
-- **`bonuses`**: Array of special bonuses for ticket holders
-- **`research`**: Exclusive Special Research and Masterwork Research
-- **`raids`**: Featured raid bosses throughout the event
-- **`eggs`**: Event-specific egg pool
-- **`habitats`**: Location-specific spawn pools (for in-person events)
-- **`customSections`**: Additional tour-specific content
+| Field               | Type     | Description
+|-------------------- |--------- |---------------------
+| **`eventInfo`**     | `object` | Event metadata with `name`, `location`, `dates`, `time`, `ticketPrice`, `ticketUrl`
+| **`pokemon`**       | `array`  | Featured Pokémon with `name`, `image`, `canBeShiny`, `source`
+| **`eggs`**          | `object` | Egg pools by distance key (`2km`, `5km`, `7km`, `10km`, `adventure5km`, `adventure10km`, `route`)
+| **`exclusiveBonuses`**| `array`| Text descriptions of ticket holder bonuses
+| **`rewards`**       | `object` | Reward categories (e.g., `ticketAddOns`)
+| **`shinies`**       | `array`  | Pokémon available as shiny during the event
+| **`shinyDebuts`**   | `array`  | New shiny Pokémon debuting at the event
+| **`whatsNew`**      | `array`  | Announcement text about new features
+| **`sales`**         | `array`  | Merchandise and special offers available
 
 
 

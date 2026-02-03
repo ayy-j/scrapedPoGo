@@ -26,21 +26,37 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ```json
 {
-  "eventID": "pokemon-go-fest-2026",
-  "name": "Pokémon GO Fest 2026",
+  "eventID": "party-play-pass-paid-timed-research-february-2026",
+  "name": "Party Play Pass",
   "eventType": "go-pass",
-  "heading": "GO Pass Event",
-  "image": "https://cdn.leekduck.com/assets/img/events/go-fest-2026.jpg",
-  "start": "2026-05-30T10:00:00.000",
-  "end": "2026-05-31T18:00:00.000",
-  "flags": {
-    "hasSpawns": false,
-    "hasFieldResearchTasks": false,
-    "hasBonuses": false,
-    "hasRaids": false,
-    "hasEggs": false,
-    "hasShiny": false
-  }
+  "heading": "Go Pass",
+  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "start": "2026-02-01T10:00:00.000",
+  "end": "2026-02-03T20:00:00.000",
+  "pricing": {
+    "usd": "$2.99"
+  },
+  "pointTasks": [
+    {
+      "task": "Walk 1 km",
+      "points": 5
+    },
+    {
+      "task": "Catch 3 Pokémon with Party Play",
+      "points": 15
+    }
+  ],
+  "milestoneBonuses": [
+    {
+      "bonus": "3 Poké Balls",
+      "points": 0
+    },
+    {
+      "bonus": "500 Stardust",
+      "points": 10
+    }
+  ],
+  "description": "Party Play Pass holders will have access to special tasks and rewards."
 }
 ```
 
@@ -53,32 +69,23 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`eventID`**   | `string` | Unique identifier for the GO Pass event
 | **`name`**      | `string` | Name of the ticketed event
 | **`eventType`** | `string` | Always `"go-pass"`
-| **`heading`**   | `string` | Always `"GO Pass Event"`
+| **`heading`**   | `string` | Always `"Go Pass"`
 | **`image`**     | `string` | Event header/thumbnail image URL
 | **`start`**     | `string` | Event start date/time (ISO 8601 format)
 | **`end`**       | `string` | Event end date/time (ISO 8601 format)
-| **`flags`**     | `object` | Content availability flags (see below)
 
-### Flags Object
+### Optional Fields
 
-| Field                     | Type      | Description
-|-------------------------- |---------- |---------------------
-| **`hasSpawns`**           | `boolean` | Whether the event has wild spawns data
-| **`hasFieldResearchTasks`** | `boolean` | Whether the event has field research tasks
-| **`hasBonuses`**          | `boolean` | Whether the event has gameplay bonuses
-| **`hasRaids`**            | `boolean` | Whether the event has raid data
-| **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
-| **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
+| Field               | Type     | Description
+|-------------------- |--------- |---------------------
+| **`pricing`**       | `object` | Price in different currencies (e.g., `{"usd": "$2.99"}`)
+| **`pointTasks`**    | `array`  | Tasks to earn points, each with `task` (string) and `points` (number)
+| **`milestoneBonuses`**| `array`| Rewards at point thresholds, each with `bonus` (string) and `points` (number)
+| **`description`**   | `string` | Full description of pass benefits
 
 ## Additional Sections
 
-GO Pass events include a `details` object containing:
-
-- **`pokemon`**: Array of exclusive Pokémon objects with `imageWidth`, `imageHeight`, `imageType`, and `canBeShiny` fields
-- **`bonuses`**: Array of exclusive bonuses for ticket holders
-- **`research`**: Special Research available with ticket purchase
-- **`raids`**: Featured raid bosses during the event
-- **`pricing`**: Ticket pricing and tier information
+GO Pass events may include detailed task and reward structures when scraped from LeekDuck event pages.
 
 
 

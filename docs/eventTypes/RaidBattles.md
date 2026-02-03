@@ -33,21 +33,30 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ```json
 {
-  "eventID": "mega-sceptile-in-mega-raids-january-2026",
-  "name": "Mega Sceptile in Mega Raids",
+  "eventID": "mega-ampharos-in-mega-raids-january-2026",
+  "name": "Mega Ampharos in Mega Raids",
   "eventType": "raid-battles",
   "heading": "Raid Battles",
   "image": "https://cdn.leekduck.com/assets/img/events/mega-default.jpg",
-  "start": "2026-01-16T10:00:00.000",
-  "end": "2026-01-25T10:00:00.000",
-  "flags": {
-    "hasSpawns": false,
-    "hasFieldResearchTasks": false,
-    "hasBonuses": false,
-    "hasRaids": false,
-    "hasEggs": false,
-    "hasShiny": false
-  }
+  "start": "2026-01-25T10:00:00.000",
+  "end": "2026-02-04T10:00:00.000",
+  "raids": [
+    {
+      "name": "Mega Ampharos",
+      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_181_51.png",
+      "canBeShiny": true,
+      "imageWidth": 256,
+      "imageHeight": 256,
+      "imageType": "png"
+    }
+  ],
+  "shinies": [
+    {
+      "name": "Ampharos",
+      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_181_00_shiny.png",
+      "canBeShiny": true
+    }
+  ]
 }
 ```
 
@@ -64,25 +73,15 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`image`**     | `string` | Event header/thumbnail image URL
 | **`start`**     | `string` | Rotation start date/time (ISO 8601 format)
 | **`end`**       | `string` | Rotation end date/time (ISO 8601 format)
-| **`flags`**     | `object` | Content availability flags (see below)
 
-### Flags Object
+### Optional Fields
 
-| Field                     | Type      | Description
-|-------------------------- |---------- |---------------------
-| **`hasSpawns`**           | `boolean` | Whether the event has wild spawns data
-| **`hasFieldResearchTasks`** | `boolean` | Whether the event has field research tasks
-| **`hasBonuses`**          | `boolean` | Whether the event has gameplay bonuses
-| **`hasRaids`**            | `boolean` | Whether the event has raid data
-| **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
-| **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
-
-## Additional Sections
-
-Raid Battle events include a `details` object containing:
-
-- **`raids`**: Featured raid boss details organized by tier
-- **`pokemon`**: Array of featured Pokémon objects with `imageWidth`, `imageHeight`, `imageType`, and `canBeShiny` fields
+| Field           | Type     | Description
+|---------------- |--------- |---------------------
+| **`raids`**     | `array`  | Array of raid boss objects with `name`, `image`, `canBeShiny`, `imageWidth`, `imageHeight`, `imageType`
+| **`shinies`**   | `array`  | Array of shiny-eligible Pokemon objects
+| **`raidAlternation`** | `string` | Rotation pattern description (if bosses alternate)
+| **`raidFeaturedAttacks`** | `array` | Featured exclusive moves available during the event
 
 
 

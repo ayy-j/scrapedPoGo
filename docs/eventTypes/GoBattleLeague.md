@@ -26,20 +26,34 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ```json
 {
-  "eventID": "go-battle-league-season-21",
-  "name": "GO Battle League Season 21",
+  "eventID": "gbl-precious-paths_great-league_ultra-league_master-league-split-3",
+  "name": "Great League, Ultra League, and Master League | Precious Paths",
   "eventType": "go-battle-league",
-  "heading": "GO Battle League",
-  "image": "https://cdn.leekduck.com/assets/img/events/go-battle-league.jpg",
-  "start": "2025-12-02T13:00:00.000",
-  "end": "2026-03-03T13:00:00.000",
-  "flags": {
-    "hasSpawns": false,
-    "hasFieldResearchTasks": false,
-    "hasBonuses": false,
-    "hasRaids": false,
-    "hasEggs": false,
-    "hasShiny": false
+  "heading": "Go Battle League",
+  "image": "https://cdn.leekduck.com/assets/img/events/go-battle-league-season-25-precious-paths.jpg",
+  "start": "2026-01-27T21:00:00.000Z",
+  "end": "2026-02-03T21:00:00.000Z",
+  "battle": {
+    "leagues": [
+      {
+        "name": "Great League",
+        "cpCap": 1500,
+        "typeRestrictions": [],
+        "rules": ["Pokémon must be at or below 1,500 CP to enter."]
+      },
+      {
+        "name": "Ultra League",
+        "cpCap": 2500,
+        "typeRestrictions": [],
+        "rules": ["Pokémon must be at or below 2,500 CP to enter."]
+      },
+      {
+        "name": "Master League",
+        "cpCap": null,
+        "typeRestrictions": [],
+        "rules": ["All Pokémon are eligible."]
+      }
+    ]
   }
 }
 ```
@@ -50,32 +64,23 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field           | Type     | Description
 |---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the GO Battle League season or cup
-| **`name`**      | `string` | Name of the season or cup rotation
+| **`eventID`**   | `string` | Unique identifier for the GO Battle League rotation
+| **`name`**      | `string` | Name of the rotation (includes active leagues)
 | **`eventType`** | `string` | Always `"go-battle-league"`
-| **`heading`**   | `string` | Always `"GO Battle League"`
+| **`heading`**   | `string` | Always `"Go Battle League"`
 | **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Season/cup start date/time (ISO 8601 format)
-| **`end`**       | `string` | Season/cup end date/time (ISO 8601 format)
-| **`flags`**     | `object` | Content availability flags (see below)
+| **`start`**     | `string` | Rotation start date/time (ISO 8601 format with Z suffix for UTC)
+| **`end`**       | `string` | Rotation end date/time (ISO 8601 format with Z suffix for UTC)
 
-### Flags Object
+### Battle Object
 
-| Field                     | Type      | Description
-|-------------------------- |---------- |---------------------
-| **`hasSpawns`**           | `boolean` | Whether the event has wild spawns data
-| **`hasFieldResearchTasks`** | `boolean` | Whether the event has field research tasks
-| **`hasBonuses`**          | `boolean` | Whether the event has gameplay bonuses
-| **`hasRaids`**            | `boolean` | Whether the event has raid data
-| **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
-| **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
-
-## Additional Sections
-
-GO Battle League events include a `details` object containing:
-
-- **`battle`**: League and cup rotation details with CP restrictions and rules
-- **`bonuses`**: Season rewards and rank-up bonuses
+| Field                       | Type     | Description
+|---------------------------- |--------- |---------------------
+| **`battle.leagues`**        | `array`  | Array of active league objects
+| **`battle.leagues[].name`** | `string` | League name (e.g., "Great League", "Ultra League", "Love Cup")
+| **`battle.leagues[].cpCap`**| `int\|null` | Maximum CP allowed (1500, 2500, or null for unlimited)
+| **`battle.leagues[].typeRestrictions`** | `array` | Required Pokémon types (empty for unrestricted)
+| **`battle.leagues[].rules`**| `array`  | League-specific rules and restrictions
 
 
 

@@ -26,27 +26,14 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ```json
 {
-  "eventID": "max-mondays-2026-01-26",
-  "name": "Dynamax Roggenrola during Max Monday",
+  "eventID": "max-mondays-2026-02-02",
+  "name": "Dynamax Wailmer during Max Monday",
   "eventType": "max-mondays",
   "heading": "Max Mondays",
   "image": "https://cdn.leekduck.com/assets/img/events/max-battles-kanto.jpg",
-  "start": "2026-01-26T18:00:00.000",
-  "end": "2026-01-26T19:00:00.000",
-  "flags": {
-    "hasSpawns": false,
-    "hasFieldResearchTasks": false,
-    "hasBonuses": false,
-    "hasRaids": false,
-    "hasEggs": false,
-    "hasShiny": false,
-    "hasShowcases": false,
-    "hasRocket": false,
-    "hasBattle": false,
-    "hasResearch": false,
-    "hasRewards": false
-  },
-  "bonus": "January 26, 2026"
+  "start": "2026-02-02T18:00:00.000",
+  "end": "2026-02-02T19:00:00.000",
+  "bonus": "February 2, 2026"
 }
 ```
 
@@ -63,21 +50,7 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`image`**     | `string` | Event header/thumbnail image URL
 | **`start`**     | `string` | Monday start time (ISO 8601 format, typically 18:00 local)
 | **`end`**       | `string` | Monday end time (ISO 8601 format, typically 19:00 local)
-| **`flags`**     | `object` | Content availability flags (see below)
-| **`bonus`**     | `string` | Bonus text or date information
-
-### Flags Object
-
-| Field                     | Type      | Description
-|-------------------------- |---------- |---------------------
-| **`hasSpawns`**           | `boolean` | Whether the event has wild spawns data
-| **`hasFieldResearchTasks`** | `boolean` | Whether the event has field research tasks
-| **`hasBonuses`**          | `boolean` | Whether the event has gameplay bonuses
-| **`hasRaids`**            | `boolean` | Whether the event has raid data
-| **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
-| **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
-| **`hasShowcases`**        | `boolean` | Whether the event has showcase data
-| **`hasRocket`**           | `boolean` | Whether the event has Team GO Rocket data
+| **`bonus`**     | `string` | Date or bonus text information
 | **`hasBattle`**           | `boolean` | Whether the event has GO Battle League data
 | **`hasResearch`**         | `boolean` | Whether the event has research data
 | **`hasRewards`**          | `boolean` | Whether the event has rewards data

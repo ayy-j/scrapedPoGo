@@ -4,7 +4,9 @@
 
 ## Description
 
-This file contains all Team GO Rocket events. These events feature increased Team GO Rocket activity, special Shadow Pokémon, Rocket Leader rotations, and Giovanni encounters.
+This file contains Team GO Rocket Takeover events. These are limited-time events featuring increased Team GO Rocket activity, new Shadow Pokémon, and special encounters.
+
+> **Note:** This event type may be empty when no Rocket Takeover events are active. For current Team GO Rocket battle lineups (Grunts, Leaders, Giovanni), see the [Rocket Lineups endpoint](/docs/RocketLineups.md) at `https://pokemn.quest/data/rocketLineups.min.json`.
 
 ## Data Structure
 
@@ -13,8 +15,8 @@ The file contains an array of event objects with the `eventType` field set to `"
 ```json
 [
   {
-    "eventID": "team-go-rocket-event-example",
-    "name": "Team GO Rocket Event",
+    "eventID": "team-go-rocket-takeover-february-2026",
+    "name": "Team GO Rocket Takeover",
     "eventType": "team-go-rocket",
     "heading": "Team GO Rocket",
     ...
@@ -26,21 +28,13 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ```json
 {
-  "eventID": "team-go-rocket-takeover-2026-01",
+  "eventID": "team-go-rocket-takeover-february-2026",
   "name": "Team GO Rocket Takeover",
   "eventType": "team-go-rocket",
   "heading": "Team GO Rocket",
-  "image": "https://cdn.leekduck.com/assets/img/events/team-go-rocket-default.jpg",
-  "start": "2026-01-25T00:00:00.000",
-  "end": "2026-01-28T23:59:59.000",
-  "flags": {
-    "hasSpawns": false,
-    "hasFieldResearchTasks": false,
-    "hasBonuses": false,
-    "hasRaids": false,
-    "hasEggs": false,
-    "hasShiny": false
-  }
+  "image": "https://cdn.leekduck.com/assets/img/events/team-go-rocket-takeover.jpg",
+  "start": "2026-02-15T00:00:00.000",
+  "end": "2026-02-18T23:59:00.000"
 }
 ```
 
@@ -50,41 +44,30 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field           | Type     | Description
 |---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the Team GO Rocket event
-| **`name`**      | `string` | Name of the Rocket event
+| **`eventID`**   | `string` | Unique identifier for the Rocket event
+| **`name`**      | `string` | Name of the event (e.g., "Team GO Rocket Takeover")
 | **`eventType`** | `string` | Always `"team-go-rocket"`
 | **`heading`**   | `string` | Always `"Team GO Rocket"`
 | **`image`**     | `string` | Event header/thumbnail image URL
 | **`start`**     | `string` | Event start date/time (ISO 8601 format)
 | **`end`**       | `string` | Event end date/time (ISO 8601 format)
-| **`flags`**     | `object` | Content availability flags (see below)
 
-### Flags Object
+### Optional Fields
 
-| Field                     | Type      | Description
-|-------------------------- |---------- |---------------------
-| **`hasSpawns`**           | `boolean` | Whether the event has wild spawns data
-| **`hasFieldResearchTasks`** | `boolean` | Whether the event has field research tasks
-| **`hasBonuses`**          | `boolean` | Whether the event has gameplay bonuses
-| **`hasRaids`**            | `boolean` | Whether the event has raid data
-| **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
-| **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
+| Field           | Type     | Description
+|---------------- |--------- |---------------------
+| **`pokemon`**   | `array`  | New Shadow Pokémon available during the event
+| **`bonuses`**   | `array`  | Active bonuses (e.g., increased Rocket spawns, TM effects)
+| **`description`**| `string`| Event description text
 
-## Additional Sections
+## Related Endpoints
 
-Team GO Rocket events include a `details` object containing:
-
-- **`pokemon`**: Array of new or featured Shadow Pokémon objects with `imageWidth`, `imageHeight`, `imageType`, and `canBeShiny` fields
-- **`bonuses`**: Array of bonuses related to Team GO Rocket battles
-- **`research`**: Rocket-themed research tasks
-- **`rocket`**: Detailed Shadow Pokémon lineup information
-
-
+- **[Rocket Lineups](/docs/RocketLineups.md)** - Current Team GO Rocket battle lineups (always available)
+- **[Events](/docs/Events.md)** - All event types including Rocket Takeovers
 
 ## Notes
 
-- Team GO Rocket events often feature increased balloon and PokéStop invasions
-- May introduce new Shadow Pokémon or rotate available Shadow species
-- Giovanni encounters may be available during special events
-- Rocket Leader lineups (Cliff, Sierra, Arlo) change periodically
-- Shadow Raids featuring Shadow Legendary Pokémon may be included
+- Rocket Takeover events typically run for 3-5 days
+- During these events, Team GO Rocket appears more frequently at PokéStops
+- New Shadow Pokémon may debut during Takeover events
+- Special Research featuring Giovanni often accompanies these events

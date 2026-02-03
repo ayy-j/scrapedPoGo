@@ -26,21 +26,13 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ```json
 {
-  "eventID": "dynamax-venusaur-max-battles-january-2026",
-  "name": "Dynamax Venusaur in Max Battles",
+  "eventID": "max-battle-day-february-2026",
+  "name": "Max Battle Day",
   "eventType": "max-battles",
   "heading": "Max Battles",
-  "image": "https://cdn.leekduck.com/assets/img/events/max-battles-default.jpg",
-  "start": "2026-01-15T10:00:00.000",
-  "end": "2026-01-22T10:00:00.000",
-  "flags": {
-    "hasSpawns": false,
-    "hasFieldResearchTasks": false,
-    "hasBonuses": false,
-    "hasRaids": false,
-    "hasEggs": false,
-    "hasShiny": false
-  }
+  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "start": "2026-02-15T14:00:00.000",
+  "end": "2026-02-15T17:00:00.000"
 }
 ```
 
@@ -57,25 +49,13 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`image`**     | `string` | Event header/thumbnail image URL
 | **`start`**     | `string` | Rotation start date/time (ISO 8601 format)
 | **`end`**       | `string` | Rotation end date/time (ISO 8601 format)
-| **`flags`**     | `object` | Content availability flags (see below)
 
-### Flags Object
+### Optional Fields
 
-| Field                     | Type      | Description
-|-------------------------- |---------- |---------------------
-| **`hasSpawns`**           | `boolean` | Whether the event has wild spawns data
-| **`hasFieldResearchTasks`** | `boolean` | Whether the event has field research tasks
-| **`hasBonuses`**          | `boolean` | Whether the event has gameplay bonuses
-| **`hasRaids`**            | `boolean` | Whether the event has raid data
-| **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
-| **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
-
-## Additional Sections
-
-Max Battle events include a `details` object containing:
-
-- **`pokemon`**: Array of featured Dynamax Pokémon objects with `imageWidth`, `imageHeight`, `imageType`, and `canBeShiny` fields
-- **`bonuses`**: Array of any active bonuses during the rotation
+| Field           | Type     | Description
+|---------------- |--------- |---------------------
+| **`pokemon`**   | `array`  | Featured Dynamax Pokémon objects
+| **`bonuses`**   | `array`  | Active bonuses during the rotation
 
 
 

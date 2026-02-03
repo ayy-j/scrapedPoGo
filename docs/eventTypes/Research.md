@@ -2,9 +2,13 @@
 
 `https://pokemn.quest/data/eventTypes/research.min.json`
 
+> **⚠️ Note:** This event type (`eventType: "research"`) is not currently active in the data. Research-related events use `research-day` instead.
+>
+> **Looking for Field Research Tasks?** See the separate [Research Tasks endpoint](/docs/Research.md) at `https://pokemn.quest/data/research.min.json` which contains current field research tasks and rewards.
+
 ## Description
 
-This file contains Research events, which typically refer to Special Research, Timed Research, or Research Breakthrough changes. These are quest-based storylines or limited-time research tasks.
+This file would contain Research events with `eventType: "research"`, which could refer to Special Research, Timed Research, or Research Breakthrough changes. Currently, these are not scraped as separate events.
 
 ## Data Structure
 
