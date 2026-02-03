@@ -5,3 +5,7 @@
 ## 2024-05-23 - Toggle Buttons Need State
 **Learning:** Filter chips and view toggles were implemented as plain buttons with active classes, leaving screen reader users unaware of their state (on/off).
 **Action:** Always include `aria-pressed="true/false"` on buttons that function as toggles, not just visual `active` classes.
+
+## 2026-02-03 - Unified Focus Styles
+**Learning:** Interactive elements like custom buttons and `div`s with `role="button"` often lack default browser focus indicators or have inconsistent ones.
+**Action:** Always add explicit `:focus-visible` styles to all interactive elements to ensure keyboard users can clearly see their position.
