@@ -8,7 +8,7 @@ The Events endpoint provides comprehensive data about all Pokemon GO events, inc
 
 ## Response Structure
 
-The endpoint returns a JSON array of event objects sorted chronologically by start date:
+The endpoint returns a minified JSON array of event objects sorted chronologically by start date:
 
 ```json
 [
@@ -66,7 +66,7 @@ Depending on the event type and content, events may include any of the following
 | **`bonuses`** | `array` | Event bonuses as objects with `text` and `image` fields |
 | **`bonuses[].text`** | `string` | Bonus description text |
 | **`bonuses[].image`** | `string` | Bonus icon image URL |
-| **`bonus`** | `string` | Single bonus text (alternative to `bonuses` array) |
+| **`bonus`** | `string` | Single bonus text (alternative to `bonuses` array, used in Spotlight Hours) |
 | **`bonusDisclaimers`** | `array` | Disclaimers/restrictions for bonuses (e.g., regional, ticket-only) |
 | **`lureModuleBonus`** | `string` | Lure module bonus description |
 | **`exclusiveBonuses`** | `array` | Bonuses exclusive to ticketed players |
@@ -198,6 +198,14 @@ Depending on the event type and content, events may include any of the following
 | **`whatsNew`** | `array` | New features for the tour |
 | **`sales`** | `array` | In-game sales and offers |
 
+**whatsNew Example:**
+```json
+[
+  "Trainers who participate in raids will have a chance of receiving new Special Backgrounds!",
+  "<img src=\"https://cdn.leekduck.com/assets/img/events/kalos-special-backgrounds.png\">"
+]
+```
+
 ### Max Battles
 
 | Field | Type | Description |
@@ -227,7 +235,7 @@ These boolean flags indicate what content is available for an event (flat at top
 | **`availability`** | `object` | Event availability window with `start` and `end` fields |
 | **`encounters`** | `array` | Encounter Pokemon list |
 | **`isPaid`** | `boolean` | Whether the event requires payment |
-| **`price`** | `string` | Event ticket price |
+| **`price`** | `string \| number` | Event ticket price |
 | **`tasks`** | `array` | Research tasks (alternative structure) |
 
 **eventInfo Object Structure:**
@@ -346,6 +354,29 @@ Events are categorized by type. Each type has its own filtered endpoint:
 | **`research-day`** | Research Day events |
 | **`season`** | Seasonal events (3-month periods) |
 
+### Other Source Category Labels
+
+These labels appear on LeekDuck and related sources but are not currently normalized as `eventType` values in this API. They may be mapped into the supported event types above or omitted depending on content:
+
+- `bonus-hour`
+- `city-safari`
+- `giovanni-special-research`
+- `global-challenge`
+- `live-event`
+- `location-specific`
+- `pokemon-go-fest`
+- `potential-ultra-unlock`
+- `research`
+- `research-breakthrough`
+- `safari-zone`
+- `special-research`
+- `team-go-rocket`
+- `ticketed`
+- `ticketed-event`
+- `timed-research`
+- `update`
+- `wild-area`
+
 ## Per-Event-Type Endpoints
 
 Each event type has its own filtered endpoint containing only events of that type:
@@ -380,6 +411,8 @@ All dates follow ISO 8601 format with millisecond precision:
 **Local time** (no `Z` suffix): Used for most events. These times apply in the player's local timezone (e.g., Community Day starts at 14:00 local time everywhere).
 
 **UTC time** (with `Z` suffix): Used for globally synchronized events like GO Battle League seasons, which start at the same moment worldwide.
+
+Most programming languages' date parsers (e.g., JavaScript's `Date.parse()`) handle this distinction automatically.
 
 ## Example Events
 
