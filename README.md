@@ -354,9 +354,7 @@ module.exports = { get };
 | `npm run detailedscrape` | Scrape detailed event information |
 | `npm run combinedetails` | Combine detailed data with basic events and generate per-eventType files |
 | `npm run validate` | Validate all data files against JSON schemas |
-| `npm run blob:upload` | Upload images to Vercel Blob Storage |
-| `npm run blob:upload:dry` | Preview uploads without actually uploading |
-| `npm run blob:upload:force` | Re-upload all images (overwrite existing) |
+| `npm run blob:upload` | Upload images to Vercel Blob Storage (supports `--dry-run`, `--force`) |
 
 ---
 
@@ -374,13 +372,13 @@ Images referenced in the scraped data can optionally be stored in [Vercel Blob](
 
 ```bash
 # Preview what would be uploaded
-npm run blob:upload:dry
+npm run blob:upload -- --dry-run
 
 # Upload new images to Blob Storage
 npm run blob:upload
 
 # Force re-upload all images
-npm run blob:upload:force
+npm run blob:upload -- --force
 ```
 
 ### Enable Blob URLs in Output
@@ -412,7 +410,7 @@ You can download a local mirror of all referenced images using the same folder s
 
 ```bash
 # Preview what would be downloaded
-npm run images:download:dry
+npm run images:download -- --dry-run
 
 # Download all images
 npm run images:download

@@ -152,11 +152,25 @@ async function scrapeShinies() {
 				let filename = `pokemon_icon_${String(dexNumber).padStart(3, '0')}_${typeFileCode}_shiny.png`;
 				let basePath = 'Images/Pokemon%20-%20256x256';
 				
+				// Known aa_fn forms that don't have shiny variants in PokeMiners
+				const nonExistentShinyForms = [
+					'fGIGANTAMAX',  // Gigantamax forms generally don't have shinies yet
+					'fFALL_2020'     // Fall 2020 costume shiny doesn't exist
+				];
+				
 				// Prefer aa_fn (Addressable Assets format) over fn for custom filenames
 				if (pokemon.aa_fn) {
 					// aa_fn format: "pm2.cJAN_2020_NOEVOLVE" -> add ".s.icon.png" for shiny
-					filename = `${pokemon.aa_fn}.s.icon.png`;
-					basePath = 'Images/Pokemon%20-%20256x256/Addressable%20Assets';
+					const aaFormCode = pokemon.aa_fn.split('.')[1]; // Extract form code
+					
+					// Check if this form has a known non-existent shiny variant
+					if (aaFormCode && nonExistentShinyForms.includes(aaFormCode)) {
+						console.log(`  Note: ${pokemon.aa_fn} shiny doesn't exist for #${dexNumber}, using base shiny`);
+						// Leave filename as default base shiny
+					} else {
+						filename = `${pokemon.aa_fn}.s.icon.png`;
+						basePath = 'Images/Pokemon%20-%20256x256/Addressable%20Assets';
+					}
 				} else if (pokemon.fn) {
 					// Legacy fn format - try to convert to aa_fn format
 					// fn format: "pm0025_00_pgo_fall2019" -> "pm25.fFALL_2019.s.icon.png"
@@ -166,9 +180,15 @@ async function scrapeShinies() {
 						'movie2020': 'fCOSTUME_2020',
 						'4thanniversary': 'fFLYING_5TH_ANNIV',  // Close approximation
 						'5thanniversary': 'fFLYING_5TH_ANNIV',
-						'winter2020': 'cWINTER_2018',          // May need verification
+						'winter2020': 'fWINTER_2020',          // Corrected from cWINTER_2018
 						'copy2019': 'fCOPY_2019',
-						'adventurehat2020': 'fADVENTURE_HAT_2020'
+						'adventurehat2020': 'fADVENTURE_HAT_2020',
+						// Year-only costumes (no underscore in filename)
+						'2020': 'f2020',
+						'2021': 'f2021',
+						'2022': 'f2022',
+						// Note: fall2020 shiny doesn't exist in PokeMiners, will fallback to base
+						'fall2020': null  // Explicitly mark as non-existent
 					};
 					
 					const fnMatch = pokemon.fn.match(/^pm(\d+)_\d+_pgo_(.+)$/);
@@ -180,6 +200,10 @@ async function scrapeShinies() {
 						if (mappedName) {
 							filename = `pm${fnDex}.${mappedName}.s.icon.png`;
 							basePath = 'Images/Pokemon%20-%20256x256/Addressable%20Assets';
+						} else if (mappedName === null) {
+							// Explicitly null mapping means shiny variant doesn't exist, use base
+							console.log(`  Note: ${costumeSuffix} shiny variant doesn't exist for #${fnDex}, using base shiny`);
+							// Leave filename as default base shiny
 						} else {
 							// Try generic conversion: fall2019 -> FALL_2019, use 'f' prefix for forms
 							const upperSuffix = costumeSuffix.toUpperCase().replace(/(\d{4})$/, '_$1');
