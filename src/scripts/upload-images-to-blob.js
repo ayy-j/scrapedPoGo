@@ -23,6 +23,9 @@ const DRY_RUN = process.argv.includes('--dry-run');
 const FORCE = process.argv.includes('--force');
 const VERBOSE = process.argv.includes('--verbose') || process.argv.includes('-v');
 
+// Custom domain for blob storage (replaces raw vercel-storage.com URLs)
+const BLOB_CUSTOM_DOMAIN = 'https://pokemn.quest';
+
 // URL Mapping storage
 const URL_MAP_FILE = path.join(__dirname, '..', 'utils', 'blob-url-map.json');
 
@@ -270,11 +273,19 @@ async function main() {
                         contentType: contentType,
                     });
 
+                    // Transform blob.url to use custom domain
+                    // e.g., https://xyz.public.blob.vercel-storage.com/images/foo.png
+                    //    -> https://pokemn.quest/images/foo.png
+                    const blobUrl = blob.url.replace(
+                        /^https:\/\/[^/]+\.public\.blob\.vercel-storage\.com/,
+                        BLOB_CUSTOM_DOMAIN
+                    );
+
                     // Store mapping for the exact URL found in data...
-                    urlMap[url] = blob.url;
+                    urlMap[url] = blobUrl;
                     // ...and also for a canonicalized equivalent (helps if upstream host changes).
                     if (canonicalUrl && canonicalUrl !== url) {
-                        urlMap[canonicalUrl] = blob.url;
+                        urlMap[canonicalUrl] = blobUrl;
                     }
                     results.success++;
 

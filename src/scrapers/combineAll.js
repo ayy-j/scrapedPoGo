@@ -11,6 +11,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { transformUrls, isEnabled: isBlobEnabled } = require('../utils/blobUrls');
 
 const DATA_DIR = path.join(__dirname, '../../data');
 const EVENT_TYPES_DIR = path.join(DATA_DIR, 'eventTypes');
@@ -364,9 +365,18 @@ async function main() {
     console.log('Calculating statistics...');
     unified.stats = calculateStats(unified);
     
+    // Transform all image URLs to blob URLs if enabled
+    let outputData = unified;
+    if (isBlobEnabled()) {
+        console.log('Transforming image URLs to blob storage...');
+        outputData = transformUrls(unified);
+        // Update imageBase in meta
+        outputData.meta.imageBase = 'https://pokemn.quest/images/';
+    }
+
     // Write minified file
     const minifiedPath = path.join(DATA_DIR, 'unified.min.json');
-    fs.writeFileSync(minifiedPath, JSON.stringify(unified));
+    fs.writeFileSync(minifiedPath, JSON.stringify(outputData));
     const minSize = fs.statSync(minifiedPath).size;
     console.log(`\n✅ Wrote: ${minifiedPath} (${(minSize / 1024).toFixed(1)} KB)`);
     
