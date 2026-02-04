@@ -1240,37 +1240,27 @@ function extractGoPassTiers(doc) {
  */
 function deduplicateEvents(events) {
     const eventsByID = new Map();
-    events.forEach(e => {
+    const processedIDs = new Set();
+
+    for (const e of events) {
         if (!eventsByID.has(e.eventID)) {
-            eventsByID.set(e.eventID, []);
-        }
-        eventsByID.get(e.eventID).push(e);
-    });
+            eventsByID.set(e.eventID, e);
+        } else if (!processedIDs.has(e.eventID)) {
+            // Found the first duplicate - merge it
+            const firstEvent = eventsByID.get(e.eventID);
 
-    const deduplicatedEvents = [];
-
-    for (const duplicates of eventsByID.values()) {
-        if (duplicates.length > 1) {
-            const mergedEvent = duplicates[0]; // Use the first occurrence
-
-            if (duplicates[0].start)
-            {
-                mergedEvent.start = duplicates[0].start;
-                mergedEvent.end = duplicates[1].end;
-            }
-            else
-            {
-                mergedEvent.start = duplicates[1].start;
-                mergedEvent.end = duplicates[0].end;
+            if (firstEvent.start) {
+                firstEvent.end = e.end;
+            } else {
+                firstEvent.start = e.start;
             }
 
-            deduplicatedEvents.push(mergedEvent);
-        } else {
-            deduplicatedEvents.push(duplicates[0]);
+            processedIDs.add(e.eventID);
         }
+        // Subsequent duplicates are ignored
     }
 
-    return deduplicatedEvents;
+    return Array.from(eventsByID.values());
 }
 
 // ============================================================================
