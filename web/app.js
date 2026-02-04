@@ -166,9 +166,24 @@ async function loadDataset(datasetId) {
 
     // ⚡ Bolt Optimization: Pre-calculate timestamps to avoid repeated new Date() calls during sort/render
     state.data[datasetId] = rawData.map((item) => {
-      if (item.start) item._startTime = new Date(item.start).getTime();
-      if (item.end) item._endTime = new Date(item.end).getTime();
-      if (item.date) item._date = new Date(item.date).getTime();
+      if (item.start) {
+        const startTime = new Date(item.start).getTime();
+        if (!Number.isNaN(startTime)) {
+          item._startTime = startTime;
+        }
+      }
+      if (item.end) {
+        const endTime = new Date(item.end).getTime();
+        if (!Number.isNaN(endTime)) {
+          item._endTime = endTime;
+        }
+      }
+      if (item.date) {
+        const dateTime = new Date(item.date).getTime();
+        if (!Number.isNaN(dateTime)) {
+          item._date = dateTime;
+        }
+      }
       return item;
     });
   } catch (error) {
@@ -383,15 +398,15 @@ function renderCalendar() {
 
     const daysEvents = events.filter((e) => {
       // ⚡ Bolt Optimization: Use pre-calculated timestamps
-      const eStart = e._startTime || (e.start ? new Date(e.start).getTime() : 0);
-      const eEnd = e._endTime || (e.end ? new Date(e.end).getTime() : 0);
+      const eStart = e._startTime ?? (e.start ? new Date(e.start).getTime() : 0);
+      const eEnd = e._endTime ?? (e.end ? new Date(e.end).getTime() : 0);
       if (!eStart || !eEnd) return false;
       return Math.max(eStart, currentDayStart) <= Math.min(eEnd, currentDayEnd);
     });
 
     daysEvents.sort((a, b) => {
-      const aStart = a._startTime || new Date(a.start).getTime();
-      const bStart = b._startTime || new Date(b.start).getTime();
+      const aStart = a._startTime ?? new Date(a.start).getTime();
+      const bStart = b._startTime ?? new Date(b.start).getTime();
       return aStart - bStart;
     });
 
