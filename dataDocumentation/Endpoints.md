@@ -1,6 +1,7 @@
 # API Endpoints
 | Category                         | Endpoint                                                                                          |
 | -------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **Unified (All Data)**           | `https://pokemn.quest/data/unified.min.json`                  |
 | **Events**                       | `https://pokemn.quest/data/events.min.json`                   |
 | Community Day                    | `https://pokemn.quest/data/eventTypes/community-day.min.json` |
 | Event                            | `https://pokemn.quest/data/eventTypes/event.min.json`         |

@@ -38,6 +38,9 @@ npm run detailedscrape
 # Combine detailed data with basic events (also generates per-eventType files)
 npm run combinedetails
 
+# Generate unified data file with all datasets and indices
+npm run combineall
+
 # Generate data quality metrics
 ```
 
@@ -49,6 +52,7 @@ For the most comprehensive event data:
 npm run scrape              # Get basic event data
 npm run detailedscrape      # Get detailed event info
 npm run combinedetails      # Merge details + generate per-eventType files
+npm run combineall          # Generate unified data file
 ```
 
 ### Output
@@ -62,6 +66,16 @@ All scraped data is saved to the `data/` directory as JSON files:
 ## API Endpoints
 
 All data is served from **https://pokemn.quest** and updated every 8 hours via automated scraping.
+
+### Unified Data (Recommended)
+- Endpoint: `https://pokemn.quest/data/unified.min.json`
+- [Documentation](dataDocumentation/UnifiedData.md)
+
+The unified endpoint combines all datasets into a single payload with:
+- All events, raids, eggs, research, shinies, and rocket lineups
+- Deduplicated Pokemon index with dex numbers and cross-references
+- Pre-computed lookup indices for fast data access
+- Summary statistics
 
 ### Events
 - Formatted: `https://pokemn.quest/data/events.json`

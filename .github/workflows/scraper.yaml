@@ -45,6 +45,10 @@ jobs:
         run: npm run combinedetails
         continue-on-error: true
       
+      - name: Generate unified data file
+        run: npm run combineall
+        continue-on-error: true
+      
       - name: Upload new images to Blob Storage
         if: env.BLOB_READ_WRITE_TOKEN != ''
         run: |
