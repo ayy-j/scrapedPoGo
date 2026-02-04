@@ -40,9 +40,10 @@ function extractImageUrls(obj, urls = []) {
     if (!obj) return urls;
 
     if (typeof obj === 'string') {
-        // Match image URLs but exclude blob storage URLs (already uploaded)
+        // Match image URLs but exclude blob storage URLs and pokemn.quest URLs (already uploaded)
         if (obj.match(/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp|svg)/i) &&
-            !obj.includes('.blob.vercel-storage.com')) {
+            !obj.includes('.blob.vercel-storage.com') &&
+            !obj.includes('pokemn.quest')) {
             urls.push(obj);
         }
         return urls;
