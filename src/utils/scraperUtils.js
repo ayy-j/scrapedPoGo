@@ -200,7 +200,7 @@ async function extractPokemonList(container, options = {}) {
         
         // Name
         const nameEl = item.querySelector(':scope > .pkmn-name');
-        poke.name = nameEl ? nameEl.innerHTML.trim() : '';
+        poke.name = nameEl ? nameEl.textContent.trim() : '';
         
         // Image
         const imgEl = item.querySelector(':scope > .pkmn-list-img > img');
@@ -409,7 +409,7 @@ async function extractBonuses(doc) {
         const bonus = {};
         
         const textEl = item.querySelector(':scope > .bonus-text');
-        bonus.text = textEl ? textEl.innerHTML.trim() : '';
+        bonus.text = textEl ? textEl.textContent.trim() : '';
         
         const imgEl = item.querySelector(':scope > .item-circle > img');
         bonus.image = imgEl ? imgEl.src : '';
@@ -579,7 +579,7 @@ async function extractResearchTasks(doc, researchType = 'special') {
         // Step name
         const stepNameEl = stepItem.querySelector(':scope > .task-reward-wrapper > .step-name');
         if (stepNameEl) {
-            step.name = stepNameEl.innerHTML?.trim() || '';
+            step.name = stepNameEl.textContent?.trim() || '';
         }
         
         // Tasks within step
@@ -595,12 +595,12 @@ async function extractResearchTasks(doc, researchType = 'special') {
             
             const taskTextEl = taskItem.querySelector(':scope > .task-text');
             if (taskTextEl) {
-                task.text = taskTextEl.innerHTML?.replace(/\n\s+/g, ' ').trim() || '';
+                task.text = taskTextEl.textContent?.replace(/\n\s+/g, ' ').trim() || '';
             }
             
             const rewardLabelEl = taskItem.querySelector(':scope > .reward-text > .reward-label');
             if (rewardLabelEl) {
-                task.reward.text = rewardLabelEl.innerHTML?.replace(/<span>|<\/span>/g, '').trim() || '';
+                task.reward.text = rewardLabelEl.textContent?.trim() || '';
             }
             
             const rewardImgEl = taskItem.querySelector(':scope > .reward-text > .reward-bubble > .reward-image');
@@ -623,7 +623,7 @@ async function extractResearchTasks(doc, researchType = 'special') {
             
             const labelEl = rewardItem.querySelector(':scope > .reward-label > span');
             if (labelEl) {
-                reward.text = labelEl.innerHTML?.trim() || '';
+                reward.text = labelEl.textContent?.trim() || '';
             }
             
             const imgEl = rewardItem.querySelector(':scope > .page-reward-item > .reward-image');
