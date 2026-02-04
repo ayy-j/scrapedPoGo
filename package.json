@@ -7,11 +7,12 @@
     "scrape": "node ./src/scrapers/scrape.js",
     "detailedscrape": "node ./src/scrapers/detailedscrape.js",
     "combinedetails": "node ./src/scrapers/combinedetails.js",
-    "combineall": "node ./src/scrapers/combineAll.js",
+    "combineall": "USE_BLOB_URLS=true node ./src/scrapers/combineAll.js",
     "scrapeshinies": "node ./src/scrapers/scrapeShinies.js",
     "pipeline": "USE_BLOB_URLS=true npm run scrapeshinies && USE_BLOB_URLS=true npm run scrape && USE_BLOB_URLS=true npm run detailedscrape && USE_BLOB_URLS=true npm run combinedetails && npm run combineall",
     "validate": "node src/scripts/validate-schemas.js",
     "blob:upload": "node src/scripts/upload-images-to-blob.js",
+    "blob:transform": "USE_BLOB_URLS=true node src/scripts/transform-all-urls.js",
     "images:download": "node src/scripts/download-images-locally.js"
   },
   "author": "quantNebula",
