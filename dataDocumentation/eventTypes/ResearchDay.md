@@ -89,7 +89,7 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
 | **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
 
-Note: Unlike other event types, Research Day events may not use the `details` wrapper structure consistently.
+Note: Content flags are always at the top level of the event object, consistent with all other event types.
 
 
 
