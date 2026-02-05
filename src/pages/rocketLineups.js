@@ -9,6 +9,8 @@ const fs = require('fs');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
+const logger = require('../utils/logger');
+const { fetchJson } = require('../utils/scraperUtils');
 
 /**
  * @typedef {Object} WeaknessInfo
@@ -54,11 +56,11 @@ const https = require('https');
  * await rocketLineups.get();
  * // Creates data/rocketLineups.json and data/rocketLineups.min.json
  */
-function get() {
-    return new Promise(resolve => {
-        JSDOM.fromURL("https://leekduck.com/rocket-lineups/", {
-        })
-        .then((dom) => {
+async function get() {
+    logger.info("Scraping rocket lineups...");
+    try {
+        try {
+            const dom = await JSDOM.fromURL("https://leekduck.com/rocket-lineups/", {});
             const lineups = [];
             
             const rocketProfiles = dom.window.document.querySelectorAll('.rocket-profile');
@@ -147,39 +149,19 @@ function get() {
                 lineups.push(lineup);
             });
 
-            fs.writeFile('data/rocketLineups.min.json', JSON.stringify(lineups), err => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-            });
-        }).catch(_err => {
-            console.log(_err);
-            https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json", (res) => {
-                let body = "";
-                res.on("data", (chunk) => { body += chunk; });
+            await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(lineups));
+            logger.success("Rocket lineups saved.");
+        } catch (_err) {
+            logger.error(_err);
 
-                res.on("end", () => {
-                    try {
-                        let json = JSON.parse(body);
+            const json = await fetchJson("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json");
 
-                        fs.writeFile('data/rocketLineups.min.json', JSON.stringify(json), err => {
-                            if (err) {
-                                console.error(err);
-                                return;
-                            }
-                        });
-                    }
-                    catch (error) {
-                        console.error(error.message);
-                    };
-                });
-
-            }).on("error", (error) => {
-                console.error(error.message);
-            });
-        });
-    })
+            await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(json));
+            logger.success("Rocket lineups saved (fallback).");
+        }
+    } catch (error) {
+        logger.error(error.message);
+    }
 }
 
 module.exports = { get }
