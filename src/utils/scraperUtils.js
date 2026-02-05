@@ -309,7 +309,7 @@ async function extractSection(doc, sectionId) {
         
         // Paragraphs
         if (sibling.tagName === 'P') {
-            const text = sibling.innerHTML?.trim();
+            const text = sibling.textContent?.trim();
             if (text) {
                 result.paragraphs.push(text);
             }
@@ -319,7 +319,7 @@ async function extractSection(doc, sectionId) {
         if (sibling.tagName === 'UL' || sibling.tagName === 'OL') {
             const listItems = [];
             sibling.querySelectorAll('li').forEach(li => {
-                listItems.push(li.innerHTML?.trim());
+                listItems.push(li.textContent?.trim());
             });
             if (listItems.length > 0) {
                 result.lists.push(listItems);
@@ -369,7 +369,7 @@ function extractTable(table) {
     rows.forEach(row => {
         const cells = [];
         row.querySelectorAll('td').forEach(td => {
-            cells.push(td.innerHTML?.trim() || '');
+            cells.push(td.textContent?.trim() || '');
         });
         if (cells.length > 0) {
             data.rows.push(cells);
@@ -431,13 +431,22 @@ async function extractBonuses(doc) {
             
             while (sibling && sibling.tagName !== 'H2' && sibling.nextSibling) {
                 if (sibling.tagName === 'P') {
-                    const html = sibling.innerHTML;
-                    if (html.includes('<br>\n')) {
-                        html.split('<br>\n').forEach(s => {
-                            if (s.trim()) result.disclaimers.push(s.trim());
-                        });
-                    } else if (html.trim()) {
-                        result.disclaimers.push(html.trim());
+                    let currentText = '';
+                    sibling.childNodes.forEach(node => {
+                        if (node.nodeType === 1 && node.tagName === 'BR') {
+                            if (currentText.trim()) {
+                                result.disclaimers.push(currentText.trim());
+                            }
+                            currentText = '';
+                        } else if (node.nodeType === 1 && (node.tagName === 'SCRIPT' || node.tagName === 'STYLE')) {
+                            // Skip script and style tags
+                        } else {
+                            currentText += node.textContent || '';
+                        }
+                    });
+
+                    if (currentText.trim()) {
+                        result.disclaimers.push(currentText.trim());
                     }
                 }
                 sibling = sibling.nextSibling;
@@ -573,7 +582,7 @@ async function extractResearchTasks(doc, researchType = 'special') {
         // Step number
         const stepNumEl = stepItem.querySelector(':scope > .step-label > .step-number');
         if (stepNumEl) {
-            step.step = parseInt(stepNumEl.innerHTML) || 0;
+            step.step = parseInt(stepNumEl.textContent) || 0;
         }
         
         // Step name
