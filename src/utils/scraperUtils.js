@@ -75,14 +75,44 @@ async function fetchJson(url, timeout = 30000) {
 }
 
 /**
+ * In-flight HTML fetch cache for request coalescing.
+ * When multiple scrapers request the same URL concurrently (e.g., generic.js
+ * and a type-specific scraper both fetching the same event page), only one
+ * HTTP request is made. Each caller gets its own JSDOM instance from the
+ * shared HTML to avoid DOM mutation conflicts.
+ *
+ * Performance impact: Eliminates ~50% of HTTP requests in Stage 2
+ * (detailedscrape.js), where every event URL is fetched by both the generic
+ * scraper and the type-specific scraper in parallel.
+ *
+ * @type {Map<string, Promise<string>>}
+ */
+const htmlFetchCache = new Map();
+
+/**
  * Fetches a URL and returns a JSDOM instance.
- * Replaces JSDOM.fromURL with a secure, timeout-enabled version.
+ * Uses request coalescing: concurrent calls for the same URL share a single
+ * HTTP fetch, then each receives its own independent JSDOM instance.
+ * Replaces JSDOM.fromURL with a secure, timeout-enabled, deduplicated version.
  * @param {string} url - URL to fetch
- * @returns {Promise<JSDOM>} JSDOM instance
+ * @returns {Promise<JSDOM>} JSDOM instance (unique per call, safe to mutate)
  */
 async function getJSDOM(url) {
-    const html = await fetchUrl(url);
+    // Coalesce concurrent fetches for the same URL into a single HTTP request
+    if (!htmlFetchCache.has(url)) {
+        htmlFetchCache.set(url, fetchUrl(url));
+    }
+    const html = await htmlFetchCache.get(url);
     return new JSDOM(html, { url });
+}
+
+/**
+ * Clears the HTML fetch cache used by getJSDOM for request coalescing.
+ * Call between pipeline stages or after a batch of scrapes to free memory.
+ * @returns {void}
+ */
+function clearHtmlCache() {
+    htmlFetchCache.clear();
 }
 
 // ============================================================================
@@ -1272,6 +1302,7 @@ module.exports = {
     fetchUrl,
     fetchJson,
     getJSDOM,
+    clearHtmlCache,
     
     // File operations
     writeTempFile,

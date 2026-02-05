@@ -5,7 +5,6 @@
  * @module pages/detailed/communityday
  */
 
-const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
     handleScraperError, 
@@ -13,7 +12,8 @@ const {
     extractBonuses, 
     extractResearchTasks,
     extractSection,
-    extractPrice
+    extractPrice,
+    getJSDOM
 } = require('../../utils/scraperUtils');
 
 /**
@@ -68,7 +68,7 @@ const {
  */
 async function get(url, id, bkp) {
     try {
-        const dom = await JSDOM.fromURL(url, {});
+        const dom = await getJSDOM(url);
         const doc = dom.window.document;
 
         const commday = {

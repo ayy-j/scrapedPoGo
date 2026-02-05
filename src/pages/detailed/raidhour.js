@@ -4,8 +4,7 @@
  * @module pages/detailed/raidhour
  */
 
-const { JSDOM } = require('jsdom');
-const { writeTempFile, handleScraperError, extractPokemonList } = require('../../utils/scraperUtils');
+const { writeTempFile, handleScraperError, extractPokemonList, getJSDOM } = require('../../utils/scraperUtils');
 
 /**
  * @typedef {Object} RaidHourData
@@ -31,7 +30,7 @@ const { writeTempFile, handleScraperError, extractPokemonList } = require('../..
  */
 async function get(url, id, bkp) {
     try {
-        const dom = await JSDOM.fromURL(url, {});
+        const dom = await getJSDOM(url);
         const doc = dom.window.document;
         
         const raidHourData = {
