@@ -67,7 +67,7 @@ async function get()
 
                 events.forEach (e =>
                 {
-                    var name = e.querySelector(":scope > .event-item-wrapper > .event-item > .event-text-container > .event-text > h2").innerHTML;
+                    var name = e.querySelector(":scope > .event-item-wrapper > .event-item > .event-text-container > .event-text > h2").textContent;
                     var image = e.querySelector(":scope > .event-item-wrapper > .event-item > .event-img-wrapper > img").src;
                     if (image.includes("cdn-cgi"))
                     {
