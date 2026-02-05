@@ -12,6 +12,8 @@ const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
 const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
+const logger = require('../utils/logger');
+const { fetchJson } = require('../utils/scraperUtils');
 
 /**
  * @typedef {Object} EncounterReward
@@ -132,12 +134,12 @@ function inferTaskType(text) {
  * await research.get();
  * // Creates data/research.json and data/research.min.json
  */
-function get()
+async function get()
 {
-    return new Promise(resolve => {
-        JSDOM.fromURL("https://leekduck.com/research/", {
-        })
-        .then(async (dom) => {
+    logger.info("Scraping research...");
+    try {
+        try {
+            const dom = await JSDOM.fromURL("https://leekduck.com/research/", {});
             // Load shiny data for cross-referencing
             const shinyMap = loadShinyData();
 
@@ -292,45 +294,20 @@ function get()
 
             const output = transformUrls(research);
 
-            fs.writeFile('data/research.min.json', JSON.stringify(output), err => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-            });
-        }).catch(_err =>
-            {
-                console.log(_err);
-                https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.min.json", (res) =>
-                {
-                    let body = "";
-                    res.on("data", (chunk) => { body += chunk; });
-                
-                    res.on("end", () => {
-                        try
-                        {
-                            let json = JSON.parse(body);
-    
-                            const output = transformUrls(json);
+            await fs.promises.writeFile('data/research.min.json', JSON.stringify(output));
+            logger.success("Research saved.");
+        } catch (_err) {
+            logger.error(_err);
 
-                            fs.writeFile('data/research.min.json', JSON.stringify(output), err => {
-                                if (err) {
-                                    console.error(err);
-                                    return;
-                                }
-                            });
-                        }
-                        catch (error)
-                        {
-                            console.error(error.message);
-                        };
-                    });
-                
-                }).on("error", (error) => {
-                    console.error(error.message);
-                });
-            });
-    })
+            const json = await fetchJson("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/research.min.json");
+            const output = transformUrls(json);
+
+            await fs.promises.writeFile('data/research.min.json', JSON.stringify(output));
+            logger.success("Research saved (fallback).");
+        }
+    } catch (error) {
+        logger.error(error.message);
+    }
 }
 
 module.exports = { get }

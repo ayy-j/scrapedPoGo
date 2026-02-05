@@ -5,7 +5,7 @@
  * @module pages/events
  */
 
-const fs = require('fs');
+const fs = require('fs').promises;
 const { normalizeDatePair, deduplicateEvents, fetchJson, getJSDOM } = require('../utils/scraperUtils');
 const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
@@ -41,6 +41,7 @@ const { transformUrls } = require('../utils/blobUrls');
  */
 async function get()
 {
+    logger.info("Scraping events...");
     try {
         // Fetch event dates from JSON feed
         const feedJson = await fetchJson("https://leekduck.com/feeds/events.json");
@@ -109,12 +110,8 @@ async function get()
 
             const output = transformUrls(allEvents);
 
-            fs.writeFile('data/events.min.json', JSON.stringify(output), err => {
-                if (err) {
-                    logger.error(err);
-                    return;
-                }
-            });
+            await fs.writeFile('data/events.min.json', JSON.stringify(output));
+            logger.success("Events saved.");
         } catch (_err) {
             logger.error(_err);
             
@@ -123,12 +120,8 @@ async function get()
 
             const output = transformUrls(json);
 
-            fs.writeFile('data/events.min.json', JSON.stringify(output), err => {
-                if (err) {
-                    logger.error(err);
-                    return;
-                }
-            });
+            await fs.writeFile('data/events.min.json', JSON.stringify(output));
+            logger.success("Events saved (fallback).");
         }
     } catch (error) {
         logger.error(error.message);
