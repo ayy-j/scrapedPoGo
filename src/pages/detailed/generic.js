@@ -5,8 +5,7 @@
  * @module pages/detailed/generic
  */
 
-const { JSDOM } = require('jsdom');
-const { writeTempFile, handleScraperError } = require('../../utils/scraperUtils');
+const { writeTempFile, handleScraperError, getJSDOM } = require('../../utils/scraperUtils');
 
 /**
  * @typedef {Object} GenericEventMeta
@@ -39,7 +38,7 @@ const { writeTempFile, handleScraperError } = require('../../utils/scraperUtils'
  */
 async function get(url, id, bkp) {
     try {
-        const dom = await JSDOM.fromURL(url, {});
+        const dom = await getJSDOM(url);
         const doc = dom.window.document;
 
         const generic = {
