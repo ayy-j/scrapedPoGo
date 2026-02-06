@@ -3,14 +3,13 @@ node_modules
 .env.local
 .DS_Store
 
-# Source files (only deploy built output)
+# Source files (not needed in deployment)
 src
-public
 schemas
 test
-dataDocumentation
 
 # Documentation
+dataDocumentation
 *.md
 !README.md
 
@@ -19,7 +18,7 @@ dataDocumentation
 .github
 serve.js
 POKEMON_GO_CONTEXT.md
+.jules
 
-# Keep only the built output
-!.vercel/output
-!data
+# Keep these directories - they're needed for the build script
+# public/ and data/ will be copied to .vercel/output/static by the build script
