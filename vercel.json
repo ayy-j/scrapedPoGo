@@ -25,8 +25,32 @@
   ],
   "rewrites": [
     {
-      "source": "/data/:path*",
-      "destination": "/data/:path*"
+      "source": "/pokemon/:path*",
+      "destination": "https://btzr53b2kyiebsam.public.blob.vercel-storage.com/pokemon/:path*"
+    },
+    {
+      "source": "/events/:path*",
+      "destination": "https://btzr53b2kyiebsam.public.blob.vercel-storage.com/events/:path*"
+    },
+    {
+      "source": "/bonuses/:path*",
+      "destination": "https://btzr53b2kyiebsam.public.blob.vercel-storage.com/bonuses/:path*"
+    },
+    {
+      "source": "/types/:path*",
+      "destination": "https://btzr53b2kyiebsam.public.blob.vercel-storage.com/types/:path*"
+    },
+    {
+      "source": "/items/:path*",
+      "destination": "https://btzr53b2kyiebsam.public.blob.vercel-storage.com/items/:path*"
+    },
+    {
+      "source": "/weather/:path*",
+      "destination": "https://btzr53b2kyiebsam.public.blob.vercel-storage.com/weather/:path*"
+    },
+    {
+      "source": "/misc/:path*",
+      "destination": "https://btzr53b2kyiebsam.public.blob.vercel-storage.com/misc/:path*"
     }
   ]
 }

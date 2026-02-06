@@ -7,7 +7,7 @@ const LOCAL_DATA_PATH = '../data/';
 // Get the appropriate base URL
 const getBaseUrl = () => USE_LOCAL_DATA ? LOCAL_DATA_PATH : API_BASE_URL;
 
-// Event type mappings
+// Event type mappings (only types that have data files)
 const EVENT_TYPES = [
     { slug: 'community-day', name: 'Community Day' },
     { slug: 'event', name: 'Event' },
@@ -17,14 +17,11 @@ const EVENT_TYPES = [
     { slug: 'max-mondays', name: 'Max Mondays' },
     { slug: 'pokemon-go-tour', name: 'Pokémon GO Tour' },
     { slug: 'pokemon-spotlight-hour', name: 'Pokémon Spotlight Hour' },
-    { slug: 'pokestop-showcase', name: 'PokéStop Showcase' },
     { slug: 'raid-battles', name: 'Raid Battles' },
     { slug: 'raid-day', name: 'Raid Day' },
     { slug: 'raid-hour', name: 'Raid Hour' },
-    { slug: 'research', name: 'Research' },
     { slug: 'research-day', name: 'Research Day' },
-    { slug: 'season', name: 'Season' },
-    { slug: 'team-go-rocket', name: 'Team GO Rocket' }
+    { slug: 'season', name: 'Season' }
 ];
 
 // Utility functions

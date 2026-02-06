@@ -294,11 +294,25 @@ async function main() {
                         console.log(`  ✓ ${pathname} (${(imageBuffer.length / 1024).toFixed(1)} KB)`);
                     }
                 } catch (err) {
-                    errors.push({ url, error: err.message });
-                    results.failed++;
+                    // If blob already exists, generate the mapping from the pathname
+                    if (err.message && err.message.includes('already exists')) {
+                        const blobUrl = `${BLOB_CUSTOM_DOMAIN}/${pathname}`;
+                        urlMap[url] = blobUrl;
+                        if (canonicalUrl && canonicalUrl !== url) {
+                            urlMap[canonicalUrl] = blobUrl;
+                        }
+                        results.success++;
 
-                    if (VERBOSE) {
-                        console.error(`  ✗ ${url}: ${err.message}`);
+                        if (VERBOSE) {
+                            console.log(`  ≡ ${pathname} (already in blob, mapped)`);
+                        }
+                    } else {
+                        errors.push({ url, error: err.message });
+                        results.failed++;
+
+                        if (VERBOSE) {
+                            console.error(`  ✗ ${url}: ${err.message}`);
+                        }
                     }
                 }
             })
