@@ -1,32 +1,20 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
-  "cleanUrls": true,
-  "trailingSlash": false,
   "github": {
     "silent": true
   },
   "headers": [
     {
-      "source": "/data/(.*).json",
+      "source": "/data/(.*)",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/json; charset=utf-8"
+          "value": "application/json;charset=utf-8"
         },
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600, s-maxage=7200, stale-while-revalidate=3600"
         },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
