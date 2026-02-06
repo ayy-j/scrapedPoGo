@@ -44,10 +44,17 @@ async function scrapeShinies() {
 			fetchJson(namesUrl)
 		]);
 
-		// Filter for shiny pokemon: either has shiny_released flag OR has released_date
-		const shinyPokemon = pokemonData.filter(p => p.shiny_released === true || p.released_date);
+		// Filter for shiny pokemon:
+		// - shiny_released === true: explicitly marked as shiny available
+		// - released_date without aa_fn/fn/isotope: base form with a shiny release date
+		//   (costume/form entries have aa_fn or fn set and their released_date is
+		//    just the costume release date, NOT a shiny availability date)
+		const shinyPokemon = pokemonData.filter(p =>
+			p.shiny_released === true ||
+			(p.released_date && !p.aa_fn && !p.fn && !p.isotope)
+		);
 		
-		console.log(`Found ${shinyPokemon.length} shiny Pokemon entries`);
+		console.log(`Found ${shinyPokemon.length} shiny Pokemon entries (filtered from ${pokemonData.length} total)`);
 
 		if (shinyPokemon.length === 0) {
 			console.warn('No shiny Pokemon found in the data.');
