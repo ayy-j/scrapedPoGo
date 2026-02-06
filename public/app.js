@@ -1,6 +1,7 @@
 // Configuration
 const API_BASE_URL = 'https://pokemn.quest/data/';
-const USE_LOCAL_DATA = true; // Set to false to use production API
+// Automatically detect if we're running locally or in production
+const USE_LOCAL_DATA = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const LOCAL_DATA_PATH = '../data/';
 
 // Get the appropriate base URL

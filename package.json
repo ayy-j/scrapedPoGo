@@ -13,7 +13,9 @@
     "compare:schemas": "node src/scripts/compare-docs-data-schemas.js --mode report",
     "compare:schemas:strict": "node src/scripts/compare-docs-data-schemas.js --mode strict",
     "test": "node --test",
-    "blob:upload": "node src/scripts/upload-images-to-blob.js"
+    "blob:upload": "node src/scripts/upload-images-to-blob.js",
+    "serve": "node serve.js",
+    "build": "node -e \"require('fs').cpSync('public', '.vercel/output/static', {recursive: true}); require('fs').cpSync('data', '.vercel/output/static/data', {recursive: true});\""
   },
   "author": "quantNebula",
   "license": "MIT",

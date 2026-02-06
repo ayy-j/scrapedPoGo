@@ -1,0 +1,25 @@
+# Development files
+node_modules
+.env.local
+.DS_Store
+
+# Source files (only deploy built output)
+src
+public
+schemas
+test
+dataDocumentation
+
+# Documentation
+*.md
+!README.md
+
+# Configuration
+.gitignore
+.github
+serve.js
+POKEMON_GO_CONTEXT.md
+
+# Keep only the built output
+!.vercel/output
+!data
