@@ -10,7 +10,8 @@
     "combineall": "USE_BLOB_URLS=true node ./src/scrapers/combineAll.js",
     "pipeline": "USE_BLOB_URLS=true npm run scrape && USE_BLOB_URLS=true npm run detailedscrape && USE_BLOB_URLS=true npm run combinedetails && npm run combineall",
     "validate": "node src/scripts/validate-schemas.js",
-    "blob:upload": "node src/scripts/upload-images-to-blob.js"
+    "blob:upload": "node src/scripts/upload-images-to-blob.js",
+    "serve": "node serve.js"
   },
   "author": "quantNebula",
   "license": "MIT",
