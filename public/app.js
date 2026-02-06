@@ -217,7 +217,7 @@ const loadEventTypes = async () => {
             <h3>${eventType.name}</h3>
             <div class="endpoint-info">
                 <code>${API_BASE_URL}eventTypes/${eventType.slug}.min.json</code>
-                <span class="status loading" id="${statusId}">Loading...</span>
+                <span class="status loading" id="${statusId}-status">Loading...</span>
             </div>
             <div id="${statusId}-content" class="content-grid"></div>
         `;
