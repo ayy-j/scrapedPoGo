@@ -9,7 +9,7 @@
 ```json
 {
     "name": "Bulbasaur",
-    "eggType": "1 km",
+    "eggType": "1km",
     "isAdventureSync": false,
     "image": "https://pokemn.quest/images/pokemon/pm1.png",
     "canBeShiny": true,
@@ -30,15 +30,15 @@
 | Field                 | Type      | Description
 |---------------------- |---------- |---------------------
 | **`name`**            | `string`  | The name of the hatched Pokemon.
-| **`eggType`**         | `string`  | The type of the egg.<br />Can be `1 km`, `2 km`, `5 km`, `7 km`, `10 km`, `12 km`
+| **`eggType`**         | `string`  | The type of the egg.<br />Can be `1km`, `2km`, `5km`, `7km`, `10km`, `12km`, `route`, `adventure5km`, `adventure10km`
 | **`isAdventureSync`** | `boolean` | Whether or not the egg is obtained from Adventure Sync.
 | **`isRegional`**      | `boolean` | Whether or not the hatched Pokemon is a regional exclusive.
 | **`isGiftExchange`**  | `boolean` | Whether or not the egg is obtained from gift exchange.
-| **`rarity`**          | `int`     | The rarity tier of the hatched Pokemon (1-5 scale).
+| **`rarity`**          | `int`     | The rarity tier of the hatched Pokemon (0-5 scale).
 | **`image`**           | `string`  | The image URL of the hatched Pokemon.
 | **`canBeShiny`**      | `boolean` | Whether or not the hatched Pokemon can be shiny.
-| **`combatPower.min`** | `int`     | The minimum combat power of the hatched Pokemon.
-| **`combatPower.max`** | `int`     | The maximum combat power of the hatched Pokemon.
+| **`combatPower.min`** | `int\|null` | The minimum combat power of the hatched Pokemon, or `null` if unknown.
+| **`combatPower.max`** | `int\|null` | The maximum combat power of the hatched Pokemon, or `null` if unknown.
 | **`imageWidth`**      | `int`     | The width of the image in pixels.
 | **`imageHeight`**     | `int`     | The height of the image in pixels.
 | **`imageType`**       | `string`  | The image format (e.g., `png`).
@@ -75,7 +75,7 @@
       "eggType": {
         "type": "string",
         "description": "The type of the egg",
-        "enum": ["1 km", "2 km", "5 km", "7 km", "10 km", "12 km"]
+        "enum": ["1km", "2km", "5km", "7km", "10km", "12km", "route", "adventure5km", "adventure10km"]
       },
       "isAdventureSync": {
         "type": "boolean",
@@ -96,12 +96,12 @@
         "required": ["min", "max"],
         "properties": {
           "min": {
-            "type": "integer",
-            "description": "The minimum combat power of the hatched Pokemon"
+            "type": ["integer", "null"],
+            "description": "The minimum combat power of the hatched Pokemon, or null if unknown"
           },
           "max": {
-            "type": "integer",
-            "description": "The maximum combat power of the hatched Pokemon"
+            "type": ["integer", "null"],
+            "description": "The maximum combat power of the hatched Pokemon, or null if unknown"
           }
         },
         "additionalProperties": false
@@ -117,7 +117,7 @@
       "rarity": {
         "type": "integer",
         "description": "The rarity tier of the hatched Pokemon (1-5 scale)",
-        "minimum": 1,
+        "minimum": 0,
         "maximum": 5
       },
       "imageWidth": {

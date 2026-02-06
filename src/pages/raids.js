@@ -6,14 +6,11 @@
  */
 
 const fs = require('fs');
-const jsd = require('jsdom');
-const { JSDOM } = jsd;
-const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
 const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
 const logger = require('../utils/logger');
-const { fetchJson } = require('../utils/scraperUtils');
+const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
 
 /**
  * @typedef {Object} RaidCombatPower
@@ -185,7 +182,7 @@ async function get() {
     logger.info("Scraping raids...");
     try {
         try {
-            const dom = await JSDOM.fromURL("https://leekduck.com/raid-bosses/", {});
+            const dom = await getJSDOM("https://leekduck.com/raid-bosses/");
 
             let bosses = [];
 
@@ -240,8 +237,8 @@ async function get() {
                                 canBeShiny: false,
                                 types: [],
                                 combatPower: {
-                                    normal: { min: -1, max: -1 },
-                                    boosted: { min: -1, max: -1 }
+                                    normal: { min: null, max: null },
+                                    boosted: { min: null, max: null }
                                 },
                                 boostedWeather: [],
                                 image: ""
@@ -270,14 +267,14 @@ async function get() {
                             // Combat Power (normal)
                             let cpText = card.querySelector('.cp-range')?.textContent.replace('CP', '').trim() || "";
                             let [cpMin, cpMax] = cpText.split('-').map(s => parseInt(s.trim()));
-                            boss.combatPower.normal.min = cpMin || -1;
-                            boss.combatPower.normal.max = cpMax || -1;
+                            boss.combatPower.normal.min = cpMin || null;
+                            boss.combatPower.normal.max = cpMax || null;
 
                             // Combat Power (boosted)
                             let boostedText = card.querySelector('.boosted-cp-row .boosted-cp')?.textContent.replace('CP', '').trim() || "";
                             let [boostMin, boostMax] = boostedText.split('-').map(s => parseInt(s.trim()));
-                            boss.combatPower.boosted.min = boostMin || -1;
-                            boss.combatPower.boosted.max = boostMax || -1;
+                            boss.combatPower.boosted.min = boostMin || null;
+                            boss.combatPower.boosted.max = boostMax || null;
 
                             // Boosted Weather
                             card.querySelectorAll('.weather-boosted .boss-weather .weather-pill img').forEach(img => {

@@ -28,7 +28,7 @@
       "eggType": {
         "type": "string",
         "description": "The type of the egg",
-        "enum": ["1 km", "2 km", "5 km", "7 km", "10 km", "12 km"]
+        "enum": ["1km", "2km", "5km", "7km", "10km", "12km", "route", "adventure5km", "adventure10km"]
       },
       "isAdventureSync": {
         "type": "boolean",
@@ -49,12 +49,12 @@
         "required": ["min", "max"],
         "properties": {
           "min": {
-            "type": "integer",
-            "description": "The minimum combat power of the hatched Pokemon"
+            "type": ["integer", "null"],
+            "description": "The minimum combat power of the hatched Pokemon, or null if unknown"
           },
           "max": {
-            "type": "integer",
-            "description": "The maximum combat power of the hatched Pokemon"
+            "type": ["integer", "null"],
+            "description": "The maximum combat power of the hatched Pokemon, or null if unknown"
           }
         },
         "additionalProperties": false
@@ -70,7 +70,7 @@
       "rarity": {
         "type": "integer",
         "description": "The rarity tier of the hatched Pokemon (1-5 scale)",
-        "minimum": 1,
+        "minimum": 0,
         "maximum": 5
       },
       "imageWidth": {

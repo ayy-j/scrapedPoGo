@@ -6,11 +6,8 @@
  */
 
 const fs = require('fs');
-const jsd = require('jsdom');
-const { JSDOM } = jsd;
-const https = require('https');
 const logger = require('../utils/logger');
-const { fetchJson } = require('../utils/scraperUtils');
+const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
 const { transformUrls } = require('../utils/blobUrls');
 
 /**
@@ -34,9 +31,7 @@ const { transformUrls } = require('../utils/blobUrls');
  * @property {string} name - Trainer name (e.g., "Giovanni", "Cliff", or grunt type)
  * @property {string} title - Display title (e.g., "Team GO Rocket Leader")
  * @property {string} type - Grunt type for typed grunts (e.g., "fire", "water") or empty
- * @property {ShadowPokemon[]} firstPokemon - Possible Pokemon in slot 1
- * @property {ShadowPokemon[]} secondPokemon - Possible Pokemon in slot 2
- * @property {ShadowPokemon[]} thirdPokemon - Possible Pokemon in slot 3
+ * @property {ShadowPokemon[][]} slots - Possible Pokemon per slot (3 slots, each an array of possible Pokemon)
  */
 
 /**
@@ -61,7 +56,7 @@ async function get() {
     logger.info("Scraping rocket lineups...");
     try {
         try {
-            const dom = await JSDOM.fromURL("https://leekduck.com/rocket-lineups/", {});
+            const dom = await getJSDOM("https://leekduck.com/rocket-lineups/");
             const lineups = [];
             
             const rocketProfiles = dom.window.document.querySelectorAll('.rocket-profile');
@@ -71,9 +66,7 @@ async function get() {
                     name: "",
                     title: "",
                     type: "",
-                    firstPokemon: [],
-                    secondPokemon: [],
-                    thirdPokemon: [],
+                    slots: [[], [], []]
                 };
 
                 let nameElement = profile.querySelector('.name');
@@ -137,20 +130,14 @@ async function get() {
                         pokemonList.push(pokemon);
                     });
                     
-                    if (slotNumber === 1) {
-                        lineup.firstPokemon = pokemonList;
-                    } else if (slotNumber === 2) {
-                        lineup.secondPokemon = pokemonList;
-                    } else if (slotNumber === 3) {
-                        lineup.thirdPokemon = pokemonList;
-                    }    
+                    lineup.slots[index] = pokemonList;
 
                 });
                 
                 lineups.push(lineup);
             });
 
-            await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(lineups));
+            await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(transformUrls(lineups)));
             logger.success("Rocket lineups saved.");
         } catch (_err) {
             logger.error(_err);

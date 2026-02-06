@@ -107,11 +107,11 @@ async function get(url, id, bkp) {
             else if (lastHeader === 'featured-attack') {
                 if (n.tagName === 'P') {
                     if (!commday.featuredAttack) {
-                        commday.featuredAttack = { description: n.innerHTML, stats: [] };
+                        commday.featuredAttack = { description: n.textContent.trim(), stats: [] };
                     }
                 } else if (n.tagName === 'UL' && commday.featuredAttack) {
                     n.querySelectorAll('li').forEach(li => {
-                        commday.featuredAttack.stats.push(li.innerHTML);
+                        commday.featuredAttack.stats.push(li.textContent.trim());
                     });
                 }
             }
@@ -119,7 +119,7 @@ async function get(url, id, bkp) {
             else if (lastHeader === 'photobomb') {
                 if (n.tagName === 'P') {
                     if (!commday.photobomb) {
-                        commday.photobomb = { description: n.innerHTML, pokemon: [] };
+                        commday.photobomb = { description: n.textContent.trim(), pokemon: [] };
                     }
                 } else if (n.className === 'pkmn-list-flex' && commday.photobomb) {
                     commday.photobomb.pokemon.push(...(await extractPokemonList(n)));
@@ -133,16 +133,16 @@ async function get(url, id, bkp) {
             // Lure Module Bonus
             else if (lastHeader === 'lure-module-bonus' && n.tagName === 'P') {
                 if (!commday.lureModuleBonus) {
-                    commday.lureModuleBonus = n.innerHTML;
+                    commday.lureModuleBonus = n.textContent.trim();
                 }
             }
             // Field Research Tasks
             else if (lastHeader === 'field-research-tasks') {
                 if (n.tagName === 'P') {
-                    commday.fieldResearchTasks.push({ type: 'info', text: n.innerHTML });
+                    commday.fieldResearchTasks.push({ type: 'info', text: n.textContent.trim() });
                 } else if (n.tagName === 'UL') {
                     n.querySelectorAll('li').forEach(li => {
-                        commday.fieldResearchTasks.push({ type: 'task', text: li.innerHTML });
+                        commday.fieldResearchTasks.push({ type: 'task', text: li.textContent.trim() });
                     });
                 } else if (n.className === 'pkmn-list-flex') {
                     const pokemon = await extractPokemonList(n);

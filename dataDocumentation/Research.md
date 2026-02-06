@@ -109,8 +109,8 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
 | Field                 | Type      | Description
 |---------------------- |---------- |---------------------
 | **`canBeShiny`**      | `boolean` | Whether or not the reward Pokemon can be shiny.
-| **`combatPower.min`** | `int`     | The minimum combat power of the reward Pokemon.
-| **`combatPower.max`** | `int`     | The maximum combat power of the reward Pokemon.
+| **`combatPower.min`** | `int\|null` | The minimum combat power of the reward Pokemon, or `null` if unknown.
+| **`combatPower.max`** | `int\|null` | The maximum combat power of the reward Pokemon, or `null` if unknown.
 
 #### Item/Resource-Only Fields
 
@@ -183,12 +183,12 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
               "required": ["min", "max"],
               "properties": {
                 "min": {
-                  "type": "integer",
-                  "description": "The minimum combat power of the reward Pokemon"
+                  "type": ["integer", "null"],
+                  "description": "The minimum combat power of the reward Pokemon, or null if unknown"
                 },
                 "max": {
-                  "type": "integer",
-                  "description": "The maximum combat power of the reward Pokemon"
+                  "type": ["integer", "null"],
+                  "description": "The maximum combat power of the reward Pokemon, or null if unknown"
                 }
               },
               "additionalProperties": false

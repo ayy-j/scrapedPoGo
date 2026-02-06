@@ -20,6 +20,8 @@ The endpoint returns a minified JSON array of event objects sorted chronological
     "image": "https://pokemn.quest/images/...",
     "start": "2026-01-27T10:00:00.000",
     "end": "2026-02-01T20:00:00.000",
+    "isGlobal": false,
+    "eventStatus": "active",
     "pokemon": [...],
     "bonuses": [...],
     "raids": [...]
@@ -41,6 +43,8 @@ All events share these required core fields:
 | **`image`** | `string` | Event header/banner image URL |
 | **`start`** | `string` | Event start date/time in ISO 8601 format (see [Date Format](#date-format)) |
 | **`end`** | `string` | Event end date/time in ISO 8601 format (see [Date Format](#date-format)) |
+| **`isGlobal`** | `boolean` | Whether the event uses a global start time (no local timezone offset) |
+| **`eventStatus`** | `string` | Computed status: `upcoming`, `active`, or `ended` |
 
 ## Optional Fields
 
@@ -55,6 +59,7 @@ Depending on the event type and content, events may include any of the following
 | **`pokemon[].image`** | `string` | Pokemon image URL |
 | **`pokemon[].source`** | `string` | Where the Pokemon appears.<br />Values: `spawn`, `featured`, `incense`, `costumed`, `debut`, `maxDebut`<br />Schema-reserved (not currently produced): `raid`, `egg`, `research`, `reward`, `encounter` |
 | **`pokemon[].canBeShiny`** | `boolean` | Whether the Pokemon can be encountered as shiny |
+| **`pokemon[].dexNumber`** | `int\|null` | National Pokédex number, or `null` if not determinable |
 | **`pokemon[].imageWidth`** | `int` | Image width in pixels |
 | **`pokemon[].imageHeight`** | `int` | Image height in pixels |
 | **`pokemon[].imageType`** | `string` | Image format (e.g., `png`) |
@@ -66,6 +71,8 @@ Depending on the event type and content, events may include any of the following
 | **`bonuses`** | `array` | Event bonuses as objects with `text` and `image` fields |
 | **`bonuses[].text`** | `string` | Bonus description text |
 | **`bonuses[].image`** | `string` | Bonus icon image URL |
+| **`bonuses[].multiplier`** | `number` | Parsed numeric bonus multiplier (e.g., `2` for 2×), when parseable |
+| **`bonuses[].bonusType`** | `string` | Parsed bonus category (e.g., `XP`, `Stardust`, `Candy`), when parseable |
 | **`bonus`** | `string` | Single bonus text (alternative to `bonuses` array, used in Spotlight Hours and Max Mondays) |
 | **`bonusDisclaimers`** | `array` | Disclaimers/restrictions for bonuses (e.g., regional, ticket-only) |
 | **`lureModuleBonus`** | `string` | Lure module bonus description |

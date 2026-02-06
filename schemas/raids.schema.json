@@ -91,12 +91,12 @@
             "required": ["min", "max"],
             "properties": {
               "min": {
-                "type": "integer",
-                "description": "The minimum normal combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The minimum normal combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": "integer",
-                "description": "The maximum normal combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The maximum normal combat power of the Pokemon, or null if unknown"
               }
             },
             "additionalProperties": false
@@ -106,12 +106,12 @@
             "required": ["min", "max"],
             "properties": {
               "min": {
-                "type": "integer",
-                "description": "The minimum boosted combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The minimum boosted combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": "integer",
-                "description": "The maximum boosted combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The maximum boosted combat power of the Pokemon, or null if unknown"
               }
             },
             "additionalProperties": false

@@ -156,11 +156,7 @@ function buildPokemonIndex(shinies, raids, eggs, research, rocketLineups) {
     
     // Fifth pass: add Pokemon from Rocket lineups
     for (const lineup of rocketLineups) {
-        const allSlots = [
-            ...(lineup.firstPokemon || []),
-            ...(lineup.secondPokemon || []),
-            ...(lineup.thirdPokemon || [])
-        ];
+        const allSlots = (lineup.slots || []).flat();
         for (const pokemon of allSlots) {
             if (pokemon.name) {
                 const key = normalizeName(pokemon.name);

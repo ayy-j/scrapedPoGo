@@ -73,7 +73,7 @@ async function get(url, id, bkp) {
                     // Type restriction detection
                     const typeMatch = item.match(/Only\s+([\w,\s-]+)-type/i);
                     if (typeMatch) {
-                        league.typeRestrictions = typeMatch[1].split(/,\s*and\s*|,\s*/).map(t => t.trim());
+                        league.typeRestrictions = typeMatch[1].split(/,\s*and\s*|,\s*/).map(t => t.trim().replace(/-$/, ''));
                     }
                     
                     league.rules.push(item);

@@ -225,7 +225,7 @@ Array of Pokemon that can hatch from eggs.
 | `combatPower` | object | ✓ | CP range at hatch |
 | `isRegional` | boolean | ✓ | Whether regionally exclusive |
 | `isGiftExchange` | boolean | ✓ | Whether from gift eggs |
-| `rarity` | number | ✓ | Rarity tier (1-5, higher = rarer) |
+| `rarity` | number | ✓ | Rarity tier (0-5, higher = rarer) |
 | `imageWidth` | number | ✓ | Image width in pixels |
 | `imageHeight` | number | ✓ | Image height in pixels |
 | `imageType` | string | ✓ | Image format |
@@ -234,19 +234,22 @@ Array of Pokemon that can hatch from eggs.
 
 | Value | Description |
 |-------|-------------|
-| `"1 km"` | 1 kilometer eggs (starter Pokemon) |
-| `"2 km"` | 2 kilometer eggs |
-| `"5 km"` | 5 kilometer eggs |
-| `"7 km"` | 7 kilometer eggs (gift eggs) |
-| `"10 km"` | 10 kilometer eggs |
-| `"12 km"` | 12 kilometer eggs (strange eggs from Rocket) |
+| `"1km"` | 1 kilometer eggs (starter Pokemon) |
+| `"2km"` | 2 kilometer eggs |
+| `"5km"` | 5 kilometer eggs |
+| `"7km"` | 7 kilometer eggs (gift eggs) |
+| `"10km"` | 10 kilometer eggs |
+| `"12km"` | 12 kilometer eggs (strange eggs from Rocket) |
+| `"route"` | Route gift eggs |
+| `"adventure5km"` | Adventure Sync 5 km rewards |
+| `"adventure10km"` | Adventure Sync 10 km rewards |
 
 ### Egg Combat Power Object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `min` | number | Minimum CP at hatch |
-| `max` | number | Maximum CP at hatch |
+| `min` | number\|null | Minimum CP at hatch, or `null` if unknown |
+| `max` | number\|null | Maximum CP at hatch, or `null` if unknown |
 
 ---
 
@@ -302,22 +305,22 @@ Array of all shiny-eligible Pokemon.
 |-------|------|----------|-------------|
 | `dexNumber` | number | ✓ | National Pokedex number |
 | `name` | string | ✓ | Pokemon name |
-| `releasedDate` | string | ✓ | Date shiny was released (YYYY/MM/DD) |
+| `releasedDate` | string | ✓ | Date shiny was released (YYYY-MM-DD) |
 | `family` | string | ✓ | Evolution family identifier |
-| `typeCode` | string | | Form/variant code (e.g., `"_51"` for Hisuian) |
+| `region` | string | | Regional variant label (e.g., `"alolan"`, `"galarian"`) |
 | `forms` | array | | Available shiny forms |
-| `imageUrl` | string | | URL to default shiny sprite |
-| `width` | number | | Image width in pixels |
-| `height` | number | | Image height in pixels |
+| `image` | string | | URL to default shiny sprite |
+| `imageWidth` | number | | Image width in pixels |
+| `imageHeight` | number | | Image height in pixels |
 
 ### Shiny Form Object
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `name` | string | Form identifier |
-| `imageUrl` | string | URL to form's shiny sprite |
-| `width` | number | Image width in pixels |
-| `height` | number | Image height in pixels |
+| `image` | string | URL to form's shiny sprite |
+| `imageWidth` | number | Image width in pixels |
+| `imageHeight` | number | Image height in pixels |
 
 ---
 
@@ -332,9 +335,7 @@ Array of Team GO Rocket lineups.
 | `name` | string | ✓ | Character name or grunt type |
 | `title` | string | ✓ | Character title |
 | `type` | string | ✓ | Pokemon type specialization (empty for leaders) |
-| `firstPokemon` | array | ✓ | First slot Pokemon options |
-| `secondPokemon` | array | ✓ | Second slot Pokemon options |
-| `thirdPokemon` | array | ✓ | Third slot Pokemon options |
+| `slots` | array[][] | ✓ | Array of 3 battle slots, each containing an array of possible Shadow Pokemon |
 
 ### Lineup Names
 
@@ -382,6 +383,7 @@ Object containing deduplicated Pokemon entries, keyed by normalized name (lowerc
 | `dexNumber` | number | National Pokedex number (if known) |
 | `family` | string | Evolution family identifier |
 | `typeCode` | string | Form/variant code |
+| `region` | string | Regional variant label |
 | `canBeShiny` | boolean | Whether shiny form is available in-game |
 | `types` | array | Pokemon types (when available) |
 | `sources` | array | Which datasets reference this Pokemon |
@@ -443,12 +445,15 @@ Object mapping egg distance to array of indices into `eggs` array.
 
 | Key | Value |
 |-----|-------|
-| `"1 km"` | Array of numeric indices |
-| `"2 km"` | Array of numeric indices |
-| `"5 km"` | Array of numeric indices |
-| `"7 km"` | Array of numeric indices |
-| `"10 km"` | Array of numeric indices |
-| `"12 km"` | Array of numeric indices |
+| `"1km"` | Array of numeric indices |
+| `"2km"` | Array of numeric indices |
+| `"5km"` | Array of numeric indices |
+| `"7km"` | Array of numeric indices |
+| `"10km"` | Array of numeric indices |
+| `"12km"` | Array of numeric indices |
+| `"route"` | Array of numeric indices |
+| `"adventure5km"` | Array of numeric indices |
+| `"adventure10km"` | Array of numeric indices |
 
 ### `indices.researchByType`
 

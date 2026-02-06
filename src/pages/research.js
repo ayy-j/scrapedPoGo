@@ -6,14 +6,11 @@
  */
 
 const fs = require('fs');
-const jsd = require('jsdom');
-const { JSDOM } = jsd;
-const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
 const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
 const logger = require('../utils/logger');
-const { fetchJson } = require('../utils/scraperUtils');
+const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
 
 /**
  * @typedef {Object} EncounterReward
@@ -139,7 +136,7 @@ async function get()
     logger.info("Scraping research...");
     try {
         try {
-            const dom = await JSDOM.fromURL("https://leekduck.com/research/", {});
+            const dom = await getJSDOM("https://leekduck.com/research/");
             // Load shiny data for cross-referencing
             const shinyMap = loadShinyData();
 
@@ -152,7 +149,6 @@ async function get()
             taskNameToID["Training Tasks"] = "training";
             taskNameToID["Team GO Rocket Tasks"] = "rocket";
             taskNameToID["Buddy & Friendship Tasks"] = "buddy";
-            taskNameToID["Buddy &amp; Friendship Tasks"] = "buddy"; // Handle HTML entity
             taskNameToID["AR Scanning Tasks"] = "ar";
             taskNameToID["Sponsored Tasks"] = "sponsored";
 
@@ -165,10 +161,10 @@ async function get()
             {
                 // Get category icon if present
                 var categoryIcon = _e.querySelector(":scope > h2 img")?.src || null;
-                var categoryType = taskNameToID[_e.querySelector(":scope > h2").innerHTML.trim().replace(/<img[^>]*>/g, '').trim()];
+                var categoryType = taskNameToID[_e.querySelector(":scope > h2").textContent.trim()];
                 
                 _e.querySelectorAll(":scope > .task-list > .task-item").forEach(task => {
-                    var text = task.querySelector(":scope > .task-text").innerHTML.trim();
+                    var text = task.querySelector(":scope > .task-text").textContent.trim();
                     var type = categoryType || inferTaskType(text);
 
                     var rewards = [];
@@ -184,21 +180,23 @@ async function get()
                                 image: "",
                                 canBeShiny: false,
                                 combatPower: {
-                                    min: -1,
-                                    max: -1
+                                    min: null,
+                                    max: null
                                 }
                             };
 
-                            reward.name = r.querySelector(":scope > .reward-label > span")?.innerHTML.trim() || "";
+                            reward.name = r.querySelector(":scope > .reward-label > span")?.textContent.trim() || "";
                             reward.image = r.querySelector(":scope > .reward-bubble > .reward-image")?.src || "";
 
                             var minCpEl = r.querySelector(":scope > .cp-values > .min-cp");
                             var maxCpEl = r.querySelector(":scope > .cp-values > .max-cp");
                             if (minCpEl) {
-                                reward.combatPower.min = parseInt(minCpEl.innerHTML.trim().split("</div>")[1]) || -1;
+                                const minMatch = minCpEl.textContent.trim().match(/(\d+)/);
+                                reward.combatPower.min = minMatch ? parseInt(minMatch[1]) : null;
                             }
                             if (maxCpEl) {
-                                reward.combatPower.max = parseInt(maxCpEl.innerHTML.trim().split("</div>")[1]) || -1;
+                                const maxMatch = maxCpEl.textContent.trim().match(/(\d+)/);
+                                reward.combatPower.max = maxMatch ? parseInt(maxMatch[1]) : null;
                             }
                             
                             // Shiny - check both LeekDuck icon and PogoAssets data

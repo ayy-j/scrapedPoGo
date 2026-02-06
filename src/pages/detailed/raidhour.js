@@ -4,12 +4,14 @@
  * @module pages/detailed/raidhour
  */
 
-const { writeTempFile, handleScraperError, extractPokemonList, getJSDOM } = require('../../utils/scraperUtils');
+const { writeTempFile, handleScraperError, extractPokemonList, extractBonuses, getJSDOM } = require('../../utils/scraperUtils');
 
 /**
  * @typedef {Object} RaidHourData
  * @property {Object|null} featured - Featured raid boss Pokemon with name, image, shiny info
  * @property {boolean} canBeShiny - Whether the featured boss can be shiny
+ * @property {Object[]} bonuses - Active bonuses during raid hour
+ * @property {string[]} bonusDisclaimers - Disclaimers for bonuses
  */
 
 /**
@@ -35,7 +37,9 @@ async function get(url, id, bkp) {
         
         const raidHourData = {
             featured: null,
-            canBeShiny: false
+            canBeShiny: false,
+            bonuses: [],
+            bonusDisclaimers: []
         };
 
         const pkmnList = doc.querySelector('.pkmn-list-flex');
@@ -58,6 +62,11 @@ async function get(url, id, bkp) {
                 };
             }
         }
+
+        // Extract bonuses
+        const bonusData = await extractBonuses(doc);
+        raidHourData.bonuses = bonusData.bonuses;
+        raidHourData.bonusDisclaimers = bonusData.disclaimers;
 
         if (raidHourData.featured) {
             writeTempFile(id, 'raid-hour', raidHourData);

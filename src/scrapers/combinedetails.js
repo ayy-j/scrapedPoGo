@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
+const { isGlobalEvent } = require('../utils/scraperUtils');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -26,6 +27,27 @@ function sanitizeType(type) {
         .replace(/[^a-z0-9-]/g, '-')
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '');
+}
+
+/**
+ * Computes event status based on current time vs event start/end dates.
+ * 
+ * @param {string} startStr - ISO date string for event start
+ * @param {string} endStr - ISO date string for event end
+ * @returns {"upcoming"|"active"|"ended"} Event status
+ */
+function computeEventStatus(startStr, endStr) {
+    try {
+        const now = new Date();
+        const start = startStr ? new Date(startStr) : null;
+        const end = endStr ? new Date(endStr) : null;
+        
+        if (start && now < start) return 'upcoming';
+        if (end && now > end) return 'ended';
+        return 'active';
+    } catch {
+        return 'active';
+    }
 }
 
 /**
@@ -47,7 +69,9 @@ function segmentEventData(event) {
         heading: event.heading,
         image: event.image,
         start: event.start,
-        end: event.end
+        end: event.end,
+        isGlobal: isGlobalEvent(event.start),
+        eventStatus: computeEventStatus(event.start, event.end)
     };
 
     // If event already has consolidated fields (already flattened),

@@ -44,10 +44,9 @@ async function get(url, id, bkp) {
         const eventDesc = doc.querySelector('.event-description');
         let bonus = '';
         if (eventDesc) {
-            const temp = eventDesc.innerHTML;
-            const split = temp.split('<strong>');
-            if (split.length > 1) {
-                bonus = split[split.length - 1].split('</strong>')[0];
+            const strong = eventDesc.querySelector('strong');
+            if (strong) {
+                bonus = strong.textContent.trim();
             }
         }
 

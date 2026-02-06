@@ -61,6 +61,15 @@
         "description": "Event end date/time (ISO 8601 format)",
         "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}(Z)?$"
       },
+      "isGlobal": {
+        "type": "boolean",
+        "description": "Whether the event uses a global start time (no local timezone offset)"
+      },
+      "eventStatus": {
+        "type": "string",
+        "description": "The computed status of the event based on current time",
+        "enum": ["upcoming", "active", "ended"]
+      },
       "hasSpawns": {
         "type": "boolean",
         "description": "Whether the event has wild Pokemon spawns"
@@ -110,6 +119,10 @@
               "type": "boolean",
               "description": "Whether the Pokemon can be shiny"
             },
+            "dexNumber": {
+              "type": ["integer", "null"],
+              "description": "National Pokedex number"
+            },
             "imageWidth": {
               "type": "integer",
               "description": "Image width in pixels"
@@ -137,7 +150,9 @@
               "type": "object",
               "properties": {
                 "text": { "type": "string" },
-                "image": { "type": "string", "format": "uri" }
+                "image": { "type": "string", "format": "uri" },
+                "multiplier": { "type": "number", "description": "Parsed numeric multiplier (e.g., 2 for 2×)" },
+                "bonusType": { "type": "string", "description": "Parsed bonus category (e.g., XP, Stardust, Candy)" }
               },
               "required": ["text"],
               "additionalProperties": false

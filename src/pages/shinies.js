@@ -6,75 +6,31 @@
  */
 
 const fs = require('fs');
-const https = require('https');
 const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
+const { fetchJson } = require('../utils/scraperUtils');
 
 /**
  * @typedef {Object} ShinyForm
  * @property {string} name - Form name (e.g., "Male", "White Striped")
- * @property {string} imageUrl - URL to shiny form image
- * @property {number} width - Image width in pixels
- * @property {number} height - Image height in pixels
+ * @property {string} image - URL to shiny form image
+ * @property {number} imageWidth - Image width in pixels
+ * @property {number} imageHeight - Image height in pixels
  */
 
 /**
  * @typedef {Object} ShinyPokemon
  * @property {number} dexNumber - National Pokedex number
  * @property {string} name - Pokemon name with regional prefix if applicable
- * @property {string} imageUrl - URL to shiny sprite image
- * @property {string|null} releasedDate - Release date in "YYYY/MM/DD" format or null
+ * @property {string} image - URL to shiny sprite image
+ * @property {string|null} releasedDate - Release date in "YYYY-MM-DD" format or null
  * @property {number|null} family - Evolution family ID or null
- * @property {string|null} typeCode - Regional type code (e.g., "_61" for Alolan) or null
- * @property {number} width - Image width in pixels (256)
- * @property {number} height - Image height in pixels (256)
+ * @property {string|null} region - Regional variant name (e.g., "alolan", "galarian") or null
+ * @property {number} imageWidth - Image width in pixels (256)
+ * @property {number} imageHeight - Image height in pixels (256)
  * @property {ShinyForm[]} [forms] - Array of alternate forms if applicable
  */
 
-/**
- * Fetches JSON data from a URL.
- * 
- * @param {string} url - URL to fetch JSON from
- * @returns {Promise<Object>} Parsed JSON data
- * @throws {Error} On network failure or JSON parse error
- * 
- * @example
- * const data = await fetchJson('https://example.com/data.json');
- */
-function fetchJson(url) {
-	return new Promise((resolve, reject) => {
-		https.get(url, (res) => {
-			let body = '';
-			res.on('data', (chunk) => { body += chunk; });
-			res.on('end', () => {
-				try {
-					resolve(JSON.parse(body));
-				} catch (error) {
-					reject(error);
-				}
-			});
-		}).on('error', reject);
-	});
-}
-
-/**
- * Scrapes shiny Pokemon data from LeekDuck and PogoAssets.
- * 
- * Fetches both the Pokemon data file and English names file from LeekDuck,
- * filters for Pokemon with shiny releases, and constructs image URLs
- * using the PogoAssets CDN. Handles regional variants, gender forms,
- * and special forms like Mega and Gigantamax.
- * 
- * @async
- * @function scrapeShinies
- * @returns {Promise<ShinyPokemon[]>} Array of shiny Pokemon data sorted by dex number
- * @throws {Error} On network failure or data processing error
- * 
- * @example
- * const shinies = require('./pages/shinies');
- * const data = await shinies();
- * console.log(`Found ${data.length} shiny Pokemon`);
- */
 async function scrapeShinies() {
 	console.log('Fetching shiny Pokemon data from LeekDuck...');
 	
@@ -236,15 +192,22 @@ async function scrapeShinies() {
 
 				const imageUrl = `https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/${basePath}/${filename}`;
 
+				// Convert releasedDate from YYYY/MM/DD to ISO YYYY-MM-DD
+				const rawDate = pokemon.released_date || null;
+				const releasedDate = rawDate ? rawDate.replace(/\//g, '-') : null;
+
+				// Map typeCode to human-readable region name
+				const region = (typeCode && typeMap[typeCode]) ? typeMap[typeCode].toLowerCase() : null;
+
 				entries.push({
 					dexNumber,
 					name: fullName,
-					imageUrl,
-					releasedDate: pokemon.released_date || null,
+					image: imageUrl,
+					releasedDate,
 					family: pokemon.family || null,
-					typeCode,
-					width: 256,
-					height: 256
+					region,
+					imageWidth: 256,
+					imageHeight: 256
 				});
 
 			} catch (error) {
@@ -255,10 +218,10 @@ async function scrapeShinies() {
 		// Group by dex number and combine forms
 		const grouped = {};
 		for (const entry of entries) {
-			const { dexNumber, name, releasedDate, family, typeCode, ...data } = entry;
+			const { dexNumber, name, releasedDate, family, region, ...data } = entry;
 			
-			// Use typeCode as part of grouping key for regional variants
-			const groupKey = typeCode ? `${dexNumber}_${typeCode}` : `${dexNumber}`;
+			// Use region as part of grouping key for regional variants
+			const groupKey = region ? `${dexNumber}_${region}` : `${dexNumber}`;
 			
 			if (!grouped[groupKey]) {
 				grouped[groupKey] = {
@@ -266,7 +229,7 @@ async function scrapeShinies() {
 					name: name.replace(/[(_][^)_]*[)_]?$/, '').trim(), // Remove form suffix
 					releasedDate,
 					family,
-					typeCode,
+					region,
 					forms: []
 				};
 			}
@@ -278,7 +241,7 @@ async function scrapeShinies() {
 					name: formMatch[2],
 					...data
 				});
-			} else if (!grouped[groupKey].imageUrl) {
+			} else if (!grouped[groupKey].image) {
 				// Base form
 				grouped[groupKey] = {
 					...grouped[groupKey],
@@ -289,10 +252,10 @@ async function scrapeShinies() {
 
 		const output = Object.values(grouped).sort((a, b) => {
 			if (a.dexNumber !== b.dexNumber) return a.dexNumber - b.dexNumber;
-			if (!a.typeCode && b.typeCode) return -1;
-			if (a.typeCode && !b.typeCode) return 1;
-			if (!a.typeCode && !b.typeCode) return 0;
-			return a.typeCode.localeCompare(b.typeCode);
+			if (!a.region && b.region) return -1;
+			if (a.region && !b.region) return 1;
+			if (!a.region && !b.region) return 0;
+			return a.region.localeCompare(b.region);
 		});
 
 		console.log(`Successfully processed ${output.length} unique shiny Pokemon with ${entries.length} total forms`);

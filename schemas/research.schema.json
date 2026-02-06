@@ -61,12 +61,12 @@
               "required": ["min", "max"],
               "properties": {
                 "min": {
-                  "type": "integer",
-                  "description": "The minimum combat power of the reward Pokemon"
+                  "type": ["integer", "null"],
+                  "description": "The minimum combat power of the reward Pokemon, or null if unknown"
                 },
                 "max": {
-                  "type": "integer",
-                  "description": "The maximum combat power of the reward Pokemon"
+                  "type": ["integer", "null"],
+                  "description": "The maximum combat power of the reward Pokemon, or null if unknown"
                 }
               },
               "additionalProperties": false

@@ -11,69 +11,71 @@
     "name": "Cliff",
     "title": "Team GO Rocket Leader",
     "type": "",
-    "firstPokemon": [
-        {
-            "name": "Magikarp",
-            "image": "https://pokemn.quest/images/pokemon/pm129.png",
-            "types": [
-                "water"
-            ],
-            "weaknesses": {
-                "double": [],
-                "single": [
-                    "grass",
-                    "electric"
-                ]
-            },
-            "isEncounter": true,
-            "canBeShiny": true
-        }
-    ],
-    "secondPokemon": [
-        {
-            "name": "Cradily",
-            "image": "https://pokemn.quest/images/pokemon/pm346.png",
-            "types": [
-                "rock",
-                "grass"
-            ],
-            "weaknesses": {
-                "double": [],
-                "single": [
-                    "ice",
-                    "fighting",
-                    "bug",
-                    "steel"
-                ]
-            },
-            "isEncounter": false,
-            "canBeShiny": false
-        }
-    ],
-    "thirdPokemon": [
-        {
-            "name": "Tyranitar",
-            "image": "https://pokemn.quest/images/pokemon/pm248.png",
-            "types": [
-                "rock",
-                "dark"
-            ],
-            "weaknesses": {
-                "double": [
-                    "fighting"
+    "slots": [
+        [
+            {
+                "name": "Magikarp",
+                "image": "https://pokemn.quest/images/pokemon/pm129.png",
+                "types": [
+                    "water"
                 ],
-                "single": [
-                    "ground",
-                    "bug",
-                    "steel",
-                    "water",
-                    "grass",
-                    "fairy"
-                ]
-            },
-            "isEncounter": false,
-            "canBeShiny": false
-        }
+                "weaknesses": {
+                    "double": [],
+                    "single": [
+                        "grass",
+                        "electric"
+                    ]
+                },
+                "isEncounter": true,
+                "canBeShiny": true
+            }
+        ],
+        [
+            {
+                "name": "Cradily",
+                "image": "https://pokemn.quest/images/pokemon/pm346.png",
+                "types": [
+                    "rock",
+                    "grass"
+                ],
+                "weaknesses": {
+                    "double": [],
+                    "single": [
+                        "ice",
+                        "fighting",
+                        "bug",
+                        "steel"
+                    ]
+                },
+                "isEncounter": false,
+                "canBeShiny": false
+            }
+        ],
+        [
+            {
+                "name": "Tyranitar",
+                "image": "https://pokemn.quest/images/pokemon/pm248.png",
+                "types": [
+                    "rock",
+                    "dark"
+                ],
+                "weaknesses": {
+                    "double": [
+                        "fighting"
+                    ],
+                    "single": [
+                        "ground",
+                        "bug",
+                        "steel",
+                        "water",
+                        "grass",
+                        "fairy"
+                    ]
+                },
+                "isEncounter": false,
+                "canBeShiny": false
+            }
+        ]
     ]
 }
 ```
@@ -85,9 +87,7 @@
 | **`name`**          | `string`          | The name of the Rocket member (e.g., `Giovanni`, `Cliff`, `Fire-type Female Grunt`).
 | **`title`**         | `string`          | The title of the Rocket member.<br />Can be `Team GO Rocket Boss`, `Team GO Rocket Leader`, `Team GO Rocket Grunt`
 | **`type`**          | `string`          | The type specialization of the grunt (empty for Leaders/Giovanni).
-| **`firstPokemon`**  | `ShadowPokemon[]` | The possible Pokemon in the first slot. See [ShadowPokemon](#ShadowPokemon).
-| **`secondPokemon`** | `ShadowPokemon[]` | The possible Pokemon in the second slot. See [ShadowPokemon](#ShadowPokemon).
-| **`thirdPokemon`**  | `ShadowPokemon[]` | The possible Pokemon in the third slot. See [ShadowPokemon](#ShadowPokemon).
+| **`slots`**         | `ShadowPokemon[][]` | Array of 3 battle slots, each containing an array of possible Pokemon. See [ShadowPokemon](#ShadowPokemon).
 
 ## Other Objects
 
@@ -162,7 +162,7 @@
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["name", "title", "type", "firstPokemon", "secondPokemon", "thirdPokemon"],
+    "required": ["name", "title", "type", "slots"],
     "properties": {
       "name": {
         "type": "string",
@@ -177,23 +177,17 @@
         "type": "string",
         "description": "The type specialization of the grunt (empty for Leaders/Giovanni)"
       },
-      "firstPokemon": {
+      "slots": {
         "type": "array",
-        "description": "The possible Pokemon in the first slot",
-        "items": { "$ref": "#/definitions/shadowPokemon" },
-        "minItems": 1
-      },
-      "secondPokemon": {
-        "type": "array",
-        "description": "The possible Pokemon in the second slot",
-        "items": { "$ref": "#/definitions/shadowPokemon" },
-        "minItems": 1
-      },
-      "thirdPokemon": {
-        "type": "array",
-        "description": "The possible Pokemon in the third slot",
-        "items": { "$ref": "#/definitions/shadowPokemon" },
-        "minItems": 1
+        "description": "Three battle slots, each containing an array of possible Shadow Pokemon",
+        "items": {
+          "type": "array",
+          "description": "Possible Pokemon in this battle slot",
+          "items": { "$ref": "#/definitions/shadowPokemon" },
+          "minItems": 1
+        },
+        "minItems": 3,
+        "maxItems": 3
       }
     },
     "additionalProperties": false

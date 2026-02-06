@@ -6,14 +6,11 @@
  */
 
 const fs = require('fs');
-const jsd = require('jsdom');
-const { JSDOM } = jsd;
-const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
 const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
 const logger = require('../utils/logger');
-const { fetchJson } = require('../utils/scraperUtils');
+const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
 
 /**
  * @typedef {Object} CombatPower
@@ -60,7 +57,7 @@ async function get()
     logger.info("Scraping eggs...");
     try {
         try {
-            const dom = await JSDOM.fromURL("https://leekduck.com/eggs/", {});
+            const dom = await getJSDOM("https://leekduck.com/eggs/");
 
             var content = dom.window.document.querySelector('.page-content').childNodes;
 
@@ -76,10 +73,19 @@ async function get()
             {
                 if (c.tagName == "H2")
                 {
-                    currentType = c.innerHTML.trim();
+                    currentType = c.textContent.trim();
                     currentAdventureSync = currentType.includes("(Adventure Sync Rewards)");
                     currentGiftExchange = currentType.includes("(From Route Gift)");
                     currentType = currentType.split(" Eggs")[0];
+                    // Normalize to compact format: "2 km" → "2km", "Adventure Sync 5 km" → "adventure5km"
+                    if (currentAdventureSync) {
+                        const kmMatch = currentType.match(/(\d+)\s*km/i);
+                        currentType = kmMatch ? `adventure${kmMatch[1]}km` : currentType.replace(/\s+/g, '').toLowerCase();
+                    } else if (currentGiftExchange) {
+                        currentType = 'route';
+                    } else {
+                        currentType = currentType.replace(/\s+/g, '').toLowerCase();
+                    }
                 }
                 else if (c.className == "egg-grid")
                 {
@@ -92,15 +98,15 @@ async function get()
                             image: "",
                             canBeShiny: false,
                             combatPower: {
-                                min: -1,
-                                max: -1
+                                min: null,
+                                max: null
                             },
                             isRegional: false,
                             isGiftExchange: false,
                             rarity: 0
                         };
 
-                        pokemon.name = e.querySelector(".name").innerHTML || "";
+                        pokemon.name = e.querySelector(".name")?.textContent.trim() || "";
                         pokemon.eggType = currentType;
                         pokemon.isAdventureSync = currentAdventureSync;
                         pokemon.image = e.querySelector(".icon img").src || "";
@@ -114,16 +120,16 @@ async function get()
                         pokemon.isRegional = e.querySelector(".regional-icon") != null;
                         pokemon.isGiftExchange = currentGiftExchange;
 
-                        var cpText = e.querySelector(".cp-range").innerHTML;
-                        var cpValue = cpText.replace('<span class="label">CP </span>', '').trim();
+                        var cpText = e.querySelector(".cp-range")?.textContent.trim() || "";
+                        var cpValue = cpText.replace(/^CP\s*/i, '').trim();
                         
                         // Logic to handle single CP value if no range is provided 
                         if (cpValue.includes(' - ')) {
-                            pokemon.combatPower.min = parseInt(cpValue.split(' - ')[0]);
-                            pokemon.combatPower.max = parseInt(cpValue.split(' - ')[1]);
+                            pokemon.combatPower.min = parseInt(cpValue.split(' - ')[0]) || null;
+                            pokemon.combatPower.max = parseInt(cpValue.split(' - ')[1]) || null;
                         } else {
-                            pokemon.combatPower.min = parseInt(cpValue);
-                            pokemon.combatPower.max = parseInt(cpValue);
+                            pokemon.combatPower.min = parseInt(cpValue) || null;
+                            pokemon.combatPower.max = parseInt(cpValue) || null;
                         }
 
                         var rarityDiv = e.querySelector(".rarity");

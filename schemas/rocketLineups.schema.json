@@ -6,7 +6,7 @@
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["name", "title", "type", "firstPokemon", "secondPokemon", "thirdPokemon"],
+    "required": ["name", "title", "type", "slots"],
     "properties": {
       "name": {
         "type": "string",
@@ -21,29 +21,19 @@
         "type": "string",
         "description": "The type specialization of the grunt (empty for Leaders/Giovanni)"
       },
-      "firstPokemon": {
+      "slots": {
         "type": "array",
-        "description": "The possible Pokemon in the first slot",
+        "description": "Three battle slots, each containing an array of possible Shadow Pokemon",
         "items": {
-          "$ref": "#/definitions/shadowPokemon"
+          "type": "array",
+          "description": "Possible Pokemon in this battle slot",
+          "items": {
+            "$ref": "#/definitions/shadowPokemon"
+          },
+          "minItems": 1
         },
-        "minItems": 1
-      },
-      "secondPokemon": {
-        "type": "array",
-        "description": "The possible Pokemon in the second slot",
-        "items": {
-          "$ref": "#/definitions/shadowPokemon"
-        },
-        "minItems": 1
-      },
-      "thirdPokemon": {
-        "type": "array",
-        "description": "The possible Pokemon in the third slot",
-        "items": {
-          "$ref": "#/definitions/shadowPokemon"
-        },
-        "minItems": 1
+        "minItems": 3,
+        "maxItems": 3
       }
     },
     "additionalProperties": false

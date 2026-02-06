@@ -50,7 +50,7 @@ async function get(url, id, bkp) {
         if (eventDesc) {
             const strong = eventDesc.querySelector('strong');
             if (strong) {
-                maxMondaysData.bonus = strong.innerHTML;
+                maxMondaysData.bonus = strong.textContent.trim();
             }
         }
 

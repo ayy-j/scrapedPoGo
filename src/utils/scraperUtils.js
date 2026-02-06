@@ -9,12 +9,14 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 const { getMultipleImageDimensions, clearCache } = require('./imageDimensions');
+const { extractDexNumber } = require('./shinyData');
 
 /**
  * @typedef {Object} Pokemon
  * @property {string} name - Pokemon display name
  * @property {string} image - URL to Pokemon image
  * @property {boolean} canBeShiny - Whether this Pokemon can be shiny
+ * @property {number|null} [dexNumber] - National Pokedex number extracted from image URL
  * @property {number} [imageWidth] - Image width in pixels
  * @property {number} [imageHeight] - Image height in pixels
  * @property {string} [imageType] - Image format type
@@ -250,6 +252,12 @@ async function extractPokemonList(container, options = {}) {
             poke.canBeShiny = true;
         }
         
+        // Extract dex number from image URL if possible
+        const dexNum = extractDexNumber(poke.image);
+        if (dexNum) {
+            poke.dexNumber = dexNum;
+        }
+        
         if (poke.name) {
             pokemon.push(poke);
         }
@@ -445,6 +453,13 @@ async function extractBonuses(doc) {
         bonus.image = imgEl ? imgEl.src : '';
         
         if (bonus.text) {
+            // Parse multiplier from bonus text (e.g., "2× Catch XP" → {multiplier: 2, bonusType: "Catch XP"})
+            const parsed = parseBonusMultiplier(bonus.text);
+            if (parsed) {
+                bonus.multiplier = parsed.multiplier;
+                bonus.bonusType = parsed.bonusType;
+            }
+            
             result.bonuses.push(bonus);
             
             if (bonus.text.includes('*')) {

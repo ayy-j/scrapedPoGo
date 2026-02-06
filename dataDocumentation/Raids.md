@@ -102,10 +102,10 @@ Defines the CP (Combat Power) range for catching the raid boss.
 
 | Field             | Type  | Description
 |------------------ |------ |---------------------
-| **`normal.min`**  | `int` | The minimum CP when not weather boosted.
-| **`normal.max`**  | `int` | The maximum CP when not weather boosted.
-| **`boosted.min`** | `int` | The minimum CP when weather boosted.
-| **`boosted.max`** | `int` | The maximum CP when weather boosted.
+| **`normal.min`**  | `int\|null` | The minimum CP when not weather boosted, or `null` if unknown.
+| **`normal.max`**  | `int\|null` | The maximum CP when not weather boosted, or `null` if unknown.
+| **`boosted.min`** | `int\|null` | The minimum CP when weather boosted, or `null` if unknown.
+| **`boosted.max`** | `int\|null` | The maximum CP when weather boosted, or `null` if unknown.
 
 Weather boosting increases CP by approximately 25% and indicates better IVs (minimum 4/4/4 instead of 0/0/0).
 
@@ -305,12 +305,12 @@ Raid data can be cross-referenced with:
             "required": ["min", "max"],
             "properties": {
               "min": {
-                "type": "integer",
-                "description": "The minimum normal combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The minimum normal combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": "integer",
-                "description": "The maximum normal combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The maximum normal combat power of the Pokemon, or null if unknown"
               }
             },
             "additionalProperties": false
@@ -320,12 +320,12 @@ Raid data can be cross-referenced with:
             "required": ["min", "max"],
             "properties": {
               "min": {
-                "type": "integer",
-                "description": "The minimum boosted combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The minimum boosted combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": "integer",
-                "description": "The maximum boosted combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The maximum boosted combat power of the Pokemon, or null if unknown"
               }
             },
             "additionalProperties": false
