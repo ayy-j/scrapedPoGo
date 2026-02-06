@@ -10,6 +10,9 @@
     "combineall": "USE_BLOB_URLS=true node ./src/scrapers/combineAll.js",
     "pipeline": "USE_BLOB_URLS=true npm run scrape && USE_BLOB_URLS=true npm run detailedscrape && USE_BLOB_URLS=true npm run combinedetails && npm run combineall",
     "validate": "node src/scripts/validate-schemas.js",
+    "compare:schemas": "node src/scripts/compare-docs-data-schemas.js --mode report",
+    "compare:schemas:strict": "node src/scripts/compare-docs-data-schemas.js --mode strict",
+    "test": "node --test",
     "blob:upload": "node src/scripts/upload-images-to-blob.js"
   },
   "author": "quantNebula",
