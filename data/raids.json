@@ -11,7 +11,10 @@
     "types": [
       {
         "name": "water",
-        "image": "https://pokemn.quest/types/water.png"
+        "image": "https://pokemn.quest/types/water.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -27,7 +30,10 @@
     "boostedWeather": [
       {
         "name": "rainy",
-        "image": "https://pokemn.quest/weather/rainy.png"
+        "image": "https://pokemn.quest/weather/rainy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/060-poliwag/pm60.icon.png",
@@ -47,7 +53,10 @@
     "types": [
       {
         "name": "psychic",
-        "image": "https://pokemn.quest/types/psychic.png"
+        "image": "https://pokemn.quest/types/psychic.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -63,7 +72,10 @@
     "boostedWeather": [
       {
         "name": "windy",
-        "image": "https://pokemn.quest/weather/windy.png"
+        "image": "https://pokemn.quest/weather/windy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/325-spoink/pm325.icon.png",
@@ -83,11 +95,17 @@
     "types": [
       {
         "name": "bug",
-        "image": "https://pokemn.quest/types/bug.png"
+        "image": "https://pokemn.quest/types/bug.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "grass",
-        "image": "https://pokemn.quest/types/grass.png"
+        "image": "https://pokemn.quest/types/grass.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -103,11 +121,17 @@
     "boostedWeather": [
       {
         "name": "rainy",
-        "image": "https://pokemn.quest/weather/rainy.png"
+        "image": "https://pokemn.quest/weather/rainy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "sunny",
-        "image": "https://pokemn.quest/weather/sunny.png"
+        "image": "https://pokemn.quest/weather/sunny.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/540-sewaddle/pm540.icon.png",
@@ -127,7 +151,10 @@
     "types": [
       {
         "name": "water",
-        "image": "https://pokemn.quest/types/water.png"
+        "image": "https://pokemn.quest/types/water.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -143,7 +170,10 @@
     "boostedWeather": [
       {
         "name": "rainy",
-        "image": "https://pokemn.quest/weather/rainy.png"
+        "image": "https://pokemn.quest/weather/rainy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/816-sobble/pm816.icon.png",
@@ -163,11 +193,17 @@
     "types": [
       {
         "name": "ice",
-        "image": "https://pokemn.quest/types/ice.png"
+        "image": "https://pokemn.quest/types/ice.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "psychic",
-        "image": "https://pokemn.quest/types/psychic.png"
+        "image": "https://pokemn.quest/types/psychic.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -183,11 +219,17 @@
     "boostedWeather": [
       {
         "name": "snow",
-        "image": "https://pokemn.quest/weather/snowy.png"
+        "image": "https://pokemn.quest/weather/snowy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "windy",
-        "image": "https://pokemn.quest/weather/windy.png"
+        "image": "https://pokemn.quest/weather/windy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/124-jynx/pm124.icon.png",
@@ -207,11 +249,17 @@
     "types": [
       {
         "name": "normal",
-        "image": "https://pokemn.quest/types/normal.png"
+        "image": "https://pokemn.quest/types/normal.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "flying",
-        "image": "https://pokemn.quest/types/flying.png"
+        "image": "https://pokemn.quest/types/flying.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -227,11 +275,17 @@
     "boostedWeather": [
       {
         "name": "partly cloudy",
-        "image": "https://pokemn.quest/weather/partlycloudy.png"
+        "image": "https://pokemn.quest/weather/partlycloudy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "windy",
-        "image": "https://pokemn.quest/weather/windy.png"
+        "image": "https://pokemn.quest/weather/windy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/277-swellow/pm277.icon.png",
@@ -247,15 +301,21 @@
     "tier": "3-Star Raids",
     "isShadowRaid": false,
     "eventStatus": "unknown",
-    "canBeShiny": true,
+    "canBeShiny": false,
     "types": [
       {
         "name": "water",
-        "image": "https://pokemn.quest/types/water.png"
+        "image": "https://pokemn.quest/types/water.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "flying",
-        "image": "https://pokemn.quest/types/flying.png"
+        "image": "https://pokemn.quest/types/flying.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -271,11 +331,17 @@
     "boostedWeather": [
       {
         "name": "rainy",
-        "image": "https://pokemn.quest/weather/rainy.png"
+        "image": "https://pokemn.quest/weather/rainy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "windy",
-        "image": "https://pokemn.quest/weather/windy.png"
+        "image": "https://pokemn.quest/weather/windy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/581-swanna/pm581.icon.png",
@@ -295,11 +361,17 @@
     "types": [
       {
         "name": "steel",
-        "image": "https://pokemn.quest/types/steel.png"
+        "image": "https://pokemn.quest/types/steel.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "dragon",
-        "image": "https://pokemn.quest/types/dragon.png"
+        "image": "https://pokemn.quest/types/dragon.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -315,11 +387,17 @@
     "boostedWeather": [
       {
         "name": "snow",
-        "image": "https://pokemn.quest/weather/snowy.png"
+        "image": "https://pokemn.quest/weather/snowy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "windy",
-        "image": "https://pokemn.quest/weather/windy.png"
+        "image": "https://pokemn.quest/weather/windy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/483-dialga/pm483.icon.png",
@@ -339,11 +417,17 @@
     "types": [
       {
         "name": "water",
-        "image": "https://pokemn.quest/types/water.png"
+        "image": "https://pokemn.quest/types/water.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "dragon",
-        "image": "https://pokemn.quest/types/dragon.png"
+        "image": "https://pokemn.quest/types/dragon.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -359,11 +443,17 @@
     "boostedWeather": [
       {
         "name": "rainy",
-        "image": "https://pokemn.quest/weather/rainy.png"
+        "image": "https://pokemn.quest/weather/rainy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "windy",
-        "image": "https://pokemn.quest/weather/windy.png"
+        "image": "https://pokemn.quest/weather/windy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/484-palkia/pm484.icon.png",
@@ -383,11 +473,17 @@
     "types": [
       {
         "name": "normal",
-        "image": "https://pokemn.quest/types/normal.png"
+        "image": "https://pokemn.quest/types/normal.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "flying",
-        "image": "https://pokemn.quest/types/flying.png"
+        "image": "https://pokemn.quest/types/flying.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -403,11 +499,17 @@
     "boostedWeather": [
       {
         "name": "partly cloudy",
-        "image": "https://pokemn.quest/weather/partlycloudy.png"
+        "image": "https://pokemn.quest/weather/partlycloudy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "windy",
-        "image": "https://pokemn.quest/weather/windy.png"
+        "image": "https://pokemn.quest/weather/windy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/018-pidgeot/pm18.fMEGA.icon.png",
@@ -427,7 +529,10 @@
     "types": [
       {
         "name": "dragon",
-        "image": "https://pokemn.quest/types/dragon.png"
+        "image": "https://pokemn.quest/types/dragon.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -443,7 +548,10 @@
     "boostedWeather": [
       {
         "name": "windy",
-        "image": "https://pokemn.quest/weather/windy.png"
+        "image": "https://pokemn.quest/weather/windy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/147-dratini/pm147.icon.png",
@@ -463,11 +571,17 @@
     "types": [
       {
         "name": "ground",
-        "image": "https://pokemn.quest/types/ground.png"
+        "image": "https://pokemn.quest/types/ground.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "flying",
-        "image": "https://pokemn.quest/types/flying.png"
+        "image": "https://pokemn.quest/types/flying.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -483,11 +597,17 @@
     "boostedWeather": [
       {
         "name": "sunny",
-        "image": "https://pokemn.quest/weather/sunny.png"
+        "image": "https://pokemn.quest/weather/sunny.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "windy",
-        "image": "https://pokemn.quest/weather/windy.png"
+        "image": "https://pokemn.quest/weather/windy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/207-gligar/pm207.icon.png",
@@ -507,7 +627,10 @@
     "types": [
       {
         "name": "grass",
-        "image": "https://pokemn.quest/types/grass.png"
+        "image": "https://pokemn.quest/types/grass.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -523,7 +646,10 @@
     "boostedWeather": [
       {
         "name": "sunny",
-        "image": "https://pokemn.quest/weather/sunny.png"
+        "image": "https://pokemn.quest/weather/sunny.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/331-cacnea/pm331.icon.png",
@@ -543,11 +669,17 @@
     "types": [
       {
         "name": "bug",
-        "image": "https://pokemn.quest/types/bug.png"
+        "image": "https://pokemn.quest/types/bug.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "electric",
-        "image": "https://pokemn.quest/types/electric.png"
+        "image": "https://pokemn.quest/types/electric.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -563,7 +695,10 @@
     "boostedWeather": [
       {
         "name": "rainy",
-        "image": "https://pokemn.quest/weather/rainy.png"
+        "image": "https://pokemn.quest/weather/rainy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/595-joltik/pm595.icon.png",
@@ -583,11 +718,17 @@
     "types": [
       {
         "name": "fire",
-        "image": "https://pokemn.quest/types/fire.png"
+        "image": "https://pokemn.quest/types/fire.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "ghost",
-        "image": "https://pokemn.quest/types/ghost.png"
+        "image": "https://pokemn.quest/types/ghost.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -603,11 +744,17 @@
     "boostedWeather": [
       {
         "name": "sunny",
-        "image": "https://pokemn.quest/weather/sunny.png"
+        "image": "https://pokemn.quest/weather/sunny.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "fog",
-        "image": "https://pokemn.quest/weather/foggy.png"
+        "image": "https://pokemn.quest/weather/foggy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/105-marowak/pm105.fALOLA.icon.png",
@@ -627,11 +774,17 @@
     "types": [
       {
         "name": "water",
-        "image": "https://pokemn.quest/types/water.png"
+        "image": "https://pokemn.quest/types/water.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "ice",
-        "image": "https://pokemn.quest/types/ice.png"
+        "image": "https://pokemn.quest/types/ice.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -647,11 +800,17 @@
     "boostedWeather": [
       {
         "name": "rainy",
-        "image": "https://pokemn.quest/weather/rainy.png"
+        "image": "https://pokemn.quest/weather/rainy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       },
       {
         "name": "snow",
-        "image": "https://pokemn.quest/weather/snowy.png"
+        "image": "https://pokemn.quest/weather/snowy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/131-lapras/pm131.icon.png",
@@ -671,7 +830,10 @@
     "types": [
       {
         "name": "normal",
-        "image": "https://pokemn.quest/types/normal.png"
+        "image": "https://pokemn.quest/types/normal.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -687,7 +849,10 @@
     "boostedWeather": [
       {
         "name": "partly cloudy",
-        "image": "https://pokemn.quest/weather/partlycloudy.png"
+        "image": "https://pokemn.quest/weather/partlycloudy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/234-stantler/pm234.icon.png",
@@ -707,7 +872,10 @@
     "types": [
       {
         "name": "normal",
-        "image": "https://pokemn.quest/types/normal.png"
+        "image": "https://pokemn.quest/types/normal.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "combatPower": {
@@ -723,7 +891,10 @@
     "boostedWeather": [
       {
         "name": "partly cloudy",
-        "image": "https://pokemn.quest/weather/partlycloudy.png"
+        "image": "https://pokemn.quest/weather/partlycloudy.png",
+        "imageWidth": 32,
+        "imageHeight": 32,
+        "imageType": "png"
       }
     ],
     "image": "https://pokemn.quest/pokemon/486-regigigas/pm486.icon.png",

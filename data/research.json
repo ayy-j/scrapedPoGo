@@ -1,5 +1,37 @@
 [
   {
+    "text": "???",
+    "type": null,
+    "rewards": [
+      {
+        "type": "encounter",
+        "name": "Hoothoot",
+        "image": "https://pokemn.quest/pokemon/163-hoothoot/pm163.icon.png",
+        "canBeShiny": true,
+        "combatPower": {
+          "min": 262,
+          "max": 290
+        },
+        "imageWidth": 139,
+        "imageHeight": 127,
+        "imageType": "png"
+      },
+      {
+        "type": "encounter",
+        "name": "Starly",
+        "image": "https://pokemn.quest/pokemon/396-starly/pm396.icon.png",
+        "canBeShiny": true,
+        "combatPower": {
+          "min": 279,
+          "max": 308
+        },
+        "imageWidth": 76,
+        "imageHeight": 94,
+        "imageType": "png"
+      }
+    ]
+  },
+  {
     "text": "Catch 10 Pokémon",
     "type": "catch",
     "rewards": [

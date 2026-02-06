@@ -5,6 +5,9 @@
     "eventType": "season",
     "heading": "Season",
     "image": "https://pokemn.quest/events/2025-12-02-season-21-precious-paths.jpg",
+    "imageWidth": 639,
+    "imageHeight": 338,
+    "imageType": "jpg",
     "start": "2025-12-02T10:00:00.000",
     "end": "2026-03-03T10:00:00.000",
     "isGlobal": false,
@@ -15,163 +18,244 @@
           "name": "Bulbasaur",
           "image": "https://pokemn.quest/pokemon/001-bulbasaur/pokemon_icon_001_00.png",
           "canBeShiny": true,
-          "dexNumber": 1
+          "dexNumber": 1,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Charmander",
           "image": "https://pokemn.quest/pokemon/004-charmander/pokemon_icon_004_00.png",
           "canBeShiny": true,
-          "dexNumber": 4
+          "dexNumber": 4,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Squirtle",
           "image": "https://pokemn.quest/pokemon/007-squirtle/pokemon_icon_007_00.png",
           "canBeShiny": true,
-          "dexNumber": 7
+          "dexNumber": 7,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Chikorita",
           "image": "https://pokemn.quest/pokemon/152-chikorita/pokemon_icon_152_00.png",
           "canBeShiny": true,
-          "dexNumber": 152
+          "dexNumber": 152,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Cyndaquil",
           "image": "https://pokemn.quest/pokemon/155-cyndaquil/pokemon_icon_155_00.png",
           "canBeShiny": true,
-          "dexNumber": 155
+          "dexNumber": 155,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Totodile",
           "image": "https://pokemn.quest/pokemon/158-totodile/pokemon_icon_158_00.png",
           "canBeShiny": true,
-          "dexNumber": 158
+          "dexNumber": 158,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Treecko",
           "image": "https://pokemn.quest/pokemon/252-treecko/pokemon_icon_252_00.png",
           "canBeShiny": true,
-          "dexNumber": 252
+          "dexNumber": 252,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Torchic",
           "image": "https://pokemn.quest/pokemon/255-torchic/pokemon_icon_255_00.png",
           "canBeShiny": true,
-          "dexNumber": 255
+          "dexNumber": 255,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Mudkip",
           "image": "https://pokemn.quest/pokemon/258-mudkip/pokemon_icon_258_00.png",
           "canBeShiny": true,
-          "dexNumber": 258
+          "dexNumber": 258,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Turtwig",
           "image": "https://pokemn.quest/pokemon/387-turtwig/pokemon_icon_387_00.png",
           "canBeShiny": true,
-          "dexNumber": 387
+          "dexNumber": 387,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Chimchar",
           "image": "https://pokemn.quest/pokemon/390-chimchar/pokemon_icon_390_00.png",
           "canBeShiny": true,
-          "dexNumber": 390
+          "dexNumber": 390,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Piplup",
           "image": "https://pokemn.quest/pokemon/393-piplup/pokemon_icon_393_00.png",
           "canBeShiny": true,
-          "dexNumber": 393
+          "dexNumber": 393,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Snivy",
           "image": "https://pokemn.quest/pokemon/495-snivy/pokemon_icon_495_00.png",
           "canBeShiny": true,
-          "dexNumber": 495
+          "dexNumber": 495,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Tepig",
           "image": "https://pokemn.quest/pokemon/498-tepig/pokemon_icon_498_00.png",
           "canBeShiny": true,
-          "dexNumber": 498
+          "dexNumber": 498,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Oshawott",
           "image": "https://pokemn.quest/pokemon/501-oshawott/pokemon_icon_501_00.png",
           "canBeShiny": true,
-          "dexNumber": 501
+          "dexNumber": 501,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Chespin",
           "image": "https://pokemn.quest/pokemon/650-chespin/pokemon_icon_650_00.png",
           "canBeShiny": true,
-          "dexNumber": 650
+          "dexNumber": 650,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Fennekin",
           "image": "https://pokemn.quest/pokemon/653-fennekin/pokemon_icon_653_00.png",
           "canBeShiny": true,
-          "dexNumber": 653
+          "dexNumber": 653,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Froakie",
           "image": "https://pokemn.quest/pokemon/656-froakie/pokemon_icon_656_00.png",
           "canBeShiny": true,
-          "dexNumber": 656
+          "dexNumber": 656,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Rowlet",
           "image": "https://pokemn.quest/pokemon/722-rowlet/pm722.icon.png",
           "canBeShiny": true,
-          "dexNumber": 722
+          "dexNumber": 722,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Litten",
           "image": "https://pokemn.quest/pokemon/725-litten/pm725.icon.png",
           "canBeShiny": true,
-          "dexNumber": 725
+          "dexNumber": 725,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Popplio",
           "image": "https://pokemn.quest/pokemon/728-popplio/pm728.icon.png",
           "canBeShiny": true,
-          "dexNumber": 728
+          "dexNumber": 728,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Grookey",
           "image": "https://pokemn.quest/pokemon/810-grookey/pm810.icon.png",
           "canBeShiny": false,
-          "dexNumber": 810
+          "dexNumber": 810,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Scorbunny",
           "image": "https://pokemn.quest/pokemon/813-scorbunny/pm813.icon.png",
           "canBeShiny": false,
-          "dexNumber": 813
+          "dexNumber": 813,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Sobble",
           "image": "https://pokemn.quest/pokemon/816-sobble/pm816.icon.png",
           "canBeShiny": false,
-          "dexNumber": 816
+          "dexNumber": 816,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Sprigatito",
           "image": "https://pokemn.quest/pokemon/906-sprigatito/pm906.icon.png",
           "canBeShiny": true,
-          "dexNumber": 906
+          "dexNumber": 906,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Fuecoco",
           "image": "https://pokemn.quest/pokemon/909-fuecoco/pm909.icon.png",
           "canBeShiny": true,
-          "dexNumber": 909
+          "dexNumber": 909,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Quaxly",
           "image": "https://pokemn.quest/pokemon/912-quaxly/pm912.icon.png",
           "canBeShiny": true,
-          "dexNumber": 912
+          "dexNumber": 912,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "2km": [
@@ -179,67 +263,100 @@
           "name": "Cleffa",
           "image": "https://pokemn.quest/pokemon/173-cleffa/pokemon_icon_173_00.png",
           "canBeShiny": true,
-          "dexNumber": 173
+          "dexNumber": 173,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Igglybuff",
           "image": "https://pokemn.quest/pokemon/174-igglybuff/pokemon_icon_174_00.png",
           "canBeShiny": true,
-          "dexNumber": 174
+          "dexNumber": 174,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Smoochum",
           "image": "https://pokemn.quest/pokemon/238-smoochum/pokemon_icon_238_00.png",
           "canBeShiny": true,
-          "dexNumber": 238
+          "dexNumber": 238,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Meditite",
           "image": "https://pokemn.quest/pokemon/307-meditite/pokemon_icon_307_00.png",
           "canBeShiny": true,
-          "dexNumber": 307
+          "dexNumber": 307,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Bonsly",
           "image": "https://pokemn.quest/pokemon/438-bonsly/pokemon_icon_438_00.png",
           "canBeShiny": true,
-          "dexNumber": 438
+          "dexNumber": 438,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Petilil",
           "image": "https://pokemn.quest/pokemon/548-petilil/pokemon_icon_548_00.png",
           "canBeShiny": true,
-          "dexNumber": 548
+          "dexNumber": 548,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Ducklett",
           "image": "https://pokemn.quest/pokemon/580-ducklett/pokemon_icon_580_00.png",
           "canBeShiny": true,
-          "dexNumber": 580
+          "dexNumber": 580,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Litleo",
           "image": "https://pokemn.quest/pokemon/667-litleo/pokemon_icon_667_00.png",
           "canBeShiny": true,
-          "dexNumber": 667
+          "dexNumber": 667,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Bergmite",
           "image": "https://pokemn.quest/pokemon/712-bergmite/pm712.icon.png",
           "canBeShiny": true,
-          "dexNumber": 712
+          "dexNumber": 712,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Wimpod",
           "image": "https://pokemn.quest/pokemon/767-wimpod/pm767.icon.png",
           "canBeShiny": true,
-          "dexNumber": 767
+          "dexNumber": 767,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Smoliv",
           "image": "https://pokemn.quest/pokemon/928-smoliv/pm928.icon.png",
           "canBeShiny": true,
-          "dexNumber": 928
+          "dexNumber": 928,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "5km": [
@@ -247,59 +364,89 @@
           "name": "Munchlax",
           "image": "https://pokemn.quest/pokemon/446-munchlax/pokemon_icon_446_00.png",
           "canBeShiny": true,
-          "dexNumber": 446
+          "dexNumber": 446,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Audino",
           "image": "https://pokemn.quest/pokemon/531-audino/pokemon_icon_531_00.png",
           "canBeShiny": true,
-          "dexNumber": 531
+          "dexNumber": 531,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Elgyem",
           "image": "https://pokemn.quest/pokemon/605-elgyem/pokemon_icon_605_00.png",
           "canBeShiny": true,
-          "dexNumber": 605
+          "dexNumber": 605,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Inkay",
           "image": "https://pokemn.quest/pokemon/686-inkay/pokemon_icon_686_00.png",
           "canBeShiny": true,
-          "dexNumber": 686
+          "dexNumber": 686,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Crabrawler",
           "image": "https://pokemn.quest/pokemon/739-crabrawler/pm739.icon.png",
           "canBeShiny": true,
-          "dexNumber": 739
+          "dexNumber": 739,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Komala",
           "image": "https://pokemn.quest/pokemon/775-komala/pm775.icon.png",
           "canBeShiny": true,
-          "dexNumber": 775
+          "dexNumber": 775,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Togedemaru",
           "image": "https://pokemn.quest/pokemon/777-togedemaru/pm777.icon.png",
           "canBeShiny": true,
-          "dexNumber": 777
+          "dexNumber": 777,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Snom",
           "image": "https://pokemn.quest/pokemon/872/pm872.icon.png",
           "canBeShiny": false,
-          "dexNumber": 872
+          "dexNumber": 872,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Indeedee (Male)",
           "image": "https://pokemn.quest/pokemon/876-indeedee/pm876.fMALE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Indeedee (Female)",
           "image": "https://pokemn.quest/pokemon/876-indeedee/pm876.fFEMALE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "7km": [
@@ -307,42 +454,63 @@
           "name": "Alolan Diglett",
           "image": "https://pokemn.quest/pokemon/050-diglett/pokemon_icon_050_61.png",
           "canBeShiny": true,
-          "dexNumber": 50
+          "dexNumber": 50,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Galarian Meowth",
           "image": "https://pokemn.quest/pokemon/052-meowth/pokemon_icon_052_31.png",
           "canBeShiny": true,
-          "dexNumber": 52
+          "dexNumber": 52,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Alolan Geodude",
           "image": "https://pokemn.quest/pokemon/074-geodude/pokemon_icon_074_61.png",
           "canBeShiny": true,
-          "dexNumber": 74
+          "dexNumber": 74,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Galarian Corsola",
           "image": "https://pokemn.quest/pokemon/222-corsola/pm222.fGALARIAN.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Galarian Zigzagoon",
           "image": "https://pokemn.quest/pokemon/263-zigzagoon/pokemon_icon_263_31.png",
           "canBeShiny": true,
-          "dexNumber": 263
+          "dexNumber": 263,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Galarian Darumaka",
           "image": "https://pokemn.quest/pokemon/554-darumaka/pokemon_icon_554_31.png",
           "canBeShiny": true,
-          "dexNumber": 554
+          "dexNumber": 554,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Galarian Stunfisk",
           "image": "https://pokemn.quest/pokemon/618-stunfisk/pokemon_icon_618_31.png",
           "canBeShiny": true,
-          "dexNumber": 618
+          "dexNumber": 618,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "10km": [
@@ -350,61 +518,91 @@
           "name": "Beldum",
           "image": "https://pokemn.quest/pokemon/374-beldum/pokemon_icon_374_00.png",
           "canBeShiny": true,
-          "dexNumber": 374
+          "dexNumber": 374,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Pawniard",
           "image": "https://pokemn.quest/pokemon/624-pawniard/pokemon_icon_624_00.png",
           "canBeShiny": true,
-          "dexNumber": 624
+          "dexNumber": 624,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Honedge",
           "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00.png",
           "canBeShiny": false,
-          "dexNumber": 679
+          "dexNumber": 679,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Carbink",
           "image": "https://pokemn.quest/pokemon/703-carbink/pm703.icon.png",
           "canBeShiny": true,
-          "dexNumber": 703
+          "dexNumber": 703,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Jangmo-o",
           "image": "https://pokemn.quest/pokemon/782-jangmo-o/pm782.icon.png",
           "canBeShiny": true,
-          "dexNumber": 782
+          "dexNumber": 782,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Toxel",
           "image": "https://pokemn.quest/pokemon/848-toxel/pm848.icon.png",
           "canBeShiny": true,
-          "dexNumber": 848
+          "dexNumber": 848,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Dreepy",
           "image": "https://pokemn.quest/pokemon/885/pm885.icon.png",
           "canBeShiny": false,
-          "dexNumber": 885
+          "dexNumber": 885,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Charcadet",
           "image": "https://pokemn.quest/pokemon/935-charcadet/pm935.icon.png",
           "canBeShiny": true,
-          "dexNumber": 935
+          "dexNumber": 935,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Tinkatink",
           "image": "https://pokemn.quest/pokemon/957-tinkatink/pm957.icon.png",
           "canBeShiny": false,
-          "dexNumber": 957
+          "dexNumber": 957,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Frigibax",
           "image": "https://pokemn.quest/pokemon/996-frigibax/pm996.icon.png",
           "canBeShiny": true,
-          "dexNumber": 996
+          "dexNumber": 996,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "12km": [],
@@ -412,23 +610,35 @@
         {
           "name": "Hisuian Growlithe",
           "image": "https://pokemn.quest/pokemon/058-growlithe/pm58.fHISUIAN.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Galarian Slowpoke",
           "image": "https://pokemn.quest/pokemon/079-slowpoke/pokemon_icon_079_31.png",
           "canBeShiny": true,
-          "dexNumber": 79
+          "dexNumber": 79,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Hisuian Sneasel",
           "image": "https://pokemn.quest/pokemon/215-sneasel/pm215.fHISUIAN.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Galarian Corsola",
           "image": "https://pokemn.quest/pokemon/222-corsola/pm222.fGALARIAN.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "adventure5km": [
@@ -436,31 +646,46 @@
           "name": "Skarmory",
           "image": "https://pokemn.quest/pokemon/227-skarmory/pokemon_icon_227_00.png",
           "canBeShiny": true,
-          "dexNumber": 227
+          "dexNumber": 227,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Bonsly",
           "image": "https://pokemn.quest/pokemon/438-bonsly/pokemon_icon_438_00.png",
           "canBeShiny": true,
-          "dexNumber": 438
+          "dexNumber": 438,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Riolu",
           "image": "https://pokemn.quest/pokemon/447-riolu/pokemon_icon_447_00.png",
           "canBeShiny": true,
-          "dexNumber": 447
+          "dexNumber": 447,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Tirtouga",
           "image": "https://pokemn.quest/pokemon/564-tirtouga/pokemon_icon_564_00.png",
           "canBeShiny": true,
-          "dexNumber": 564
+          "dexNumber": 564,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Archen",
           "image": "https://pokemn.quest/pokemon/566-archen/pokemon_icon_566_00.png",
           "canBeShiny": true,
-          "dexNumber": 566
+          "dexNumber": 566,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "adventure10km": [
@@ -468,46 +693,70 @@
           "name": "Beldum",
           "image": "https://pokemn.quest/pokemon/374-beldum/pokemon_icon_374_00.png",
           "canBeShiny": true,
-          "dexNumber": 374
+          "dexNumber": 374,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Gible",
           "image": "https://pokemn.quest/pokemon/443-gible/pokemon_icon_443_00.png",
           "canBeShiny": true,
-          "dexNumber": 443
+          "dexNumber": 443,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Turtonator",
           "image": "https://pokemn.quest/pokemon/776-turtonator/pm776.icon.png",
           "canBeShiny": true,
-          "dexNumber": 776
+          "dexNumber": 776,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Drampa",
           "image": "https://pokemn.quest/pokemon/780-drampa/pm780.icon.png",
           "canBeShiny": true,
-          "dexNumber": 780
+          "dexNumber": 780,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Dreepy",
           "image": "https://pokemn.quest/pokemon/885/pm885.icon.png",
           "canBeShiny": false,
-          "dexNumber": 885
+          "dexNumber": 885,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ]
     },
     "bonuses": [
       {
         "text": "One additional Special Trade per day",
-        "image": "https://pokemn.quest/bonuses/trade.png"
+        "image": "https://pokemn.quest/bonuses/trade.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased Stardust for the first catch of the day",
-        "image": "https://pokemn.quest/bonuses/stardust.png"
+        "image": "https://pokemn.quest/bonuses/stardust.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased friendship bonus damage dealt by Pokémon in raids",
-        "image": "https://pokemn.quest/bonuses/friendship.png"
+        "image": "https://pokemn.quest/bonuses/friendship.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       }
     ],
     "research": {
@@ -516,37 +765,55 @@
           "name": "Galarian Mr. Mime",
           "image": "https://pokemn.quest/pokemon/122-mr-mime/pokemon_icon_122_31.png",
           "canBeShiny": true,
-          "dexNumber": 122
+          "dexNumber": 122,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Lapras",
           "image": "https://pokemn.quest/pokemon/131-lapras/pokemon_icon_131_00.png",
           "canBeShiny": true,
-          "dexNumber": 131
+          "dexNumber": 131,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Snorlax",
           "image": "https://pokemn.quest/pokemon/143-snorlax/pokemon_icon_143_00.png",
           "canBeShiny": true,
-          "dexNumber": 143
+          "dexNumber": 143,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Honedge",
           "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00.png",
           "canBeShiny": false,
-          "dexNumber": 679
+          "dexNumber": 679,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Sinistea",
           "image": "https://pokemn.quest/pokemon/854-sinistea/pm854.icon.png",
           "canBeShiny": true,
-          "dexNumber": 854
+          "dexNumber": 854,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Dreepy",
           "image": "https://pokemn.quest/pokemon/885/pm885.icon.png",
           "canBeShiny": false,
-          "dexNumber": 885
+          "dexNumber": 885,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "masterwork": [
@@ -567,7 +834,10 @@
     "name": "Shadow Regigigas in Shadow Raids",
     "eventType": "raid-battles",
     "heading": "Raid Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-02-01T06:00:00.000",
     "end": "2026-03-04T22:00:00.000",
     "isGlobal": false,
@@ -601,6 +871,9 @@
     "eventType": "event",
     "heading": "Event",
     "image": "https://pokemn.quest/events/2026-02-03-carnival-of-flamigo.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-03T10:00:00.000",
     "end": "2026-02-08T20:00:00.000",
     "isGlobal": false,
@@ -611,77 +884,110 @@
         "image": "https://pokemn.quest/pokemon/167-spinarak/pokemon_icon_167_00.png",
         "canBeShiny": true,
         "dexNumber": 167,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Lotad",
         "image": "https://pokemn.quest/pokemon/270-lotad/pokemon_icon_270_00.png",
         "canBeShiny": true,
         "dexNumber": 270,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Surskit",
         "image": "https://pokemn.quest/pokemon/283-surskit/pokemon_icon_283_00.png",
         "canBeShiny": true,
         "dexNumber": 283,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Buneary",
         "image": "https://pokemn.quest/pokemon/427-buneary/pokemon_icon_427_00.png",
         "canBeShiny": true,
         "dexNumber": 427,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Finneon",
         "image": "https://pokemn.quest/pokemon/456-finneon/pokemon_icon_456_00.png",
         "canBeShiny": true,
         "dexNumber": 456,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Petilil",
         "image": "https://pokemn.quest/pokemon/548-petilil/pokemon_icon_548_00.png",
         "canBeShiny": true,
         "dexNumber": 548,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Pikipek",
         "image": "https://pokemn.quest/pokemon/731-pikipek/pm731.icon.png",
         "canBeShiny": true,
         "dexNumber": 731,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Bounsweet",
         "image": "https://pokemn.quest/pokemon/761-bounsweet/pm761.icon.png",
         "canBeShiny": true,
         "dexNumber": 761,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Frillish",
         "image": "https://pokemn.quest/pokemon/592-frillish/pokemon_icon_592_00.png",
         "canBeShiny": true,
         "dexNumber": 592,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Spritzee",
         "image": "https://pokemn.quest/pokemon/682-spritzee/pokemon_icon_682_00.png",
         "canBeShiny": true,
         "dexNumber": 682,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Flamigo",
         "image": "https://pokemn.quest/pokemon/973/pm973.icon.png",
         "canBeShiny": false,
         "dexNumber": 973,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "bonuses": [
@@ -689,21 +995,33 @@
         "text": "2× Incense duration",
         "image": "https://pokemn.quest/bonuses/incense.png",
         "multiplier": 2,
-        "bonusType": "Incense duration"
+        "bonusType": "Incense duration",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "2× Daily Adventure Incense duration",
         "image": "https://pokemn.quest/bonuses/dailyincense.png",
         "multiplier": 2,
-        "bonusType": "Daily Adventure Incense duration"
+        "bonusType": "Daily Adventure Incense duration",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "500 Additional Stardust for catching Flamigo",
-        "image": "https://pokemn.quest/bonuses/stardust.png"
+        "image": "https://pokemn.quest/bonuses/stardust.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased chance to encounter Shiny Lotad, Shiny Spritzee, and Shiny Pikipek",
-        "image": "https://pokemn.quest/bonuses/wildgrass.png"
+        "image": "https://pokemn.quest/bonuses/wildgrass.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       }
     ],
     "shinies": [
@@ -711,18 +1029,27 @@
         "name": "Lotad",
         "image": "https://pokemn.quest/pokemon/270-lotad/pokemon_icon_270_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 270
+        "dexNumber": 270,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Spritzee",
         "image": "https://pokemn.quest/pokemon/682-spritzee/pokemon_icon_682_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 682
+        "dexNumber": 682,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Pikipek",
         "image": "https://pokemn.quest/pokemon/731-pikipek/pm731.s.icon.png",
-        "canBeShiny": false
+        "canBeShiny": false,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "customSections": {
@@ -740,7 +1067,10 @@
             "name": "Flamigo",
             "image": "https://pokemn.quest/pokemon/973/pm973.icon.png",
             "canBeShiny": false,
-            "dexNumber": 973
+            "dexNumber": 973,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -811,6 +1141,9 @@
     "eventType": "go-pass",
     "heading": "Go Pass",
     "image": "https://pokemn.quest/events/2026-02-03-go-pass-february-2026.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-03T10:00:00.000",
     "end": "2026-03-03T10:00:00.000",
     "isGlobal": false,
@@ -880,7 +1213,10 @@
     "name": "Ultra League and 2026 Championship Series Cup | Precious Paths",
     "eventType": "go-battle-league",
     "heading": "Go Battle League",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/go-battle-league-ultra-league-machamp-swampert.jpg",
+    "imageWidth": 512,
+    "imageHeight": 288,
+    "imageType": "jpg",
     "start": "2026-02-03T21:00:00.000Z",
     "end": "2026-02-10T21:00:00.000Z",
     "isGlobal": true,
@@ -930,7 +1266,10 @@
     "name": "Dialga and Palkia in 5-star Raid Battles",
     "eventType": "raid-battles",
     "heading": "Raid Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-02-04T10:00:00.000",
     "end": "2026-02-16T10:00:00.000",
     "isGlobal": false,
@@ -981,7 +1320,10 @@
     "name": "Mega Pidgeot in Mega Raids",
     "eventType": "raid-battles",
     "heading": "Raid Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/mega-default.jpg",
+    "imageWidth": 524,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-02-04T10:00:00.000",
     "end": "2026-02-16T10:00:00.000",
     "isGlobal": false,
@@ -1024,6 +1366,9 @@
     "eventType": "event",
     "heading": "Event",
     "image": "https://pokemn.quest/events/2026-02-07-oricorio-catch-mastery-day-february-2026.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-07T10:00:00.000",
     "end": "2026-02-07T20:00:00.000",
     "isGlobal": false,
@@ -1034,14 +1379,20 @@
         "image": "https://pokemn.quest/pokemon/163-hoothoot/pokemon_icon_163_00.png",
         "canBeShiny": true,
         "dexNumber": 163,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Starly",
         "image": "https://pokemn.quest/pokemon/396-starly/pokemon_icon_396_00.png",
         "canBeShiny": true,
         "dexNumber": 396,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "bonuses": [
@@ -1049,11 +1400,17 @@
         "text": "2× XP for successfully catching Pokémon with Nice Throws or better",
         "image": "https://pokemn.quest/bonuses/xp.png",
         "multiplier": 2,
-        "bonusType": "XP for successfully catching Pokémon with Nice Throws or better"
+        "bonusType": "XP for successfully catching Pokémon with Nice Throws or better",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased Candy for successfully catching Pokémon with Nice Throws or better",
-        "image": "https://pokemn.quest/bonuses/candy.png"
+        "image": "https://pokemn.quest/bonuses/candy.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       }
     ],
     "shinies": [
@@ -1061,33 +1418,51 @@
         "name": "Hoothoot",
         "image": "https://pokemn.quest/pokemon/163-hoothoot/pokemon_icon_163_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 163
+        "dexNumber": 163,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Starly",
         "image": "https://pokemn.quest/pokemon/396-starly/pokemon_icon_396_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 396
+        "dexNumber": 396,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Oricorio (Baile Style)",
         "image": "https://pokemn.quest/pokemon/741-oricorio/pm741.fBAILE.s.icon.png",
-        "canBeShiny": false
+        "canBeShiny": false,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Oricorio (Pom-Pom Style)",
         "image": "https://pokemn.quest/pokemon/741-oricorio/pm741.fPOMPOM.s.icon.png",
-        "canBeShiny": false
+        "canBeShiny": false,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Oricorio (Pa'u Style)",
         "image": "https://pokemn.quest/pokemon/741-oricorio/pm741.fPAU.s.icon.png",
-        "canBeShiny": false
+        "canBeShiny": false,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Oricorio (Sensu Style)",
         "image": "https://pokemn.quest/pokemon/741-oricorio/pm741.fSENSU.s.icon.png",
-        "canBeShiny": false
+        "canBeShiny": false,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "customSections": {
@@ -1168,11 +1543,28 @@
     }
   },
   {
+    "eventID": "flamigo-showcase-february-2026",
+    "name": "Flamigo PokéStop Showcase",
+    "eventType": "pokestop-showcase",
+    "heading": "Pokestop Showcase",
+    "image": "https://pokemn.quest/events/pokestop-showcases-default.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
+    "start": "2026-02-08T10:00:00.000",
+    "end": "2026-02-08T20:00:00.000",
+    "isGlobal": false,
+    "eventStatus": "upcoming"
+  },
+  {
     "eventID": "max-mondays-2026-02-09",
     "name": "Dynamax Growlithe during Max Monday",
     "eventType": "max-mondays",
     "heading": "Max Mondays",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/max-battles-kanto.jpg",
+    "imageWidth": 960,
+    "imageHeight": 540,
+    "imageType": "jpg",
     "start": "2026-02-09T18:00:00.000",
     "end": "2026-02-09T19:00:00.000",
     "isGlobal": false,
@@ -1185,6 +1577,9 @@
     "eventType": "event",
     "heading": "Event",
     "image": "https://pokemn.quest/events/2026-02-10-valentines-day-2026.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-10T10:00:00.000",
     "end": "2026-02-15T20:00:00.000",
     "isGlobal": false,
@@ -1195,27 +1590,39 @@
         "image": "https://pokemn.quest/pokemon/029-nidoran-female/pokemon_icon_029_00.png",
         "canBeShiny": true,
         "dexNumber": 29,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Nidoran♂",
         "image": "https://pokemn.quest/pokemon/032-nidoran-male/pokemon_icon_032_00.png",
         "canBeShiny": true,
         "dexNumber": 32,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Furfrou (Natural)",
         "image": "https://pokemn.quest/pokemon/676-furfrou/pm676.fNATURAL.icon.png",
         "canBeShiny": true,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Audino",
         "image": "https://pokemn.quest/pokemon/531-audino/pokemon_icon_531_00.png",
         "canBeShiny": true,
         "dexNumber": 531,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "bonuses": [
@@ -1223,33 +1630,54 @@
         "text": "2× XP for catching Pokémon",
         "image": "https://pokemn.quest/bonuses/xp.png",
         "multiplier": 2,
-        "bonusType": "XP for catching Pokémon"
+        "bonusType": "XP for catching Pokémon",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "2× Stardust from opening Gifts",
         "image": "https://pokemn.quest/bonuses/stardust2x.png",
         "multiplier": 2,
-        "bonusType": "Stardust from opening Gifts"
+        "bonusType": "Stardust from opening Gifts",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased chance to encounter Shiny Nidoran♀ and Shiny Nidoran♂",
-        "image": "https://pokemn.quest/bonuses/none.png"
+        "image": "https://pokemn.quest/bonuses/none.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased chance to hatch Shiny Nidoran♀, Shiny Nidoran♂, and Shiny Cherubi",
-        "image": "https://pokemn.quest/bonuses/none.png"
+        "image": "https://pokemn.quest/bonuses/none.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Free Timed Research awarding encounters with Spinda with a heart pattern",
-        "image": "https://pokemn.quest/bonuses/none.png"
+        "image": "https://pokemn.quest/bonuses/none.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Successfully catching a Pokémon with a Curveball Throw will award 750 XP",
-        "image": "https://pokemn.quest/bonuses/xp.png"
+        "image": "https://pokemn.quest/bonuses/xp.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Gifts may include Rare Candy",
-        "image": "https://pokemn.quest/bonuses/rarecandy.png"
+        "image": "https://pokemn.quest/bonuses/rarecandy.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       }
     ],
     "shinies": [
@@ -1257,31 +1685,46 @@
         "name": "Nidoran♀",
         "image": "https://pokemn.quest/pokemon/029-nidoran-female/pokemon_icon_029_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 29
+        "dexNumber": 29,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Nidoran♂",
         "image": "https://pokemn.quest/pokemon/032-nidoran-male/pokemon_icon_032_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 32
+        "dexNumber": 32,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Nidoran♀",
         "image": "https://pokemn.quest/pokemon/029-nidoran-female/pokemon_icon_029_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 29
+        "dexNumber": 29,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Nidoran♂",
         "image": "https://pokemn.quest/pokemon/032-nidoran-male/pokemon_icon_032_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 32
+        "dexNumber": 32,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Cherubi",
         "image": "https://pokemn.quest/pokemon/420-cherubi/pokemon_icon_420_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 420
+        "dexNumber": 420,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "customSections": {
@@ -1305,12 +1748,18 @@
           {
             "name": "Furfrou (Natural)",
             "image": "https://pokemn.quest/pokemon/676-furfrou/pm676.fNATURAL.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Furfrou (Heart)",
             "image": "https://pokemn.quest/pokemon/676-furfrou/pm676.fHEART.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -1342,37 +1791,55 @@
             "name": "Nidoran♀",
             "image": "https://pokemn.quest/pokemon/029-nidoran-female/pokemon_icon_029_00.png",
             "canBeShiny": true,
-            "dexNumber": 29
+            "dexNumber": 29,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Nidoran♂",
             "image": "https://pokemn.quest/pokemon/032-nidoran-male/pokemon_icon_032_00.png",
             "canBeShiny": true,
-            "dexNumber": 32
+            "dexNumber": 32,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Cleffa",
             "image": "https://pokemn.quest/pokemon/173-cleffa/pokemon_icon_173_00.png",
             "canBeShiny": true,
-            "dexNumber": 173
+            "dexNumber": 173,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Igglybuff",
             "image": "https://pokemn.quest/pokemon/174-igglybuff/pokemon_icon_174_00.png",
             "canBeShiny": true,
-            "dexNumber": 174
+            "dexNumber": 174,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Cherubi",
             "image": "https://pokemn.quest/pokemon/420-cherubi/pokemon_icon_420_00.png",
             "canBeShiny": true,
-            "dexNumber": 420
+            "dexNumber": 420,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Happiny",
             "image": "https://pokemn.quest/pokemon/440-happiny/pokemon_icon_440_00.png",
             "canBeShiny": true,
-            "dexNumber": 440
+            "dexNumber": 440,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -1392,13 +1859,19 @@
             "name": "Gardevoir",
             "image": "https://pokemn.quest/pokemon/282-gardevoir/pokemon_icon_282_00.png",
             "canBeShiny": true,
-            "dexNumber": 282
+            "dexNumber": 282,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Gallade",
             "image": "https://pokemn.quest/pokemon/475-gallade/pokemon_icon_475_00.png",
             "canBeShiny": true,
-            "dexNumber": 475
+            "dexNumber": 475,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -1433,37 +1906,55 @@
             "name": "Ralts",
             "image": "https://pokemn.quest/pokemon/280-ralts/pokemon_icon_280_00.png",
             "canBeShiny": true,
-            "dexNumber": 280
+            "dexNumber": 280,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kirlia",
             "image": "https://pokemn.quest/pokemon/281-kirlia/pokemon_icon_281_00.png",
             "canBeShiny": false,
-            "dexNumber": 281
+            "dexNumber": 281,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Gardevoir",
             "image": "https://pokemn.quest/pokemon/282-gardevoir/pokemon_icon_282_00.png",
             "canBeShiny": true,
-            "dexNumber": 282
+            "dexNumber": 282,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ralts",
             "image": "https://pokemn.quest/pokemon/280-ralts/pokemon_icon_280_00.png",
             "canBeShiny": true,
-            "dexNumber": 280
+            "dexNumber": 280,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kirlia",
             "image": "https://pokemn.quest/pokemon/281-kirlia/pokemon_icon_281_00.png",
             "canBeShiny": false,
-            "dexNumber": 281
+            "dexNumber": 281,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Gallade",
             "image": "https://pokemn.quest/pokemon/475-gallade/pokemon_icon_475_00.png",
             "canBeShiny": true,
-            "dexNumber": 475
+            "dexNumber": 475,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -1471,24 +1962,14 @@
     }
   },
   {
-    "eventID": "pokemonspotlighthour2026-02-10",
-    "name": "Munna",
-    "eventType": "pokemon-spotlight-hour",
-    "heading": "Pokemon Spotlight Hour",
-    "image": "https://pokemn.quest/pokemon/517-munna/pokemon_icon_517_00.png",
-    "start": "2026-02-10T18:00:00.000",
-    "end": "2026-02-10T19:00:00.000",
-    "isGlobal": false,
-    "eventStatus": "upcoming",
-    "canBeShiny": true,
-    "bonus": "February 10"
-  },
-  {
     "eventID": "gbl-precious-paths_master-league_2026-championship-series-cup",
     "name": "Master League and 2026 Championship Series Cup | Precious Paths",
     "eventType": "go-battle-league",
     "heading": "Go Battle League",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/gobattleleague-master-key.jpg",
+    "imageWidth": 427,
+    "imageHeight": 240,
+    "imageType": "jpg",
     "start": "2026-02-10T21:00:00.000Z",
     "end": "2026-02-17T21:00:00.000Z",
     "isGlobal": true,
@@ -1534,11 +2015,30 @@
     }
   },
   {
+    "eventID": "pokemonspotlighthour2026-02-10",
+    "name": "Munna",
+    "eventType": "pokemon-spotlight-hour",
+    "heading": "Pokemon Spotlight Hour",
+    "image": "https://pokemn.quest/pokemon/517-munna/pokemon_icon_517_00.png",
+    "imageWidth": 256,
+    "imageHeight": 256,
+    "imageType": "jpg",
+    "start": "2026-02-10T18:00:00.000",
+    "end": "2026-02-10T19:00:00.000",
+    "isGlobal": false,
+    "eventStatus": "upcoming",
+    "canBeShiny": true,
+    "bonus": "February 10"
+  },
+  {
     "eventID": "raidhour20260211",
     "name": "Dialga and Palkia Raid Hour",
     "eventType": "raid-hour",
     "heading": "Raid Hour",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/raidhour.jpg",
+    "imageWidth": 480,
+    "imageHeight": 240,
+    "imageType": "jpg",
     "start": "2026-02-11T18:00:00.000",
     "end": "2026-02-11T19:00:00.000",
     "isGlobal": false,
@@ -1551,6 +2051,9 @@
     "eventType": "raid-day",
     "heading": "Raid Day",
     "image": "https://pokemn.quest/events/2026-02-14-therian-forme-enamorus-raid-day-2026.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-14T14:00:00.000",
     "end": "2026-02-14T17:00:00.000",
     "isGlobal": false,
@@ -1588,37 +2091,61 @@
     "bonuses": [
       {
         "text": "Enamorus (Therian Forme) will make its Pokémon GO debut in five-star raids",
-        "image": "https://pokemn.quest/bonuses/none.png"
+        "image": "https://pokemn.quest/bonuses/none.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Receive up to five additional free Raid Passes from spinning Gym Photo Discs (for a total of six)*",
-        "image": "https://pokemn.quest/bonuses/freeraidpass.png"
+        "image": "https://pokemn.quest/bonuses/freeraidpass.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased chance of encountering Shiny Luvdisc and Shiny Furfrou** from Raids",
-        "image": "https://pokemn.quest/bonuses/none.png"
+        "image": "https://pokemn.quest/bonuses/none.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "The Remote Raid limit will increase to 20 from Friday, February 13, at 4:00 p.m. to Saturday, February 14, 2026, at 7:00 p.m. PST",
-        "image": "https://pokemn.quest/bonuses/remoteraidpass.png"
+        "image": "https://pokemn.quest/bonuses/remoteraidpass.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Receive up to eight additional Raid Passes from spinning Gym Photo Discs (for a daily total of 14)**",
-        "image": "https://pokemn.quest/bonuses/freeraidpass.png"
+        "image": "https://pokemn.quest/bonuses/freeraidpass.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased chance to get Rare Candy XL from Raid Battles",
-        "image": "https://pokemn.quest/bonuses/rarecandyxl.png"
+        "image": "https://pokemn.quest/bonuses/rarecandyxl.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "50% more XP from Raid Battles",
-        "image": "https://pokemn.quest/bonuses/xp.png"
+        "image": "https://pokemn.quest/bonuses/xp.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "2× Stardust from Raid Battles",
         "image": "https://pokemn.quest/bonuses/stardust2x.png",
         "multiplier": 2,
-        "bonusType": "Stardust from Raid Battles"
+        "bonusType": "Stardust from Raid Battles",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       }
     ],
     "rewards": {
@@ -1657,7 +2184,10 @@
     "name": "Max Battle Day",
     "eventType": "max-battles",
     "heading": "Max Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-02-15T14:00:00.000",
     "end": "2026-02-15T17:00:00.000",
     "isGlobal": false,
@@ -1669,6 +2199,9 @@
     "eventType": "max-battles",
     "heading": "Max Battles",
     "image": "https://pokemn.quest/events/2026-02-15-gigantamax-meowth-max-battle-day-2026.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-15T14:00:00.000",
     "end": "2026-02-15T17:00:00.000",
     "isGlobal": false,
@@ -1696,7 +2229,10 @@
     "name": "Mega Sableye in Mega Raids",
     "eventType": "raid-battles",
     "heading": "Raid Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/mega-default.jpg",
+    "imageWidth": 524,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-02-16T10:00:00.000",
     "end": "2026-02-21T10:00:00.000",
     "isGlobal": false,
@@ -1738,7 +2274,10 @@
     "name": "Solgaleo in 5-star Raid Battles",
     "eventType": "raid-battles",
     "heading": "Raid Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/solgaleo.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-16T10:00:00.000",
     "end": "2026-02-21T10:00:00.000",
     "isGlobal": false,
@@ -1760,7 +2299,10 @@
     "name": "Dynamax Machop during Max Monday",
     "eventType": "max-mondays",
     "heading": "Max Mondays",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/max-battles-kanto.jpg",
+    "imageWidth": 960,
+    "imageHeight": 540,
+    "imageType": "jpg",
     "start": "2026-02-16T18:00:00.000",
     "end": "2026-02-16T19:00:00.000",
     "isGlobal": false,
@@ -1773,6 +2315,9 @@
     "eventType": "event",
     "heading": "Event",
     "image": "https://pokemn.quest/events/2026-02-17-lunar-new-year-2026.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-17T10:00:00.000",
     "end": "2026-02-21T20:00:00.000",
     "isGlobal": false,
@@ -1783,53 +2328,80 @@
         "image": "https://pokemn.quest/pokemon/077-ponyta/pokemon_icon_077_00.png",
         "canBeShiny": true,
         "dexNumber": 77,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Galarian Ponyta",
         "image": "https://pokemn.quest/pokemon/077-ponyta/pokemon_icon_077_31.png",
         "canBeShiny": true,
         "dexNumber": 77,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Fuecoco",
         "image": "https://pokemn.quest/pokemon/909-fuecoco/pm909.icon.png",
         "canBeShiny": true,
         "dexNumber": 909,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Blitzle",
         "image": "https://pokemn.quest/pokemon/522-blitzle/pokemon_icon_522_00.png",
         "canBeShiny": true,
         "dexNumber": 522,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Darumaka",
         "image": "https://pokemn.quest/pokemon/554-darumaka/pokemon_icon_554_00.png",
         "canBeShiny": true,
         "dexNumber": 554,
-        "source": "spawn"
+        "source": "spawn",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "bonuses": [
       {
         "text": "Increased chance to get Lucky Pokémon in trades",
-        "image": "https://pokemn.quest/bonuses/trade.png"
+        "image": "https://pokemn.quest/bonuses/trade.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased chance to become Lucky Friends",
-        "image": "https://pokemn.quest/bonuses/friendship.png"
+        "image": "https://pokemn.quest/bonuses/friendship.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "PokéStops may turn gold without a Golden Lure Module",
-        "image": "https://pokemn.quest/bonuses/pokestop.png"
+        "image": "https://pokemn.quest/bonuses/pokestop.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "Increased chance to encounter Shiny Blitzle, Shiny Darumaka, and Shiny Gimmighoul",
-        "image": "https://pokemn.quest/bonuses/wildgrass.png"
+        "image": "https://pokemn.quest/bonuses/wildgrass.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       }
     ],
     "shinies": [
@@ -1837,18 +2409,27 @@
         "name": "Blitzle",
         "image": "https://pokemn.quest/pokemon/522-blitzle/pokemon_icon_522_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 522
+        "dexNumber": 522,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Darumaka",
         "image": "https://pokemn.quest/pokemon/554-darumaka/pokemon_icon_554_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 554
+        "dexNumber": 554,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Gimmighoul",
         "image": "https://pokemn.quest/pokemon/misc/poke_capture_0999_001_uk_n_00000000_f_r.png",
-        "canBeShiny": false
+        "canBeShiny": false,
+        "imageWidth": 512,
+        "imageHeight": 512,
+        "imageType": "png"
       }
     ],
     "customSections": {
@@ -1900,24 +2481,14 @@
     }
   },
   {
-    "eventID": "pokemonspotlighthour2026-02-17",
-    "name": "Horsea",
-    "eventType": "pokemon-spotlight-hour",
-    "heading": "Pokemon Spotlight Hour",
-    "image": "https://pokemn.quest/pokemon/116-horsea/pokemon_icon_116_00.png",
-    "start": "2026-02-17T18:00:00.000",
-    "end": "2026-02-17T19:00:00.000",
-    "isGlobal": false,
-    "eventStatus": "upcoming",
-    "canBeShiny": true,
-    "bonus": "February 17"
-  },
-  {
     "eventID": "gbl-precious-paths_great-league_love-cup-great-league-edition",
     "name": "Great League and Love Cup: Great League Edition | Precious Paths",
     "eventType": "go-battle-league",
     "heading": "Go Battle League",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/gobattle-greatleague-key.jpg",
+    "imageWidth": 600,
+    "imageHeight": 338,
+    "imageType": "jpg",
     "start": "2026-02-17T21:00:00.000Z",
     "end": "2026-02-24T21:00:00.000Z",
     "isGlobal": true,
@@ -1945,11 +2516,30 @@
     }
   },
   {
+    "eventID": "pokemonspotlighthour2026-02-17",
+    "name": "Horsea",
+    "eventType": "pokemon-spotlight-hour",
+    "heading": "Pokemon Spotlight Hour",
+    "image": "https://pokemn.quest/pokemon/116-horsea/pokemon_icon_116_00.png",
+    "imageWidth": 256,
+    "imageHeight": 256,
+    "imageType": "jpg",
+    "start": "2026-02-17T18:00:00.000",
+    "end": "2026-02-17T19:00:00.000",
+    "isGlobal": false,
+    "eventStatus": "upcoming",
+    "canBeShiny": true,
+    "bonus": "February 17"
+  },
+  {
     "eventID": "raidhour20260218",
     "name": "Solgaleo Raid Hour",
     "eventType": "raid-hour",
     "heading": "Raid Hour",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/raidhour.jpg",
+    "imageWidth": 480,
+    "imageHeight": 240,
+    "imageType": "jpg",
     "start": "2026-02-18T18:00:00.000",
     "end": "2026-02-18T19:00:00.000",
     "isGlobal": false,
@@ -1962,6 +2552,9 @@
     "eventType": "pokemon-go-tour",
     "heading": "Pokemon Go Tour",
     "image": "https://pokemn.quest/events/2026-02-20-pokemon-go-tour-kalos-tainan-2026.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-20T01:00:00.000Z",
     "end": "2026-02-22T09:00:00.000Z",
     "isGlobal": true,
@@ -1971,62 +2564,89 @@
         "name": "Calem's Hat Pikachu",
         "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Calem.png",
         "canBeShiny": true,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Serena's Hat Pikachu",
         "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Serena.png",
         "canBeShiny": true,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown A",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_11.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown X",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_34.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown Y",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_35.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown Z",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_36.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
         "dexNumber": 679,
-        "source": "costumed"
+        "source": "costumed",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
         "dexNumber": 701,
-        "source": "costumed"
+        "source": "costumed",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
         "dexNumber": 707,
-        "source": "costumed"
+        "source": "costumed",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "eggs": {
@@ -2036,52 +2656,79 @@
           "name": "Larvitar",
           "image": "https://pokemn.quest/pokemon/246-larvitar/pokemon_icon_246_00.png",
           "canBeShiny": true,
-          "dexNumber": 246
+          "dexNumber": 246,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Bagon",
           "image": "https://pokemn.quest/pokemon/371-bagon/pokemon_icon_371_00.png",
           "canBeShiny": true,
-          "dexNumber": 371
+          "dexNumber": 371,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Beldum",
           "image": "https://pokemn.quest/pokemon/374-beldum/pokemon_icon_374_00.png",
           "canBeShiny": true,
-          "dexNumber": 374
+          "dexNumber": 374,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Gible",
           "image": "https://pokemn.quest/pokemon/443-gible/pokemon_icon_443_00.png",
           "canBeShiny": true,
-          "dexNumber": 443
+          "dexNumber": 443,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "5km": [
         {
           "name": "Red Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fRED.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Yellow Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fYELLOW.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Orange Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fORANGE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Blue Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fBLUE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "White Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fWHITE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "7km": [],
@@ -2090,25 +2737,37 @@
           "name": "Kangaskhan",
           "image": "https://pokemn.quest/pokemon/115-kangaskhan/pokemon_icon_115_00.png",
           "canBeShiny": true,
-          "dexNumber": 115
+          "dexNumber": 115,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Heracross",
           "image": "https://pokemn.quest/pokemon/214-heracross/pokemon_icon_214_00.png",
           "canBeShiny": true,
-          "dexNumber": 214
+          "dexNumber": 214,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Hawlucha",
           "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00.png",
           "canBeShiny": true,
-          "dexNumber": 701
+          "dexNumber": 701,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Klefki",
           "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00.png",
           "canBeShiny": true,
-          "dexNumber": 707
+          "dexNumber": 707,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "12km": [],
@@ -2169,55 +2828,82 @@
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 679
+        "dexNumber": 679,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 701
+        "dexNumber": 701,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 707
+        "dexNumber": 707,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 679
+        "dexNumber": 679,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 701
+        "dexNumber": 701,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 707
+        "dexNumber": 707,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 679
+        "dexNumber": 679,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 701
+        "dexNumber": 701,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 707
+        "dexNumber": 707,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "eventInfo": {
@@ -2255,6 +2941,9 @@
     "eventType": "pokemon-go-tour",
     "heading": "Pokemon Go Tour",
     "image": "https://pokemn.quest/events/2026-02-20-mega-night-pokemon-go-tour-kalos-tainan-2026.jpg",
+    "imageWidth": 720,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-20T09:00:00.000Z",
     "end": "2026-02-22T11:00:00.000Z",
     "isGlobal": true,
@@ -2280,6 +2969,9 @@
     "eventType": "pokemon-go-tour",
     "heading": "Pokemon Go Tour",
     "image": "https://pokemn.quest/events/2026-02-20-pokemon-go-tour-kalos-los-angeles-2026.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-20T17:00:00.000Z",
     "end": "2026-02-23T01:00:00.000Z",
     "isGlobal": true,
@@ -2289,62 +2981,89 @@
         "name": "Calem's Hat Pikachu",
         "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Calem.png",
         "canBeShiny": true,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Serena's Hat Pikachu",
         "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Serena.png",
         "canBeShiny": true,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown A",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_11.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown X",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_34.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown Y",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_35.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown Z",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_36.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
         "dexNumber": 679,
-        "source": "costumed"
+        "source": "costumed",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
         "dexNumber": 701,
-        "source": "costumed"
+        "source": "costumed",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
         "dexNumber": 707,
-        "source": "costumed"
+        "source": "costumed",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "eggs": {
@@ -2354,52 +3073,79 @@
           "name": "Larvitar",
           "image": "https://pokemn.quest/pokemon/246-larvitar/pokemon_icon_246_00.png",
           "canBeShiny": true,
-          "dexNumber": 246
+          "dexNumber": 246,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Bagon",
           "image": "https://pokemn.quest/pokemon/371-bagon/pokemon_icon_371_00.png",
           "canBeShiny": true,
-          "dexNumber": 371
+          "dexNumber": 371,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Beldum",
           "image": "https://pokemn.quest/pokemon/374-beldum/pokemon_icon_374_00.png",
           "canBeShiny": true,
-          "dexNumber": 374
+          "dexNumber": 374,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Gible",
           "image": "https://pokemn.quest/pokemon/443-gible/pokemon_icon_443_00.png",
           "canBeShiny": true,
-          "dexNumber": 443
+          "dexNumber": 443,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "5km": [
         {
           "name": "Red Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fRED.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Yellow Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fYELLOW.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Orange Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fORANGE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Blue Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fBLUE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "White Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fWHITE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "7km": [],
@@ -2408,25 +3154,37 @@
           "name": "Kangaskhan",
           "image": "https://pokemn.quest/pokemon/115-kangaskhan/pokemon_icon_115_00.png",
           "canBeShiny": true,
-          "dexNumber": 115
+          "dexNumber": 115,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Heracross",
           "image": "https://pokemn.quest/pokemon/214-heracross/pokemon_icon_214_00.png",
           "canBeShiny": true,
-          "dexNumber": 214
+          "dexNumber": 214,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Hawlucha",
           "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00.png",
           "canBeShiny": true,
-          "dexNumber": 701
+          "dexNumber": 701,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Klefki",
           "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00.png",
           "canBeShiny": true,
-          "dexNumber": 707
+          "dexNumber": 707,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "12km": [],
@@ -2484,55 +3242,82 @@
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 679
+        "dexNumber": 679,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 701
+        "dexNumber": 701,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 707
+        "dexNumber": 707,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 679
+        "dexNumber": 679,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 701
+        "dexNumber": 701,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 707
+        "dexNumber": 707,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 679
+        "dexNumber": 679,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 701
+        "dexNumber": 701,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 707
+        "dexNumber": 707,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "eventInfo": {
@@ -2578,6 +3363,9 @@
     "eventType": "pokemon-go-tour",
     "heading": "Pokemon Go Tour",
     "image": "https://pokemn.quest/events/2026-02-20-mega-night-pokemon-go-tour-kalos-los-angeles-2026.jpg",
+    "imageWidth": 720,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-21T02:00:00.000Z",
     "end": "2026-02-23T04:00:00.000Z",
     "isGlobal": true,
@@ -2602,7 +3390,10 @@
     "name": "Lunala in 5-star Raid Battles",
     "eventType": "raid-battles",
     "heading": "Raid Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/lunala.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-21T10:00:00.000",
     "end": "2026-03-04T10:00:00.000",
     "isGlobal": false,
@@ -2624,7 +3415,10 @@
     "name": "Mega Absol in Mega Raids",
     "eventType": "raid-battles",
     "heading": "Raid Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/mega-default.jpg",
+    "imageWidth": 524,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-02-21T10:00:00.000",
     "end": "2026-03-04T10:00:00.000",
     "isGlobal": false,
@@ -2665,6 +3459,9 @@
     "eventType": "event",
     "heading": "Event",
     "image": "https://pokemn.quest/events/2026-02-23-road-to-kalos.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-23T00:00:00.000",
     "end": "2026-02-27T23:59:00.000",
     "isGlobal": false,
@@ -2674,15 +3471,24 @@
         "text": "1/2 Egg Hatch Distance when Eggs are placed in an Incubator during the event period",
         "image": "https://pokemn.quest/bonuses/eggdistance.png",
         "multiplier": 0.5,
-        "bonusType": "Egg Hatch Distance when Eggs are placed in an Incubator during the event period"
+        "bonusType": "Egg Hatch Distance when Eggs are placed in an Incubator during the event period",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "The Remote Raid Pass limit will be increased to 30 from Monday, February 23 to Friday, February 27, 2026",
-        "image": "https://pokemn.quest/bonuses/remoteraidpass.png"
+        "image": "https://pokemn.quest/bonuses/remoteraidpass.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       },
       {
         "text": "There will be no limit on Remote Raids from Saturday, February 28, to Sunday, March 1, 2026",
-        "image": "https://pokemn.quest/bonuses/remoteraidpass.png"
+        "image": "https://pokemn.quest/bonuses/remoteraidpass.png",
+        "imageWidth": 100,
+        "imageHeight": 100,
+        "imageType": "png"
       }
     ],
     "customSections": {
@@ -2702,22 +3508,34 @@
           {
             "name": "Red's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Leaf's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A_02.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ethan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lyra's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B_02.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -2786,144 +3604,222 @@
           {
             "name": "Red's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Leaf's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Articuno",
             "image": "https://pokemn.quest/pokemon/144-articuno/pokemon_icon_144_00.png",
             "canBeShiny": false,
-            "dexNumber": 144
+            "dexNumber": 144,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zapdos",
             "image": "https://pokemn.quest/pokemon/145-zapdos/pokemon_icon_145_00.png",
             "canBeShiny": false,
-            "dexNumber": 145
+            "dexNumber": 145,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Moltres",
             "image": "https://pokemn.quest/pokemon/146-moltres/pokemon_icon_146_00.png",
             "canBeShiny": false,
-            "dexNumber": 146
+            "dexNumber": 146,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ethan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lyra's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lugia",
             "image": "https://pokemn.quest/pokemon/249-lugia/pokemon_icon_249_00.png",
             "canBeShiny": false,
-            "dexNumber": 249
+            "dexNumber": 249,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ho-Oh",
             "image": "https://pokemn.quest/pokemon/250-ho-oh/pokemon_icon_250_00.png",
             "canBeShiny": false,
-            "dexNumber": 250
+            "dexNumber": 250,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Brendan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_HAT.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "May's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_BANDANA_NOEVOLVE.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pokemon_icon_382_00.png",
             "canBeShiny": false,
-            "dexNumber": 382
+            "dexNumber": 382,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pokemon_icon_383_00.png",
             "canBeShiny": false,
-            "dexNumber": 383
+            "dexNumber": 383,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lucas's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dawn's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rei's Cap Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fREI-CAP-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Akari's Kerchief Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fAKARI-KERCHIEF-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pokemon_icon_483_00.png",
             "canBeShiny": false,
-            "dexNumber": 483
+            "dexNumber": 483,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pokemon_icon_484_00.png",
             "canBeShiny": false,
-            "dexNumber": 484
+            "dexNumber": 484,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilbert's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilbert.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilda's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilda.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Nate's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Nate.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rosa's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Rosa.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -2990,144 +3886,222 @@
           {
             "name": "Red's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Leaf's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Articuno",
             "image": "https://pokemn.quest/pokemon/144-articuno/pokemon_icon_144_00.png",
             "canBeShiny": false,
-            "dexNumber": 144
+            "dexNumber": 144,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zapdos",
             "image": "https://pokemn.quest/pokemon/145-zapdos/pokemon_icon_145_00.png",
             "canBeShiny": false,
-            "dexNumber": 145
+            "dexNumber": 145,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Moltres",
             "image": "https://pokemn.quest/pokemon/146-moltres/pokemon_icon_146_00.png",
             "canBeShiny": false,
-            "dexNumber": 146
+            "dexNumber": 146,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ethan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lyra's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lugia",
             "image": "https://pokemn.quest/pokemon/249-lugia/pokemon_icon_249_00.png",
             "canBeShiny": false,
-            "dexNumber": 249
+            "dexNumber": 249,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ho-Oh",
             "image": "https://pokemn.quest/pokemon/250-ho-oh/pokemon_icon_250_00.png",
             "canBeShiny": false,
-            "dexNumber": 250
+            "dexNumber": 250,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Brendan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_HAT.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "May's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_BANDANA_NOEVOLVE.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pokemon_icon_382_00.png",
             "canBeShiny": false,
-            "dexNumber": 382
+            "dexNumber": 382,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pokemon_icon_383_00.png",
             "canBeShiny": false,
-            "dexNumber": 383
+            "dexNumber": 383,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lucas's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dawn's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rei's Cap Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fREI-CAP-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Akari's Kerchief Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fAKARI-KERCHIEF-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pokemon_icon_483_00.png",
             "canBeShiny": false,
-            "dexNumber": 483
+            "dexNumber": 483,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pokemon_icon_484_00.png",
             "canBeShiny": false,
-            "dexNumber": 484
+            "dexNumber": 484,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilbert's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilbert.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilda's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilda.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Nate's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Nate.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rosa's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Rosa.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3183,116 +4157,179 @@
           {
             "name": "Ethan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lyra's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lugia",
             "image": "https://pokemn.quest/pokemon/249-lugia/pokemon_icon_249_00.png",
             "canBeShiny": false,
-            "dexNumber": 249
+            "dexNumber": 249,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ho-Oh",
             "image": "https://pokemn.quest/pokemon/250-ho-oh/pokemon_icon_250_00.png",
             "canBeShiny": false,
-            "dexNumber": 250
+            "dexNumber": 250,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Brendan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_HAT.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "May's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_BANDANA_NOEVOLVE.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pokemon_icon_382_00.png",
             "canBeShiny": false,
-            "dexNumber": 382
+            "dexNumber": 382,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pokemon_icon_383_00.png",
             "canBeShiny": false,
-            "dexNumber": 383
+            "dexNumber": 383,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lucas's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dawn's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rei's Cap Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fREI-CAP-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Akari's Kerchief Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fAKARI-KERCHIEF-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pokemon_icon_483_00.png",
             "canBeShiny": false,
-            "dexNumber": 483
+            "dexNumber": 483,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pokemon_icon_484_00.png",
             "canBeShiny": false,
-            "dexNumber": 484
+            "dexNumber": 484,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilbert's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilbert.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilda's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilda.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Nate's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Nate.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rosa's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Rosa.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3339,94 +4376,145 @@
           {
             "name": "Brendan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_HAT.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "May's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_BANDANA_NOEVOLVE.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pokemon_icon_382_00.png",
             "canBeShiny": false,
-            "dexNumber": 382
+            "dexNumber": 382,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pokemon_icon_383_00.png",
             "canBeShiny": false,
-            "dexNumber": 383
+            "dexNumber": 383,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lucas's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dawn's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rei's Cap Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fREI-CAP-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Akari's Kerchief Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fAKARI-KERCHIEF-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pokemon_icon_483_00.png",
             "canBeShiny": false,
-            "dexNumber": 483
+            "dexNumber": 483,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pokemon_icon_484_00.png",
             "canBeShiny": false,
-            "dexNumber": 484
+            "dexNumber": 484,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilbert's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilbert.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilda's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilda.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Nate's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Nate.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rosa's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Rosa.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3464,72 +4552,111 @@
           {
             "name": "Lucas's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dawn's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A_02.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rei's Cap Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fREI-CAP-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Akari's Kerchief Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fAKARI-KERCHIEF-temp.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pokemon_icon_483_00.png",
             "canBeShiny": false,
-            "dexNumber": 483
+            "dexNumber": 483,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pokemon_icon_484_00.png",
             "canBeShiny": false,
-            "dexNumber": 484
+            "dexNumber": 484,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilbert's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilbert.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilda's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilda.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Nate's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Nate.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rosa's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Rosa.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3556,40 +4683,61 @@
           {
             "name": "Hilbert's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilbert.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilda's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilda.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Nate's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Nate.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rosa's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Rosa.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3622,37 +4770,55 @@
             "name": "Bulbasaur",
             "image": "https://pokemn.quest/pokemon/001-bulbasaur/pokemon_icon_001_00.png",
             "canBeShiny": true,
-            "dexNumber": 1
+            "dexNumber": 1,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Charmander",
             "image": "https://pokemn.quest/pokemon/004-charmander/pokemon_icon_004_00.png",
             "canBeShiny": true,
-            "dexNumber": 4
+            "dexNumber": 4,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Squirtle",
             "image": "https://pokemn.quest/pokemon/007-squirtle/pokemon_icon_007_00.png",
             "canBeShiny": true,
-            "dexNumber": 7
+            "dexNumber": 7,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pokemon_icon_025_00.png",
             "canBeShiny": true,
-            "dexNumber": 25
+            "dexNumber": 25,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Clefairy",
             "image": "https://pokemn.quest/pokemon/035-clefairy/pokemon_icon_035_00.png",
             "canBeShiny": true,
-            "dexNumber": 35
+            "dexNumber": 35,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Meowth",
             "image": "https://pokemn.quest/pokemon/052-meowth/pokemon_icon_052_00.png",
             "canBeShiny": true,
-            "dexNumber": 52
+            "dexNumber": 52,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3676,37 +4842,55 @@
             "name": "Chikorita",
             "image": "https://pokemn.quest/pokemon/152-chikorita/pokemon_icon_152_00.png",
             "canBeShiny": true,
-            "dexNumber": 152
+            "dexNumber": 152,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Cyndaquil",
             "image": "https://pokemn.quest/pokemon/155-cyndaquil/pokemon_icon_155_00.png",
             "canBeShiny": true,
-            "dexNumber": 155
+            "dexNumber": 155,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Totodile",
             "image": "https://pokemn.quest/pokemon/158-totodile/pokemon_icon_158_00.png",
             "canBeShiny": true,
-            "dexNumber": 158
+            "dexNumber": 158,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Marill",
             "image": "https://pokemn.quest/pokemon/183-marill/pokemon_icon_183_00.png",
             "canBeShiny": true,
-            "dexNumber": 183
+            "dexNumber": 183,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hoppip",
             "image": "https://pokemn.quest/pokemon/187-hoppip/pokemon_icon_187_00.png",
             "canBeShiny": true,
-            "dexNumber": 187
+            "dexNumber": 187,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Teddiursa",
             "image": "https://pokemn.quest/pokemon/216-teddiursa/pokemon_icon_216_00.png",
             "canBeShiny": true,
-            "dexNumber": 216
+            "dexNumber": 216,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3730,37 +4914,55 @@
             "name": "Treecko",
             "image": "https://pokemn.quest/pokemon/252-treecko/pokemon_icon_252_00.png",
             "canBeShiny": true,
-            "dexNumber": 252
+            "dexNumber": 252,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Torchic",
             "image": "https://pokemn.quest/pokemon/255-torchic/pokemon_icon_255_00.png",
             "canBeShiny": true,
-            "dexNumber": 255
+            "dexNumber": 255,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Mudkip",
             "image": "https://pokemn.quest/pokemon/258-mudkip/pokemon_icon_258_00.png",
             "canBeShiny": true,
-            "dexNumber": 258
+            "dexNumber": 258,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Poochyena",
             "image": "https://pokemn.quest/pokemon/261-poochyena/pokemon_icon_261_00.png",
             "canBeShiny": true,
-            "dexNumber": 261
+            "dexNumber": 261,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Taillow",
             "image": "https://pokemn.quest/pokemon/276-taillow/pokemon_icon_276_00.png",
             "canBeShiny": true,
-            "dexNumber": 276
+            "dexNumber": 276,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Nincada",
             "image": "https://pokemn.quest/pokemon/290-nincada/pokemon_icon_290_00.png",
             "canBeShiny": true,
-            "dexNumber": 290
+            "dexNumber": 290,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3784,37 +4986,55 @@
             "name": "Turtwig",
             "image": "https://pokemn.quest/pokemon/387-turtwig/pokemon_icon_387_00.png",
             "canBeShiny": true,
-            "dexNumber": 387
+            "dexNumber": 387,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Chimchar",
             "image": "https://pokemn.quest/pokemon/390-chimchar/pokemon_icon_390_00.png",
             "canBeShiny": true,
-            "dexNumber": 390
+            "dexNumber": 390,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Piplup",
             "image": "https://pokemn.quest/pokemon/393-piplup/pokemon_icon_393_00.png",
             "canBeShiny": true,
-            "dexNumber": 393
+            "dexNumber": 393,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Bidoof",
             "image": "https://pokemn.quest/pokemon/399-bidoof/pokemon_icon_399_00.png",
             "canBeShiny": true,
-            "dexNumber": 399
+            "dexNumber": 399,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Shinx",
             "image": "https://pokemn.quest/pokemon/403-shinx/pokemon_icon_403_00.png",
             "canBeShiny": true,
-            "dexNumber": 403
+            "dexNumber": 403,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Snover",
             "image": "https://pokemn.quest/pokemon/459-snover/pokemon_icon_459_00.png",
             "canBeShiny": true,
-            "dexNumber": 459
+            "dexNumber": 459,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3838,37 +5058,55 @@
             "name": "Snivy",
             "image": "https://pokemn.quest/pokemon/495-snivy/pokemon_icon_495_00.png",
             "canBeShiny": true,
-            "dexNumber": 495
+            "dexNumber": 495,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Tepig",
             "image": "https://pokemn.quest/pokemon/498-tepig/pokemon_icon_498_00.png",
             "canBeShiny": true,
-            "dexNumber": 498
+            "dexNumber": 498,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Oshawott",
             "image": "https://pokemn.quest/pokemon/501-oshawott/pokemon_icon_501_00.png",
             "canBeShiny": true,
-            "dexNumber": 501
+            "dexNumber": 501,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lillipup",
             "image": "https://pokemn.quest/pokemon/506-lillipup/pokemon_icon_506_00.png",
             "canBeShiny": true,
-            "dexNumber": 506
+            "dexNumber": 506,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Darumaka",
             "image": "https://pokemn.quest/pokemon/554-darumaka/pokemon_icon_554_00.png",
             "canBeShiny": true,
-            "dexNumber": 554
+            "dexNumber": 554,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Gothita",
             "image": "https://pokemn.quest/pokemon/574-gothita/pokemon_icon_574_00.png",
             "canBeShiny": true,
-            "dexNumber": 574
+            "dexNumber": 574,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3890,25 +5128,37 @@
             "name": "Larvitar",
             "image": "https://pokemn.quest/pokemon/246-larvitar/pokemon_icon_246_00.png",
             "canBeShiny": true,
-            "dexNumber": 246
+            "dexNumber": 246,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Bagon",
             "image": "https://pokemn.quest/pokemon/371-bagon/pokemon_icon_371_00.png",
             "canBeShiny": true,
-            "dexNumber": 371
+            "dexNumber": 371,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Beldum",
             "image": "https://pokemn.quest/pokemon/374-beldum/pokemon_icon_374_00.png",
             "canBeShiny": true,
-            "dexNumber": 374
+            "dexNumber": 374,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Gible",
             "image": "https://pokemn.quest/pokemon/443-gible/pokemon_icon_443_00.png",
             "canBeShiny": true,
-            "dexNumber": 443
+            "dexNumber": 443,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3940,30 +5190,45 @@
           {
             "name": "Red's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Leaf's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A_02.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Articuno",
             "image": "https://pokemn.quest/pokemon/144-articuno/pokemon_icon_144_00.png",
             "canBeShiny": true,
-            "dexNumber": 144
+            "dexNumber": 144,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zapdos",
             "image": "https://pokemn.quest/pokemon/145-zapdos/pokemon_icon_145_00.png",
             "canBeShiny": true,
-            "dexNumber": 145
+            "dexNumber": 145,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Moltres",
             "image": "https://pokemn.quest/pokemon/146-moltres/pokemon_icon_146_00.png",
             "canBeShiny": true,
-            "dexNumber": 146
+            "dexNumber": 146,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -3987,30 +5252,45 @@
           {
             "name": "Red's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Leaf's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_A_02.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Articuno",
             "image": "https://pokemn.quest/pokemon/144-articuno/pokemon_icon_144_00.png",
             "canBeShiny": true,
-            "dexNumber": 144
+            "dexNumber": 144,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zapdos",
             "image": "https://pokemn.quest/pokemon/145-zapdos/pokemon_icon_145_00.png",
             "canBeShiny": true,
-            "dexNumber": 145
+            "dexNumber": 145,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Moltres",
             "image": "https://pokemn.quest/pokemon/146-moltres/pokemon_icon_146_00.png",
             "canBeShiny": true,
-            "dexNumber": 146
+            "dexNumber": 146,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4031,19 +5311,28 @@
             "name": "Articuno",
             "image": "https://pokemn.quest/pokemon/144-articuno/pokemon_icon_144_00.png",
             "canBeShiny": true,
-            "dexNumber": 144
+            "dexNumber": 144,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zapdos",
             "image": "https://pokemn.quest/pokemon/145-zapdos/pokemon_icon_145_00.png",
             "canBeShiny": true,
-            "dexNumber": 145
+            "dexNumber": 145,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Moltres",
             "image": "https://pokemn.quest/pokemon/146-moltres/pokemon_icon_146_00.png",
             "canBeShiny": true,
-            "dexNumber": 146
+            "dexNumber": 146,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4074,24 +5363,36 @@
           {
             "name": "Ethan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lyra's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B_02.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lugia",
             "image": "https://pokemn.quest/pokemon/249-lugia/pokemon_icon_249_00.png",
             "canBeShiny": false,
-            "dexNumber": 249
+            "dexNumber": 249,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ho-Oh",
             "image": "https://pokemn.quest/pokemon/250-ho-oh/pokemon_icon_250_00.png",
             "canBeShiny": false,
-            "dexNumber": 250
+            "dexNumber": 250,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4114,24 +5415,36 @@
           {
             "name": "Ethan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lyra's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2026_B_02.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Lugia",
             "image": "https://pokemn.quest/pokemon/249-lugia/pokemon_icon_249_00.png",
             "canBeShiny": false,
-            "dexNumber": 249
+            "dexNumber": 249,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ho-Oh",
             "image": "https://pokemn.quest/pokemon/250-ho-oh/pokemon_icon_250_00.png",
             "canBeShiny": false,
-            "dexNumber": 250
+            "dexNumber": 250,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4151,13 +5464,19 @@
             "name": "Lugia",
             "image": "https://pokemn.quest/pokemon/249-lugia/pokemon_icon_249_00.png",
             "canBeShiny": false,
-            "dexNumber": 249
+            "dexNumber": 249,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Ho-Oh",
             "image": "https://pokemn.quest/pokemon/250-ho-oh/pokemon_icon_250_00.png",
             "canBeShiny": false,
-            "dexNumber": 250
+            "dexNumber": 250,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4188,22 +5507,34 @@
           {
             "name": "Brendan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_HAT.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "May's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_BANDANA_NOEVOLVE.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Primal Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pm382.fPRIMAL.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Primal Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pm383.fPRIMAL.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4226,22 +5557,34 @@
           {
             "name": "Brendan's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_HAT.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "May's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.cGOTOUR_2023_BANDANA_NOEVOLVE.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Primal Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pm382.fPRIMAL.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Primal Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pm383.fPRIMAL.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4260,12 +5603,18 @@
           {
             "name": "Primal Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pm382.fPRIMAL.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Primal Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pm383.fPRIMAL.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4296,24 +5645,36 @@
           {
             "name": "Lucas's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dawn's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A_02.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pokemon_icon_483_00.png",
             "canBeShiny": true,
-            "dexNumber": 483
+            "dexNumber": 483,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pokemon_icon_484_00.png",
             "canBeShiny": true,
-            "dexNumber": 484
+            "dexNumber": 484,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4334,24 +5695,36 @@
           {
             "name": "Lucas's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dawn's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fGOTOUR_2024_A_02.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pokemon_icon_483_00.png",
             "canBeShiny": true,
-            "dexNumber": 483
+            "dexNumber": 483,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pokemon_icon_484_00.png",
             "canBeShiny": true,
-            "dexNumber": 484
+            "dexNumber": 484,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4369,13 +5742,19 @@
             "name": "Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pokemon_icon_483_00.png",
             "canBeShiny": true,
-            "dexNumber": 483
+            "dexNumber": 483,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pokemon_icon_484_00.png",
             "canBeShiny": true,
-            "dexNumber": 484
+            "dexNumber": 484,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4398,22 +5777,34 @@
           {
             "name": "Rei's Cap Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fREI-CAP-temp.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Akari's Kerchief Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fAKARI-KERCHIEF-temp.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pm483.fORIGIN.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pm484.fORIGIN.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4436,22 +5827,34 @@
           {
             "name": "Rei's Cap Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fREI-CAP-temp.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Akari's Kerchief Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/pm25.fAKARI-KERCHIEF-temp.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pm483.fORIGIN.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pm484.fORIGIN.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4470,12 +5873,18 @@
           {
             "name": "Origin Forme Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pm483.fORIGIN.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pm484.fORIGIN.icon.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4506,24 +5915,36 @@
           {
             "name": "Hilbert's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilbert.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilda's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilda.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": true,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem (Black)",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_13.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4544,24 +5965,36 @@
           {
             "name": "Hilbert's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilbert.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Hilda's Hat Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Hilda.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": true,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem (Black)",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_13.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4579,13 +6012,19 @@
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": true,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem (Black)",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_13.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4608,24 +6047,36 @@
           {
             "name": "Nate's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Nate.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rosa's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Rosa.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": true,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem (White)",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_12.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4648,24 +6099,36 @@
           {
             "name": "Nate's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Nate.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Rosa's Visor Pikachu",
             "image": "https://pokemn.quest/pokemon/025-pikachu/Pikachu_Rosa.png",
-            "canBeShiny": true
+            "canBeShiny": true,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": true,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem (White)",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_12.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4685,13 +6148,19 @@
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": true,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem (White)",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_12.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4764,59 +6233,89 @@
             "name": "Articuno",
             "image": "https://pokemn.quest/pokemon/144-articuno/pokemon_icon_144_00.png",
             "canBeShiny": false,
-            "dexNumber": 144
+            "dexNumber": 144,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zapdos",
             "image": "https://pokemn.quest/pokemon/145-zapdos/pokemon_icon_145_00.png",
             "canBeShiny": false,
-            "dexNumber": 145
+            "dexNumber": 145,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Moltres",
             "image": "https://pokemn.quest/pokemon/146-moltres/pokemon_icon_146_00.png",
             "canBeShiny": false,
-            "dexNumber": 146
+            "dexNumber": 146,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pokemon_icon_382_00.png",
             "canBeShiny": false,
-            "dexNumber": 382
+            "dexNumber": 382,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pokemon_icon_383_00.png",
             "canBeShiny": false,
-            "dexNumber": 383
+            "dexNumber": 383,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pm483.fORIGIN.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pm484.fORIGIN.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4859,59 +6358,89 @@
             "name": "Articuno",
             "image": "https://pokemn.quest/pokemon/144-articuno/pokemon_icon_144_00.png",
             "canBeShiny": false,
-            "dexNumber": 144
+            "dexNumber": 144,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zapdos",
             "image": "https://pokemn.quest/pokemon/145-zapdos/pokemon_icon_145_00.png",
             "canBeShiny": false,
-            "dexNumber": 145
+            "dexNumber": 145,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Moltres",
             "image": "https://pokemn.quest/pokemon/146-moltres/pokemon_icon_146_00.png",
             "canBeShiny": false,
-            "dexNumber": 146
+            "dexNumber": 146,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pokemon_icon_382_00.png",
             "canBeShiny": false,
-            "dexNumber": 382
+            "dexNumber": 382,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pokemon_icon_383_00.png",
             "canBeShiny": false,
-            "dexNumber": 383
+            "dexNumber": 383,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pm483.fORIGIN.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pm484.fORIGIN.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -4946,41 +6475,62 @@
             "name": "Kyogre",
             "image": "https://pokemn.quest/pokemon/382-kyogre/pokemon_icon_382_00.png",
             "canBeShiny": false,
-            "dexNumber": 382
+            "dexNumber": 382,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Groudon",
             "image": "https://pokemn.quest/pokemon/383-groudon/pokemon_icon_383_00.png",
             "canBeShiny": false,
-            "dexNumber": 383
+            "dexNumber": 383,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pm483.fORIGIN.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pm484.fORIGIN.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -5008,30 +6558,45 @@
           {
             "name": "Origin Forme Dialga",
             "image": "https://pokemn.quest/pokemon/483-dialga/pm483.fORIGIN.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Origin Forme Palkia",
             "image": "https://pokemn.quest/pokemon/484-palkia/pm484.fORIGIN.icon.png",
-            "canBeShiny": false
+            "canBeShiny": false,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -5054,19 +6619,28 @@
             "name": "Reshiram",
             "image": "https://pokemn.quest/pokemon/643-reshiram/pokemon_icon_643_00.png",
             "canBeShiny": false,
-            "dexNumber": 643
+            "dexNumber": 643,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Zekrom",
             "image": "https://pokemn.quest/pokemon/644-zekrom/pokemon_icon_644_00.png",
             "canBeShiny": false,
-            "dexNumber": 644
+            "dexNumber": 644,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           },
           {
             "name": "Kyurem",
             "image": "https://pokemn.quest/pokemon/646-kyurem/pokemon_icon_646_11.png",
             "canBeShiny": false,
-            "dexNumber": 646
+            "dexNumber": 646,
+            "imageWidth": 256,
+            "imageHeight": 256,
+            "imageType": "png"
           }
         ],
         "tables": []
@@ -5079,6 +6653,9 @@
     "eventType": "go-pass",
     "heading": "Go Pass",
     "image": "https://pokemn.quest/events/2026-02-23-go-pass-road-to-kalos.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-23T10:00:00.000",
     "end": "2026-03-01T18:00:00.000",
     "isGlobal": false,
@@ -5103,31 +6680,24 @@
     "name": "Unannounced Max Monday",
     "eventType": "max-mondays",
     "heading": "Max Mondays",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/max-battles-kanto.jpg",
+    "imageWidth": 960,
+    "imageHeight": 540,
+    "imageType": "jpg",
     "start": "2026-02-23T18:00:00.000",
     "end": "2026-02-23T19:00:00.000",
     "isGlobal": false,
     "eventStatus": "upcoming"
   },
   {
-    "eventID": "pokemonspotlighthour2026-02-24",
-    "name": "Totodile",
-    "eventType": "pokemon-spotlight-hour",
-    "heading": "Pokemon Spotlight Hour",
-    "image": "https://pokemn.quest/pokemon/158-totodile/pokemon_icon_158_00.png",
-    "start": "2026-02-24T18:00:00.000",
-    "end": "2026-02-24T19:00:00.000",
-    "isGlobal": false,
-    "eventStatus": "upcoming",
-    "canBeShiny": true,
-    "bonus": "February 24"
-  },
-  {
     "eventID": "gbl-precious-paths_great-league_ultra-league_master-league-mega-edition",
     "name": "Great League, Ultra League, and Master League: Mega Edition | Precious Paths",
     "eventType": "go-battle-league",
     "heading": "Go Battle League",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/go-battle-league-season-25-precious-paths.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-24T21:00:00.000Z",
     "end": "2026-03-03T21:00:00.000Z",
     "isGlobal": true,
@@ -5163,11 +6733,30 @@
     }
   },
   {
+    "eventID": "pokemonspotlighthour2026-02-24",
+    "name": "Totodile",
+    "eventType": "pokemon-spotlight-hour",
+    "heading": "Pokemon Spotlight Hour",
+    "image": "https://pokemn.quest/pokemon/158-totodile/pokemon_icon_158_00.png",
+    "imageWidth": 256,
+    "imageHeight": 256,
+    "imageType": "jpg",
+    "start": "2026-02-24T18:00:00.000",
+    "end": "2026-02-24T19:00:00.000",
+    "isGlobal": false,
+    "eventStatus": "upcoming",
+    "canBeShiny": true,
+    "bonus": "February 24"
+  },
+  {
     "eventID": "raidhour20260225",
     "name": "Lunala Raid Hour",
     "eventType": "raid-hour",
     "heading": "Raid Hour",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/raidhour.jpg",
+    "imageWidth": 480,
+    "imageHeight": 240,
+    "imageType": "jpg",
     "start": "2026-02-25T18:00:00.000",
     "end": "2026-02-25T19:00:00.000",
     "isGlobal": false,
@@ -5180,6 +6769,9 @@
     "eventType": "pokemon-go-tour",
     "heading": "Pokemon Go Tour",
     "image": "https://pokemn.quest/events/2026-02-28-pokemon-go-tour-kalos-global-2026.jpg",
+    "imageWidth": 640,
+    "imageHeight": 360,
+    "imageType": "jpg",
     "start": "2026-02-28T10:00:00.000",
     "end": "2026-03-01T18:00:00.000",
     "isGlobal": false,
@@ -5190,35 +6782,50 @@
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_11.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown K",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_21.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown L",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_22.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown O",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_25.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Unown S",
         "image": "https://pokemn.quest/pokemon/201-unown/pokemon_icon_201_29.png",
         "canBeShiny": true,
         "dexNumber": 201,
-        "source": "incense"
+        "source": "incense",
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "eggs": {
@@ -5228,52 +6835,79 @@
           "name": "Larvitar",
           "image": "https://pokemn.quest/pokemon/246-larvitar/pokemon_icon_246_00.png",
           "canBeShiny": true,
-          "dexNumber": 246
+          "dexNumber": 246,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Bagon",
           "image": "https://pokemn.quest/pokemon/371-bagon/pokemon_icon_371_00.png",
           "canBeShiny": true,
-          "dexNumber": 371
+          "dexNumber": 371,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Beldum",
           "image": "https://pokemn.quest/pokemon/374-beldum/pokemon_icon_374_00.png",
           "canBeShiny": true,
-          "dexNumber": 374
+          "dexNumber": 374,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Gible",
           "image": "https://pokemn.quest/pokemon/443-gible/pokemon_icon_443_00.png",
           "canBeShiny": true,
-          "dexNumber": 443
+          "dexNumber": 443,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "5km": [
         {
           "name": "Red Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fRED.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Yellow Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fYELLOW.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Orange Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fORANGE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Blue Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fBLUE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "White Flower Flabébé",
           "image": "https://pokemn.quest/pokemon/669-flabebe/pm669.fWHITE.icon.png",
-          "canBeShiny": true
+          "canBeShiny": true,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "7km": [],
@@ -5282,25 +6916,37 @@
           "name": "Kangaskhan",
           "image": "https://pokemn.quest/pokemon/115-kangaskhan/pokemon_icon_115_00.png",
           "canBeShiny": true,
-          "dexNumber": 115
+          "dexNumber": 115,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Heracross",
           "image": "https://pokemn.quest/pokemon/214-heracross/pokemon_icon_214_00.png",
           "canBeShiny": true,
-          "dexNumber": 214
+          "dexNumber": 214,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Hawlucha",
           "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00.png",
           "canBeShiny": true,
-          "dexNumber": 701
+          "dexNumber": 701,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         },
         {
           "name": "Klefki",
           "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00.png",
           "canBeShiny": true,
-          "dexNumber": 707
+          "dexNumber": 707,
+          "imageWidth": 256,
+          "imageHeight": 256,
+          "imageType": "png"
         }
       ],
       "12km": [],
@@ -5354,42 +7000,63 @@
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 679
+        "dexNumber": 679,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 701
+        "dexNumber": 701,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 707
+        "dexNumber": 707,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Diancie",
         "image": "https://pokemn.quest/pokemon/719-diancie/pm719.s.icon.png",
-        "canBeShiny": false
+        "canBeShiny": false,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Honedge",
         "image": "https://pokemn.quest/pokemon/679-honedge/pokemon_icon_679_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 679
+        "dexNumber": 679,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Hawlucha",
         "image": "https://pokemn.quest/pokemon/701-hawlucha/pokemon_icon_701_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 701
+        "dexNumber": 701,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       },
       {
         "name": "Klefki",
         "image": "https://pokemn.quest/pokemon/707/pokemon_icon_707_00_shiny.png",
         "canBeShiny": true,
-        "dexNumber": 707
+        "dexNumber": 707,
+        "imageWidth": 256,
+        "imageHeight": 256,
+        "imageType": "png"
       }
     ],
     "eventInfo": {
@@ -5410,7 +7077,10 @@
     "name": "Season Event",
     "eventType": "season",
     "heading": "Season",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-03-07T10:00:00.000",
     "end": "2026-03-09T20:00:00.000",
     "isGlobal": false,
@@ -5424,7 +7094,10 @@
     "name": "March Community Day",
     "eventType": "community-day",
     "heading": "Community Day",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/cd-default.jpg",
+    "imageWidth": 524,
+    "imageHeight": 295,
+    "imageType": "jpg",
     "start": "2026-03-14T14:00:00.000",
     "end": "2026-03-14T17:00:00.000",
     "isGlobal": false,
@@ -5435,7 +7108,10 @@
     "name": "Research Day",
     "eventType": "research-day",
     "heading": "Research Day",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-03-21T14:00:00.000",
     "end": "2026-03-21T17:00:00.000",
     "isGlobal": false,
@@ -5462,7 +7138,10 @@
     "name": "Max Battle Day",
     "eventType": "max-battles",
     "heading": "Max Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-03-28T14:00:00.000",
     "end": "2026-03-28T17:00:00.000",
     "isGlobal": false,
@@ -5473,7 +7152,10 @@
     "name": "Raid Day",
     "eventType": "raid-day",
     "heading": "Raid Day",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-04-04T14:00:00.000",
     "end": "2026-04-04T17:00:00.000",
     "isGlobal": false,
@@ -5484,7 +7166,10 @@
     "name": "April Community Day",
     "eventType": "community-day",
     "heading": "Community Day",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/cd-default.jpg",
+    "imageWidth": 524,
+    "imageHeight": 295,
+    "imageType": "jpg",
     "start": "2026-04-11T14:00:00.000",
     "end": "2026-04-11T17:00:00.000",
     "isGlobal": false,
@@ -5495,7 +7180,10 @@
     "name": "Hatch Day",
     "eventType": "event",
     "heading": "Event",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-04-18T14:00:00.000",
     "end": "2026-04-18T17:00:00.000",
     "isGlobal": false,
@@ -5506,7 +7194,10 @@
     "name": "Max Battle Day",
     "eventType": "max-battles",
     "heading": "Max Battles",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-04-25T14:00:00.000",
     "end": "2026-04-25T17:00:00.000",
     "isGlobal": false,
@@ -5517,7 +7208,10 @@
     "name": "Shadow Raid Day",
     "eventType": "raid-day",
     "heading": "Raid Day",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-05-02T14:00:00.000",
     "end": "2026-05-02T17:00:00.000",
     "isGlobal": false,
@@ -5528,7 +7222,10 @@
     "name": "May Community Day",
     "eventType": "community-day",
     "heading": "Community Day",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/cd-default.jpg",
+    "imageWidth": 524,
+    "imageHeight": 295,
+    "imageType": "jpg",
     "start": "2026-05-09T14:00:00.000",
     "end": "2026-05-09T17:00:00.000",
     "isGlobal": false,
@@ -5539,7 +7236,10 @@
     "name": "May Community Day Classic",
     "eventType": "community-day",
     "heading": "Community Day",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/cd-default.jpg",
+    "imageWidth": 524,
+    "imageHeight": 295,
+    "imageType": "jpg",
     "start": "2026-05-16T14:00:00.000",
     "end": "2026-05-16T17:00:00.000",
     "isGlobal": false,
@@ -5550,7 +7250,10 @@
     "name": "Raid Day",
     "eventType": "raid-day",
     "heading": "Raid Day",
-    "image": "https://pokemn.quest/events/events.jpg",
+    "image": "https://pokemn.quest/events/events-default-img.jpg",
+    "imageWidth": 512,
+    "imageHeight": 256,
+    "imageType": "jpg",
     "start": "2026-05-23T14:00:00.000",
     "end": "2026-05-23T17:00:00.000",
     "isGlobal": false,

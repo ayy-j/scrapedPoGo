@@ -418,11 +418,60 @@ footer a:hover {
     color: #ffe3a2;
 }
 
+.badge.is-share {
+    background: rgba(157, 250, 114, 0.16);
+    border-color: rgba(157, 250, 114, 0.48);
+    color: #ddffca;
+}
+
 .chip {
     background: rgba(16, 38, 49, 0.75);
     border-color: rgba(80, 221, 255, 0.2);
     color: #c6edf6;
     font-size: 0.65rem;
+}
+
+.card-actions {
+    margin-top: 0.62rem;
+}
+
+.share-button {
+    width: 100%;
+    border: 1px solid rgba(80, 221, 255, 0.35);
+    border-radius: var(--radius-sm);
+    background: rgba(80, 221, 255, 0.1);
+    color: #cff6ff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0.45rem 0.55rem;
+    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.share-button:hover,
+.share-button:focus-visible {
+    border-color: rgba(255, 111, 61, 0.6);
+    background: rgba(255, 111, 61, 0.18);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.share-button:disabled {
+    opacity: 0.72;
+    cursor: wait;
+}
+
+.share-button.is-success {
+    border-color: rgba(157, 250, 114, 0.62);
+    background: rgba(157, 250, 114, 0.2);
+    color: #ecffd8;
+}
+
+.card.card-shared-target {
+    border-color: rgba(157, 250, 114, 0.7);
+    box-shadow: 0 0 0 1px rgba(157, 250, 114, 0.32), 0 16px 34px rgba(0, 0, 0, 0.34);
 }
 
 .slot-list {
@@ -526,6 +575,48 @@ pre {
     background: rgba(255, 95, 103, 0.12);
 }
 
+.share-toast {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 180;
+    max-width: min(420px, calc(100vw - 2rem));
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.85rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 170ms ease, transform 170ms ease;
+    pointer-events: none;
+}
+
+.share-toast.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.share-toast.is-success {
+    color: #e4ffda;
+    border-color: rgba(157, 250, 114, 0.55);
+    background: rgba(157, 250, 114, 0.16);
+}
+
+.share-toast.is-error {
+    color: #ffd2d6;
+    border-color: rgba(255, 95, 103, 0.56);
+    background: rgba(255, 95, 103, 0.18);
+}
+
+.share-toast.is-neutral {
+    color: #d8f3fa;
+    border-color: rgba(80, 221, 255, 0.48);
+    background: rgba(80, 221, 255, 0.14);
+}
+
 footer {
     max-width: 1240px;
     margin: 0 auto 2.2rem;
@@ -593,6 +684,13 @@ footer {
 
     .endpoint-info code {
         min-width: 0;
+    }
+
+    .share-toast {
+        left: 0.78rem;
+        right: 0.78rem;
+        max-width: none;
+        bottom: 0.78rem;
     }
 }
 

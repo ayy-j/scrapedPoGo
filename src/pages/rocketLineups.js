@@ -7,6 +7,7 @@
 
 const fs = require('fs');
 const logger = require('../utils/logger');
+const { enrichMissingImageDimensions } = require('../utils/imageDimensions');
 const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
 const { transformUrls } = require('../utils/blobUrls');
 
@@ -136,6 +137,9 @@ async function get() {
                 
                 lineups.push(lineup);
             });
+
+            // Populate image dimensions for all slot Pokemon.
+            await enrichMissingImageDimensions(lineups);
 
             await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(transformUrls(lineups)));
             logger.success("Rocket lineups saved.");

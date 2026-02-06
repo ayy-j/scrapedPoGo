@@ -7,7 +7,7 @@
 
 const fs = require('fs');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
-const { getMultipleImageDimensions } = require('../utils/imageDimensions');
+const { enrichMissingImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
 const logger = require('../utils/logger');
 const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
@@ -289,19 +289,8 @@ async function get() {
                     });
                 });
 
-            // Fetch image dimensions for all boss images
-            const imageUrls = bosses.map(b => b.image).filter(Boolean);
-            const dimensionsMap = await getMultipleImageDimensions(imageUrls);
-
-            // Assign dimensions back to bosses
-            bosses.forEach(boss => {
-                if (boss.image && dimensionsMap.has(boss.image)) {
-                    const dims = dimensionsMap.get(boss.image);
-                    boss.imageWidth = dims.width;
-                    boss.imageHeight = dims.height;
-                    boss.imageType = dims.type;
-                }
-            });
+            // Populate dimensions for raid bosses and nested image assets (types/weather).
+            await enrichMissingImageDimensions(bosses);
 
             const output = transformUrls(bosses);
 

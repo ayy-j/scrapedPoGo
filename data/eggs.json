@@ -361,7 +361,7 @@
     "eggType": "1km",
     "isAdventureSync": false,
     "image": "https://pokemn.quest/pokemon/810-grookey/pm810.icon.png",
-    "canBeShiny": true,
+    "canBeShiny": false,
     "combatPower": {
       "min": 620,
       "max": 620

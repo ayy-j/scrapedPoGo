@@ -28,6 +28,10 @@ const LIMITS = {
     shinies: 12
 };
 
+const SHARED_EVENT_QUERY_PARAM = 'event';
+const LOCAL_ANALYTICS_STORAGE_KEY = 'pogoSignalDeckMetrics';
+const TOAST_AUTO_HIDE_MS = 2200;
+
 const HTML_ESCAPES = {
     '&': '&amp;',
     '<': '&lt;',
@@ -37,6 +41,21 @@ const HTML_ESCAPES = {
 };
 
 const getBaseUrl = () => (USE_LOCAL_DATA ? LOCAL_DATA_PATH : API_BASE_URL);
+
+const normalizeEventId = (value) => String(value ?? '').trim().toLowerCase();
+
+const getSharedEventIdFromUrl = () => {
+    const params = new URLSearchParams(window.location.search);
+    const rawId = normalizeEventId(params.get(SHARED_EVENT_QUERY_PARAM));
+    return /^[a-z0-9_-]+$/.test(rawId) ? rawId : '';
+};
+
+const appState = {
+    sharedEventId: getSharedEventIdFromUrl(),
+    highlightedEventCard: null,
+    shareToastTimeoutId: null,
+    trackedSharedLinkOpen: false
+};
 
 const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => HTML_ESCAPES[char]);
 
@@ -54,6 +73,100 @@ const formatDate = (value) => {
 };
 
 const formatNumber = (value) => Number(value || 0).toLocaleString();
+
+const readLocalMetrics = () => {
+    try {
+        const parsed = JSON.parse(localStorage.getItem(LOCAL_ANALYTICS_STORAGE_KEY) || '{}');
+        return parsed && typeof parsed === 'object' ? parsed : {};
+    } catch {
+        return {};
+    }
+};
+
+const writeLocalMetrics = (metrics) => {
+    try {
+        localStorage.setItem(LOCAL_ANALYTICS_STORAGE_KEY, JSON.stringify(metrics));
+    } catch {
+        // Ignore storage write failures.
+    }
+};
+
+const cleanTrackingPayload = (payload = {}) => Object.entries(payload).reduce((accumulator, [key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+        accumulator[key] = value;
+    }
+    return accumulator;
+}, {});
+
+const trackEvent = (eventName, payload = {}) => {
+    const properties = cleanTrackingPayload(payload);
+
+    if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, properties);
+    }
+
+    if (typeof window.plausible === 'function') {
+        window.plausible(eventName, { props: properties });
+    }
+
+    const metrics = readLocalMetrics();
+    metrics[eventName] = (Number(metrics[eventName]) || 0) + 1;
+    metrics.lastEvent = {
+        name: eventName,
+        properties,
+        timestamp: new Date().toISOString()
+    };
+    writeLocalMetrics(metrics);
+};
+
+const ensureShareToast = () => {
+    let toast = document.getElementById('share-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'share-toast';
+        toast.className = 'share-toast';
+        toast.setAttribute('role', 'status');
+        toast.setAttribute('aria-live', 'polite');
+        document.body.appendChild(toast);
+    }
+    return toast;
+};
+
+const showShareToast = (message, variant = 'success') => {
+    const toast = ensureShareToast();
+    toast.textContent = message;
+    toast.className = `share-toast is-visible is-${variant}`;
+
+    if (appState.shareToastTimeoutId) {
+        window.clearTimeout(appState.shareToastTimeoutId);
+    }
+
+    appState.shareToastTimeoutId = window.setTimeout(() => {
+        toast.classList.remove('is-visible');
+    }, TOAST_AUTO_HIDE_MS);
+};
+
+const copyToClipboard = async (text) => {
+    if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return;
+    }
+
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.setAttribute('readonly', '');
+    textArea.style.position = 'fixed';
+    textArea.style.opacity = '0';
+    document.body.appendChild(textArea);
+    textArea.select();
+
+    const didCopy = document.execCommand('copy');
+    document.body.removeChild(textArea);
+
+    if (!didCopy) {
+        throw new Error('Clipboard copy failed');
+    }
+};
 
 const sanitizeUrl = (value) => {
     if (!value || typeof value !== 'string') {
@@ -132,6 +245,61 @@ const badgeMarkup = (label, variant = '') => {
 
 const chipMarkup = (label) => `<span class="chip">${escapeHtml(label)}</span>`;
 
+const buildEventShareUrl = (eventId) => {
+    const url = new URL(window.location.href);
+    url.search = '';
+    url.hash = 'events';
+    url.searchParams.set(SHARED_EVENT_QUERY_PARAM, eventId);
+    return url.toString();
+};
+
+const highlightSharedEventCard = (card) => {
+    card.classList.add('card-shared-target');
+    const body = card.querySelector('.card-body');
+    if (!body) {
+        return;
+    }
+
+    let badgeRow = body.querySelector('.badge-row');
+    if (!badgeRow) {
+        badgeRow = document.createElement('div');
+        badgeRow.className = 'badge-row';
+        const subtitle = body.querySelector('.card-subtitle');
+        if (subtitle) {
+            subtitle.insertAdjacentElement('afterend', badgeRow);
+        } else {
+            body.appendChild(badgeRow);
+        }
+    }
+
+    badgeRow.insertAdjacentHTML('beforeend', badgeMarkup('Shared Link', 'is-share'));
+};
+
+const selectEventsForDisplay = (events, limit) => {
+    if (!appState.sharedEventId) {
+        return events.slice(0, limit);
+    }
+
+    const targetIndex = events.findIndex((event) => normalizeEventId(event.eventID) === appState.sharedEventId);
+    if (targetIndex < 0) {
+        return events.slice(0, limit);
+    }
+
+    const selected = [events[targetIndex]];
+    for (let index = 0; index < events.length; index += 1) {
+        if (index === targetIndex) {
+            continue;
+        }
+
+        selected.push(events[index]);
+        if (selected.length >= limit) {
+            break;
+        }
+    }
+
+    return selected;
+};
+
 const buildCard = ({
     kicker,
     title,
@@ -164,7 +332,9 @@ const buildCard = ({
     return card;
 };
 
-const renderEvent = (event) => {
+const renderEvent = (event, options = {}) => {
+    const includeShareActions = options.includeShareActions ?? true;
+    const canHighlightShared = options.canHighlightShared ?? true;
     const badges = [];
 
     if (event.eventStatus) {
@@ -181,7 +351,8 @@ const renderEvent = (event) => {
         chips.push(chipMarkup(`+${pokemon.length - 6} more`));
     }
 
-    return buildCard({
+    const eventId = normalizeEventId(event.eventID);
+    const card = buildCard({
         kicker: 'Event Feed',
         title: event.name || 'Unnamed Event',
         subtitle: event.eventType || 'General Event',
@@ -192,8 +363,32 @@ const renderEvent = (event) => {
             { label: 'End', value: formatDate(event.end) }
         ],
         badges,
-        chips
+        chips,
+        extra: eventId && includeShareActions ? `
+            <div class="card-actions">
+                <button
+                    type="button"
+                    class="share-button"
+                    data-share-event-id="${escapeHtml(eventId)}"
+                    data-share-event-name="${escapeHtml(event.name || 'Pokemon GO Event')}"
+                >
+                    Share Event
+                </button>
+            </div>
+        ` : ''
     });
+
+    if (eventId) {
+        card.dataset.eventId = eventId;
+        card.id = `event-${eventId}`;
+
+        if (canHighlightShared && appState.sharedEventId && eventId === appState.sharedEventId) {
+            appState.highlightedEventCard = card;
+            highlightSharedEventCard(card);
+        }
+    }
+
+    return card;
 };
 
 const renderRaid = (raid) => {
@@ -302,7 +497,8 @@ const loadDataset = async ({
     containerId,
     limit,
     renderer,
-    emptyMessage
+    emptyMessage,
+    selectRecords
 }) => {
     const container = document.getElementById(containerId);
     updateStatus(statusId, 'loading');
@@ -316,13 +512,122 @@ const loadDataset = async ({
             return [];
         }
 
-        appendCards(container, data.slice(0, limit), renderer);
-        updateStatus(statusId, 'success', `${Math.min(limit, data.length)}/${data.length}`);
+        if (statusId === 'events') {
+            appState.highlightedEventCard = null;
+        }
+
+        const recordsToRender = typeof selectRecords === 'function'
+            ? selectRecords(data, limit)
+            : data.slice(0, limit);
+
+        appendCards(container, recordsToRender, renderer);
+        updateStatus(statusId, 'success', `${recordsToRender.length}/${data.length}`);
         return data;
     } catch (error) {
         updateStatus(statusId, 'error');
         renderError(container, `Error loading ${endpoint}: ${error.message}`);
         return null;
+    }
+};
+
+const flashShareButton = (button, baseLabel, successLabel) => {
+    button.textContent = successLabel;
+    button.classList.add('is-success');
+
+    window.setTimeout(() => {
+        button.classList.remove('is-success');
+        if (!button.disabled) {
+            button.textContent = baseLabel;
+        }
+    }, 1500);
+};
+
+const handleEventShare = async (button) => {
+    const eventId = normalizeEventId(button.dataset.shareEventId);
+    if (!eventId) {
+        return;
+    }
+
+    const baseLabel = button.dataset.baseLabel || button.textContent || 'Share Event';
+    button.dataset.baseLabel = baseLabel;
+    const eventName = (button.dataset.shareEventName || 'Pokemon GO Event').trim();
+    const shareUrl = buildEventShareUrl(eventId);
+
+    trackEvent('share_clicked', {
+        event_id: eventId,
+        source: 'event_card'
+    });
+
+    button.disabled = true;
+    button.textContent = 'Sharing...';
+
+    try {
+        let shareMethod = 'clipboard';
+        if (typeof navigator.share === 'function') {
+            try {
+                await navigator.share({
+                    title: `${eventName} | Pokemon GO Signal Deck`,
+                    text: `Track this event on Pokemon GO Signal Deck: ${eventName}`,
+                    url: shareUrl
+                });
+                shareMethod = 'native';
+            } catch (error) {
+                if (error?.name === 'AbortError') {
+                    showShareToast('Share canceled.', 'neutral');
+                    return;
+                }
+                await copyToClipboard(shareUrl);
+            }
+        } else {
+            await copyToClipboard(shareUrl);
+        }
+
+        flashShareButton(button, baseLabel, shareMethod === 'native' ? 'Shared' : 'Copied');
+        showShareToast(shareMethod === 'native' ? 'Shared event link.' : 'Event link copied.');
+    } catch {
+        button.textContent = baseLabel;
+        showShareToast('Unable to share this event.', 'error');
+    } finally {
+        button.disabled = false;
+        if (button.textContent === 'Sharing...') {
+            button.textContent = baseLabel;
+        }
+    }
+};
+
+const setupEventShareHandlers = () => {
+    const eventsContainer = document.getElementById('events-content');
+    if (!eventsContainer) {
+        return;
+    }
+
+    eventsContainer.addEventListener('click', (event) => {
+        const shareButton = event.target.closest('.share-button');
+        if (!shareButton || !eventsContainer.contains(shareButton)) {
+            return;
+        }
+
+        void handleEventShare(shareButton);
+    });
+};
+
+const finalizeSharedEventExperience = () => {
+    if (!appState.sharedEventId || appState.trackedSharedLinkOpen) {
+        return;
+    }
+
+    const foundInEventsFeed = Boolean(appState.highlightedEventCard);
+    trackEvent('share_link_opened', {
+        event_id: appState.sharedEventId,
+        found_in_events_feed: foundInEventsFeed
+    });
+    appState.trackedSharedLinkOpen = true;
+
+    if (appState.highlightedEventCard) {
+        appState.highlightedEventCard.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
     }
 };
 
@@ -361,7 +666,10 @@ const loadEventTypes = async () => {
                 return;
             }
 
-            appendCards(content, [data[0]], renderEvent);
+            appendCards(content, [data[0]], (event) => renderEvent(event, {
+                includeShareActions: false,
+                canHighlightShared: false
+            }));
             updateStatus(sectionInfo.statusId, 'success', `${data.length}`);
         } catch (error) {
             updateStatus(sectionInfo.statusId, 'error');
@@ -449,6 +757,8 @@ const loadUnifiedData = async () => {
 };
 
 const initialize = async () => {
+    setupEventShareHandlers();
+
     await Promise.all([
         loadDataset({
             statusId: 'events',
@@ -456,7 +766,8 @@ const initialize = async () => {
             containerId: 'events-content',
             limit: LIMITS.events,
             renderer: renderEvent,
-            emptyMessage: 'No events found.'
+            emptyMessage: 'No events found.',
+            selectRecords: (events) => selectEventsForDisplay(events, LIMITS.events)
         }),
         loadDataset({
             statusId: 'raids',
@@ -501,6 +812,8 @@ const initialize = async () => {
         loadEventTypes(),
         loadUnifiedData()
     ]);
+
+    finalizeSharedEventExperience();
 };
 
 // Initialize on page load

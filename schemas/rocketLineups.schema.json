@@ -52,6 +52,19 @@
           "format": "uri",
           "description": "The image of the Shadow Pokemon"
         },
+        "imageWidth": {
+          "type": "integer",
+          "description": "The image width in pixels"
+        },
+        "imageHeight": {
+          "type": "integer",
+          "description": "The image height in pixels"
+        },
+        "imageType": {
+          "type": "string",
+          "description": "The image format",
+          "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+        },
         "types": {
           "type": "array",
           "description": "The type(s) of the Pokemon (lowercase)",

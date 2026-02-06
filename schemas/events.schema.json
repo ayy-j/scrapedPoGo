@@ -151,6 +151,9 @@
               "properties": {
                 "text": { "type": "string" },
                 "image": { "type": "string", "format": "uri" },
+                "imageWidth": { "type": "integer", "description": "Bonus icon width in pixels" },
+                "imageHeight": { "type": "integer", "description": "Bonus icon height in pixels" },
+                "imageType": { "type": "string", "description": "Bonus icon format", "enum": ["png", "jpg", "jpeg", "gif", "webp"] },
                 "multiplier": { "type": "number", "description": "Parsed numeric multiplier (e.g., 2 for 2×)" },
                 "bonusType": { "type": "string", "description": "Parsed bonus category (e.g., XP, Stardust, Candy)" }
               },

@@ -286,12 +286,14 @@ function externalUrlToBlobPathname(externalUrl) {
             }
         }
         
+        const genericParentSlugs = new Set(['event', 'events', 'img', 'assets']);
+
         let eventFilename = filename;
-        if (slug) {
+        if (slug && !genericParentSlugs.has(slug.toLowerCase())) {
             const extIndex = filename.lastIndexOf('.');
             const ext = extIndex >= 0 ? filename.slice(extIndex) : '';
             eventFilename = `${slug}${ext}`;
-        } else if (year !== 'misc' && filename) {
+        } else if (year !== 'misc' && filename && !genericParentSlugs.has(slug.toLowerCase())) {
             eventFilename = `${year}-${filename}`;
         }
 

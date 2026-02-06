@@ -74,6 +74,19 @@
               "type": "string",
               "format": "uri",
               "description": "The image of the type"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "The width of the type icon in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "The height of the type icon in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "The type icon format",
+              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
             }
           },
           "additionalProperties": false
@@ -135,6 +148,19 @@
               "type": "string",
               "format": "uri",
               "description": "The image of the weather type"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "The width of the weather icon in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "The height of the weather icon in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "The weather icon format",
+              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
             }
           },
           "additionalProperties": false

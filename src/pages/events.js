@@ -7,6 +7,7 @@
 
 const fs = require('fs').promises;
 const { normalizeDatePair, deduplicateEvents, fetchJson, getJSDOM } = require('../utils/scraperUtils');
+const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
 
@@ -16,6 +17,9 @@ const { transformUrls } = require('../utils/blobUrls');
  * @property {string} name - Display name of the event
  * @property {string} eventType - Event category (e.g., "community-day", "raid-battles", "spotlight")
  * @property {string} image - URL to event banner image
+ * @property {number} [imageWidth] - Banner width in pixels (stored at 50% upload size)
+ * @property {number} [imageHeight] - Banner height in pixels (stored at 50% upload size)
+ * @property {string} [imageType] - Image format type
  * @property {string|null} start - ISO 8601 start datetime or null if unknown
  * @property {string|null} end - ISO 8601 end datetime or null if unknown
  */
@@ -39,6 +43,28 @@ const { transformUrls } = require('../utils/blobUrls');
  * events.get();
  * // Creates data/events.json and data/events.min.json
  */
+function halfSize(value) {
+    return Math.max(1, Math.round(value * 0.5));
+}
+
+async function applyBannerDimensions(events) {
+    if (!Array.isArray(events) || events.length === 0) return;
+
+    const bannerUrls = events.map(e => e.image).filter(Boolean);
+    if (bannerUrls.length === 0) return;
+
+    const dimensionsMap = await getMultipleImageDimensions(bannerUrls);
+    events.forEach(event => {
+        if (!event.image || !dimensionsMap.has(event.image)) return;
+        const dims = dimensionsMap.get(event.image);
+
+        // Event banners are uploaded at 50% size to Blob, so persist half-scale dimensions.
+        event.imageWidth = halfSize(dims.width);
+        event.imageHeight = halfSize(dims.height);
+        event.imageType = dims.type;
+    });
+}
+
 async function get()
 {
     logger.info("Scraping events...");
@@ -108,6 +134,8 @@ async function get()
             // Optimization: Deduplicate events using a Map to reduce iterations and lookups
             allEvents = deduplicateEvents(allEvents);
 
+            await applyBannerDimensions(allEvents);
+
             const output = transformUrls(allEvents);
 
             await fs.writeFile('data/events.min.json', JSON.stringify(output));
@@ -117,6 +145,8 @@ async function get()
             
             // Fallback to cached CDN data
             const json = await fetchJson("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json");
+
+            await applyBannerDimensions(json);
 
             const output = transformUrls(json);
 
