@@ -5,7 +5,10 @@
  * @module pages/shinies
  */
 
+const fs = require('fs');
 const https = require('https');
+const logger = require('../utils/logger');
+const { transformUrls } = require('../utils/blobUrls');
 
 /**
  * @typedef {Object} ShinyForm
@@ -302,4 +305,24 @@ async function scrapeShinies() {
 	}
 }
 
-module.exports = scrapeShinies;
+/**
+ * Scrapes shiny Pokemon data and writes output files.
+ * Matches the get() convention used by other page scrapers.
+ * 
+ * @async
+ * @function get
+ * @returns {Promise<void>}
+ */
+async function get() {
+    logger.start('Scraping shiny Pokemon data from PogoAssets...');
+    try {
+        const data = await scrapeShinies();
+        const output = transformUrls(data);
+        fs.writeFileSync('data/shinies.min.json', JSON.stringify(output));
+        logger.success(`Successfully saved ${output.length} shinies to data/shinies.min.json`);
+    } catch (error) {
+        logger.error('Failed to scrape shinies:', error.message);
+    }
+}
+
+module.exports = { get, scrapeShinies };

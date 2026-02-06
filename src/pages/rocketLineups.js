@@ -11,6 +11,7 @@ const { JSDOM } = jsd;
 const https = require('https');
 const logger = require('../utils/logger');
 const { fetchJson } = require('../utils/scraperUtils');
+const { transformUrls } = require('../utils/blobUrls');
 
 /**
  * @typedef {Object} WeaknessInfo
@@ -156,7 +157,7 @@ async function get() {
 
             const json = await fetchJson("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json");
 
-            await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(json));
+            await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(transformUrls(json)));
             logger.success("Rocket lineups saved (fallback).");
         }
     } catch (error) {

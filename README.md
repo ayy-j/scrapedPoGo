@@ -26,11 +26,8 @@ npm install
 ### Running Scrapers
 
 ```bash
-# Scrape all basic data (events, raids, research, eggs, rocket lineups)
+# Scrape all basic data (events, raids, research, eggs, rocket lineups, shinies)
 npm run scrape
-
-# Scrape shiny Pokemon data
-npm run scrapeshinies
 
 # Scrape detailed event information
 npm run detailedscrape
@@ -181,11 +178,9 @@ scrapedPoGo/
 
 | File | Description |
 |------|-------------|
-| `scrape.js` | Primary scraper for basic data (events, raids, research, eggs, rocket lineups) |
+| `scrape.js` | Primary scraper for all data types (events, raids, research, eggs, rocket lineups, shinies) |
 | `detailedscrape.js` | Scraper for detailed event information |
 | `combinedetails.js` | Combines detailed data with basic event data and generates per-eventType files |
-| `scrapeShinies.js` | Scrapes shiny Pokemon availability data |
-| `explore.js` | Utility for exploring page structure (development/debugging) |
 
 #### Page Scrapers (`src/pages/`)
 
@@ -309,11 +304,7 @@ Scrapes additional event-specific data and merges it into the events data. This 
 
 ### Shiny Pokemon Data
 
-```bash
-npm run scrapeshinies
-```
-
-Generates shiny availability data used to augment `canBeShiny` fields in other endpoints.
+Shiny availability data is scraped as part of `npm run scrape` and used to augment `canBeShiny` fields in other endpoints.
 
 ---
 
@@ -363,8 +354,7 @@ module.exports = { get };
 
 | Script | Description |
 |--------|-------------|
-| `npm run scrape` | Run basic scraper (all data types) |
-| `npm run scrapeshinies` | Run shiny Pokemon scraper |
+| `npm run scrape` | Run all scrapers (events, raids, research, eggs, rocket, shinies) |
 | `npm run detailedscrape` | Scrape detailed event information |
 | `npm run combinedetails` | Combine detailed data with basic events and generate per-eventType files |
 | `npm run validate` | Validate all data files against JSON schemas |

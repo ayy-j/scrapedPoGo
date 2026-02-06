@@ -13,6 +13,7 @@ const raids = require('../pages/raids')
 const research = require('../pages/research')
 const eggs = require('../pages/eggs')
 const rocketLineups = require('../pages/rocketLineups')
+const shinies = require('../pages/shinies')
 
 dotenv.config();
 dotenv.config({ path: '.env.local' });
@@ -46,7 +47,8 @@ async function main()
         raids.get(),
         research.get(),
         eggs.get(),
-        rocketLineups.get()
+        rocketLineups.get(),
+        shinies.get()
     ]);
 
     logger.success("All primary scrapers completed.");
