@@ -192,9 +192,11 @@ async function scrapeShinies() {
 
 				const imageUrl = `https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/${basePath}/${filename}`;
 
-				// Convert releasedDate from YYYY/MM/DD to ISO YYYY-MM-DD
+				// Convert releasedDate from YYYY/MM/DD to ISO YYYY-MM-DD (zero-padded)
 				const rawDate = pokemon.released_date || null;
-				const releasedDate = rawDate ? rawDate.replace(/\//g, '-') : null;
+				const releasedDate = rawDate
+					? rawDate.split('/').map((p, i) => i === 0 ? p : p.padStart(2, '0')).join('-')
+					: null;
 
 				// Map typeCode to human-readable region name
 				const region = (typeCode && typeMap[typeCode]) ? typeMap[typeCode].toLowerCase() : null;

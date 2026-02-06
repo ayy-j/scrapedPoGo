@@ -408,26 +408,6 @@ stickers/<file>                # Sticker images
 misc/<file>                    # Anything else
 ```
 
-### Download Images Locally
-
-You can download a local mirror of all referenced images using the same folder structure:
-
-```bash
-# Preview what would be downloaded
-npm run images:download -- --dry-run
-
-# Download all images
-npm run images:download
-```
-
-By default, images are written under `data/blob-images/`:
-
-```
-data/blob-images/pokemon/155-cyndaquil/pm155.icon.png
-data/blob-images/events/2026-02-14-valentines-day-2026.jpg
-data/blob-images/types/fire.png
-```
-
 ---
 
 ## Documentation
