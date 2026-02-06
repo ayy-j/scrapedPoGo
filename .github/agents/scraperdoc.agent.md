@@ -61,7 +61,7 @@ Create comprehensive documentation by completing the following phases:
 ### Phase 3: Learning Documentation Patterns
 
 1. **Find existing documentation**
-   - Search the `docs/` directory for `.md` files
+   - Search the `dataDocumentation/` directory for `.md` files
    - Identify endpoint documentation files (likely named after endpoints)
    - Read at least 3–5 examples to understand patterns
 
@@ -116,7 +116,7 @@ Create comprehensive documentation by completing the following phases:
 ```text
 1. Search for scraper files related to the target endpoint's domain
 2. Search for the target .min.json or similar data files
-3. List all .md files in docs/ directory
+3. List all .md files in dataDocumentation/ directory
 4. Create mental map of repository structure
 ```
 

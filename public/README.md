@@ -96,6 +96,10 @@ One example event of each type:
 - Research Day
 - Season
 - Team GO Rocket
+- GO Rocket Takeover
+- Research Breakthrough
+- Special Research
+- Timed Research
 
 ### Unified Data
 Summary statistics showing total counts for each data type.

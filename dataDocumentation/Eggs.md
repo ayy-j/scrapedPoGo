@@ -116,7 +116,7 @@
       },
       "rarity": {
         "type": "integer",
-        "description": "The rarity tier of the hatched Pokemon (1-5 scale)",
+        "description": "The rarity tier of the hatched Pokemon (0-5 scale)",
         "minimum": 0,
         "maximum": 5
       },

@@ -74,9 +74,9 @@ Each entry in the `shinies` array represents a Pokémon (or regional variant) wi
 | `family` | string\|null | Evolution family identifier |
 | `region` | string\|null | Regional variant label (e.g., `alolan`, `galarian`, `hisuian`, `paldean`), or `null` for base form |
 | `forms` | array | Array of alternative forms/costumes for this Pokémon |
-| `image` | string | URL to the base shiny sprite image |
-| `imageWidth` | number | Image width in pixels (always 256) |
-| `imageHeight` | number | Image height in pixels (always 256) |
+| `image` | string | URL to the base shiny sprite image. *Optional* — absent for Pokémon that only have form variants. |
+| `imageWidth` | number | Image width in pixels (always 256). *Optional* — absent when `image` is absent. |
+| `imageHeight` | number | Image height in pixels (always 256). *Optional* — absent when `image` is absent. |
 
 ## Form Entry Structure
 

@@ -57,7 +57,7 @@ Depending on the event type and content, events may include any of the following
 | **`pokemon`** | `array` | Featured Pokemon in the event (spawns, debuts, featured encounters) |
 | **`pokemon[].name`** | `string` | Pokemon name |
 | **`pokemon[].image`** | `string` | Pokemon image URL |
-| **`pokemon[].source`** | `string` | Where the Pokemon appears.<br />Values: `spawn`, `featured`, `incense`, `costumed`, `debut`, `maxDebut`<br />Schema-reserved (not currently produced): `raid`, `egg`, `research`, `reward`, `encounter` |
+| **`pokemon[].source`** | `string` | Where the Pokemon appears.<br />Values: `spawn`, `featured`, `incense`, `costumed`, `debut`, `maxDebut`, `raid`, `egg`, `research`, `reward`, `encounter` |
 | **`pokemon[].canBeShiny`** | `boolean` | Whether the Pokemon can be encountered as shiny |
 | **`pokemon[].dexNumber`** | `int\|null` | National Pokédex number, or `null` if not determinable |
 | **`pokemon[].imageWidth`** | `int` | Image width in pixels |
@@ -288,7 +288,7 @@ Each Pokemon object in the `pokemon` array has the following structure:
 |-------|------|-------------|
 | **`name`** | `string` | Pokemon name |
 | **`image`** | `string` | Pokemon image URL |
-| **`source`** | `string` | Source type: `spawn`, `featured`, `incense`, `costumed` (reserved: `debut`, `maxDebut`) |
+| **`source`** | `string` | Source type: `spawn`, `featured`, `incense`, `costumed`, `debut`, `maxDebut`, `raid`, `egg`, `research`, `reward`, `encounter` |
 | **`canBeShiny`** | `boolean` | Whether the Pokemon can be shiny |
 | **`imageWidth`** | `int` | Image width in pixels |
 | **`imageHeight`** | `int` | Image height in pixels |

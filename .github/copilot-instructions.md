@@ -72,12 +72,11 @@ Every file in `src/pages/detailed/` exports an async `get(url, id, bkp)` functio
 See `src/pages/detailed/communityday.js` as the canonical example.
 
 ```javascript
-const { JSDOM } = require('jsdom');
-const { writeTempFile, handleScraperError, extractPokemonList, extractBonuses } = require('../../utils/scraperUtils');
+const { writeTempFile, handleScraperError, extractPokemonList, extractBonuses, getJSDOM } = require('../../utils/scraperUtils');
 
 async function get(url, id, bkp) {
     try {
-        const dom = await JSDOM.fromURL(url, {});
+        const dom = await getJSDOM(url);
         const doc = dom.window.document;
 
         const data = { /* extract fields */ };

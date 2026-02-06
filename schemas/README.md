@@ -17,15 +17,13 @@ This directory contains JSON Schema definitions for all the data files produced 
 
 ### Validation
 
-You can validate the data files against their schemas using a JSON Schema validator. For example, using [ajv-cli](https://github.com/ajv-validator/ajv-cli):
+Validate all data files against their schemas using the built-in validation script:
 
 ```bash
-# Install ajv-cli
-npm install -g ajv-cli
-
-# Validate a data file
-ajv validate -s schemas/eggs.schema.json -d data/eggs.min.json
+npm run validate
 ```
+
+This runs `src/scripts/validate-schemas.js` which validates every data file in `data/` against its corresponding schema using [ajv](https://ajv.js.org/) + [ajv-formats](https://github.com/ajv-validator/ajv-formats).
 
 ### In Your Application
 
