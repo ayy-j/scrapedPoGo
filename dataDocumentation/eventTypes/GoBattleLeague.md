@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Great League, Ultra League, and Master League | Precious Paths",
   "eventType": "go-battle-league",
   "heading": "Go Battle League",
-  "image": "https://cdn.leekduck.com/assets/img/events/go-battle-league-season-25-precious-paths.jpg",
+  "image": "https://pokemn.quest/events/go-battle-league-season-25-precious-paths.jpg",
   "start": "2026-01-27T21:00:00.000Z",
   "end": "2026-02-03T21:00:00.000Z",
   "battle": {

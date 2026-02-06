@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/raids.schema.json",
   "title": "Pokemon GO Raids Data",
-  "description": "Schema for Pokemon GO raid boss data from LeekDuck",
+  "description": "Schema for Pokemon GO raid boss data",
   "type": "array",
   "items": {
     "type": "object",

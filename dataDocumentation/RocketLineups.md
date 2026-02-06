@@ -158,7 +158,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Pokemon GO Team Rocket Lineups Data",
-  "description": "Schema for Pokemon GO Team GO Rocket lineup data from LeekDuck",
+  "description": "Schema for Pokemon GO Team GO Rocket lineup data",
   "type": "array",
   "items": {
     "type": "object",

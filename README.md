@@ -1,6 +1,6 @@
 # scrapedPoGo
 
-A comprehensive web scraper for Pokémon GO event data from [LeekDuck.com](https://leekduck.com).
+A comprehensive web scraper for Pokémon GO event data.
 
 ## Table of Contents
 
@@ -249,7 +249,7 @@ scrapedPoGo/
 
 | File | Description |
 |------|-------------|
-| `events.js` | Scrapes event information from LeekDuck |
+| `events.js` | Scrapes event information |
 | `raids.js` | Scrapes raid boss data |
 | `research.js` | Scrapes field research tasks and rewards |
 | `eggs.js` | Scrapes egg hatch pool data |
@@ -376,7 +376,6 @@ Shiny availability data is scraped as part of `npm run scrape` and used to augme
 ### Technical Notes
 
 - All scrapers use [JSDOM](https://github.com/jsdom/jsdom) for HTML parsing
-- Data is fetched from LeekDuck.com with permission
 - Temporary files during detailed scraping are stored in `data/temp/` and cleaned up automatically
 - The project uses [moment.js](https://momentjs.com/) for date/time handling
 

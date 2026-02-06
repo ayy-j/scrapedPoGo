@@ -124,7 +124,7 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Pokemon GO Research Data",
-  "description": "Schema for Pokemon GO field research tasks and rewards from LeekDuck",
+  "description": "Schema for Pokemon GO field research tasks and rewards",
   "type": "array",
   "items": {
     "type": "object",

@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Pokémon GO Tour: Kalos - Tainan 2026",
   "eventType": "pokemon-go-tour",
   "heading": "Pokemon GO Tour",
-  "image": "https://cdn.leekduck.com/assets/img/events/pogo-tour-kalos.jpg",
+  "image": "https://pokemn.quest/events/pogo-tour-kalos.jpg",
   "start": "2026-02-20T09:00:00.000",
   "end": "2026-02-22T17:00:00.000",
   "eventInfo": {
@@ -44,7 +44,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "pokemon": [
     {
       "name": "Chespin",
-      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_650_00.png",
+      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_650_00.png",
       "canBeShiny": true,
       "source": "spawn"
     }

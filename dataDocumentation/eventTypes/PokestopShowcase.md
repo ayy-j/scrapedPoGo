@@ -30,13 +30,13 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Toucannon, Ludicolo, and Quaquaval PokéStop Showcase",
   "eventType": "pokestop-showcase",
   "heading": "Pokestop Showcase",
-  "image": "https://cdn.leekduck.com/assets/img/events/pokestop-showcases-default.jpg",
+  "image": "https://pokemn.quest/events/pokestop-showcases-default.jpg",
   "start": "2026-02-02T10:00:00.000",
   "end": "2026-02-04T20:00:00.000",
   "pokemon": [
     {
       "name": "Ludicolo",
-      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_272_00.png",
+      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_272_00.png",
       "canBeShiny": false,
       "source": "featured"
     }

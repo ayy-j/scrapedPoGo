@@ -209,7 +209,7 @@ Depending on the event type and content, events may include any of the following
 ```json
 [
   "Trainers who participate in raids will have a chance of receiving new Special Backgrounds!",
-  "<img src=\"https://cdn.leekduck.com/assets/img/events/kalos-special-backgrounds.png\">"
+  "<img src=\"https://pokemn.quest/events/kalos-special-backgrounds.png\">"
 ]
 ```
 
@@ -301,7 +301,7 @@ Each raid object in the `raids` array has the following structure:
 ```json
 {
   "name": "Tornadus (Incarnate)",
-  "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_641_11.png",
+  "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_641_11.png",
   "canBeShiny": true,
   "imageWidth": 256,
   "imageHeight": 256,
@@ -370,7 +370,7 @@ Events are categorized by type. Each type has its own filtered endpoint. All typ
 
 ### Other Source Category Labels
 
-These labels appear on LeekDuck as CSS classes but are not normalized as `eventType` values in this API. They may be mapped into the supported event types above or omitted:
+These labels appear in the source data as CSS classes but are not normalized as `eventType` values in this API. They may be mapped into the supported event types above or omitted:
 
 - `bonus-hour`
 - `city-safari`
@@ -476,11 +476,11 @@ Most programming languages' date parsers (e.g., JavaScript's `Date.parse()`) han
   "bonuses": [
     {
       "text": "2× Catch Stardust",
-      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/stardust.png"
+      "image": "https://pokemn.quest/events/bonuses/stardust.png"
     },
     {
       "text": "2× Catch XP",
-      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/xp.png"
+      "image": "https://pokemn.quest/events/bonuses/xp.png"
     }
   ]
 }
@@ -500,7 +500,7 @@ Most programming languages' date parsers (e.g., JavaScript's `Date.parse()`) han
   "raids": [
     {
       "name": "Tornadus (Incarnate)",
-      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_641_11.png",
+      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_641_11.png",
       "canBeShiny": true,
       "imageWidth": 256,
       "imageHeight": 256,
@@ -508,7 +508,7 @@ Most programming languages' date parsers (e.g., JavaScript's `Date.parse()`) han
     },
     {
       "name": "Mega Ampharos",
-      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_181_51.png",
+      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_181_51.png",
       "canBeShiny": true,
       "imageWidth": 256,
       "imageHeight": 256,
@@ -585,15 +585,15 @@ Most programming languages' date parsers (e.g., JavaScript's `Date.parse()`) han
   "bonuses": [
     {
       "text": "3× Catch XP",
-      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/xp.png"
+      "image": "https://pokemn.quest/events/bonuses/xp.png"
     },
     {
       "text": "2× Catch Candy",
-      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/candy.png"
+      "image": "https://pokemn.quest/events/bonuses/candy.png"
     },
     {
       "text": "2× chance for Candy XL from catching",
-      "image": "https://cdn.leekduck.com/assets/img/events/bonuses/xl-candy.png"
+      "image": "https://pokemn.quest/events/bonuses/xl-candy.png"
     }
   ],
   "shinies": [
@@ -782,7 +782,7 @@ Events provide context (when something is available), while other endpoints prov
 
 3. **HTML Content:** The `whatsNew` array may contain HTML tags including `<img>` and `<span>` elements.
 
-4. **Image URLs:** Image URLs typically use the `pokemn.quest` domain for hosted images or `cdn.leekduck.com` for scraped images.
+4. **Image URLs:** Image URLs typically use the `pokemn.quest` domain for hosted images.
 
 5. **Pokémon Naming:**
    - Regional forms: "Alolan Diglett", "Galarian Meowth"
@@ -851,7 +851,7 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Pokemon GO Events Data",
-  "description": "Schema for Pokemon GO event data from LeekDuck. Note: additionalProperties is set to true as events can have many type-specific fields added by detailed scrapers.",
+  "description": "Schema for Pokemon GO event data. Note: additionalProperties is set to true as events can have many type-specific fields added by detailed scrapers.",
   "type": "array",
   "items": {
     "type": "object",

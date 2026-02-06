@@ -35,8 +35,6 @@ Metadata about the unified file generation.
 | `version` | string | Data format version (e.g., `"1.0.0"`) |
 | `generatedAt` | string | ISO 8601 timestamp when file was generated |
 | `schemaVersion` | string | Schema version for validation |
-| `dataSource` | string | Source of scraped data (`"leekduck.com"`) |
-| `imageBase` | string | Base URL for image assets (`"https://cdn.leekduck.com/assets/img/"` or `"https://pokemn.quest/images/"` when Blob URLs are enabled) |
 
 ---
 
@@ -515,7 +513,7 @@ When Vercel Blob storage is enabled (`USE_BLOB_URLS=true`), image URLs are serve
 | `eggs/<file>` | Egg-related images |
 | `raids/<file>` | Raid-related images |
 
-When Blob URLs are disabled, images are served from the original sources (primarily `cdn.leekduck.com`).
+When Blob URLs are enabled, images are served from `https://pokemn.quest/` with semantic folder organization.
 
 Standard Pokemon icon dimensions: 256×256 pixels.
 

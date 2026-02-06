@@ -49,7 +49,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Pokemon GO Eggs Data",
-  "description": "Schema for Pokemon GO egg hatch data from LeekDuck",
+  "description": "Schema for Pokemon GO egg hatch data",
   "type": "array",
   "items": {
     "type": "object",

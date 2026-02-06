@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Raid Day",
   "eventType": "raid-day",
   "heading": "Raid Day",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-02-14T14:00:00.000",
   "end": "2026-02-14T17:00:00.000"
 }

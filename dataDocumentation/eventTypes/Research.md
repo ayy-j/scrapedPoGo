@@ -8,7 +8,7 @@
 
 ## Description
 
-This file contains Research events with `eventType: "research"`, which typically refer to Special Research or Masterwork Research storylines. This event type is fully supported by the scraper pipeline (via `src/pages/detailed/research.js`) but is periodic — events only appear when they are active on LeekDuck.
+This file contains Research events with `eventType: "research"`, which typically refer to Special Research or Masterwork Research storylines. This event type is fully supported by the scraper pipeline (via `src/pages/detailed/research.js`) but is periodic — events only appear when they are active.
 
 ## Data Structure
 
@@ -34,7 +34,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "A Mythical Discovery",
   "eventType": "research",
   "heading": "Research",
-  "image": "https://cdn.leekduck.com/assets/img/events/research-mew.jpg",
+  "image": "https://pokemn.quest/events/research-mew.jpg",
   "start": "2026-01-01T00:00:00.000",
   "end": null,
   "hasSpawns": false,
@@ -86,4 +86,4 @@ Research events may include the following top-level fields (flattened, not neste
 - Timed Research has a specific deadline
 - Research Breakthrough changes affect monthly Field Research rewards
 - Some research is automatically granted, others require purchase or event participation
-- This event type is fully supported by the scraper pipeline but only appears when active events exist on LeekDuck
+- This event type is fully supported by the scraper pipeline but only appears when active events exist

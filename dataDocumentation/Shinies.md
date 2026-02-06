@@ -178,7 +178,7 @@ fetch('https://pokemn.quest/data/shinies.min.json')
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Pokemon GO Shinies Data",
-  "description": "Schema for Pokemon GO shiny availability data from LeekDuck",
+  "description": "Schema for Pokemon GO shiny availability data",
   "type": "array",
   "items": {
     "type": "object",

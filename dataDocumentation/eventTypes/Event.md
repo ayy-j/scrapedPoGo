@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Winter Weekend 2026",
   "eventType": "event",
   "heading": "Event",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-12-19T10:00:00.000",
   "end": "2026-12-22T20:00:00.000",
   "bonuses": [

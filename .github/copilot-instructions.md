@@ -1,7 +1,7 @@
 # Copilot Instructions for scrapedPoGo
 Always call the  'vercel/*' tool first.
 
-Scrapes Pokémon GO event data from [LeekDuck.com](https://leekduck.com) and serves it as a JSON API at `https://pokemn.quest/data/`.
+Scrapes Pokémon GO event data and serves it as a JSON API at `https://pokemn.quest/data/`.
 
 ## Tech Stack
 
@@ -214,4 +214,4 @@ GitHub Actions (`.github/workflows/scraper.yaml`):
 - 💡 `detailedscrape.js` always runs `generic.get()` for every event alongside the type-specific scraper
 - 💡 `combinedetails.js` `segmentEventData()` transforms raw scraper output into the canonical flat structure — understand its mapping before adding new fields
 - 💡 The `bkp` parameter in scrapers is backup data fetched from the CDN (last committed `events.min.json`), used as fallback when live scraping fails
-- ⚠️ LeekDuck HTML structure can change without notice — scrapers should be defensive with null checks on selectors
+- ⚠️ Source HTML structure can change without notice — scrapers should be defensive with null checks on selectors

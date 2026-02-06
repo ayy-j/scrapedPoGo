@@ -32,7 +32,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Team GO Rocket Takeover",
   "eventType": "team-go-rocket",
   "heading": "Team GO Rocket",
-  "image": "https://cdn.leekduck.com/assets/img/events/team-go-rocket-takeover.jpg",
+  "image": "https://pokemn.quest/events/team-go-rocket-takeover.jpg",
   "start": "2026-02-15T00:00:00.000",
   "end": "2026-02-18T23:59:00.000"
 }

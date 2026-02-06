@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Research Breakthrough: January 2026",
   "eventType": "research-breakthrough",
   "heading": "Research Breakthrough",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-01-01T13:00:00.000",
   "end": "2026-02-01T13:00:00.000",
   "name": "Furfrou",

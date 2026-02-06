@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Special Research: Spring 2026",
   "eventType": "special-research",
   "heading": "Special Research",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-03-01T10:00:00.000",
   "end": "2026-03-31T20:00:00.000",
   "description": "Complete special research tasks for exclusive rewards.",

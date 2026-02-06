@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Timed Research: Furfrou",
   "eventType": "timed-research",
   "heading": "Timed Research",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-01-15T10:00:00.000",
   "end": "2026-01-22T20:00:00.000",
   "description": "Complete timed research tasks to earn encounters with Furfrou.",
