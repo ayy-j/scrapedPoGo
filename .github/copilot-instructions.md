@@ -1,4 +1,5 @@
 # Copilot Instructions for scrapedPoGo
+Always call the  'vercel/*' tool first.
 
 Scrapes Pokémon GO event data from [LeekDuck.com](https://leekduck.com) and serves it as a JSON API at `https://pokemn.quest/data/`.
 

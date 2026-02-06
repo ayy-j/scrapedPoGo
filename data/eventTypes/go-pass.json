@@ -1,0 +1,97 @@
+[
+  {
+    "eventID": "go-pass-february-2026",
+    "name": "GO Pass: February",
+    "eventType": "go-pass",
+    "heading": "Go Pass",
+    "image": "https://pokemn.quest/events/2026-02-03-go-pass-february-2026.jpg",
+    "start": "2026-02-03T10:00:00.000",
+    "end": "2026-03-03T10:00:00.000",
+    "isGlobal": false,
+    "eventStatus": "active",
+    "pricing": {
+      "deluxe": 7.99,
+      "deluxePlus": 9.99
+    },
+    "pointTasks": {
+      "daily": [],
+      "weekly": [
+        {
+          "task": "Catch 75 Pokémon",
+          "points": 200
+        },
+        {
+          "task": "Win a raid",
+          "points": 150
+        },
+        {
+          "task": "Make 20 Great Throws",
+          "points": 150
+        },
+        {
+          "task": "Hatch 3 Eggs",
+          "points": 150
+        },
+        {
+          "task": "Spin 25 PokéStops or Gyms",
+          "points": 100
+        },
+        {
+          "task": "Use 20 Berries to help catch Pokémon",
+          "points": 100
+        },
+        {
+          "task": "Earn 10 hearts with your buddy",
+          "points": 150
+        },
+        {
+          "task": "Catch 15 Pokémon",
+          "points": 200
+        },
+        {
+          "task": "Win a raid",
+          "points": 100
+        },
+        {
+          "task": "Hatch an Egg",
+          "points": 40
+        },
+        {
+          "task": "Catch a Pokémon",
+          "points": 5
+        }
+      ],
+      "bonus": []
+    },
+    "milestoneBonuses": {
+      "free": [],
+      "deluxe": []
+    },
+    "description": "Trainers will automatically receive GO Pass: February on Tuesday, February 3, at 10:00 a.m. local time. You can collect GO Points and rank up to get additional rewards through Tuesday, March 3, at 10:00 a.m. local time."
+  },
+  {
+    "eventID": "go-pass-road-to-kalos",
+    "name": "GO Pass: Road to Kalos",
+    "eventType": "go-pass",
+    "heading": "Go Pass",
+    "image": "https://pokemn.quest/events/2026-02-23-go-pass-road-to-kalos.jpg",
+    "start": "2026-02-23T10:00:00.000",
+    "end": "2026-03-01T18:00:00.000",
+    "isGlobal": false,
+    "eventStatus": "upcoming",
+    "pricing": {
+      "deluxe": 14.99,
+      "deluxePlus": 19.99
+    },
+    "pointTasks": {
+      "daily": [],
+      "weekly": [],
+      "bonus": []
+    },
+    "milestoneBonuses": {
+      "free": [],
+      "deluxe": []
+    },
+    "description": "Trainers will automatically receive GO Pass: Road to Kalos at no cost on Monday, February 23, at 10:00 a.m. local time. You can collect GO Points and rank up to get additional rewards through Sunday, March 1, at 6:00 p.m. local time."
+  }
+]
