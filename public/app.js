@@ -1,13 +1,8 @@
 // Configuration
 const API_BASE_URL = 'https://pokemn.quest/data/';
-// Automatically detect if we're running locally or in production
 const USE_LOCAL_DATA = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const LOCAL_DATA_PATH = '../data/';
 
-// Get the appropriate base URL
-const getBaseUrl = () => USE_LOCAL_DATA ? LOCAL_DATA_PATH : API_BASE_URL;
-
-// Event type mappings (only types that have data files)
 const EVENT_TYPES = [
     { slug: 'community-day', name: 'Community Day' },
     { slug: 'event', name: 'Event' },
@@ -15,8 +10,8 @@ const EVENT_TYPES = [
     { slug: 'go-pass', name: 'Go Pass' },
     { slug: 'max-battles', name: 'Max Battles' },
     { slug: 'max-mondays', name: 'Max Mondays' },
-    { slug: 'pokemon-go-tour', name: 'Pokémon GO Tour' },
-    { slug: 'pokemon-spotlight-hour', name: 'Pokémon Spotlight Hour' },
+    { slug: 'pokemon-go-tour', name: 'Pokemon GO Tour' },
+    { slug: 'pokemon-spotlight-hour', name: 'Pokemon Spotlight Hour' },
     { slug: 'raid-battles', name: 'Raid Battles' },
     { slug: 'raid-day', name: 'Raid Day' },
     { slug: 'raid-hour', name: 'Raid Hour' },
@@ -24,348 +19,381 @@ const EVENT_TYPES = [
     { slug: 'season', name: 'Season' }
 ];
 
-// Utility functions
-const updateStatus = (id, status) => {
-    const element = document.getElementById(`${id}-status`);
-    if (element) {
-        element.textContent = status === 'success' ? '✓ Loaded' : status === 'error' ? '✗ Error' : 'Loading...';
-        element.className = `status ${status}`;
+const LIMITS = {
+    events: 3,
+    raids: 6,
+    research: 3,
+    eggs: 6,
+    rocket: 4,
+    shinies: 12
+};
+
+const HTML_ESCAPES = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+};
+
+const getBaseUrl = () => (USE_LOCAL_DATA ? LOCAL_DATA_PATH : API_BASE_URL);
+
+const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => HTML_ESCAPES[char]);
+
+const formatDate = (value) => {
+    if (!value) {
+        return 'N/A';
     }
+
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) {
+        return 'N/A';
+    }
+
+    return parsed.toLocaleString();
+};
+
+const formatNumber = (value) => Number(value || 0).toLocaleString();
+
+const sanitizeUrl = (value) => {
+    if (!value || typeof value !== 'string') {
+        return '';
+    }
+
+    try {
+        return new URL(value, window.location.href).href;
+    } catch {
+        return '';
+    }
+};
+
+const updateStatus = (id, status, detail = '') => {
+    const element = document.getElementById(`${id}-status`);
+    if (!element) {
+        return;
+    }
+
+    const text = {
+        loading: 'Syncing...',
+        error: 'Unavailable',
+        success: detail ? `Live ${detail}` : 'Live'
+    };
+
+    element.textContent = text[status] || 'Syncing...';
+    element.className = `status ${status}`;
 };
 
 const fetchData = async (endpoint) => {
     const url = `${getBaseUrl()}${endpoint}`;
-    try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return await response.json();
-    } catch (error) {
-        console.error(`Error fetching ${endpoint}:`, error);
-        throw error;
+    const response = await fetch(url, { cache: 'no-store' });
+
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
     }
+
+    return response.json();
 };
 
-// Rendering functions
-const renderEvent = (event) => {
-    const card = document.createElement('div');
+const renderLoading = (container, message = 'Syncing records...') => {
+    container.innerHTML = `<div class="loading-state">${escapeHtml(message)}</div>`;
+};
+
+const renderEmpty = (container, message = 'No records available') => {
+    container.innerHTML = `<div class="empty-state">${escapeHtml(message)}</div>`;
+};
+
+const renderError = (container, message) => {
+    container.innerHTML = `<div class="error-message">${escapeHtml(message)}</div>`;
+};
+
+const imageMarkup = (src, alt) => {
+    const safeSrc = sanitizeUrl(src);
+    if (!safeSrc) {
+        return '';
+    }
+
+    return `<img class="card-media" src="${escapeHtml(safeSrc)}" alt="${escapeHtml(alt || 'Data image')}" loading="lazy" decoding="async">`;
+};
+
+const metaMarkup = (rows) => rows
+    .filter((row) => row.value !== undefined && row.value !== null && row.value !== '')
+    .map((row) => `
+        <div class="meta-row">
+            <span class="meta-label">${escapeHtml(row.label)}</span>
+            <span class="meta-value">${escapeHtml(row.value)}</span>
+        </div>
+    `)
+    .join('');
+
+const badgeMarkup = (label, variant = '') => {
+    const classes = variant ? `badge ${variant}` : 'badge';
+    return `<span class="${classes}">${escapeHtml(label)}</span>`;
+};
+
+const chipMarkup = (label) => `<span class="chip">${escapeHtml(label)}</span>`;
+
+const buildCard = ({
+    kicker,
+    title,
+    subtitle,
+    image,
+    meta = [],
+    badges = [],
+    chips = [],
+    extra = ''
+}) => {
+    const card = document.createElement('article');
     card.className = 'card';
 
-    const statusBadge = event.eventStatus ? `<span class="badge">${event.eventStatus}</span>` : '';
-    const globalBadge = event.isGlobal ? `<span class="badge">Global</span>` : '';
+    const cleanBadges = badges.filter(Boolean).join('');
+    const cleanChips = chips.filter(Boolean).join('');
 
     card.innerHTML = `
-        ${event.image ? `<img src="${event.image}" alt="${event.name}" onerror="this.style.display='none'">` : ''}
-        <h4>${event.name}</h4>
-        <div class="meta">
-            <strong>Type:</strong> ${event.eventType || 'N/A'}<br>
-            <strong>Start:</strong> ${event.start ? new Date(event.start).toLocaleString() : 'N/A'}<br>
-            <strong>End:</strong> ${event.end ? new Date(event.end).toLocaleString() : 'N/A'}
+        ${imageMarkup(image, title)}
+        <div class="card-body">
+            ${kicker ? `<span class="kicker">${escapeHtml(kicker)}</span>` : ''}
+            <h3>${escapeHtml(title || 'Untitled')}</h3>
+            ${subtitle ? `<p class="card-subtitle">${escapeHtml(subtitle)}</p>` : ''}
+            <div class="meta-grid">${metaMarkup(meta)}</div>
+            ${cleanBadges ? `<div class="badge-row">${cleanBadges}</div>` : ''}
+            ${cleanChips ? `<div class="chip-list">${cleanChips}</div>` : ''}
+            ${extra}
         </div>
-        ${statusBadge} ${globalBadge}
-        ${event.pokemon && event.pokemon.length > 0 ? `
-            <div class="pokemon-list">
-                ${event.pokemon.slice(0, 5).map(p => `
-                    <div class="pokemon-item">
-                        ${p.image ? `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none'">` : ''}
-                        <span>${p.name}</span>
-                        ${p.canBeShiny ? '<span class="shiny-badge">✨</span>' : ''}
-                    </div>
-                `).join('')}
-                ${event.pokemon.length > 5 ? `<span>+${event.pokemon.length - 5} more</span>` : ''}
-            </div>
-        ` : ''}
     `;
 
     return card;
+};
+
+const renderEvent = (event) => {
+    const badges = [];
+
+    if (event.eventStatus) {
+        badges.push(badgeMarkup(event.eventStatus, 'is-alert'));
+    }
+
+    if (event.isGlobal) {
+        badges.push(badgeMarkup('Global'));
+    }
+
+    const pokemon = Array.isArray(event.pokemon) ? event.pokemon : [];
+    const chips = pokemon.slice(0, 6).map((entry) => chipMarkup(`${entry.name || 'Pokemon'}${entry.canBeShiny ? ' (Shiny)' : ''}`));
+    if (pokemon.length > 6) {
+        chips.push(chipMarkup(`+${pokemon.length - 6} more`));
+    }
+
+    return buildCard({
+        kicker: 'Event Feed',
+        title: event.name || 'Unnamed Event',
+        subtitle: event.eventType || 'General Event',
+        image: event.image,
+        meta: [
+            { label: 'Type', value: event.eventType || 'N/A' },
+            { label: 'Start', value: formatDate(event.start) },
+            { label: 'End', value: formatDate(event.end) }
+        ],
+        badges,
+        chips
+    });
 };
 
 const renderRaid = (raid) => {
-    const card = document.createElement('div');
-    card.className = 'card';
+    const normalCp = raid.combatPower?.normal;
+    const cpRange = normalCp ? `${normalCp.min || '?'} - ${normalCp.max || '?'}` : 'N/A';
+    const types = Array.isArray(raid.types) ? raid.types : [];
 
-    card.innerHTML = `
-        ${raid.image ? `<img src="${raid.image}" alt="${raid.name}" onerror="this.style.display='none'">` : ''}
-        <h4>${raid.name}${raid.form ? ` (${raid.form})` : ''}</h4>
-        <div class="meta">
-            <strong>Tier:</strong> ${raid.tier || 'N/A'}<br>
-            ${raid.combatPower ? `<strong>CP:</strong> ${raid.combatPower.normal?.min || '?'} - ${raid.combatPower.normal?.max || '?'}` : ''}
-        </div>
-        ${raid.canBeShiny ? '<span class="shiny-badge">✨ Shiny Available</span>' : ''}
-        ${raid.types && raid.types.length > 0 ? `
-            <div>
-                ${raid.types.map(t => `
-                    <span class="type-icon">
-                        ${t.image ? `<img src="${t.image}" alt="${t.name}" onerror="this.style.display='none'">` : ''}
-                        ${t.name}
-                    </span>
-                `).join('')}
-            </div>
-        ` : ''}
-    `;
-
-    return card;
+    return buildCard({
+        kicker: 'Raid Rotation',
+        title: `${raid.name || 'Unknown Raid'}${raid.form ? ` (${raid.form})` : ''}`,
+        image: raid.image,
+        meta: [
+            { label: 'Tier', value: raid.tier || 'N/A' },
+            { label: 'CP', value: cpRange }
+        ],
+        badges: [raid.canBeShiny ? badgeMarkup('Shiny Available', 'is-shiny') : ''],
+        chips: types.map((type) => chipMarkup(type.name || 'Type'))
+    });
 };
 
 const renderResearch = (research) => {
-    const card = document.createElement('div');
-    card.className = 'card';
+    const taskCount = Array.isArray(research.tasks) ? research.tasks.length : 0;
+    const rewardCount = Array.isArray(research.rewards) ? research.rewards.length : 0;
 
-    card.innerHTML = `
-        <h4>${research.name || 'Research'}</h4>
-        <div class="meta">
-            <strong>Type:</strong> ${research.type || 'N/A'}<br>
-            ${research.start ? `<strong>Start:</strong> ${new Date(research.start).toLocaleString()}` : ''}
-        </div>
-        ${research.tasks && research.tasks.length > 0 ? `
-            <p><strong>Tasks:</strong> ${research.tasks.length}</p>
-        ` : ''}
-    `;
-
-    return card;
+    return buildCard({
+        kicker: 'Research Task',
+        title: research.name || 'Research',
+        subtitle: research.description || '',
+        meta: [
+            { label: 'Type', value: research.type || 'N/A' },
+            { label: 'Start', value: formatDate(research.start) },
+            { label: 'Tasks', value: taskCount || '0' },
+            { label: 'Rewards', value: rewardCount || '0' }
+        ]
+    });
 };
 
 const renderEgg = (egg) => {
-    const card = document.createElement('div');
-    card.className = 'card';
+    const cpRange = egg.combatPower ? `${egg.combatPower.min || '?'} - ${egg.combatPower.max || '?'}` : 'N/A';
 
-    card.innerHTML = `
-        ${egg.image ? `<img src="${egg.image}" alt="${egg.name}" onerror="this.style.display='none'">` : ''}
-        <h4>${egg.name}${egg.form ? ` (${egg.form})` : ''}</h4>
-        <div class="meta">
-            <strong>Egg Type:</strong> ${egg.eggType || 'N/A'}<br>
-            ${egg.combatPower ? `<strong>CP:</strong> ${egg.combatPower.min || '?'} - ${egg.combatPower.max || '?'}` : ''}
-        </div>
-        ${egg.canBeShiny ? '<span class="shiny-badge">✨ Shiny Available</span>' : ''}
-        ${egg.rarity ? `<span class="badge">Rarity: ${egg.rarity}</span>` : ''}
-    `;
-
-    return card;
+    return buildCard({
+        kicker: 'Egg Pool',
+        title: `${egg.name || 'Unknown'}${egg.form ? ` (${egg.form})` : ''}`,
+        image: egg.image,
+        meta: [
+            { label: 'Egg Type', value: egg.eggType || 'N/A' },
+            { label: 'CP', value: cpRange },
+            { label: 'Rarity', value: egg.rarity || 'N/A' }
+        ],
+        badges: [egg.canBeShiny ? badgeMarkup('Shiny Available', 'is-shiny') : '']
+    });
 };
 
 const renderRocketLineup = (lineup) => {
-    const card = document.createElement('div');
-    card.className = 'card';
+    const slots = Array.isArray(lineup.slots) ? lineup.slots : [];
 
-    card.innerHTML = `
-        <h4>${lineup.trainer || 'Rocket Grunt'}</h4>
-        <div class="meta">
-            <strong>Type:</strong> ${lineup.type || 'N/A'}<br>
-            ${lineup.quote ? `<em>"${lineup.quote}"</em>` : ''}
-        </div>
-        ${lineup.slots && lineup.slots.length > 0 ? `
-            <div>
-                ${lineup.slots.map((slot, idx) => `
-                    <p><strong>Slot ${idx + 1}:</strong> ${Array.isArray(slot) ? slot.map(p => p.name || p).join(', ') : 'N/A'}</p>
-                `).join('')}
-            </div>
-        ` : ''}
-    `;
+    const slotPills = slots
+        .map((slot, index) => {
+            const members = Array.isArray(slot)
+                ? slot.map((pokemon) => (typeof pokemon === 'string' ? pokemon : pokemon?.name || 'Unknown')).join(', ')
+                : 'Unknown';
+            return `<span class="slot-pill">S${index + 1}: ${escapeHtml(members)}</span>`;
+        })
+        .join('');
 
-    return card;
+    return buildCard({
+        kicker: 'Rocket Lineup',
+        title: lineup.trainer || 'Rocket Grunt',
+        subtitle: lineup.quote || '',
+        meta: [
+            { label: 'Type', value: lineup.type || 'N/A' },
+            { label: 'Slots', value: slots.length || '0' }
+        ],
+        extra: slotPills ? `<div class="slot-list">${slotPills}</div>` : ''
+    });
 };
 
-const renderShiny = (shiny) => {
-    const card = document.createElement('div');
-    card.className = 'card';
+const renderShiny = (shiny) => buildCard({
+    kicker: 'Shiny Registry',
+    title: `${shiny.name || 'Unknown'}${shiny.form ? ` (${shiny.form})` : ''}`,
+    image: shiny.image,
+    meta: [
+        { label: 'Dex', value: shiny.dexNumber ? `#${shiny.dexNumber}` : 'N/A' },
+        { label: 'Region', value: shiny.region || 'N/A' },
+        { label: 'Released', value: shiny.releasedDate || 'N/A' }
+    ],
+    badges: [badgeMarkup('Shiny Available', 'is-shiny')]
+});
 
-    card.innerHTML = `
-        ${shiny.image ? `<img src="${shiny.image}" alt="${shiny.name}" onerror="this.style.display='none'">` : ''}
-        <h4>${shiny.name}${shiny.form ? ` (${shiny.form})` : ''}</h4>
-        <div class="meta">
-            ${shiny.dexNumber ? `<strong>#${shiny.dexNumber}</strong><br>` : ''}
-            ${shiny.region ? `<strong>Region:</strong> ${shiny.region}<br>` : ''}
-            ${shiny.releasedDate ? `<strong>Released:</strong> ${shiny.releasedDate}` : ''}
-        </div>
-        <span class="shiny-badge">✨ Shiny Available</span>
-    `;
+const appendCards = (container, records, renderer) => {
+    container.innerHTML = '';
+    const fragment = document.createDocumentFragment();
 
-    return card;
+    records.forEach((record, index) => {
+        const card = renderer(record);
+        card.style.setProperty('--stagger', index);
+        fragment.appendChild(card);
+    });
+
+    container.appendChild(fragment);
 };
 
-// Load and display functions
-const loadEvents = async () => {
+const loadDataset = async ({
+    statusId,
+    endpoint,
+    containerId,
+    limit,
+    renderer,
+    emptyMessage
+}) => {
+    const container = document.getElementById(containerId);
+    updateStatus(statusId, 'loading');
+    renderLoading(container);
+
     try {
-        updateStatus('events', 'loading');
-        const data = await fetchData('events.min.json');
-        const container = document.getElementById('events-content');
-
-        if (Array.isArray(data) && data.length > 0) {
-            // Show first 3 events
-            data.slice(0, 3).forEach(event => {
-                container.appendChild(renderEvent(event));
-            });
-            updateStatus('events', 'success');
-        } else {
-            throw new Error('No events data');
+        const data = await fetchData(endpoint);
+        if (!Array.isArray(data) || data.length === 0) {
+            renderEmpty(container, emptyMessage || 'No records available.');
+            updateStatus(statusId, 'success', '0');
+            return [];
         }
+
+        appendCards(container, data.slice(0, limit), renderer);
+        updateStatus(statusId, 'success', `${Math.min(limit, data.length)}/${data.length}`);
+        return data;
     } catch (error) {
-        updateStatus('events', 'error');
-        document.getElementById('events-content').innerHTML =
-            `<div class="error-message">Error loading events: ${error.message}</div>`;
+        updateStatus(statusId, 'error');
+        renderError(container, `Error loading ${endpoint}: ${error.message}`);
+        return null;
     }
 };
 
 const loadEventTypes = async () => {
     const container = document.getElementById('event-types-content');
+    container.innerHTML = '';
 
-    for (const eventType of EVENT_TYPES) {
-        const section = document.createElement('div');
-        section.className = 'event-type-section';
-
+    const sections = EVENT_TYPES.map((eventType) => {
         const statusId = `event-type-${eventType.slug}`;
+        const section = document.createElement('article');
+        section.className = 'event-type-section';
         section.innerHTML = `
-            <h3>${eventType.name}</h3>
+            <h3>${escapeHtml(eventType.name)}</h3>
             <div class="endpoint-info">
-                <code>${API_BASE_URL}eventTypes/${eventType.slug}.min.json</code>
-                <span class="status loading" id="${statusId}-status">Loading...</span>
+                <code>${escapeHtml(`${API_BASE_URL}eventTypes/${eventType.slug}.min.json`)}</code>
+                <span class="status loading" id="${statusId}-status">Syncing...</span>
             </div>
-            <div id="${statusId}-content" class="content-grid"></div>
+            <div id="${statusId}-content" class="content-grid">
+                <div class="loading-state">Syncing records...</div>
+            </div>
         `;
 
         container.appendChild(section);
+        return { ...eventType, statusId };
+    });
 
-        // Load data for this event type
-        (async () => {
-            try {
-                const data = await fetchData(`eventTypes/${eventType.slug}.min.json`);
-                const contentDiv = document.getElementById(`${statusId}-content`);
+    await Promise.all(sections.map(async (sectionInfo) => {
+        const contentId = `${sectionInfo.statusId}-content`;
+        const content = document.getElementById(contentId);
 
-                if (Array.isArray(data) && data.length > 0) {
-                    // Show first event of this type
-                    contentDiv.appendChild(renderEvent(data[0]));
-                    updateStatus(statusId, 'success');
-                } else {
-                    contentDiv.innerHTML = '<p>No events of this type</p>';
-                    updateStatus(statusId, 'success');
-                }
-            } catch (error) {
-                updateStatus(statusId, 'error');
-                document.getElementById(`${statusId}-content`).innerHTML =
-                    `<div class="error-message">Error: ${error.message}</div>`;
+        try {
+            const data = await fetchData(`eventTypes/${sectionInfo.slug}.min.json`);
+            if (!Array.isArray(data) || data.length === 0) {
+                renderEmpty(content, 'No events of this type.');
+                updateStatus(sectionInfo.statusId, 'success', '0');
+                return;
             }
-        })();
-    }
+
+            appendCards(content, [data[0]], renderEvent);
+            updateStatus(sectionInfo.statusId, 'success', `${data.length}`);
+        } catch (error) {
+            updateStatus(sectionInfo.statusId, 'error');
+            renderError(content, `Error: ${error.message}`);
+        }
+    }));
 };
 
-const loadRaids = async () => {
-    try {
-        updateStatus('raids', 'loading');
-        const data = await fetchData('raids.min.json');
-        const container = document.getElementById('raids-content');
+const setHeroStats = (stats) => {
+    const mappings = [
+        ['hero-events', stats.events],
+        ['hero-raids', stats.raids],
+        ['hero-research', stats.research],
+        ['hero-shinies', stats.shinies]
+    ];
 
-        if (Array.isArray(data) && data.length > 0) {
-            // Show first 6 raids
-            data.slice(0, 6).forEach(raid => {
-                container.appendChild(renderRaid(raid));
-            });
-            updateStatus('raids', 'success');
-        } else {
-            throw new Error('No raids data');
+    mappings.forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = formatNumber(value);
         }
-    } catch (error) {
-        updateStatus('raids', 'error');
-        document.getElementById('raids-content').innerHTML =
-            `<div class="error-message">Error loading raids: ${error.message}</div>`;
-    }
-};
-
-const loadResearch = async () => {
-    try {
-        updateStatus('research', 'loading');
-        const data = await fetchData('research.min.json');
-        const container = document.getElementById('research-content');
-
-        if (Array.isArray(data) && data.length > 0) {
-            // Show first 3 research items
-            data.slice(0, 3).forEach(research => {
-                container.appendChild(renderResearch(research));
-            });
-            updateStatus('research', 'success');
-        } else {
-            throw new Error('No research data');
-        }
-    } catch (error) {
-        updateStatus('research', 'error');
-        document.getElementById('research-content').innerHTML =
-            `<div class="error-message">Error loading research: ${error.message}</div>`;
-    }
-};
-
-const loadEggs = async () => {
-    try {
-        updateStatus('eggs', 'loading');
-        const data = await fetchData('eggs.min.json');
-        const container = document.getElementById('eggs-content');
-
-        if (Array.isArray(data) && data.length > 0) {
-            // Show first 6 eggs
-            data.slice(0, 6).forEach(egg => {
-                container.appendChild(renderEgg(egg));
-            });
-            updateStatus('eggs', 'success');
-        } else {
-            throw new Error('No eggs data');
-        }
-    } catch (error) {
-        updateStatus('eggs', 'error');
-        document.getElementById('eggs-content').innerHTML =
-            `<div class="error-message">Error loading eggs: ${error.message}</div>`;
-    }
-};
-
-const loadRocketLineups = async () => {
-    try {
-        updateStatus('rocket', 'loading');
-        const data = await fetchData('rocketLineups.min.json');
-        const container = document.getElementById('rocket-content');
-
-        if (Array.isArray(data) && data.length > 0) {
-            // Show first 4 lineups
-            data.slice(0, 4).forEach(lineup => {
-                container.appendChild(renderRocketLineup(lineup));
-            });
-            updateStatus('rocket', 'success');
-        } else {
-            throw new Error('No rocket lineups data');
-        }
-    } catch (error) {
-        updateStatus('rocket', 'error');
-        document.getElementById('rocket-content').innerHTML =
-            `<div class="error-message">Error loading rocket lineups: ${error.message}</div>`;
-    }
-};
-
-const loadShinies = async () => {
-    try {
-        updateStatus('shinies', 'loading');
-        const data = await fetchData('shinies.min.json');
-        const container = document.getElementById('shinies-content');
-
-        if (Array.isArray(data) && data.length > 0) {
-            // Show first 12 shinies
-            data.slice(0, 12).forEach(shiny => {
-                container.appendChild(renderShiny(shiny));
-            });
-            updateStatus('shinies', 'success');
-        } else {
-            throw new Error('No shinies data');
-        }
-    } catch (error) {
-        updateStatus('shinies', 'error');
-        document.getElementById('shinies-content').innerHTML =
-            `<div class="error-message">Error loading shinies: ${error.message}</div>`;
-    }
+    });
 };
 
 const loadUnifiedData = async () => {
-    try {
-        updateStatus('unified', 'loading');
-        const data = await fetchData('unified.min.json');
-        const container = document.getElementById('unified-content');
+    const container = document.getElementById('unified-content');
+    updateStatus('unified', 'loading');
+    renderLoading(container);
 
-        // Display summary statistics
-        const summary = document.createElement('div');
-        summary.className = 'data-summary';
+    try {
+        const data = await fetchData('unified.min.json');
+        container.innerHTML = '';
 
         const stats = [
             { label: 'Events', value: data.events?.length || 0 },
@@ -376,44 +404,104 @@ const loadUnifiedData = async () => {
             { label: 'Shinies', value: data.shinies?.length || 0 }
         ];
 
-        stats.forEach(stat => {
-            const card = document.createElement('div');
+        const summary = document.createElement('div');
+        summary.className = 'data-summary';
+
+        stats.forEach((stat) => {
+            const card = document.createElement('article');
             card.className = 'summary-card';
             card.innerHTML = `
-                <div class="number">${stat.value}</div>
-                <div class="label">${stat.label}</div>
+                <div class="number">${formatNumber(stat.value)}</div>
+                <div class="label">${escapeHtml(stat.label)}</div>
             `;
             summary.appendChild(card);
         });
 
         container.appendChild(summary);
 
-        // Display indices if available
         if (data.indices) {
-            const indicesDiv = document.createElement('div');
-            indicesDiv.innerHTML = `
-                <h3>Available Indices</h3>
-                <pre>${JSON.stringify(data.indices, null, 2)}</pre>
-            `;
-            container.appendChild(indicesDiv);
+            const indicesBlock = document.createElement('section');
+            indicesBlock.className = 'code-block';
+
+            const title = document.createElement('h3');
+            title.textContent = 'Available Indices';
+
+            const pre = document.createElement('pre');
+            pre.textContent = JSON.stringify(data.indices, null, 2);
+
+            indicesBlock.appendChild(title);
+            indicesBlock.appendChild(pre);
+            container.appendChild(indicesBlock);
         }
 
-        updateStatus('unified', 'success');
+        setHeroStats({
+            events: data.events?.length || 0,
+            raids: data.raids?.length || 0,
+            research: data.research?.length || 0,
+            shinies: data.shinies?.length || 0
+        });
+
+        updateStatus('unified', 'success', `${Object.keys(data).length} groups`);
     } catch (error) {
         updateStatus('unified', 'error');
-        document.getElementById('unified-content').innerHTML =
-            `<div class="error-message">Error loading unified data: ${error.message}</div>`;
+        renderError(container, `Error loading unified.min.json: ${error.message}`);
     }
 };
 
+const initialize = async () => {
+    await Promise.all([
+        loadDataset({
+            statusId: 'events',
+            endpoint: 'events.min.json',
+            containerId: 'events-content',
+            limit: LIMITS.events,
+            renderer: renderEvent,
+            emptyMessage: 'No events found.'
+        }),
+        loadDataset({
+            statusId: 'raids',
+            endpoint: 'raids.min.json',
+            containerId: 'raids-content',
+            limit: LIMITS.raids,
+            renderer: renderRaid,
+            emptyMessage: 'No raids found.'
+        }),
+        loadDataset({
+            statusId: 'research',
+            endpoint: 'research.min.json',
+            containerId: 'research-content',
+            limit: LIMITS.research,
+            renderer: renderResearch,
+            emptyMessage: 'No research found.'
+        }),
+        loadDataset({
+            statusId: 'eggs',
+            endpoint: 'eggs.min.json',
+            containerId: 'eggs-content',
+            limit: LIMITS.eggs,
+            renderer: renderEgg,
+            emptyMessage: 'No egg data found.'
+        }),
+        loadDataset({
+            statusId: 'rocket',
+            endpoint: 'rocketLineups.min.json',
+            containerId: 'rocket-content',
+            limit: LIMITS.rocket,
+            renderer: renderRocketLineup,
+            emptyMessage: 'No rocket lineups found.'
+        }),
+        loadDataset({
+            statusId: 'shinies',
+            endpoint: 'shinies.min.json',
+            containerId: 'shinies-content',
+            limit: LIMITS.shinies,
+            renderer: renderShiny,
+            emptyMessage: 'No shinies found.'
+        }),
+        loadEventTypes(),
+        loadUnifiedData()
+    ]);
+};
+
 // Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-    loadEvents();
-    loadEventTypes();
-    loadRaids();
-    loadResearch();
-    loadEggs();
-    loadRocketLineups();
-    loadShinies();
-    loadUnifiedData();
-});
+document.addEventListener('DOMContentLoaded', initialize);

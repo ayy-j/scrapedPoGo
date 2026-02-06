@@ -7,12 +7,37 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>🎮 Pokémon GO Data Visualization</h1>
-        <p>Visual catalogue and verification of API endpoints from <a href="https://pokemn.quest/data/" target="_blank">pokemn.quest</a></p>
+    <div class="aura"></div>
+    <div class="scanlines"></div>
+
+    <header class="hero">
+        <p class="eyebrow">Live Data Console</p>
+        <h1>Pokémon GO Signal Deck</h1>
+        <p class="lede">
+            A visual index of scraped datasets and endpoint health from
+            <a href="https://pokemn.quest/data/" target="_blank" rel="noopener noreferrer">pokemn.quest</a>.
+        </p>
+        <div class="hero-stats" id="hero-stats">
+            <article class="hero-stat">
+                <span class="hero-stat-label">Events</span>
+                <span class="hero-stat-value" id="hero-events">0</span>
+            </article>
+            <article class="hero-stat">
+                <span class="hero-stat-label">Raids</span>
+                <span class="hero-stat-value" id="hero-raids">0</span>
+            </article>
+            <article class="hero-stat">
+                <span class="hero-stat-label">Research</span>
+                <span class="hero-stat-value" id="hero-research">0</span>
+            </article>
+            <article class="hero-stat">
+                <span class="hero-stat-label">Shinies</span>
+                <span class="hero-stat-value" id="hero-shinies">0</span>
+            </article>
+        </div>
     </header>
 
-    <nav>
+    <nav class="top-nav">
         <ul>
             <li><a href="#events">Events</a></li>
             <li><a href="#event-types">Event Types</a></li>
@@ -25,87 +50,79 @@
         </ul>
     </nav>
 
-    <main>
-        <!-- Events Section -->
-        <section id="events">
-            <h2>Events</h2>
+    <main class="layout">
+        <section id="events" class="panel">
+            <h2 class="panel-title">Events</h2>
             <div class="endpoint-info">
                 <code>https://pokemn.quest/data/events.min.json</code>
-                <span class="status" id="events-status">Loading...</span>
+                <span class="status loading" id="events-status">Syncing...</span>
             </div>
             <div id="events-content" class="content-grid"></div>
         </section>
 
-        <!-- Event Types Section -->
-        <section id="event-types">
-            <h2>Event Types</h2>
+        <section id="event-types" class="panel">
+            <h2 class="panel-title">Event Types</h2>
             <div id="event-types-content"></div>
         </section>
 
-        <!-- Raids Section -->
-        <section id="raids">
-            <h2>Raids</h2>
+        <section id="raids" class="panel">
+            <h2 class="panel-title">Raids</h2>
             <div class="endpoint-info">
                 <code>https://pokemn.quest/data/raids.min.json</code>
-                <span class="status" id="raids-status">Loading...</span>
+                <span class="status loading" id="raids-status">Syncing...</span>
             </div>
             <div id="raids-content" class="content-grid"></div>
         </section>
 
-        <!-- Research Section -->
-        <section id="research">
-            <h2>Research</h2>
+        <section id="research" class="panel">
+            <h2 class="panel-title">Research</h2>
             <div class="endpoint-info">
                 <code>https://pokemn.quest/data/research.min.json</code>
-                <span class="status" id="research-status">Loading...</span>
+                <span class="status loading" id="research-status">Syncing...</span>
             </div>
             <div id="research-content" class="content-grid"></div>
         </section>
 
-        <!-- Eggs Section -->
-        <section id="eggs">
-            <h2>Eggs</h2>
+        <section id="eggs" class="panel">
+            <h2 class="panel-title">Eggs</h2>
             <div class="endpoint-info">
                 <code>https://pokemn.quest/data/eggs.min.json</code>
-                <span class="status" id="eggs-status">Loading...</span>
+                <span class="status loading" id="eggs-status">Syncing...</span>
             </div>
             <div id="eggs-content" class="content-grid"></div>
         </section>
 
-        <!-- Rocket Lineups Section -->
-        <section id="rocket">
-            <h2>Team GO Rocket Lineups</h2>
+        <section id="rocket" class="panel">
+            <h2 class="panel-title">Team GO Rocket Lineups</h2>
             <div class="endpoint-info">
                 <code>https://pokemn.quest/data/rocketLineups.min.json</code>
-                <span class="status" id="rocket-status">Loading...</span>
+                <span class="status loading" id="rocket-status">Syncing...</span>
             </div>
             <div id="rocket-content" class="content-grid"></div>
         </section>
 
-        <!-- Shinies Section -->
-        <section id="shinies">
-            <h2>Shinies</h2>
+        <section id="shinies" class="panel">
+            <h2 class="panel-title">Shinies</h2>
             <div class="endpoint-info">
                 <code>https://pokemn.quest/data/shinies.min.json</code>
-                <span class="status" id="shinies-status">Loading...</span>
+                <span class="status loading" id="shinies-status">Syncing...</span>
             </div>
             <div id="shinies-content" class="content-grid"></div>
         </section>
 
-        <!-- Unified Data Section -->
-        <section id="unified">
-            <h2>Unified Data</h2>
+        <section id="unified" class="panel">
+            <h2 class="panel-title">Unified Data</h2>
             <div class="endpoint-info">
                 <code>https://pokemn.quest/data/unified.min.json</code>
-                <span class="status" id="unified-status">Loading...</span>
+                <span class="status loading" id="unified-status">Syncing...</span>
             </div>
             <div id="unified-content"></div>
         </section>
     </main>
 
     <footer>
-        <p>Data scraped from <a href="https://leekduck.com" target="_blank">LeekDuck.com</a></p>
-        <p>API: <a href="https://pokemn.quest/data/" target="_blank">pokemn.quest</a></p>
+        <p>Data scraped from <a href="https://leekduck.com" target="_blank" rel="noopener noreferrer">LeekDuck.com</a></p>
+        <p>API: <a href="https://pokemn.quest/data/" target="_blank" rel="noopener noreferrer">pokemn.quest</a></p>
     </footer>
 
     <script src="app.js"></script>
