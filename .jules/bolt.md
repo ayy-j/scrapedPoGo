@@ -5,3 +5,7 @@
 ## 2026-02-01 - DOM Rehydration Check
 **Learning:** `element.hasChildNodes()` returns true for text nodes (whitespace), making it a fragile check for "is this container empty/populated?". Using `element.children.length === 0` is safer when checking for element nodes.
 **Action:** When optimizing re-renders by checking if DOM exists, check children count, not `hasChildNodes()`.
+
+## 2026-02-02 - Image Dimension Fetch Coalescing
+**Learning:** Multiple scrapers (or parallelized logic within one scraper) can request dimensions for the same image URL concurrently. Simple caching (`Map<url, result>`) only prevents re-fetching *after* the first request completes. During the initial "cold" concurrent burst, multiple network requests are still sent (Thundering Herd).
+**Action:** When caching async operations that might be called concurrently, cache the **Promise** (`pendingRequests`) as well as the result. If a request is in-flight, return the existing Promise to coalesce all callers into a single network request.

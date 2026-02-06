@@ -20,6 +20,9 @@ const { imageSize } = require('image-size');
 /** @type {Map<string, ImageDimensions>} Cache to avoid redundant fetches */
 const dimensionCache = new Map();
 
+/** @type {Map<string, Promise<ImageDimensions|null>>} Map of in-flight requests */
+const pendingRequests = new Map();
+
 /**
  * Fetches image dimensions from a URL by reading image headers.
  * Results are cached to avoid redundant network requests.
@@ -42,34 +45,46 @@ async function getImageDimensions(url, timeout = 5000) {
     if (dimensionCache.has(url)) {
         return dimensionCache.get(url);
     }
-    
-    try {
-        const buffer = await fetchImageBuffer(url, timeout);
-        if (!buffer || buffer.length === 0) {
-            return null;
-        }
-        
-        const dimensions = imageSize(buffer);
-        if (dimensions && dimensions.width && dimensions.height) {
-            const result = {
-                width: dimensions.width,
-                height: dimensions.height,
-                type: dimensions.type || 'unknown'
-            };
-            
-            // Cache the result
-            dimensionCache.set(url, result);
-            return result;
-        }
-        
-        return null;
-    } catch (err) {
-        // Log in debug mode only
-        if (process.env.DEBUG) {
-            console.error(`Error getting dimensions for ${url}:`, err.message);
-        }
-        return null;
+
+    // Check pending requests
+    if (pendingRequests.has(url)) {
+        return pendingRequests.get(url);
     }
+    
+    const promise = (async () => {
+        try {
+            const buffer = await fetchImageBuffer(url, timeout);
+            if (!buffer || buffer.length === 0) {
+                return null;
+            }
+            
+            const dimensions = imageSize(buffer);
+            if (dimensions && dimensions.width && dimensions.height) {
+                const result = {
+                    width: dimensions.width,
+                    height: dimensions.height,
+                    type: dimensions.type || 'unknown'
+                };
+
+                // Cache the result
+                dimensionCache.set(url, result);
+                return result;
+            }
+
+            return null;
+        } catch (err) {
+            // Log in debug mode only
+            if (process.env.DEBUG) {
+                console.error(`Error getting dimensions for ${url}:`, err.message);
+            }
+            return null;
+        } finally {
+            pendingRequests.delete(url);
+        }
+    })();
+
+    pendingRequests.set(url, promise);
+    return promise;
 }
 
 /**
