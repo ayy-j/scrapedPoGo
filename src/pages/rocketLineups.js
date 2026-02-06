@@ -9,6 +9,7 @@ const fs = require('fs');
 const jsd = require('jsdom');
 const { JSDOM } = jsd;
 const https = require('https');
+const { transformUrls } = require('../utils/blobUrls');
 
 /**
  * @typedef {Object} WeaknessInfo
@@ -147,7 +148,7 @@ function get() {
                 lineups.push(lineup);
             });
 
-            fs.writeFile('data/rocketLineups.min.json', JSON.stringify(lineups), err => {
+            fs.writeFile('data/rocketLineups.min.json', JSON.stringify(transformUrls(lineups)), err => {
                 if (err) {
                     console.error(err);
                     return;
@@ -163,7 +164,7 @@ function get() {
                     try {
                         let json = JSON.parse(body);
 
-                        fs.writeFile('data/rocketLineups.min.json', JSON.stringify(json), err => {
+                        fs.writeFile('data/rocketLineups.min.json', JSON.stringify(transformUrls(json)), err => {
                             if (err) {
                                 console.error(err);
                                 return;

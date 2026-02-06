@@ -13,6 +13,7 @@ const raids = require('../pages/raids')
 const research = require('../pages/research')
 const eggs = require('../pages/eggs')
 const rocketLineups = require('../pages/rocketLineups')
+const shinies = require('../pages/shinies')
 
 dotenv.config();
 dotenv.config({ path: '.env.local' });
@@ -43,6 +44,7 @@ function main()
     research.get();
     eggs.get();
     rocketLineups.get();
+    shinies.get();
 
     logger.info("Scrapers initiated.");
 }

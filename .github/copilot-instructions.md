@@ -15,7 +15,7 @@ Scrapes Pokémon GO event data from [LeekDuck.com](https://leekduck.com) and ser
 
 ## Project Structure
 
-- `src/scrapers/` — Pipeline orchestrators: `scrape.js`, `detailedscrape.js`, `combinedetails.js`, `combineAll.js`, `scrapeShinies.js`
+- `src/scrapers/` — Pipeline orchestrators: `scrape.js`, `detailedscrape.js`, `combinedetails.js`, `combineAll.js`
 - `src/pages/` — Basic scrapers (one per data type): `events.js`, `raids.js`, `research.js`, `eggs.js`, `rocketLineups.js`, `shinies.js`
 - `src/pages/detailed/` — One scraper per eventType (e.g., `communityday.js`, `raidbattles.js`, `season.js`)
 - `src/utils/scraperUtils.js` — **Core utility library** (~1300 lines): shared extraction functions used by all scrapers
@@ -33,8 +33,8 @@ Scrapes Pokémon GO event data from [LeekDuck.com](https://leekduck.com) and ser
 
 ```
 Stage 1: npm run scrape
-  src/scrapers/scrape.js → runs src/pages/{events,raids,research,eggs,rocketLineups}.js in parallel
-  Output: data/{events,raids,research,eggs,rocketLineups}.min.json
+  src/scrapers/scrape.js → runs src/pages/{events,raids,research,eggs,rocketLineups,shinies}.js in parallel
+  Output: data/{events,raids,research,eggs,rocketLineups,shinies}.min.json
 
 Stage 2: npm run detailedscrape
   src/scrapers/detailedscrape.js → dispatches to src/pages/detailed/*.js based on eventType
@@ -46,8 +46,7 @@ Stage 3: npm run combinedetails
   Output: data/events.min.json (flat array), data/eventTypes/*.min.json
   Cleanup: removes data/temp/
 
-Bonus stages:
-  npm run scrapeshinies → src/scrapers/scrapeShinies.js → data/shinies.min.json
+Bonus stage:
   npm run combineall   → src/scrapers/combineAll.js → data/unified.min.json (all datasets + indices)
 ```
 
@@ -56,15 +55,13 @@ Bonus stages:
 | Command | Purpose |
 |---------|---------|
 | `npm install` | Install dependencies |
-| `npm run scrape` | Stage 1: basic data (events, raids, research, eggs, rocket) |
-| `npm run scrapeshinies` | Scrape shiny Pokémon availability |
+| `npm run scrape` | Stage 1: basic data (events, raids, research, eggs, rocket, shinies) |
 | `npm run detailedscrape` | Stage 2: detailed event pages → temp files |
 | `npm run combinedetails` | Stage 3: merge temp + generate per-type files |
 | `npm run combineall` | Generate unified data file with all datasets + indices |
 | `npm run pipeline` | Full pipeline (all stages with `USE_BLOB_URLS=true`) |
 | `npm run validate` | Validate all data files against JSON schemas |
 | `npm run blob:upload` | Upload images to Vercel Blob (`--dry-run`, `--force` flags) |
-| `npm run blob:transform` | Transform URLs in data to use Blob storage |
 | `npm run images:download` | Download local mirror of all referenced images |
 
 ## Scraper Patterns

@@ -11,6 +11,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const logger = require('../utils/logger');
 const { transformUrls, isEnabled: isBlobEnabled } = require('../utils/blobUrls');
 
 const DATA_DIR = path.join(__dirname, '../../data');
@@ -22,7 +23,7 @@ function readJsonFile(filePath) {
         const content = fs.readFileSync(filePath, 'utf8');
         return JSON.parse(content);
     } catch (err) {
-        console.warn(`Warning: Could not read ${filePath}: ${err.message}`);
+        logger.warn(`Could not read ${filePath}: ${err.message}`);
         return [];
     }
 }
@@ -39,7 +40,7 @@ function readEventTypeFiles() {
             }
         }
     } catch (err) {
-        console.warn(`Warning: Could not read eventTypes directory: ${err.message}`);
+        logger.warn(`Could not read eventTypes directory: ${err.message}`);
     }
     return eventTypes;
 }
@@ -313,10 +314,10 @@ function calculateStats(data) {
 }
 
 async function main() {
-    console.log('📦 Building unified data file...\n');
+    logger.start('Building unified data file...');
     
     // Read all data files
-    console.log('Reading data files...');
+    logger.info('Reading data files...');
     const events = readJsonFile(path.join(DATA_DIR, 'events.min.json'));
     const raids = readJsonFile(path.join(DATA_DIR, 'raids.min.json'));
     const eggs = readJsonFile(path.join(DATA_DIR, 'eggs.min.json'));
@@ -325,18 +326,18 @@ async function main() {
     const rocketLineups = readJsonFile(path.join(DATA_DIR, 'rocketLineups.min.json'));
     const eventTypes = readEventTypeFiles();
     
-    console.log(`  Events: ${events.length}`);
-    console.log(`  Raids: ${raids.length}`);
-    console.log(`  Eggs: ${eggs.length}`);
-    console.log(`  Research: ${research.length}`);
-    console.log(`  Shinies: ${shinies.length}`);
-    console.log(`  Rocket Lineups: ${rocketLineups.length}`);
-    console.log(`  Event Types: ${Object.keys(eventTypes).length}`);
+    logger.info(`  Events: ${events.length}`);
+    logger.info(`  Raids: ${raids.length}`);
+    logger.info(`  Eggs: ${eggs.length}`);
+    logger.info(`  Research: ${research.length}`);
+    logger.info(`  Shinies: ${shinies.length}`);
+    logger.info(`  Rocket Lineups: ${rocketLineups.length}`);
+    logger.info(`  Event Types: ${Object.keys(eventTypes).length}`);
     
     // Build Pokemon index
-    console.log('\nBuilding Pokemon index...');
+    logger.info('Building Pokemon index...');
     const pokemonIndex = buildPokemonIndex(shinies, raids, eggs, research, rocketLineups);
-    console.log(`  Unique Pokemon: ${Object.keys(pokemonIndex).length}`);
+    logger.info(`  Unique Pokemon: ${Object.keys(pokemonIndex).length}`);
     
     // Create unified data structure
     const unified = {
@@ -358,17 +359,17 @@ async function main() {
     };
     
     // Build indices
-    console.log('Building indices...');
+    logger.info('Building indices...');
     unified.indices = buildIndices(unified);
     
     // Calculate statistics
-    console.log('Calculating statistics...');
+    logger.info('Calculating statistics...');
     unified.stats = calculateStats(unified);
     
     // Transform all image URLs to blob URLs if enabled
     let outputData = unified;
     if (isBlobEnabled()) {
-        console.log('Transforming image URLs to blob storage...');
+        logger.info('Transforming image URLs to blob storage...');
         outputData = transformUrls(unified);
         // Update imageBase in meta
         outputData.meta.imageBase = 'https://pokemn.quest/images/';
@@ -378,14 +379,13 @@ async function main() {
     const minifiedPath = path.join(DATA_DIR, 'unified.min.json');
     fs.writeFileSync(minifiedPath, JSON.stringify(outputData));
     const minSize = fs.statSync(minifiedPath).size;
-    console.log(`\n✅ Wrote: ${minifiedPath} (${(minSize / 1024).toFixed(1)} KB)`);
+    logger.success(`Wrote: ${minifiedPath} (${(minSize / 1024).toFixed(1)} KB)`);
     
     // Print summary
-    console.log('\n📊 Summary:');
-    console.log(JSON.stringify(unified.stats, null, 2));
+    logger.info(`Summary: ${JSON.stringify(unified.stats)}`);
 }
 
 main().catch(err => {
-    console.error('Error:', err);
+    logger.error(err);
     process.exit(1);
 });
