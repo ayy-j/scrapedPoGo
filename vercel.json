@@ -3,6 +3,7 @@
   "github": {
     "silent": true
   },
+  "outputDirectory": "public",
   "headers": [
     {
       "source": "/data/(.*)",
@@ -20,6 +21,12 @@
           "value": "*"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/data/:path*",
+      "destination": "/data/:path*"
     }
   ]
 }
