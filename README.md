@@ -6,6 +6,7 @@ A comprehensive web scraper for Pokémon GO event data from [LeekDuck.com](https
 
 - [Quick Start](#quick-start)
 - [API Endpoints](#api-endpoints)
+- [Data Visualization](#data-visualization)
 - [Data Quality Metrics](#data-quality-metrics)
 - [JSON Schemas](#json-schemas)
 - [Project Structure](#project-structure)
@@ -110,6 +111,50 @@ Each `eventType` has its own file containing only events of that type (automatic
 - Formatted: `https://pokemn.quest/data/shinies.json`
 - Minimized: `https://pokemn.quest/data/shinies.min.json`
 - [Documentation](docs/Shinies.md)
+
+---
+
+## Data Visualization
+
+A simple front-end visualization tool is included to browse and verify the scraped data.
+
+### Quick Start
+
+```bash
+# Start the local server
+npm run serve
+
+# Open in browser
+# http://localhost:3000
+```
+
+### Features
+
+The visualization provides:
+- **Visual catalogue** of all data types (Events, Raids, Research, Eggs, Rocket Lineups, Shinies)
+- **Event type examples** showing one event of each type (Community Day, GO Tour, Raid Battles, etc.)
+- **Endpoint verification** with status indicators for each API endpoint
+- **Responsive design** that works on desktop and mobile
+- **Live data loading** from local data files or production API
+
+### What's Displayed
+
+- **Events**: First 3 events with images, dates, and featured Pokemon
+- **Raids**: First 6 raid bosses with CP ranges, types, and shiny availability
+- **Research**: First 3 research items with task counts
+- **Eggs**: First 6 egg hatches with rarity and shiny info
+- **Rocket Lineups**: First 4 Team GO Rocket lineups with slot details
+- **Shinies**: First 12 shiny Pokemon with release dates
+- **Event Types**: One example of each of the 16 event types
+- **Unified Data**: Summary statistics for all datasets
+
+### Configuration
+
+The visualization can load data from:
+- **Local files** (default): Serves from `data/` directory
+- **Production API**: Change `USE_LOCAL_DATA` to `false` in `public/app.js`
+
+See [public/README.md](public/README.md) for detailed documentation.
 
 ---
 
@@ -357,8 +402,10 @@ module.exports = { get };
 | `npm run scrape` | Run all scrapers (events, raids, research, eggs, rocket, shinies) |
 | `npm run detailedscrape` | Scrape detailed event information |
 | `npm run combinedetails` | Combine detailed data with basic events and generate per-eventType files |
+| `npm run combineall` | Generate unified data file with all datasets and indices |
 | `npm run validate` | Validate all data files against JSON schemas |
 | `npm run blob:upload` | Upload images to Vercel Blob Storage (supports `--dry-run`, `--force`) |
+| `npm run serve` | Start local visualization server on http://localhost:3000 |
 
 ---
 
