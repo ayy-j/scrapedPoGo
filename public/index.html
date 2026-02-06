@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon GO Data Visualization</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>🎮 Pokémon GO Data Visualization</h1>
+        <p>Visual catalogue and verification of API endpoints from <a href="https://pokemn.quest/data/" target="_blank">pokemn.quest</a></p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#event-types">Event Types</a></li>
+            <li><a href="#raids">Raids</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#eggs">Eggs</a></li>
+            <li><a href="#rocket">Team GO Rocket</a></li>
+            <li><a href="#shinies">Shinies</a></li>
+            <li><a href="#unified">Unified Data</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Events Section -->
+        <section id="events">
+            <h2>Events</h2>
+            <div class="endpoint-info">
+                <code>https://pokemn.quest/data/events.min.json</code>
+                <span class="status" id="events-status">Loading...</span>
+            </div>
+            <div id="events-content" class="content-grid"></div>
+        </section>
+
+        <!-- Event Types Section -->
+        <section id="event-types">
+            <h2>Event Types</h2>
+            <div id="event-types-content"></div>
+        </section>
+
+        <!-- Raids Section -->
+        <section id="raids">
+            <h2>Raids</h2>
+            <div class="endpoint-info">
+                <code>https://pokemn.quest/data/raids.min.json</code>
+                <span class="status" id="raids-status">Loading...</span>
+            </div>
+            <div id="raids-content" class="content-grid"></div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research">
+            <h2>Research</h2>
+            <div class="endpoint-info">
+                <code>https://pokemn.quest/data/research.min.json</code>
+                <span class="status" id="research-status">Loading...</span>
+            </div>
+            <div id="research-content" class="content-grid"></div>
+        </section>
+
+        <!-- Eggs Section -->
+        <section id="eggs">
+            <h2>Eggs</h2>
+            <div class="endpoint-info">
+                <code>https://pokemn.quest/data/eggs.min.json</code>
+                <span class="status" id="eggs-status">Loading...</span>
+            </div>
+            <div id="eggs-content" class="content-grid"></div>
+        </section>
+
+        <!-- Rocket Lineups Section -->
+        <section id="rocket">
+            <h2>Team GO Rocket Lineups</h2>
+            <div class="endpoint-info">
+                <code>https://pokemn.quest/data/rocketLineups.min.json</code>
+                <span class="status" id="rocket-status">Loading...</span>
+            </div>
+            <div id="rocket-content" class="content-grid"></div>
+        </section>
+
+        <!-- Shinies Section -->
+        <section id="shinies">
+            <h2>Shinies</h2>
+            <div class="endpoint-info">
+                <code>https://pokemn.quest/data/shinies.min.json</code>
+                <span class="status" id="shinies-status">Loading...</span>
+            </div>
+            <div id="shinies-content" class="content-grid"></div>
+        </section>
+
+        <!-- Unified Data Section -->
+        <section id="unified">
+            <h2>Unified Data</h2>
+            <div class="endpoint-info">
+                <code>https://pokemn.quest/data/unified.min.json</code>
+                <span class="status" id="unified-status">Loading...</span>
+            </div>
+            <div id="unified-content"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Data scraped from <a href="https://leekduck.com" target="_blank">LeekDuck.com</a></p>
+        <p>API: <a href="https://pokemn.quest/data/" target="_blank">pokemn.quest</a></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
