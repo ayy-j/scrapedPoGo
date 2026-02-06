@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Dynamax Wailmer during Max Monday",
   "eventType": "max-mondays",
   "heading": "Max Mondays",
-  "image": "https://cdn.leekduck.com/assets/img/events/max-battles-kanto.jpg",
+  "image": "https://pokemn.quest/events/max-battles-kanto.jpg",
   "start": "2026-02-02T18:00:00.000",
   "end": "2026-02-02T19:00:00.000",
   "bonus": "February 2, 2026"

@@ -1,6 +1,6 @@
 # Pokémon GO Data Visualization
 
-A simple front-end application that visualizes the Pokémon GO data scraped from LeekDuck.com and served via the JSON API at `https://pokemn.quest/data/`.
+A simple front-end application that visualizes the Pokémon GO data served via the JSON API at `https://pokemn.quest/data/`.
 
 ## Purpose
 

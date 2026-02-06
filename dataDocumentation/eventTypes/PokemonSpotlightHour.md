@@ -37,7 +37,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Whismur Spotlight Hour",
   "eventType": "pokemon-spotlight-hour",
   "heading": "Pokemon Spotlight Hour",
-  "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_293_00.png",
+  "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_293_00.png",
   "start": "2026-02-03T18:00:00.000",
   "end": "2026-02-03T19:00:00.000",
   "canBeShiny": true,

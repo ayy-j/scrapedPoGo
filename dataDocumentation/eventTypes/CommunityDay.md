@@ -37,7 +37,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "March Community Day",
   "eventType": "community-day",
   "heading": "Community Day",
-  "image": "https://cdn.leekduck.com/assets/img/events/cd-default.jpg",
+  "image": "https://pokemn.quest/events/cd-default.jpg",
   "start": "2026-03-14T14:00:00.000",
   "end": "2026-03-14T17:00:00.000"
 }

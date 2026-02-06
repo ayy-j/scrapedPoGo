@@ -25,11 +25,9 @@ Complete reference for the Pokémon GO Events & Data API.
 
 ## Overview
 
-This API provides comprehensive, up-to-date Pokémon GO event data, scraped from [LeekDuck.com](https://leekduck.com) and served as structured JSON.
+This API provides comprehensive, up-to-date Pokémon GO event data served as structured JSON.
 
 **Base URL**: `https://pokemn.quest/data/`
-
-**Data Source**: All data is scraped from LeekDuck.com, a trusted community resource for Pokémon GO event tracking.
 
 **Update Frequency**: Data is automatically updated every 8 hours via GitHub Actions.
 
@@ -366,7 +364,7 @@ Miscellaneous events that don't fit specific categories — seasonal celebration
   "name": "Winter Weekend 2026",
   "eventType": "event",
   "heading": "Event",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-12-19T10:00:00.000",
   "end": "2026-12-22T20:00:00.000",
   "bonuses": [...],
@@ -461,7 +459,7 @@ Paid pass events requiring tickets (GO Fest, Safari Zone, premium events).
   "name": "Party Play Pass",
   "eventType": "go-pass",
   "heading": "Go Pass",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-02-01T10:00:00.000",
   "end": "2026-02-03T20:00:00.000",
   "pricing": {"usd": "$2.99"},
@@ -496,7 +494,7 @@ Large-scale Team GO Rocket events with increased Rocket activity globally.
   "name": "Team GO Rocket Takeover",
   "eventType": "go-rocket-takeover",
   "heading": "GO Rocket Takeover",
-  "image": "https://cdn.leekduck.com/assets/img/events/rocket-default.jpg",
+  "image": "https://pokemn.quest/events/rocket-default.jpg",
   "start": "2026-01-25T00:00:00.000",
   "end": "2026-01-29T20:00:00.000",
   "shadowPokemon": [...],
@@ -533,7 +531,7 @@ Max Battle events featuring specific Dynamax Pokémon.
   "name": "Max Battle Day",
   "eventType": "max-battles",
   "heading": "Max Battles",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-02-15T14:00:00.000",
   "end": "2026-02-15T17:00:00.000"
 }
@@ -563,7 +561,7 @@ Weekly Monday events featuring special Dynamax Pokémon.
   "name": "Dynamax Wailmer during Max Monday",
   "eventType": "max-mondays",
   "heading": "Max Mondays",
-  "image": "https://cdn.leekduck.com/assets/img/events/max-battles-kanto.jpg",
+  "image": "https://pokemn.quest/events/max-battles-kanto.jpg",
   "start": "2026-02-02T18:00:00.000",
   "end": "2026-02-02T19:00:00.000",
   "bonus": "February 2, 2026"
@@ -593,7 +591,7 @@ Major annual events featuring specific regions or themes.
   "name": "Pokémon GO Tour: Kalos - Tainan 2026",
   "eventType": "pokemon-go-tour",
   "heading": "Pokemon GO Tour",
-  "image": "https://cdn.leekduck.com/assets/img/events/pogo-tour-kalos.jpg",
+  "image": "https://pokemn.quest/events/pogo-tour-kalos.jpg",
   "start": "2026-02-20T09:00:00.000",
   "end": "2026-02-22T17:00:00.000",
   "eventInfo": {...},
@@ -648,7 +646,7 @@ Weekly one-hour events featuring increased spawns of a specific Pokémon.
   "name": "Whismur Spotlight Hour",
   "eventType": "pokemon-spotlight-hour",
   "heading": "Pokemon Spotlight Hour",
-  "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_293_00.png",
+  "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_293_00.png",
   "start": "2026-02-03T18:00:00.000",
   "end": "2026-02-03T19:00:00.000",
   "canBeShiny": true,
@@ -681,7 +679,7 @@ Competitive events where Trainers enter Pokémon at PokéStops.
   "name": "Toucannon, Ludicolo, and Quaquaval PokéStop Showcase",
   "eventType": "pokestop-showcase",
   "heading": "Pokestop Showcase",
-  "image": "https://cdn.leekduck.com/assets/img/events/pokestop-showcases-default.jpg",
+  "image": "https://pokemn.quest/events/pokestop-showcases-default.jpg",
   "start": "2026-02-02T10:00:00.000",
   "end": "2026-02-04T20:00:00.000",
   "pokemon": [...],
@@ -713,7 +711,7 @@ Raid boss rotation announcements.
   "name": "Mega Ampharos in Mega Raids",
   "eventType": "raid-battles",
   "heading": "Raid Battles",
-  "image": "https://cdn.leekduck.com/assets/img/events/mega-default.jpg",
+  "image": "https://pokemn.quest/events/mega-default.jpg",
   "start": "2026-01-25T10:00:00.000",
   "end": "2026-02-04T10:00:00.000",
   "raids": [...],
@@ -748,7 +746,7 @@ Special events featuring a specific Pokémon in raids throughout the day.
   "name": "Raid Day",
   "eventType": "raid-day",
   "heading": "Raid Day",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-02-14T14:00:00.000",
   "end": "2026-02-14T17:00:00.000"
 }
@@ -781,7 +779,7 @@ Weekly one-hour events featuring a specific Legendary in 5-star raids.
   "name": "Landorus (Incarnate Forme) Raid Hour",
   "eventType": "raid-hour",
   "heading": "Raid Hour",
-  "image": "https://cdn.leekduck.com/assets/img/events/raidhour.jpg",
+  "image": "https://pokemn.quest/events/raidhour.jpg",
   "start": "2026-02-04T18:00:00.000",
   "end": "2026-02-04T19:00:00.000",
   "canBeShiny": true
@@ -812,7 +810,7 @@ Special Research or Masterwork Research storylines.
   "name": "A Mythical Discovery",
   "eventType": "research",
   "heading": "Research",
-  "image": "https://cdn.leekduck.com/assets/img/events/research-mew.jpg",
+  "image": "https://pokemn.quest/events/research-mew.jpg",
   "start": "2026-01-01T00:00:00.000",
   "end": null,
   "hasSpawns": false,
@@ -883,7 +881,7 @@ Special events focusing on Field Research tasks.
   "name": "Research Day",
   "eventType": "research-day",
   "heading": "Research Day",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-03-21T14:00:00.000",
   "end": "2026-03-21T17:00:00.000",
   "isPaid": false,
@@ -922,7 +920,7 @@ Seasonal events defining the overall theme and content (3-month periods).
   "name": "Precious Paths",
   "eventType": "season",
   "heading": "Season",
-  "image": "https://cdn.leekduck.com/assets/img/events/season-21-precious-paths.jpg",
+  "image": "https://pokemn.quest/events/season-21-precious-paths.jpg",
   "start": "2025-12-02T10:00:00.000",
   "end": "2026-03-03T10:00:00.000",
   "eggs": {...},
@@ -960,7 +958,7 @@ Story-driven research task lines, often tied to Mythical Pokémon.
   "name": "Special Research: Spring 2026",
   "eventType": "special-research",
   "heading": "Special Research",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-03-01T10:00:00.000",
   "end": "2026-03-31T20:00:00.000",
   "description": "Complete special research tasks...",
@@ -998,7 +996,7 @@ Team GO Rocket Takeover events (limited-time).
   "name": "Team GO Rocket Takeover",
   "eventType": "team-go-rocket",
   "heading": "Team GO Rocket",
-  "image": "https://cdn.leekduck.com/assets/img/events/team-go-rocket-takeover.jpg",
+  "image": "https://pokemn.quest/events/team-go-rocket-takeover.jpg",
   "start": "2026-02-15T00:00:00.000",
   "end": "2026-02-18T23:59:00.000"
 }
@@ -1031,7 +1029,7 @@ Time-limited research tasks with exclusive rewards.
   "name": "Timed Research: Furfrou",
   "eventType": "timed-research",
   "heading": "Timed Research",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-01-15T10:00:00.000",
   "end": "2026-01-22T20:00:00.000",
   "description": "Complete timed research tasks...",
@@ -1538,9 +1536,7 @@ The unified data file combines all scraped datasets into a single comprehensive 
 {
   "version": "1.0.0",
   "generatedAt": "2026-02-05T12:00:00.000Z",
-  "schemaVersion": "1.0.0",
-  "dataSource": "leekduck.com",
-  "imageBase": "https://pokemn.quest/images/"
+  "schemaVersion": "1.0.0"
 }
 ```
 
@@ -1549,8 +1545,6 @@ The unified data file combines all scraped datasets into a single comprehensive 
 | `version` | string | Data format version |
 | `generatedAt` | string | ISO 8601 generation timestamp |
 | `schemaVersion` | string | Schema version |
-| `dataSource` | string | Source of scraped data |
-| `imageBase` | string | Base URL for image assets |
 
 ### pokemonIndex
 
@@ -2028,11 +2022,9 @@ fetch('https://pokemn.quest/data/rocketLineups.min.json')
 
 ## Support & Feedback
 
-This API is maintained as an open-source project. Data is automatically scraped from LeekDuck.com every 8 hours.
+This API is maintained as an open-source project. Data is automatically updated every 8 hours.
 
 **GitHub Repository**: [scrapedPoGo](https://github.com/YOUR_USERNAME/scrapedPoGo)
-
-**Data Source**: [LeekDuck.com](https://leekduck.com)
 
 **Update Frequency**: Every 8 hours via GitHub Actions
 

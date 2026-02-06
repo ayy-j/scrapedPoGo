@@ -106,7 +106,8 @@ async function main()
 
         // Helper to process a single event
         async function processEvent(e, bkp) {
-            // Construct the event link from eventID
+            // Construct the event detail page URL from eventID
+            // The eventID typically matches the URL path segment
             const link = `https://www.leekduck.com/events/${e.eventID}/`;
             const p = [];
             

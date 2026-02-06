@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Research Day",
   "eventType": "research-day",
   "heading": "Research Day",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-03-21T14:00:00.000",
   "end": "2026-03-21T17:00:00.000",
   "description": "",

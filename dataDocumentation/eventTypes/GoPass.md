@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Party Play Pass",
   "eventType": "go-pass",
   "heading": "Go Pass",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-02-01T10:00:00.000",
   "end": "2026-02-03T20:00:00.000",
   "pricing": {
@@ -85,7 +85,7 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ## Additional Sections
 
-GO Pass events may include detailed task and reward structures when scraped from LeekDuck event pages.
+GO Pass events may include detailed task and reward structures when scraped from event pages.
 
 
 

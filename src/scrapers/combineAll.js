@@ -340,9 +340,7 @@ async function main() {
         meta: {
             version: '1.0.0',
             generatedAt: new Date().toISOString(),
-            schemaVersion: '1.0',
-            dataSource: 'leekduck.com',
-            imageBase: 'https://cdn.leekduck.com/assets/img/'
+            schemaVersion: '1.0'
         },
         events,
         eventTypes,

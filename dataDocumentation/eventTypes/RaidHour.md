@@ -37,7 +37,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Landorus (Incarnate Forme) Raid Hour",
   "eventType": "raid-hour",
   "heading": "Raid Hour",
-  "image": "https://cdn.leekduck.com/assets/img/events/raidhour.jpg",
+  "image": "https://pokemn.quest/events/raidhour.jpg",
   "start": "2026-02-04T18:00:00.000",
   "end": "2026-02-04T19:00:00.000",
   "canBeShiny": true

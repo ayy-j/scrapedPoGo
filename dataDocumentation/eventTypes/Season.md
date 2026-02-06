@@ -37,7 +37,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Precious Paths",
   "eventType": "season",
   "heading": "Season",
-  "image": "https://cdn.leekduck.com/assets/img/events/article-images/2025/2025-12-02-season-21-precious-paths/season-21-precious-paths.jpg",
+  "image": "https://pokemn.quest/events/article-images/2025/2025-12-02-season-21-precious-paths/season-21-precious-paths.jpg",
   "start": "2025-12-02T10:00:00.000",
   "end": "2026-03-03T10:00:00.000",
   "eggs": {
@@ -52,7 +52,7 @@ The file contains an array of event objects with the `eventType` field set to `"
     "adventure10km": [{"name": "Gible", "image": "...", "canBeShiny": true}]
   },
   "bonuses": [
-    {"text": "One additional Special Trade per day", "image": "https://cdn.leekduck.com/assets/img/events/bonuses/trade.png"}
+    {"text": "One additional Special Trade per day", "image": "https://pokemn.quest/events/bonuses/trade.png"}
   ],
   "research": {
     "breakthrough": [{"name": "Galarian Mr. Mime", "image": "...", "canBeShiny": true}],

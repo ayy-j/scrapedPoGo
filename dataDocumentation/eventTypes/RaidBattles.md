@@ -37,13 +37,13 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Mega Ampharos in Mega Raids",
   "eventType": "raid-battles",
   "heading": "Raid Battles",
-  "image": "https://cdn.leekduck.com/assets/img/events/mega-default.jpg",
+  "image": "https://pokemn.quest/events/mega-default.jpg",
   "start": "2026-01-25T10:00:00.000",
   "end": "2026-02-04T10:00:00.000",
   "raids": [
     {
       "name": "Mega Ampharos",
-      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_181_51.png",
+      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_181_51.png",
       "canBeShiny": true,
       "imageWidth": 256,
       "imageHeight": 256,
@@ -53,7 +53,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "shinies": [
     {
       "name": "Ampharos",
-      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_181_00_shiny.png",
+      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_181_00_shiny.png",
       "canBeShiny": true
     }
   ]

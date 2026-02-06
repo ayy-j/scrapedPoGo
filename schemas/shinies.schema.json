@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/shinies.schema.json",
   "title": "Pokemon GO Shinies Data",
-  "description": "Schema for Pokemon GO shiny availability data from LeekDuck",
+  "description": "Schema for Pokemon GO shiny availability data",
   "type": "array",
   "items": {
     "type": "object",

@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/rocketLineups.schema.json",
   "title": "Pokemon GO Team Rocket Lineups Data",
-  "description": "Schema for Pokemon GO Team GO Rocket lineup data from LeekDuck",
+  "description": "Schema for Pokemon GO Team GO Rocket lineup data",
   "type": "array",
   "items": {
     "type": "object",
