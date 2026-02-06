@@ -481,10 +481,18 @@ misc/<file>                    # Anything else
 
 ## Documentation
 
-Detailed API documentation for each endpoint:
+### Complete API Reference
+
+**📘 [Complete API Documentation](dataDocumentation/API.md)** - Everything in one place (~3,300 lines)
+
+Comprehensive single-file reference covering all endpoints, data types, event types, field schemas, conventions, and usage examples.
+
+### Modular Documentation
+
+Detailed documentation split by data type:
 
 - [Endpoints](dataDocumentation/Endpoints.md) - Complete API endpoint listing
-- [Events](dataDocumentation/Events.md) - Event data with type-specific fields
+- [Events](dataDocumentation/Events.md) - Event data with type-specific fields (20 event types)
 - [Raids](dataDocumentation/Raids.md) - Raid boss data with CP ranges
 - [Research](dataDocumentation/Research.md) - Field research tasks and rewards
 - [Eggs](dataDocumentation/Eggs.md) - Egg hatch pools by distance
