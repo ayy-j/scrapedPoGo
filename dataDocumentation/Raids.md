@@ -69,7 +69,10 @@ Represents a Pokemon type with its icon.
 ```json
 {
     "name": "fire",
-    "image": "https://pokemn.quest/images/types/fire.png"
+    "image": "https://pokemn.quest/images/types/fire.png",
+    "imageWidth": 32,
+    "imageHeight": 32,
+    "imageType": "png"
 }
 ```
 
@@ -79,6 +82,9 @@ Represents a Pokemon type with its icon.
 |------------ |--------- |---------------------
 | **`name`**  | `string` | The name of the type (e.g., `fire`, `water`, `grass`, `electric`, `psychic`, `fighting`, `dark`, `steel`, `fairy`, `dragon`, `ghost`, `bug`, `rock`, `ground`, `ice`, `poison`, `normal`, `flying`)
 | **`image`** | `string` | The image URL of the type icon. Format: `https://pokemn.quest/images/types/<type>.png`
+| **`imageWidth`** | `int` | The width of the type icon in pixels (when available).
+| **`imageHeight`** | `int` | The height of the type icon in pixels (when available).
+| **`imageType`** | `string` | The type icon format (e.g., `png`) when available.
 
 ### CombatPower
 
@@ -117,7 +123,10 @@ Represents weather conditions that boost the raid boss.
 ```json
 {
     "name": "foggy",
-    "image": "https://pokemn.quest/images/weather/foggy.png"
+    "image": "https://pokemn.quest/images/weather/foggy.png",
+    "imageWidth": 32,
+    "imageHeight": 32,
+    "imageType": "png"
 }
 ```
 
@@ -127,6 +136,9 @@ Represents weather conditions that boost the raid boss.
 |------------ |--------- |---------------------
 | **`name`**  | `string` | The weather type. Values: `sunny`, `rainy`, `partly cloudy`, `cloudy`, `windy`, `snow`, `fog`
 | **`image`** | `string` | The image URL of the weather icon. Format: `https://pokemn.quest/images/weather/<weather>.png`
+| **`imageWidth`** | `int` | The width of the weather icon in pixels (when available).
+| **`imageHeight`** | `int` | The height of the weather icon in pixels (when available).
+| **`imageType`** | `string` | The weather icon format (e.g., `png`) when available.
 
 ## Field Details
 
@@ -174,7 +186,7 @@ The `eventStatus` field indicates when the boss is available:
 | Prefix                        | Stored Content                                      | Example URL (public) |
 |------------------------------|-----------------------------------------------------|----------------------|
 | `pokemon/<dex>-<slug>/...`   | Pokémon icons/sprites                               | `.../pokemon/001-bulbasaur/pokemon_icon_001_00.png` |
-| `events/<event>.jpg`         | Event banners                                      | `.../events/into-the-depths-2026.jpg` |
+| `events/<filename>.<ext>`    | Event banners                                      | `.../events/into-the-depths-2026.jpg`, `.../events/events-default-img.jpg` |
 | `types/<type>.png`           | Type icons                                         | `.../types/poison.png` |
 | `weather/<weather>.png`      | Weather icons                                      | `.../weather/cloudy.png` |
 | `bonuses/<bonus>.png`        | Bonus icons                                        | `.../bonuses/2x-stardust.png` |
@@ -196,7 +208,7 @@ The `eventStatus` field indicates when the boss is available:
 
 4. **Weather Arrays**: `boostedWeather` can contain 1-2 weather types depending on the Pokemon's types.
 
-5. **Image Dimensions**: Currently all images are 256×256 PNG files.
+5. **Image Dimensions**: Raid boss images are currently 256x256 PNG files. Nested type/weather icons include `imageWidth`/`imageHeight`/`imageType` when available.
 
 6. **Event Status**: The `unknown` status is used when raid availability timing isn't clearly defined or is part of the regular rotation.
 
@@ -288,6 +300,19 @@ Raid data can be cross-referenced with:
               "type": "string",
               "format": "uri",
               "description": "The image of the type"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "The width of the type icon in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "The height of the type icon in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "The type icon format",
+              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
             }
           },
           "additionalProperties": false
@@ -349,6 +374,19 @@ Raid data can be cross-referenced with:
               "type": "string",
               "format": "uri",
               "description": "The image of the weather type"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "The width of the weather icon in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "The height of the weather icon in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "The weather icon format",
+              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
             }
           },
           "additionalProperties": false

@@ -458,6 +458,7 @@ npm run blob:upload -- --force
 Set the `USE_BLOB_URLS=true` environment variable to transform image URLs in JSON output to use Vercel Blob storage URLs instead of external CDNs.
 
 The URL mapping is stored in `src/utils/blob-url-map.json` and automatically updated during uploads.
+Event banner images are resized to 50% of their source dimensions before upload; corresponding event `imageWidth`/`imageHeight` values reflect the stored (resized) banner dimensions.
 
 ### Blob Pathname Scheme
 
@@ -465,7 +466,7 @@ Images are organized by **content type**, not by source. The folder structure is
 
 ```
 pokemon/<dex>-<name>/<filename> # Pokemon sprites/icons (e.g., pokemon/155-cyndaquil/pm155.icon.png)
-events/<slug>.<ext>             # Event banners (e.g., events/2026-02-28-pokemon-go-tour-kalos-global-2026.jpg)
+events/<filename>.<ext>         # Event banners (e.g., events/into-the-depths-2026.jpg, events/events-default-img.jpg)
 types/<type>.png               # Type icons (e.g., types/fire.png)
 weather/<weather>.png          # Weather icons (e.g., weather/sunny.png)
 bonuses/<bonus>.png            # Bonus icons (e.g., bonuses/candy.png)

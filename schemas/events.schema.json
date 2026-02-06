@@ -51,6 +51,19 @@
         "format": "uri",
         "description": "Event header/thumbnail image URL"
       },
+      "imageWidth": {
+        "type": "integer",
+        "description": "Stored event banner width in pixels"
+      },
+      "imageHeight": {
+        "type": "integer",
+        "description": "Stored event banner height in pixels"
+      },
+      "imageType": {
+        "type": "string",
+        "description": "Stored event banner format",
+        "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+      },
       "start": {
         "type": "string",
         "description": "Event start date/time (ISO 8601 format)",

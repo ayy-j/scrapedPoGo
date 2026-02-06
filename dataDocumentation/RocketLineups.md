@@ -99,6 +99,9 @@
 {
     "name": "Magikarp",
     "image": "https://pokemn.quest/images/pokemon/pm129.png",
+    "imageWidth": 256,
+    "imageHeight": 256,
+    "imageType": "png",
     "types": [
         "water"
     ],
@@ -120,6 +123,9 @@
 |------------------------- |----------- |---------------------
 | **`name`**               | `string`   | The name of the Shadow Pokemon.
 | **`image`**              | `string`   | The image of the Shadow Pokemon.
+| **`imageWidth`**         | `int`      | The image width in pixels (when available).
+| **`imageHeight`**        | `int`      | The image height in pixels (when available).
+| **`imageType`**          | `string`   | The image format (e.g., `png`) when available.
 | **`types`**              | `string[]` | The type(s) of the Pokemon (lowercase).
 | **`weaknesses`**         | `Weaknesses` | The weaknesses of the Pokemon. See [Weaknesses](#Weaknesses).
 | **`isEncounter`**        | `boolean`  | Whether this Pokemon can be caught after winning the battle.
@@ -205,6 +211,19 @@
           "type": "string",
           "format": "uri",
           "description": "The image of the Shadow Pokemon"
+        },
+        "imageWidth": {
+          "type": "integer",
+          "description": "The image width in pixels"
+        },
+        "imageHeight": {
+          "type": "integer",
+          "description": "The image height in pixels"
+        },
+        "imageType": {
+          "type": "string",
+          "description": "The image format",
+          "enum": ["png", "jpg", "jpeg", "gif", "webp"]
         },
         "types": {
           "type": "array",

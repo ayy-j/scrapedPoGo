@@ -41,6 +41,9 @@ All events share these required core fields:
 | **`eventType`** | `string` | Type of the event (see [Event Types](#event-types) below) |
 | **`heading`** | `string` | Display heading/category for the event |
 | **`image`** | `string` | Event header/banner image URL |
+| **`imageWidth`** | `int` | Stored banner width in pixels when available (50% of source width when uploaded to Blob) |
+| **`imageHeight`** | `int` | Stored banner height in pixels when available (50% of source height when uploaded to Blob) |
+| **`imageType`** | `string` | Banner image format when available (e.g., `jpg`, `png`) |
 | **`start`** | `string` | Event start date/time in ISO 8601 format (see [Date Format](#date-format)) |
 | **`end`** | `string` | Event end date/time in ISO 8601 format (see [Date Format](#date-format)) |
 | **`isGlobal`** | `boolean` | Whether the event uses a global start time (no local timezone offset) |
@@ -71,6 +74,9 @@ Depending on the event type and content, events may include any of the following
 | **`bonuses`** | `array` | Event bonuses as objects with `text` and `image` fields |
 | **`bonuses[].text`** | `string` | Bonus description text |
 | **`bonuses[].image`** | `string` | Bonus icon image URL |
+| **`bonuses[].imageWidth`** | `int` | Bonus icon width in pixels (when available) |
+| **`bonuses[].imageHeight`** | `int` | Bonus icon height in pixels (when available) |
+| **`bonuses[].imageType`** | `string` | Bonus icon format (e.g., `png`) |
 | **`bonuses[].multiplier`** | `number` | Parsed numeric bonus multiplier (e.g., `2` for 2×), when parseable |
 | **`bonuses[].bonusType`** | `string` | Parsed bonus category (e.g., `XP`, `Stardust`, `Candy`), when parseable |
 | **`bonus`** | `string` | Single bonus text (alternative to `bonuses` array, used in Spotlight Hours and Max Mondays) |
@@ -749,7 +755,7 @@ The API provides comprehensive event data including:
 | Prefix                        | Stored content                                      | Example URL (public) |
 |------------------------------|-----------------------------------------------------|----------------------|
 | `pokemon/<dex>-<slug>/...`   | Pokémon icons/sprites                               | `.../pokemon/001-bulbasaur/pokemon_icon_001_00.png` |
-| `events/<event>.jpg`         | Event banners                                      | `.../events/into-the-depths-2026.jpg` |
+| `events/<filename>.<ext>`    | Event banners                                      | `.../events/into-the-depths-2026.jpg`, `.../events/events-default-img.jpg` |
 | `types/<type>.png`           | Type icons                                         | `.../types/poison.png` |
 | `weather/<weather>.png`      | Weather icons                                      | `.../weather/cloudy.png` |
 | `bonuses/<bonus>.png`        | Bonus icons                                        | `.../bonuses/2x-stardust.png` |
@@ -760,6 +766,7 @@ The API provides comprehensive event data including:
 | `misc/<hash-or-file>`        | Fallback                                           | `.../misc/<hash>.bin` |
 
 > Publicly served by prefixing with `https://pokemn.quest/images/`  
+> Event banner uploads are resized to 50% dimensions before storage; `event.imageWidth` and `event.imageHeight` represent the stored banner size.
 
 ---
 
@@ -873,6 +880,9 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
       },
       "heading": { "type": "string", "description": "Display heading for the event" },
       "image": { "type": "string", "format": "uri", "description": "Event header/thumbnail image URL" },
+      "imageWidth": { "type": "integer", "description": "Stored event banner width in pixels" },
+      "imageHeight": { "type": "integer", "description": "Stored event banner height in pixels" },
+      "imageType": { "type": "string", "enum": ["png", "jpg", "jpeg", "gif", "webp"], "description": "Stored event banner format" },
       "start": {
         "type": "string",
         "description": "Event start date/time (ISO 8601 format)",
@@ -918,7 +928,12 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
               "type": "object",
               "properties": {
                 "text": { "type": "string" },
-                "image": { "type": "string", "format": "uri" }
+                "image": { "type": "string", "format": "uri" },
+                "imageWidth": { "type": "integer" },
+                "imageHeight": { "type": "integer" },
+                "imageType": { "type": "string", "enum": ["png", "jpg", "jpeg", "gif", "webp"] },
+                "multiplier": { "type": "number" },
+                "bonusType": { "type": "string" }
               },
               "required": ["text"],
               "additionalProperties": false

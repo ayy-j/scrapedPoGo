@@ -62,6 +62,9 @@ Array of all Pokémon GO events. Each event uses a **flat model** — there is n
 | `raids` | array | Featured raid bosses by tier |
 | `bonuses` | array | Active bonuses during event |
 | `bonusDisclaimers` | array | Qualifying notes for bonuses (e.g., `"*Regional only"`) |
+| `imageWidth` | integer | Stored banner width in pixels (50% of source width when uploaded to Blob) |
+| `imageHeight` | integer | Stored banner height in pixels (50% of source height when uploaded to Blob) |
+| `imageType` | string | Banner image format (e.g., `"jpg"`, `"png"`) |
 | `eggs` | array | Modified egg pools |
 | `research` | object | Research tasks: `{ field, special, timed }` arrays |
 | `rewards` | object | Ticketed rewards: `{ ticketedResearch, ticketBonuses, ticketPrice }` |
@@ -145,6 +148,9 @@ Array of all Pokémon GO events. Each event uses a **flat model** — there is n
 |-------|------|-------------|
 | `text` | string | Bonus description (e.g., `"2× Catch XP"`) |
 | `image` | string | URL to bonus icon image |
+| `imageWidth` | integer | Bonus icon width in pixels (when available) |
+| `imageHeight` | integer | Bonus icon height in pixels (when available) |
+| `imageType` | string | Bonus icon format (e.g., `"png"`) when available |
 
 ---
 
@@ -369,6 +375,9 @@ Array of Team GO Rocket lineups.
 |-------|------|----------|-------------|
 | `name` | string | ✓ | Pokemon name |
 | `image` | string | ✓ | URL to Pokemon image |
+| `imageWidth` | integer | | Pokemon image width in pixels (when available) |
+| `imageHeight` | integer | | Pokemon image height in pixels (when available) |
+| `imageType` | string | | Pokemon image format (e.g., `"png"`) when available |
 | `types` | array | ✓ | Pokemon type(s) as lowercase strings (1–2 items) |
 | `weaknesses` | object | ✓ | Type weaknesses |
 | `isEncounter` | boolean | ✓ | Whether catchable after winning the battle |
@@ -505,7 +514,7 @@ When Vercel Blob storage is enabled (`USE_BLOB_URLS=true`), image URLs are serve
 | Path Pattern | Content |
 |--------------|---------|
 | `pokemon/<dex>-<name>/<filename>` | Pokemon sprites and icons |
-| `events/<slug>.<ext>` | Event banner images |
+| `events/<filename>.<ext>` | Event banner images |
 | `types/<type>.png` | Type icons |
 | `weather/<weather>.png` | Weather icons |
 | `bonuses/<bonus>.png` | Bonus icons |
@@ -516,6 +525,7 @@ When Vercel Blob storage is enabled (`USE_BLOB_URLS=true`), image URLs are serve
 When Blob URLs are enabled, images are served from `https://pokemn.quest/` with semantic folder organization.
 
 Standard Pokemon icon dimensions: 256×256 pixels.
+Event banner uploads are resized to 50% dimensions before storage; `event.imageWidth` and `event.imageHeight` represent the stored banner size.
 
 ---
 

@@ -175,6 +175,9 @@ All events include these required fields:
 | **`eventType`** | `string` | Type of event (see [Event Types](#event-types)) |
 | **`heading`** | `string` | Display heading/category for the event |
 | **`image`** | `string` | Event header/banner image URL |
+| **`imageWidth`** | `int` | Stored banner width in pixels when available (50% of source width when uploaded to Blob) |
+| **`imageHeight`** | `int` | Stored banner height in pixels when available (50% of source height when uploaded to Blob) |
+| **`imageType`** | `string` | Banner image format when available (e.g., `jpg`, `png`) |
 | **`start`** | `string` | Event start date/time (ISO 8601 format) |
 | **`end`** | `string` | Event end date/time (ISO 8601 format) |
 | **`isGlobal`** | `boolean` | Whether the event uses a global start time |
@@ -205,6 +208,9 @@ Events may include the following optional fields based on content:
 | **`bonuses`** | `array` | Event bonuses with `text` and `image` fields |
 | **`bonuses[].text`** | `string` | Bonus description |
 | **`bonuses[].image`** | `string` | Bonus icon image URL |
+| **`bonuses[].imageWidth`** | `int` | Bonus icon width in pixels (when available) |
+| **`bonuses[].imageHeight`** | `int` | Bonus icon height in pixels (when available) |
+| **`bonuses[].imageType`** | `string` | Bonus icon format (e.g., `png`) when available |
 | **`bonuses[].multiplier`** | `number` | Parsed bonus multiplier (e.g., `2` for 2×) |
 | **`bonuses[].bonusType`** | `string` | Bonus category (e.g., `XP`, `Stardust`, `Candy`) |
 | **`bonus`** | `string` | Single bonus text (used in Spotlight Hours) |
@@ -1128,7 +1134,10 @@ Current raid boss data including tier information, CP ranges, type effectiveness
 ```json
 {
   "name": "fire",
-  "image": "https://pokemn.quest/images/types/fire.png"
+  "image": "https://pokemn.quest/images/types/fire.png",
+  "imageWidth": 32,
+  "imageHeight": 32,
+  "imageType": "png"
 }
 ```
 
@@ -1136,6 +1145,9 @@ Current raid boss data including tier information, CP ranges, type effectiveness
 |-------|------|-------------|
 | `name` | `string` | Type name (lowercase) |
 | `image` | `string` | Type icon URL |
+| `imageWidth` | `int` | Type icon width in pixels (when available) |
+| `imageHeight` | `int` | Type icon height in pixels (when available) |
+| `imageType` | `string` | Type icon format (e.g., `png`) when available |
 
 #### Combat Power Object
 
@@ -1166,7 +1178,10 @@ Current raid boss data including tier information, CP ranges, type effectiveness
 ```json
 {
   "name": "foggy",
-  "image": "https://pokemn.quest/images/weather/foggy.png"
+  "image": "https://pokemn.quest/images/weather/foggy.png",
+  "imageWidth": 32,
+  "imageHeight": 32,
+  "imageType": "png"
 }
 ```
 
@@ -1174,6 +1189,9 @@ Current raid boss data including tier information, CP ranges, type effectiveness
 |-------|------|-------------|
 | `name` | `string` | Weather type |
 | `image` | `string` | Weather icon URL |
+| `imageWidth` | `int` | Weather icon width in pixels (when available) |
+| `imageHeight` | `int` | Weather icon height in pixels (when available) |
+| `imageType` | `string` | Weather icon format (e.g., `png`) when available |
 
 **Weather Types**: `sunny`, `rainy`, `partly cloudy`, `cloudy`, `windy`, `snow`, `fog`
 
@@ -1413,6 +1431,9 @@ Team GO Rocket battle lineup information.
 |-------|------|-------------|
 | `name` | `string` | Pokémon name |
 | `image` | `string` | Pokémon image URL |
+| `imageWidth` | `int` | Pokemon image width in pixels (when available) |
+| `imageHeight` | `int` | Pokemon image height in pixels (when available) |
+| `imageType` | `string` | Pokemon image format (e.g., `png`) when available |
 | `types` | `array` | Pokémon types (lowercase strings) |
 | `weaknesses` | `object` | Type weaknesses |
 | `isEncounter` | `boolean` | Whether catchable after battle |
@@ -1770,7 +1791,7 @@ When Vercel Blob storage is enabled, image URLs follow a semantic folder structu
 | Path Pattern | Content | Example |
 |--------------|---------|---------|
 | `pokemon/<dex>-<slug>/<filename>` | Pokémon sprites | `pokemon/001-bulbasaur/pokemon_icon_001_00.png` |
-| `events/<slug>.<ext>` | Event banners | `events/into-the-depths-2026.jpg` |
+| `events/<filename>.<ext>` | Event banners | `events/into-the-depths-2026.jpg`, `events/events-default-img.jpg` |
 | `types/<type>.png` | Type icons | `types/poison.png` |
 | `weather/<weather>.png` | Weather icons | `weather/cloudy.png` |
 | `bonuses/<bonus>.png` | Bonus icons | `bonuses/2x-stardust.png` |
@@ -1781,6 +1802,7 @@ When Vercel Blob storage is enabled, image URLs follow a semantic folder structu
 | `misc/<hash-or-file>` | Fallback | `misc/<hash>.bin` |
 
 Standard Pokémon icon dimensions: 256×256 pixels (PNG format)
+Event banner uploads are resized to 50% dimensions before storage; `event.imageWidth` and `event.imageHeight` represent the stored banner size.
 
 ### Null Handling
 
