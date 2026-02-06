@@ -193,6 +193,30 @@ Validate all data files against their schemas:
 npm run validate
 ```
 
+### Schema/Data/Docs Comparison
+
+Compare canonical schemas, canonical data files, and markdown documentation:
+
+```bash
+npm run compare:schemas
+```
+
+Run in strict mode (non-zero exit only for canonical mismatches):
+
+```bash
+npm run compare:schemas:strict
+```
+
+By default, reports are written to:
+- `reports/schema-comparison.json`
+- `reports/schema-comparison.md`
+
+You can also run the script directly:
+
+```bash
+node src/scripts/compare-docs-data-schemas.js --mode report|strict --json-out <path> --md-out <path> [--no-write]
+```
+
 ### Usage
 
 See the [schemas README](schemas/README.md) for:

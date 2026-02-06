@@ -8,20 +8,14 @@ const Ajv = require('ajv');
 const addFormats = require('ajv-formats');
 const fs = require('fs');
 const path = require('path');
+const schemaManifest = require('./lib/schema-manifest');
 
 // Initialize AJV with formats support
 const ajv = new Ajv({ allErrors: true, verbose: true });
 addFormats(ajv);
 
 // Schema to data file mappings
-const validations = [
-  { schema: 'schemas/eggs.schema.json', data: 'data/eggs.min.json' },
-  { schema: 'schemas/events.schema.json', data: 'data/events.min.json' },
-  { schema: 'schemas/raids.schema.json', data: 'data/raids.min.json' },
-  { schema: 'schemas/research.schema.json', data: 'data/research.min.json' },
-  { schema: 'schemas/rocketLineups.schema.json', data: 'data/rocketLineups.min.json' },
-  { schema: 'schemas/shinies.schema.json', data: 'data/shinies.min.json' }
-];
+const validations = schemaManifest.map(({ schema, data }) => ({ schema, data }));
 
 let allValid = true;
 let totalValidations = 0;
