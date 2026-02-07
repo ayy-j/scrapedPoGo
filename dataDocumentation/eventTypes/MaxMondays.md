@@ -41,19 +41,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the Max Monday event
-| **`name`**      | `string` | Name describing the featured Dynamax Pokémon
-| **`eventType`** | `string` | Always `"max-mondays"`
-| **`heading`**   | `string` | Always `"Max Mondays"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Monday start time (ISO 8601 format, typically 18:00 local)
-| **`end`**       | `string` | Monday end time (ISO 8601 format, typically 19:00 local)
-| **`bonus`**     | `string` | Date or bonus text information
-| **`hasBattle`**           | `boolean` | Whether the event has GO Battle League data
-| **`hasResearch`**         | `boolean` | Whether the event has research data
-| **`hasRewards`**          | `boolean` | Whether the event has rewards data
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the Max Monday event
+| **`name`**         | `string`  | Name describing the featured Dynamax Pokémon
+| **`eventType`**    | `string`  | Always `"max-mondays"`
+| **`heading`**      | `string`  | Always `"Max Mondays"`
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Monday start time (ISO 8601 format, typically 18:00 local)
+| **`end`**          | `string`  | Monday end time (ISO 8601 format, typically 19:00 local)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ## Additional Sections
 

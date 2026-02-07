@@ -4,7 +4,7 @@
 
 > **⚠️ Note:** This event type (`eventType: "research"`) is periodic and may not always have active events in the data.
 >
-> **Looking for Field Research Tasks?** See the separate [Research Tasks endpoint](../Research.md) at `https://pokemn.quest/data/research.min.json` which contains current field research tasks and rewards.
+> **Note:** This endpoint contains Research _events_ (Special Research or Masterwork Research storylines). For current Field Research _tasks_ from PokéStops, use `https://pokemn.quest/data/research.min.json` instead.
 
 ## Description
 
@@ -50,15 +50,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the research
-| **`name`**      | `string` | Name of the Special or Timed Research
-| **`eventType`** | `string` | Always `"research"`
-| **`heading`**   | `string` | Always `"Research"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Research availability start (ISO 8601 format, may be null)
-| **`end`**       | `string` | Research availability end (ISO 8601 format, may be null)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the research
+| **`name`**         | `string`  | Name of the Special or Timed Research
+| **`eventType`**    | `string`  | Always `"research"`
+| **`heading`**      | `string`  | Always `"Research"`
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Research availability start (ISO 8601 format, may be null)
+| **`end`**          | `string`  | Research availability end (ISO 8601 format, may be null)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Content Flags (flat at top level)
 

@@ -50,15 +50,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the Special Research event
-| **`name`**      | `string` | Research story/event name
-| **`eventType`** | `string` | Always `"special-research"`
-| **`heading`**   | `string` | Always `"Special Research"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Event start time (ISO 8601 format)
-| **`end`**       | `string` | Event end time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the Special Research event
+| **`name`**         | `string`  | Research story/event name
+| **`eventType`**    | `string`  | Always `"special-research"`
+| **`heading`**      | `string`  | Always `"Special Research"`
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start time (ISO 8601 format)
+| **`end`**          | `string`  | Event end time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Special Research-Specific Fields
 
@@ -80,7 +85,7 @@ Special Research events are scraped using the same scraper as Timed Research but
 
 ## Notes
 
-- Special Research shares a scraper with [Timed Research](TimedResearch.md) — the output format is identical
+- Special Research shares a scraper with Timed Research — the output format is identical
 - Special Research is often story-driven and tied to Mythical or Legendary Pokémon
 - Unlike Timed Research, Special Research typically does not expire once the research line is started
 - Ticketed Special Research is common during major events (GO Fest, GO Tour)

@@ -6,7 +6,7 @@
 
 This file contains Team GO Rocket Takeover events. These are limited-time events featuring increased Team GO Rocket activity, new Shadow Pokémon, and special encounters.
 
-> **Note:** This event type may be empty when no Rocket Takeover events are active. For current Team GO Rocket battle lineups (Grunts, Leaders, Giovanni), see the [Rocket Lineups endpoint](/docs/RocketLineups.md) at `https://pokemn.quest/data/rocketLineups.min.json`.
+> **Note:** This event type may be empty when no Rocket Takeover events are active. For current Team GO Rocket battle lineups (Grunts, Leaders, Giovanni), use `https://pokemn.quest/data/rocketLineups.min.json` instead.
 
 ## Data Structure
 
@@ -42,15 +42,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the Rocket event
-| **`name`**      | `string` | Name of the event (e.g., "Team GO Rocket Takeover")
-| **`eventType`** | `string` | Always `"team-go-rocket"`
-| **`heading`**   | `string` | Always `"Team GO Rocket"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Event start date/time (ISO 8601 format)
-| **`end`**       | `string` | Event end date/time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the Rocket event
+| **`name`**         | `string`  | Name of the event (e.g., "Team GO Rocket Takeover")
+| **`eventType`**    | `string`  | Always `"team-go-rocket"`
+| **`heading`**      | `string`  | Display heading for the event
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start date/time (ISO 8601 format)
+| **`end`**          | `string`  | Event end date/time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Optional Fields
 
@@ -59,11 +64,6 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`pokemon`**   | `array`  | New Shadow Pokémon available during the event
 | **`bonuses`**   | `array`  | Active bonuses (e.g., increased Rocket spawns, TM effects)
 | **`description`**| `string`| Event description text
-
-## Related Endpoints
-
-- **[Rocket Lineups](/docs/RocketLineups.md)** - Current Team GO Rocket battle lineups (always available)
-- **[Events](/docs/Events.md)** - All event types including Rocket Takeovers
 
 ## Notes
 

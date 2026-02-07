@@ -63,15 +63,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the Timed Research event
-| **`name`**      | `string` | Research event name (typically includes featured Pokémon)
-| **`eventType`** | `string` | Always `"timed-research"`
-| **`heading`**   | `string` | Always `"Timed Research"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Event start time (ISO 8601 format)
-| **`end`**       | `string` | Event end time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the Timed Research event
+| **`name`**         | `string`  | Research event name (typically includes featured Pokémon)
+| **`eventType`**    | `string`  | Always `"timed-research"`
+| **`heading`**      | `string`  | Always `"Timed Research"`
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start time (ISO 8601 format)
+| **`end`**          | `string`  | Event end time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Timed Research-Specific Fields
 
@@ -104,4 +109,4 @@ Extracts research tasks via `extractResearchTasks(doc, 'timed')`, then iterates 
 - Some Timed Research events are free, others require a ticket purchase
 - The `tasks` array may contain step-grouped tasks (with `step` and `tasks` sub-array) or flat task objects
 - The `availability` field contains human-readable date descriptions parsed from the event page, separate from the ISO 8601 `start`/`end` fields
-- This scraper is also used for `special-research` events (see [SpecialResearch.md](SpecialResearch.md))
+- This scraper is also used for `special-research` events which have the same data structure

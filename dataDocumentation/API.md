@@ -1018,7 +1018,7 @@ Team GO Rocket Takeover events (limited-time).
 - Increased Rocket spawns at PokéStops
 - New Shadow Pokémon may debut
 - Periodic event type (only when active)
-- For current lineups, see [Rocket Lineups endpoint](#rocket-lineups)
+- Current Team GO Rocket battle lineups (Grunts, Leaders, Giovanni) are available at `https://pokemn.quest/data/rocketLineups.min.json`
 
 ---
 
