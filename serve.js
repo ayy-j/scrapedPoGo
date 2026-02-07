@@ -26,6 +26,8 @@ const MIME_TYPES = {
     '.ico': 'image/x-icon'
 };
 
+const zlib = require('zlib');
+
 const server = http.createServer((req, res) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
 
@@ -63,20 +65,44 @@ const server = http.createServer((req, res) => {
         const ext = path.extname(filePath).toLowerCase();
         const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
-        // Read and serve file
-        fs.readFile(filePath, (err, content) => {
-            if (err) {
+        // Prepare headers
+        const headers = {
+            'Content-Type': contentType,
+            'Access-Control-Allow-Origin': '*',
+            'Vary': 'Accept-Encoding',
+            // Disable caching for development
+            'Cache-Control': 'no-store, no-cache, must-revalidate'
+        };
+
+        const acceptEncoding = req.headers['accept-encoding'] || '';
+        const raw = fs.createReadStream(filePath);
+
+        // Handle error during read
+        raw.on('error', (err) => {
+            console.error('File read error:', err);
+            if (!res.headersSent) {
                 res.writeHead(500, { 'Content-Type': 'text/plain' });
                 res.end('500 Internal Server Error');
-                return;
             }
-
-            res.writeHead(200, {
-                'Content-Type': contentType,
-                'Access-Control-Allow-Origin': '*'
-            });
-            res.end(content);
         });
+
+        // Compression logic
+        if (acceptEncoding.match(/\bgzip\b/)) {
+            headers['Content-Encoding'] = 'gzip';
+            res.writeHead(200, headers);
+            const gzip = zlib.createGzip();
+            raw.pipe(gzip).pipe(res);
+
+            gzip.on('error', (err) => {
+                console.error('Compression error:', err);
+                if (!res.headersSent) {
+                    res.end();
+                }
+            });
+        } else {
+            res.writeHead(200, headers);
+            raw.pipe(res);
+        }
     });
 });
 

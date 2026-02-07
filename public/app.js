@@ -305,6 +305,7 @@ const buildCard = ({
     title,
     subtitle,
     image,
+    imageClass = '',
     meta = [],
     badges = [],
     chips = [],
@@ -316,8 +317,12 @@ const buildCard = ({
     const cleanBadges = badges.filter(Boolean).join('');
     const cleanChips = chips.filter(Boolean).join('');
 
+    // Support custom image class (e.g., card-media--event for constrained height)
+    const imgClass = imageClass ? `card-media ${imageClass}` : 'card-media';
+    const imgMarkup = image ? `<img class="${imgClass}" src="${escapeHtml(sanitizeUrl(image) || '')}" alt="${escapeHtml(title || 'Image')}" loading="lazy" decoding="async">` : '';
+
     card.innerHTML = `
-        ${imageMarkup(image, title)}
+        ${imgMarkup}
         <div class="card-body">
             ${kicker ? `<span class="kicker">${escapeHtml(kicker)}</span>` : ''}
             <h3>${escapeHtml(title || 'Untitled')}</h3>
@@ -332,13 +337,45 @@ const buildCard = ({
     return card;
 };
 
+// Compact card variant: sprite thumbnail on left, content on right
+const buildCompactCard = ({
+    kicker,
+    title,
+    sprite,
+    badges = [],
+    extra = ''
+}) => {
+    const card = document.createElement('article');
+    card.className = 'card card--compact';
+
+    const cleanBadges = badges.filter(Boolean).join('');
+    const spriteUrl = sanitizeUrl(sprite);
+    const spriteMarkup = spriteUrl
+        ? `<img class="sprite-thumb" src="${escapeHtml(spriteUrl)}" alt="${escapeHtml(title || 'Sprite')}" loading="lazy" decoding="async">`
+        : '<div class="sprite-thumb"></div>';
+
+    card.innerHTML = `
+        ${spriteMarkup}
+        <div class="card-body">
+            ${kicker ? `<span class="kicker">${escapeHtml(kicker)}</span>` : ''}
+            <h3>${escapeHtml(title || 'Untitled')}</h3>
+            ${cleanBadges ? `<div class="badge-row">${cleanBadges}</div>` : ''}
+            ${extra}
+        </div>
+    `;
+
+    return card;
+};
+
 const renderEvent = (event, options = {}) => {
     const includeShareActions = options.includeShareActions ?? true;
     const canHighlightShared = options.canHighlightShared ?? true;
     const badges = [];
 
     if (event.eventStatus) {
-        badges.push(badgeMarkup(event.eventStatus, 'is-alert'));
+        const statusMap = { 'active': 'Live Now', 'upcoming': 'Upcoming', 'ended': 'Ended' };
+        const statusColor = { 'active': 'success', 'upcoming': 'is-alert', 'ended': 'neutral' };
+        badges.push(badgeMarkup(statusMap[event.eventStatus] || event.eventStatus, statusColor[event.eventStatus] || ''));
     }
 
     if (event.isGlobal) {
@@ -364,7 +401,18 @@ const renderEvent = (event, options = {}) => {
         ],
         badges,
         chips,
-        extra: eventId && includeShareActions ? `
+        extra: `
+            ${event.bonuses && event.bonuses.length > 0 ? `
+                <div class="bonus-list">
+                    ${event.bonuses.map(b => `
+                        <div class="bonus-item">
+                            ${b.image ? `<img src="${escapeHtml(b.image)}" class="bonus-icon" alt="Bonus" loading="lazy">` : ''}
+                            <span>${escapeHtml(b.text)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : ''}
+            ${eventId && includeShareActions ? `
             <div class="card-actions">
                 <button
                     type="button"
@@ -374,8 +422,8 @@ const renderEvent = (event, options = {}) => {
                 >
                     Share Event
                 </button>
-            </div>
-        ` : ''
+            </div>` : ''}
+        `
     });
 
     if (eventId) {
@@ -393,36 +441,65 @@ const renderEvent = (event, options = {}) => {
 
 const renderRaid = (raid) => {
     const normalCp = raid.combatPower?.normal;
-    const cpRange = normalCp ? `${normalCp.min || '?'} - ${normalCp.max || '?'}` : 'N/A';
-    const types = Array.isArray(raid.types) ? raid.types : [];
+    const boostedCp = raid.combatPower?.boosted;
 
-    return buildCard({
+    // Determine tier class
+    let tierClass = 'tier-1';
+    if (raid.tier?.includes('3')) tierClass = 'tier-3';
+    if (raid.tier?.includes('5')) tierClass = 'tier-5';
+    if (raid.tier?.includes('Mega')) tierClass = 'tier-mega';
+
+    const typesMarkup = (raid.types || []).map(t => `<img src="${escapeHtml(t.image)}" class="type-icon" alt="${escapeHtml(t.name)}" title="${escapeHtml(t.name)}">`).join('');
+    const weatherMarkup = (raid.boostedWeather || []).map(w => `<img src="${escapeHtml(w.image)}" class="weather-icon" alt="${escapeHtml(w.name)}" title="Boosts in ${escapeHtml(w.name)}">`).join('');
+
+    return buildCompactCard({
         kicker: 'Raid Rotation',
-        title: `${raid.name || 'Unknown Raid'}${raid.form ? ` (${raid.form})` : ''}`,
-        image: raid.image,
-        meta: [
-            { label: 'Tier', value: raid.tier || 'N/A' },
-            { label: 'CP', value: cpRange }
-        ],
-        badges: [raid.canBeShiny ? badgeMarkup('Shiny Available', 'is-shiny') : ''],
-        chips: types.map((type) => chipMarkup(type.name || 'Type'))
+        title: `${raid.name || 'Unknown Raid'}${raid.form && raid.form !== 'Normal' ? ` (${raid.form})` : ''}`,
+        sprite: raid.image,
+        extra: `
+            <div class="raid-tier-badge ${tierClass}">${escapeHtml(raid.tier || 'Raid')}</div>
+            <div class="icon-row">
+                ${typesMarkup}
+                ${weatherMarkup ? `<div style="width:1px;background:rgba(255,255,255,0.2);margin:0 4px;"></div>` : ''}
+                ${weatherMarkup}
+            </div>
+            <div class="cp-stat">
+                <span>CP</span>
+                <span class="cp-val">${normalCp?.min || '?'} - ${normalCp?.max || '?'}</span>
+            </div>
+            <div class="cp-stat">
+                <span class="boosted-text">Boosted</span>
+                <span class="cp-val" style="color:var(--warn)">${boostedCp?.min || '?'} - ${boostedCp?.max || '?'}</span>
+            </div>
+        `,
+        badges: [raid.canBeShiny ? badgeMarkup('✨ Shiny', 'is-shiny') : '']
     });
 };
 
 const renderResearch = (research) => {
-    const taskCount = Array.isArray(research.tasks) ? research.tasks.length : 0;
-    const rewardCount = Array.isArray(research.rewards) ? research.rewards.length : 0;
+    // Research task card - shows the task text with inline reward icon
+    const reward = research.rewards?.[0];
+    const rewardImg = reward?.image;
+    const rewardLabel = reward?.name || 'Unknown Reward';
+    const rewardMeta = reward?.type === 'encounter' && reward.combatPower
+        ? `CP ${reward.combatPower.min}-${reward.combatPower.max}`
+        : (reward?.quantity ? `×${reward.quantity}` : '');
 
-    return buildCard({
-        kicker: 'Research Task',
-        title: research.name || 'Research',
-        subtitle: research.description || '',
-        meta: [
-            { label: 'Type', value: research.type || 'N/A' },
-            { label: 'Start', value: formatDate(research.start) },
-            { label: 'Tasks', value: taskCount || '0' },
-            { label: 'Rewards', value: rewardCount || '0' }
-        ]
+    return buildCompactCard({
+        kicker: research.type ? `${research.type} Research` : 'Field Research',
+        title: research.text || 'Research Task',
+        sprite: rewardImg,
+        extra: `
+            <div class="research-reward" style="margin-top:0.5rem;">
+                <div class="reward-info">
+                    <span class="reward-label">Reward</span>
+                    <span class="reward-value">
+                        ${escapeHtml(rewardLabel)}${reward?.canBeShiny ? ' ✨' : ''}
+                    </span>
+                    ${rewardMeta ? `<span class="meta-label" style="font-size:0.65rem">${escapeHtml(rewardMeta)}</span>` : ''}
+                </div>
+            </div>
+        `
     });
 };
 
@@ -814,6 +891,23 @@ const initialize = async () => {
     ]);
 
     finalizeSharedEventExperience();
+    initializeSpotlightEffect();
+};
+
+const initializeSpotlightEffect = () => {
+    const mainListener = (event) => {
+        const card = event.target.closest('.card');
+        if (!card) return;
+
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+    };
+
+    document.addEventListener('mousemove', mainListener, { passive: true });
 };
 
 // Initialize on page load

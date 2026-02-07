@@ -15,6 +15,7 @@
     "test": "node --test",
     "blob:upload": "node src/scripts/upload-images-to-blob.js",
     "serve": "node serve.js",
+    "dev": "npm run serve",
     "build": "node -e \"require('fs').cpSync('data', 'public/data', {recursive: true});\""
   },
   "author": "quantNebula",
