@@ -80,7 +80,7 @@ Special Research events are scraped using the same scraper as Timed Research but
 
 ## Notes
 
-- Special Research shares a scraper with [Timed Research](TimedResearch.md) — the output format is identical
+- Special Research shares a scraper with Timed Research — the output format is identical
 - Special Research is often story-driven and tied to Mythical or Legendary Pokémon
 - Unlike Timed Research, Special Research typically does not expire once the research line is started
 - Ticketed Special Research is common during major events (GO Fest, GO Tour)

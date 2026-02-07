@@ -6,7 +6,7 @@
 
 This file contains Team GO Rocket Takeover events. These are limited-time events featuring increased Team GO Rocket activity, new Shadow Pokémon, and special encounters.
 
-> **Note:** This event type may be empty when no Rocket Takeover events are active. For current Team GO Rocket battle lineups (Grunts, Leaders, Giovanni), see the [Rocket Lineups endpoint](/docs/RocketLineups.md) at `https://pokemn.quest/data/rocketLineups.min.json`.
+> **Note:** This event type may be empty when no Rocket Takeover events are active. For current Team GO Rocket battle lineups (Grunts, Leaders, Giovanni), use `https://pokemn.quest/data/rocketLineups.min.json` instead.
 
 ## Data Structure
 
@@ -59,11 +59,6 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`pokemon`**   | `array`  | New Shadow Pokémon available during the event
 | **`bonuses`**   | `array`  | Active bonuses (e.g., increased Rocket spawns, TM effects)
 | **`description`**| `string`| Event description text
-
-## Related Endpoints
-
-- **[Rocket Lineups](/docs/RocketLineups.md)** - Current Team GO Rocket battle lineups (always available)
-- **[Events](/docs/Events.md)** - All event types including Rocket Takeovers
 
 ## Notes
 

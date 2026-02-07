@@ -104,4 +104,4 @@ Extracts research tasks via `extractResearchTasks(doc, 'timed')`, then iterates 
 - Some Timed Research events are free, others require a ticket purchase
 - The `tasks` array may contain step-grouped tasks (with `step` and `tasks` sub-array) or flat task objects
 - The `availability` field contains human-readable date descriptions parsed from the event page, separate from the ISO 8601 `start`/`end` fields
-- This scraper is also used for `special-research` events (see [SpecialResearch.md](SpecialResearch.md))
+- This scraper is also used for `special-research` events which have the same data structure

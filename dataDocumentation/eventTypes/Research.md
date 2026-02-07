@@ -4,7 +4,7 @@
 
 > **⚠️ Note:** This event type (`eventType: "research"`) is periodic and may not always have active events in the data.
 >
-> **Looking for Field Research Tasks?** See the separate [Research Tasks endpoint](../Research.md) at `https://pokemn.quest/data/research.min.json` which contains current field research tasks and rewards.
+> **Note:** This endpoint contains Research _events_ (Special Research or Masterwork Research storylines). For current Field Research _tasks_ from PokéStops, use `https://pokemn.quest/data/research.min.json` instead.
 
 ## Description
 
