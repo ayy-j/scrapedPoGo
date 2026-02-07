@@ -163,12 +163,18 @@
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/rocketLineups.schema.json",
   "title": "Pokemon GO Team Rocket Lineups Data",
   "description": "Schema for Pokemon GO Team GO Rocket lineup data",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["name", "title", "type", "slots"],
+    "required": [
+      "name",
+      "title",
+      "type",
+      "slots"
+    ],
     "properties": {
       "name": {
         "type": "string",
@@ -177,7 +183,11 @@
       "title": {
         "type": "string",
         "description": "The title of the Rocket member",
-        "enum": ["Team GO Rocket Boss", "Team GO Rocket Leader", "Team GO Rocket Grunt"]
+        "enum": [
+          "Team GO Rocket Boss",
+          "Team GO Rocket Leader",
+          "Team GO Rocket Grunt"
+        ]
       },
       "type": {
         "type": "string",
@@ -189,7 +199,9 @@
         "items": {
           "type": "array",
           "description": "Possible Pokemon in this battle slot",
-          "items": { "$ref": "#/definitions/shadowPokemon" },
+          "items": {
+            "$ref": "#/definitions/shadowPokemon"
+          },
           "minItems": 1
         },
         "minItems": 3,
@@ -201,7 +213,14 @@
   "definitions": {
     "shadowPokemon": {
       "type": "object",
-      "required": ["name", "image", "types", "weaknesses", "isEncounter", "canBeShiny"],
+      "required": [
+        "name",
+        "image",
+        "types",
+        "weaknesses",
+        "isEncounter",
+        "canBeShiny"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -223,29 +242,44 @@
         "imageType": {
           "type": "string",
           "description": "The image format",
-          "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+          "enum": [
+            "png",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ]
         },
         "types": {
           "type": "array",
           "description": "The type(s) of the Pokemon (lowercase)",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "minItems": 1,
           "maxItems": 2
         },
         "weaknesses": {
           "type": "object",
           "description": "The weaknesses of the Pokemon",
-          "required": ["double", "single"],
+          "required": [
+            "double",
+            "single"
+          ],
           "properties": {
             "double": {
               "type": "array",
-              "description": "Types that deal 4× (double) super-effective damage",
-              "items": { "type": "string" }
+              "description": "Types that deal 4× (double) super-effective damage to this Pokemon",
+              "items": {
+                "type": "string"
+              }
             },
             "single": {
               "type": "array",
-              "description": "Types that deal 2× (single) super-effective damage",
-              "items": { "type": "string" }
+              "description": "Types that deal 2× (single) super-effective damage to this Pokemon",
+              "items": {
+                "type": "string"
+              }
             }
           },
           "additionalProperties": false
