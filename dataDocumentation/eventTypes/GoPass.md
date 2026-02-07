@@ -66,10 +66,10 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field              | Type      | Description
 |------------------- |---------- |---------------------
-| **`eventID`**      | `string`  | Unique identifier for the event
-| **`name`**         | `string`  | Event name
+| **`eventID`**      | `string`  | Unique identifier for the GO Pass event
+| **`name`**         | `string`  | Name of the ticketed event
 | **`eventType`**    | `string`  | Always `"go-pass"`
-| **`heading`**      | `string`  | Display heading for the event
+| **`heading`**      | `string`  | Always `"Go Pass"`
 | **`image`**        | `string`  | Event header/thumbnail image URL
 | **`imageWidth`**   | `int`     | Event banner image width in pixels
 | **`imageHeight`**  | `int`     | Event banner image height in pixels

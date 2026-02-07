@@ -72,10 +72,10 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field              | Type      | Description
 |------------------- |---------- |---------------------
-| **`eventID`**      | `string`  | Unique identifier for the event
-| **`name`**         | `string`  | Event name
+| **`eventID`**      | `string`  | Unique identifier for the GO Tour event
+| **`name`**         | `string`  | Name of the GO Tour (typically includes region/theme)
 | **`eventType`**    | `string`  | Always `"pokemon-go-tour"`
-| **`heading`**      | `string`  | Display heading for the event
+| **`heading`**      | `string`  | Always `"Pokemon GO Tour"`
 | **`image`**        | `string`  | Event header/thumbnail image URL
 | **`imageWidth`**   | `int`     | Event banner image width in pixels
 | **`imageHeight`**  | `int`     | Event banner image height in pixels

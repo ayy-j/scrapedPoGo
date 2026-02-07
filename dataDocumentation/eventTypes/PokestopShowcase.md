@@ -51,8 +51,8 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field              | Type      | Description
 |------------------- |---------- |---------------------
-| **`eventID`**      | `string`  | Unique identifier for the event
-| **`name`**         | `string`  | Event name
+| **`eventID`**      | `string`  | Unique identifier for the showcase event
+| **`name`**         | `string`  | Name including featured Pokémon
 | **`eventType`**    | `string`  | Always `"pokestop-showcase"`
 | **`heading`**      | `string`  | Display heading for the event
 | **`image`**        | `string`  | Event header/thumbnail image URL

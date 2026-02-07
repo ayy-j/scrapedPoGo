@@ -50,16 +50,16 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field              | Type      | Description
 |------------------- |---------- |---------------------
-| **`eventID`**      | `string`  | Unique identifier for the event
-| **`name`**         | `string`  | Event name
+| **`eventID`**      | `string`  | Unique identifier (typically "raidhour" + YYYYMMDD)
+| **`name`**         | `string`  | Name including featured Pokémon
 | **`eventType`**    | `string`  | Always `"raid-hour"`
-| **`heading`**      | `string`  | Display heading for the event
+| **`heading`**      | `string`  | Always `"Raid Hour"`
 | **`image`**        | `string`  | Event header/thumbnail image URL
 | **`imageWidth`**   | `int`     | Event banner image width in pixels
 | **`imageHeight`**  | `int`     | Event banner image height in pixels
 | **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
-| **`start`**        | `string`  | Event start date/time (ISO 8601 format)
-| **`end`**          | `string`  | Event end date/time (ISO 8601 format)
+| **`start`**        | `string`  | Event start time (ISO 8601 format, typically 18:00 local time)
+| **`end`**          | `string`  | Event end time (ISO 8601 format, typically 19:00 local time)
 | **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
 | **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 

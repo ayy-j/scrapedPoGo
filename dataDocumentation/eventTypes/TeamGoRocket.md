@@ -44,8 +44,8 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field              | Type      | Description
 |------------------- |---------- |---------------------
-| **`eventID`**      | `string`  | Unique identifier for the event
-| **`name`**         | `string`  | Event name
+| **`eventID`**      | `string`  | Unique identifier for the Rocket event
+| **`name`**         | `string`  | Name of the event (e.g., "Team GO Rocket Takeover")
 | **`eventType`**    | `string`  | Always `"team-go-rocket"`
 | **`heading`**      | `string`  | Display heading for the event
 | **`image`**        | `string`  | Event header/thumbnail image URL

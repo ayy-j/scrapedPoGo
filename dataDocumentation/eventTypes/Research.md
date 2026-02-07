@@ -52,16 +52,16 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field              | Type      | Description
 |------------------- |---------- |---------------------
-| **`eventID`**      | `string`  | Unique identifier for the event
-| **`name`**         | `string`  | Event name
+| **`eventID`**      | `string`  | Unique identifier for the research
+| **`name`**         | `string`  | Name of the Special or Timed Research
 | **`eventType`**    | `string`  | Always `"research"`
-| **`heading`**      | `string`  | Display heading for the event
+| **`heading`**      | `string`  | Always `"Research"`
 | **`image`**        | `string`  | Event header/thumbnail image URL
 | **`imageWidth`**   | `int`     | Event banner image width in pixels
 | **`imageHeight`**  | `int`     | Event banner image height in pixels
 | **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
-| **`start`**        | `string`  | Event start date/time (ISO 8601 format)
-| **`end`**          | `string`  | Event end date/time (ISO 8601 format)
+| **`start`**        | `string`  | Research availability start (ISO 8601 format, may be null)
+| **`end`**          | `string`  | Research availability end (ISO 8601 format, may be null)
 | **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
 | **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
