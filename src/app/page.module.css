@@ -1,0 +1,30 @@
+.page {
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.heading {
+  font-size: var(--font-event-title);
+  font-weight: 700;
+}
+
+.count {
+  font-size: var(--font-caption);
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-body);
+}

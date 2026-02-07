@@ -3,8 +3,7 @@ node_modules
 .env.local
 .DS_Store
 
-# Source files (not needed in deployment)
-src
+# Source files (not needed in deployment — keep src for potential server use)
 schemas
 test
 
@@ -16,9 +15,9 @@ dataDocumentation
 # Configuration
 .gitignore
 .github
-serve.js
 POKEMON_GO_CONTEXT.md
 .jules
 
-# Keep these directories - they're needed for the build script
-# public/ and data/ will be copied to .vercel/output/static by the build script
+# Keep these directories - they're needed for the Next.js build
+# app/, components/, lib/ are the front-end source
+# public/ has static assets, data/ is read at build time

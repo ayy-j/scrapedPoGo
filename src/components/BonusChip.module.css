@@ -1,0 +1,33 @@
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+}
+
+.icon {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.icon img {
+  object-fit: contain;
+}
+
+.text {
+  font-size: var(--font-body);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.multiplier {
+  font-size: var(--font-body);
+  font-weight: 700;
+  color: var(--color-accent);
+  white-space: nowrap;
+}

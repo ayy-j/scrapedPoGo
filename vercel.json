@@ -3,7 +3,6 @@
   "github": {
     "silent": true
   },
-  "outputDirectory": "public",
   "headers": [
     {
       "source": "/data/(.*)",

@@ -1,0 +1,192 @@
+.page {
+  padding: 24px 0 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Back link */
+.back {
+  font-size: var(--font-caption);
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Hero banner */
+.hero {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.hero img {
+  object-fit: cover;
+}
+
+/* Identity */
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-size: var(--font-event-title);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Sections */
+.sectionLabel {
+  font-size: var(--font-section-header);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Bonus grid */
+.bonusGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+/* Pokemon grid */
+.pokemonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .pokemonGrid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}
+
+/* Raids grid */
+.raidGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+/* Egg tabs */
+.eggTabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.eggTab {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-card);
+  font-size: var(--font-caption);
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 36px;
+}
+
+.eggTabActive {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+/* Custom sections stack */
+.customSections {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* League cards */
+.leagueCard {
+  padding: 16px;
+  border-radius: 10px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.leagueName {
+  font-size: var(--font-card-title);
+  font-weight: 600;
+}
+
+.leagueMeta {
+  font-size: var(--font-caption);
+  color: var(--color-text-secondary);
+}
+
+/* Disclaimers */
+.disclaimers {
+  font-size: var(--font-caption);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Raid card extras */
+.raidCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  border-radius: 10px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  gap: 6px;
+  position: relative;
+}
+
+.raidImageWrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.raidImageWrap img {
+  object-fit: contain;
+}
+
+.raidName {
+  font-size: var(--font-caption);
+  font-weight: 600;
+}
+
+.raidTier {
+  font-size: var(--font-micro);
+  color: #fff;
+  background: var(--color-danger);
+  padding: 1px 8px;
+  border-radius: 4px;
+}
+
+.raidShiny {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 14px;
+}
+
+.notFound {
+  text-align: center;
+  padding: 80px 16px;
+  color: var(--color-text-secondary);
+}

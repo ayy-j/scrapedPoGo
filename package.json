@@ -14,18 +14,26 @@
     "compare:schemas:strict": "node src/scripts/compare-docs-data-schemas.js --mode strict",
     "test": "node --test",
     "blob:upload": "node src/scripts/upload-images-to-blob.js",
-    "serve": "node serve.js",
-    "dev": "npm run serve",
-    "build": "node -e \"require('fs').cpSync('data', 'public/data', {recursive: true});\""
+    "dev": "next dev",
+    "serve": "next start",
+    "build": "node -e \"require('fs').cpSync('data', 'public/data', {recursive: true});\" && next build",
+    "start": "next start"
   },
   "author": "quantNebula",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^25.2.1",
+    "@types/react": "^19.2.13",
+    "@types/react-dom": "^19.2.3",
     "@vercel/blob": "^2.0.1",
     "dotenv": "^17.2.3",
     "image-size": "^2.0.2",
     "jsdom": "27.4.0",
-    "moment": "latest"
+    "moment": "latest",
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

@@ -1,0 +1,67 @@
+.bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.bar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-card);
+  font-size: var(--font-caption);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--color-text-secondary);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.tab:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.tabActive {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.tabActive:hover {
+  color: #fff;
+}
+
+/* Event type chips */
+.typeChip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  font-size: var(--font-micro);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  color: #fff;
+  transition: opacity 0.15s;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.typeChip:hover {
+  opacity: 0.85;
+}
+
+.typeChipInactive {
+  opacity: 0.45;
+}
