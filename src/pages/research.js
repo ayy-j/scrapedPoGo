@@ -11,6 +11,7 @@ const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
 const logger = require('../utils/logger');
 const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
+const dbSync = require('../utils/dbSync');
 
 /**
  * @typedef {Object} EncounterReward
@@ -131,7 +132,7 @@ function inferTaskType(text) {
  * await research.get();
  * // Creates data/research.json and data/research.min.json
  */
-async function get()
+async function get(runId)
 {
     logger.info("Scraping research...");
     try {
@@ -294,6 +295,7 @@ async function get()
 
             await fs.promises.writeFile('data/research.min.json', JSON.stringify(output));
             logger.success("Research saved.");
+            await dbSync.syncResearch(research, runId);
         } catch (_err) {
             logger.error(_err);
 
@@ -302,6 +304,7 @@ async function get()
 
             await fs.promises.writeFile('data/research.min.json', JSON.stringify(output));
             logger.success("Research saved (fallback).");
+            await dbSync.syncResearch(json, runId);
         }
     } catch (error) {
         logger.error(error.message);

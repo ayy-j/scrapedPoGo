@@ -10,6 +10,7 @@ const { normalizeDatePair, deduplicateEvents, fetchJson, getJSDOM } = require('.
 const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
+const dbSync = require('../utils/dbSync');
 
 /**
  * @typedef {Object} GameEvent
@@ -65,7 +66,7 @@ async function applyBannerDimensions(events) {
     });
 }
 
-async function get()
+async function get(runId)
 {
     logger.info("Scraping events...");
     try {
@@ -140,6 +141,9 @@ async function get()
 
             await fs.writeFile('data/events.min.json', JSON.stringify(output));
             logger.success("Events saved.");
+
+            // Sync to database (non-blocking — failures won't stop the pipeline)
+            await dbSync.syncEvents(allEvents, runId);
         } catch (_err) {
             logger.error(_err);
             
@@ -152,6 +156,7 @@ async function get()
 
             await fs.writeFile('data/events.min.json', JSON.stringify(output));
             logger.success("Events saved (fallback).");
+            await dbSync.syncEvents(json, runId);
         }
     } catch (error) {
         logger.error(error.message);

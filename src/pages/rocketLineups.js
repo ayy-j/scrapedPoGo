@@ -10,6 +10,7 @@ const logger = require('../utils/logger');
 const { enrichMissingImageDimensions } = require('../utils/imageDimensions');
 const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
 const { transformUrls } = require('../utils/blobUrls');
+const dbSync = require('../utils/dbSync');
 
 /**
  * @typedef {Object} WeaknessInfo
@@ -53,7 +54,7 @@ const { transformUrls } = require('../utils/blobUrls');
  * await rocketLineups.get();
  * // Creates data/rocketLineups.json and data/rocketLineups.min.json
  */
-async function get() {
+async function get(runId) {
     logger.info("Scraping rocket lineups...");
     try {
         try {
@@ -143,6 +144,7 @@ async function get() {
 
             await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(transformUrls(lineups)));
             logger.success("Rocket lineups saved.");
+            await dbSync.syncRocketLineups(lineups, runId);
         } catch (_err) {
             logger.error(_err);
 
@@ -150,6 +152,7 @@ async function get() {
 
             await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(transformUrls(json)));
             logger.success("Rocket lineups saved (fallback).");
+            await dbSync.syncRocketLineups(json, runId);
         }
     } catch (error) {
         logger.error(error.message);

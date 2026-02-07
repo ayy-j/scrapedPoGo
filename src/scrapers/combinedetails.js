@@ -11,6 +11,7 @@ const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
 const { enrichMissingImageDimensions } = require('../utils/imageDimensions');
 const { isGlobalEvent } = require('../utils/scraperUtils');
+const dbSync = require('../utils/dbSync');
 const dotenv = require('dotenv');
 
 dotenv.config();

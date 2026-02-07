@@ -11,6 +11,7 @@ const { enrichMissingImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
 const logger = require('../utils/logger');
 const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
+const dbSync = require('../utils/dbSync');
 
 /**
  * @typedef {Object} RaidCombatPower
@@ -178,7 +179,7 @@ function cleanName(name) {
  * const bosses = await raids.get();
  * // Creates data/raids.json and data/raids.min.json
  */
-async function get() {
+async function get(runId) {
     logger.info("Scraping raids...");
     try {
         try {
@@ -296,6 +297,7 @@ async function get() {
 
             await fs.promises.writeFile('data/raids.min.json', JSON.stringify(output));
             logger.success("Raids saved.");
+            await dbSync.syncRaids(bosses, runId);
             return output;
 
         } catch (_err) {
@@ -306,6 +308,7 @@ async function get() {
 
             await fs.promises.writeFile('data/raids.min.json', JSON.stringify(output));
             logger.success("Raids saved (fallback).");
+            await dbSync.syncRaids(json, runId);
             return output;
         }
     } catch (error) {

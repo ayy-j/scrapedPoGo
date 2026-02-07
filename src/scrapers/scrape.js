@@ -8,6 +8,7 @@
 const fs = require('fs');
 const dotenv = require('dotenv');
 const logger = require('../utils/logger');
+const dbSync = require('../utils/dbSync');
 const events = require('../pages/events')
 const raids = require('../pages/raids')
 const research = require('../pages/research')
@@ -39,19 +40,28 @@ async function main()
     if (!fs.existsSync('data'))
         fs.mkdirSync('data');
 
-    // Events must be scraped first as Raids scraper depends on events data
-    await events.get();
+    // Create a scrape_run record (returns null if DB is unavailable)
+    const runId = await dbSync.startRun('scrape');
 
-    // Run remaining scrapers in parallel
-    await Promise.all([
-        raids.get(),
-        research.get(),
-        eggs.get(),
-        rocketLineups.get(),
-        shinies.get()
-    ]);
+    try {
+        // Events must be scraped first as Raids scraper depends on events data
+        await events.get(runId);
 
-    logger.success("All primary scrapers completed.");
+        // Run remaining scrapers in parallel
+        await Promise.all([
+            raids.get(runId),
+            research.get(runId),
+            eggs.get(runId),
+            rocketLineups.get(runId),
+            shinies.get(runId)
+        ]);
+
+        logger.success("All primary scrapers completed.");
+        await dbSync.completeRun(runId, { step: 'scrape' });
+    } catch (e) {
+        await dbSync.failRun(runId, e.message || String(e));
+        throw e;
+    }
 }
 
 main().catch(e => {

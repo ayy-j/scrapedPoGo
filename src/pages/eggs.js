@@ -11,6 +11,7 @@ const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
 const logger = require('../utils/logger');
 const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
+const dbSync = require('../utils/dbSync');
 
 /**
  * @typedef {Object} CombatPower
@@ -52,7 +53,7 @@ const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
  * await eggs.get();
  * // Creates data/eggs.json and data/eggs.min.json
  */
-async function get()
+async function get(runId)
 {
     logger.info("Scraping eggs...");
     try {
@@ -161,6 +162,7 @@ async function get()
 
             await fs.promises.writeFile('data/eggs.min.json', JSON.stringify(output));
             logger.success("Eggs saved.");
+            await dbSync.syncEggs(eggs, runId);
         } catch (_err) {
             logger.error(_err);
 
@@ -169,6 +171,7 @@ async function get()
 
             await fs.promises.writeFile('data/eggs.min.json', JSON.stringify(output));
             logger.success("Eggs saved (fallback).");
+            await dbSync.syncEggs(json, runId);
         }
     } catch (error) {
         logger.error(error.message);

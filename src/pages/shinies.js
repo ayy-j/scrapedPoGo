@@ -9,6 +9,7 @@ const fs = require('fs');
 const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
 const { fetchJson } = require('../utils/scraperUtils');
+const dbSync = require('../utils/dbSync');
 
 /**
  * @typedef {Object} ShinyForm
@@ -285,13 +286,14 @@ async function scrapeShinies() {
  * @function get
  * @returns {Promise<void>}
  */
-async function get() {
+async function get(runId) {
     logger.start('Scraping shiny Pokemon data from PogoAssets...');
     try {
         const data = await scrapeShinies();
         const output = transformUrls(data);
         fs.writeFileSync('data/shinies.min.json', JSON.stringify(output));
         logger.success(`Successfully saved ${output.length} shinies to data/shinies.min.json`);
+        await dbSync.syncShinies(data, runId);
     } catch (error) {
         logger.error('Failed to scrape shinies:', error.message);
     }
