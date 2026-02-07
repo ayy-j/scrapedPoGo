@@ -147,6 +147,14 @@ test('resolveFieldPath reports allowedByAdditionalProperties when schema is perm
     }
   };
 
+  const defaultSchema = {
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: { name: { type: 'string' } }
+    }
+  };
+
   const permissiveResult = resolveFieldPath(permissiveSchema, 'unknownField');
   assert.equal(permissiveResult.ok, false);
   assert.equal(permissiveResult.allowedByAdditionalProperties, true);
@@ -154,6 +162,11 @@ test('resolveFieldPath reports allowedByAdditionalProperties when schema is perm
   const strictResult = resolveFieldPath(strictSchema, 'unknownField');
   assert.equal(strictResult.ok, false);
   assert.equal(strictResult.allowedByAdditionalProperties, false);
+
+  const defaultResult = resolveFieldPath(defaultSchema, 'unknownField');
+  assert.equal(defaultResult.ok, false);
+  assert.equal(defaultResult.allowedByAdditionalProperties, true,
+    'absent additionalProperties defaults to permissive per JSON Schema spec');
 });
 
 test('integration: report mode writes reports and includes coverage warnings on real repo', () => {

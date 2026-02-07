@@ -686,11 +686,13 @@ function resolveFieldPath(schemaRoot, fieldToken) {
     }
 
     if (nextNodes.length === 0) {
+      // Check if parent schema nodes allow additional properties.
+      // In JSON Schema, additionalProperties defaults to true when absent,
+      // and can be true, a schema object, or false. Only false disallows extras.
       const parentAllowsAdditional = currentNodes.some((current) => {
         const candidates = expandSchemaNode(current.node, schemaRoot);
         return candidates.some((candidate) =>
-          isPlainObject(candidate) && candidate.additionalProperties !== false &&
-          (candidate.additionalProperties === true || candidate.additionalProperties === undefined)
+          isPlainObject(candidate) && candidate.additionalProperties !== false
         );
       });
       return {
