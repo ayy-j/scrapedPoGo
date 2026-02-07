@@ -48,6 +48,7 @@
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/eggs.schema.json",
   "title": "Pokemon GO Eggs Data",
   "description": "Schema for Pokemon GO egg hatch data",
   "type": "array",
@@ -75,7 +76,17 @@
       "eggType": {
         "type": "string",
         "description": "The type of the egg",
-        "enum": ["1km", "2km", "5km", "7km", "10km", "12km", "route", "adventure5km", "adventure10km"]
+        "enum": [
+          "1km",
+          "2km",
+          "5km",
+          "7km",
+          "10km",
+          "12km",
+          "route",
+          "adventure5km",
+          "adventure10km"
+        ]
       },
       "isAdventureSync": {
         "type": "boolean",
@@ -93,14 +104,23 @@
       "combatPower": {
         "type": "object",
         "description": "The combat power range of the hatched Pokemon",
-        "required": ["min", "max"],
+        "required": [
+          "min",
+          "max"
+        ],
         "properties": {
           "min": {
-            "type": ["integer", "null"],
+            "type": [
+              "integer",
+              "null"
+            ],
             "description": "The minimum combat power of the hatched Pokemon, or null if unknown"
           },
           "max": {
-            "type": ["integer", "null"],
+            "type": [
+              "integer",
+              "null"
+            ],
             "description": "The maximum combat power of the hatched Pokemon, or null if unknown"
           }
         },
@@ -131,7 +151,13 @@
       "imageType": {
         "type": "string",
         "description": "The image format",
-        "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+        "enum": [
+          "png",
+          "jpg",
+          "jpeg",
+          "gif",
+          "webp"
+        ]
       }
     },
     "additionalProperties": false

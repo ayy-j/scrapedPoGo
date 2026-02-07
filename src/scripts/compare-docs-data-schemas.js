@@ -686,9 +686,19 @@ function resolveFieldPath(schemaRoot, fieldToken) {
     }
 
     if (nextNodes.length === 0) {
+      // Check if parent schema nodes allow additional properties.
+      // In JSON Schema, additionalProperties defaults to true when absent,
+      // and can be true, a schema object, or false. Only false disallows extras.
+      const parentAllowsAdditional = currentNodes.some((current) => {
+        const candidates = expandSchemaNode(current.node, schemaRoot);
+        return candidates.some((candidate) =>
+          isPlainObject(candidate) && candidate.additionalProperties !== false
+        );
+      });
       return {
         ok: false,
-        error: `Field "${segment.key}" not found while resolving "${fieldToken}".`
+        error: `Field "${segment.key}" not found while resolving "${fieldToken}".`,
+        allowedByAdditionalProperties: parentAllowsAdditional
       };
     }
 
@@ -1154,11 +1164,13 @@ function runComparison(rawOptions = {}, runtime = {}) {
       const resolved = resolveFieldPath(schema, token);
       if (!resolved.ok) {
         addFinding(findings, {
-          severity: 'error',
+          severity: resolved.allowedByAdditionalProperties ? 'warning' : 'error',
           category: 'doc-field-table',
           dataset: entry.dataset,
           file: entry.doc,
-          message: `Field "${token}" does not resolve in canonical schema (${resolved.error}).`,
+          message: resolved.allowedByAdditionalProperties
+            ? `Field "${token}" is not explicitly defined in canonical schema but allowed by additionalProperties (${resolved.error}).`
+            : `Field "${token}" does not resolve in canonical schema (${resolved.error}).`,
           details: { line: row.line, token, error: resolved.error }
         });
         continue;

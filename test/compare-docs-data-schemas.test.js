@@ -128,6 +128,47 @@ test('field table parsing + path resolution + type parsing work for nested paths
   assert.equal(unknownResolved.ok, false);
 });
 
+test('resolveFieldPath reports allowedByAdditionalProperties when schema is permissive', () => {
+  const permissiveSchema = {
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: { name: { type: 'string' } },
+      additionalProperties: true
+    }
+  };
+
+  const strictSchema = {
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: { name: { type: 'string' } },
+      additionalProperties: false
+    }
+  };
+
+  const defaultSchema = {
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: { name: { type: 'string' } }
+    }
+  };
+
+  const permissiveResult = resolveFieldPath(permissiveSchema, 'unknownField');
+  assert.equal(permissiveResult.ok, false);
+  assert.equal(permissiveResult.allowedByAdditionalProperties, true);
+
+  const strictResult = resolveFieldPath(strictSchema, 'unknownField');
+  assert.equal(strictResult.ok, false);
+  assert.equal(strictResult.allowedByAdditionalProperties, false);
+
+  const defaultResult = resolveFieldPath(defaultSchema, 'unknownField');
+  assert.equal(defaultResult.ok, false);
+  assert.equal(defaultResult.allowedByAdditionalProperties, true,
+    'absent additionalProperties defaults to permissive per JSON Schema spec');
+});
+
 test('integration: report mode writes reports and includes coverage warnings on real repo', () => {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'schema-compare-real-'));
   const jsonOut = path.join(tmpDir, 'schema-report.json');
@@ -150,6 +191,24 @@ test('integration: report mode writes reports and includes coverage warnings on 
   assert.equal(Object.keys(report.summary.byDataset).length, 6);
   assert.ok(report.coverage.unmatchedDataFiles.length > 0);
   assert.ok(report.coverage.unmatchedDocFiles.length > 0);
+});
+
+test('data contracts: real repo has zero errors between data, schemas, and docs', () => {
+  const result = runComparison({
+    mode: 'strict',
+    noWrite: true
+  }, {
+    repoRoot
+  });
+
+  assert.equal(result.report.summary.totals.error, 0,
+    `Expected 0 errors but found ${result.report.summary.totals.error}: ` +
+    result.report.findings
+      .filter((f) => f.severity === 'error')
+      .map((f) => f.message)
+      .join('; ')
+  );
+  assert.equal(result.exitCode, 0);
 });
 
 test('strict mode fails only on canonical errors, not coverage warnings', () => {

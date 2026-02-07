@@ -227,6 +227,7 @@ Raid data can be cross-referenced with:
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/raids.schema.json",
   "title": "Pokemon GO Raids Data",
   "description": "Schema for Pokemon GO raid boss data",
   "type": "array",
@@ -259,18 +260,33 @@ Raid data can be cross-referenced with:
         "description": "The original name as displayed on the site (includes form/gender)"
       },
       "form": {
-        "type": ["string", "null"],
+        "type": [
+          "string",
+          "null"
+        ],
         "description": "The form of the Pokemon (e.g., Incarnate, Origin, Alola), or null if none"
       },
       "gender": {
-        "type": ["string", "null"],
+        "type": [
+          "string",
+          "null"
+        ],
         "description": "The gender of the Pokemon (male, female), or null if not specified",
-        "enum": ["male", "female", null]
+        "enum": [
+          "male",
+          "female",
+          null
+        ]
       },
       "tier": {
         "type": "string",
         "description": "The raid tier of the Pokemon",
-        "enum": ["1-Star Raids", "3-Star Raids", "5-Star Raids", "Mega Raids"]
+        "enum": [
+          "1-Star Raids",
+          "3-Star Raids",
+          "5-Star Raids",
+          "Mega Raids"
+        ]
       },
       "isShadowRaid": {
         "type": "boolean",
@@ -279,7 +295,12 @@ Raid data can be cross-referenced with:
       "eventStatus": {
         "type": "string",
         "description": "The status of the raid event",
-        "enum": ["ongoing", "upcoming", "inactive", "unknown"]
+        "enum": [
+          "ongoing",
+          "upcoming",
+          "inactive",
+          "unknown"
+        ]
       },
       "canBeShiny": {
         "type": "boolean",
@@ -290,7 +311,10 @@ Raid data can be cross-referenced with:
         "description": "The type(s) of the Pokemon",
         "items": {
           "type": "object",
-          "required": ["name", "image"],
+          "required": [
+            "name",
+            "image"
+          ],
           "properties": {
             "name": {
               "type": "string",
@@ -312,7 +336,13 @@ Raid data can be cross-referenced with:
             "imageType": {
               "type": "string",
               "description": "The type icon format",
-              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+              "enum": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "webp"
+              ]
             }
           },
           "additionalProperties": false
@@ -323,18 +353,30 @@ Raid data can be cross-referenced with:
       "combatPower": {
         "type": "object",
         "description": "The combat power range the Pokemon can be caught with",
-        "required": ["normal", "boosted"],
+        "required": [
+          "normal",
+          "boosted"
+        ],
         "properties": {
           "normal": {
             "type": "object",
-            "required": ["min", "max"],
+            "required": [
+              "min",
+              "max"
+            ],
             "properties": {
               "min": {
-                "type": ["integer", "null"],
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "description": "The minimum normal combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": ["integer", "null"],
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "description": "The maximum normal combat power of the Pokemon, or null if unknown"
               }
             },
@@ -342,14 +384,23 @@ Raid data can be cross-referenced with:
           },
           "boosted": {
             "type": "object",
-            "required": ["min", "max"],
+            "required": [
+              "min",
+              "max"
+            ],
             "properties": {
               "min": {
-                "type": ["integer", "null"],
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "description": "The minimum boosted combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": ["integer", "null"],
+                "type": [
+                  "integer",
+                  "null"
+                ],
                 "description": "The maximum boosted combat power of the Pokemon, or null if unknown"
               }
             },
@@ -363,12 +414,23 @@ Raid data can be cross-referenced with:
         "description": "The type(s) of weather that boost the Pokemon's combat power",
         "items": {
           "type": "object",
-          "required": ["name", "image"],
+          "required": [
+            "name",
+            "image"
+          ],
           "properties": {
             "name": {
               "type": "string",
               "description": "The name of the weather type",
-              "enum": ["sunny", "rainy", "partly cloudy", "cloudy", "windy", "snow", "fog"]
+              "enum": [
+                "sunny",
+                "rainy",
+                "partly cloudy",
+                "cloudy",
+                "windy",
+                "snow",
+                "fog"
+              ]
             },
             "image": {
               "type": "string",
@@ -386,7 +448,13 @@ Raid data can be cross-referenced with:
             "imageType": {
               "type": "string",
               "description": "The weather icon format",
-              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+              "enum": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "webp"
+              ]
             }
           },
           "additionalProperties": false
@@ -408,7 +476,13 @@ Raid data can be cross-referenced with:
       "imageType": {
         "type": "string",
         "description": "The image format",
-        "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+        "enum": [
+          "png",
+          "jpg",
+          "jpeg",
+          "gif",
+          "webp"
+        ]
       }
     },
     "additionalProperties": false

@@ -102,7 +102,7 @@ Depending on the event type and content, events may include any of the following
 
 | Field | Type | Description |
 |-------|------|-------------|
-| **`research`** | `object` | Research tasks available during the event |
+| **`research`** | `array\|object` | Research tasks available during the event |
 | **`research.field`** | `array` | Field research tasks |
 | **`research.special`** | `array` | Special research quest steps |
 | **`research.timed`** | `array` | Timed research quest steps |
@@ -150,7 +150,7 @@ Depending on the event type and content, events may include any of the following
 
 | Field | Type | Description |
 |-------|------|-------------|
-| **`eggs`** | `object` | Egg pool changes keyed by distance.<br />Keys: `1km`, `2km`, `5km`, `7km`, `10km`, `12km`, `adventure5km`, `adventure10km`, `route` |
+| **`eggs`** | `array\|object` | Egg pool changes keyed by distance.<br />Keys: `1km`, `2km`, `5km`, `7km`, `10km`, `12km`, `adventure5km`, `adventure10km`, `route` |
 
 ### Shinies
 
@@ -857,32 +857,84 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/events.schema.json",
   "title": "Pokemon GO Events Data",
   "description": "Schema for Pokemon GO event data. Note: additionalProperties is set to true as events can have many type-specific fields added by detailed scrapers.",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["eventID", "name", "eventType", "heading", "image", "start", "end"],
+    "required": [
+      "eventID",
+      "name",
+      "eventType",
+      "heading",
+      "image",
+      "start",
+      "end"
+    ],
     "properties": {
-      "eventID": { "type": "string", "description": "Unique identifier for the event" },
-      "name": { "type": "string", "description": "Name of the event" },
+      "eventID": {
+        "type": "string",
+        "description": "Unique identifier for the event"
+      },
+      "name": {
+        "type": "string",
+        "description": "Name of the event"
+      },
       "eventType": {
         "type": "string",
         "description": "Type of the event",
         "enum": [
-          "community-day", "event", "go-battle-league", "go-pass",
-          "go-rocket-takeover", "max-battles", "max-mondays",
-          "pokemon-go-tour", "pokemon-spotlight-hour", "pokestop-showcase",
-          "raid-battles", "raid-day", "raid-hour",
-          "research", "research-breakthrough", "research-day",
-          "season", "special-research", "team-go-rocket", "timed-research"
+          "community-day",
+          "event",
+          "go-battle-league",
+          "go-pass",
+          "go-rocket-takeover",
+          "max-battles",
+          "max-mondays",
+          "pokemon-go-tour",
+          "pokemon-spotlight-hour",
+          "pokestop-showcase",
+          "raid-battles",
+          "raid-day",
+          "raid-hour",
+          "research",
+          "research-breakthrough",
+          "research-day",
+          "season",
+          "special-research",
+          "team-go-rocket",
+          "timed-research"
         ]
       },
-      "heading": { "type": "string", "description": "Display heading for the event" },
-      "image": { "type": "string", "format": "uri", "description": "Event header/thumbnail image URL" },
-      "imageWidth": { "type": "integer", "description": "Stored event banner width in pixels" },
-      "imageHeight": { "type": "integer", "description": "Stored event banner height in pixels" },
-      "imageType": { "type": "string", "enum": ["png", "jpg", "jpeg", "gif", "webp"], "description": "Stored event banner format" },
+      "heading": {
+        "type": "string",
+        "description": "Display heading for the event"
+      },
+      "image": {
+        "type": "string",
+        "format": "uri",
+        "description": "Event header/thumbnail image URL"
+      },
+      "imageWidth": {
+        "type": "integer",
+        "description": "Stored event banner width in pixels"
+      },
+      "imageHeight": {
+        "type": "integer",
+        "description": "Stored event banner height in pixels"
+      },
+      "imageType": {
+        "type": "string",
+        "description": "Stored event banner format",
+        "enum": [
+          "png",
+          "jpg",
+          "jpeg",
+          "gif",
+          "webp"
+        ]
+      },
       "start": {
         "type": "string",
         "description": "Event start date/time (ISO 8601 format)",
@@ -893,49 +945,163 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
         "description": "Event end date/time (ISO 8601 format)",
         "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}(Z)?$"
       },
-      "hasSpawns": { "type": "boolean" },
-      "hasFieldResearchTasks": { "type": "boolean" },
-      "hasBonuses": { "type": "boolean" },
-      "hasRaids": { "type": "boolean" },
-      "hasEggs": { "type": "boolean" },
-      "hasShiny": { "type": "boolean" },
+      "isGlobal": {
+        "type": "boolean",
+        "description": "Whether the event uses a global start time (no local timezone offset)"
+      },
+      "eventStatus": {
+        "type": "string",
+        "description": "The computed status of the event based on current time",
+        "enum": [
+          "upcoming",
+          "active",
+          "ended"
+        ]
+      },
+      "hasSpawns": {
+        "type": "boolean",
+        "description": "Whether the event has wild Pokemon spawns"
+      },
+      "hasFieldResearchTasks": {
+        "type": "boolean",
+        "description": "Whether the event has field research tasks"
+      },
+      "hasBonuses": {
+        "type": "boolean",
+        "description": "Whether the event has bonuses"
+      },
+      "hasRaids": {
+        "type": "boolean",
+        "description": "Whether the event has raids"
+      },
+      "hasEggs": {
+        "type": "boolean",
+        "description": "Whether the event has egg hatches"
+      },
+      "hasShiny": {
+        "type": "boolean",
+        "description": "Whether the event has shiny Pokemon available"
+      },
       "pokemon": {
         "type": "array",
+        "description": "Featured Pokemon in the event",
         "items": {
           "type": "object",
-          "required": ["name", "image", "source"],
+          "required": [
+            "name",
+            "image",
+            "source"
+          ],
           "properties": {
-            "name": { "type": "string" },
-            "image": { "type": "string", "format": "uri" },
+            "name": {
+              "type": "string",
+              "description": "Pokemon name"
+            },
+            "image": {
+              "type": "string",
+              "format": "uri",
+              "description": "Pokemon image URL"
+            },
             "source": {
               "type": "string",
-              "enum": ["spawn", "featured", "incense", "costumed", "debut", "maxDebut", "raid", "egg", "research", "reward", "encounter"]
+              "description": "Where the Pokemon appears",
+              "enum": [
+                "spawn",
+                "featured",
+                "incense",
+                "costumed",
+                "debut",
+                "maxDebut",
+                "raid",
+                "egg",
+                "research",
+                "reward",
+                "encounter"
+              ]
             },
-            "canBeShiny": { "type": "boolean" },
-            "imageWidth": { "type": "integer" },
-            "imageHeight": { "type": "integer" },
-            "imageType": { "type": "string", "enum": ["png", "jpg", "jpeg", "gif", "webp"] }
+            "canBeShiny": {
+              "type": "boolean",
+              "description": "Whether the Pokemon can be shiny"
+            },
+            "dexNumber": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "National Pokedex number"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "Image width in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "Image height in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "Image format",
+              "enum": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "webp"
+              ]
+            }
           },
           "additionalProperties": false
         }
       },
       "bonuses": {
         "type": "array",
+        "description": "Event bonuses (e.g., 2× XP, 2× Stardust)",
         "items": {
           "oneOf": [
-            { "type": "string" },
+            {
+              "type": "string"
+            },
             {
               "type": "object",
               "properties": {
-                "text": { "type": "string" },
-                "image": { "type": "string", "format": "uri" },
-                "imageWidth": { "type": "integer" },
-                "imageHeight": { "type": "integer" },
-                "imageType": { "type": "string", "enum": ["png", "jpg", "jpeg", "gif", "webp"] },
-                "multiplier": { "type": "number" },
-                "bonusType": { "type": "string" }
+                "text": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "imageWidth": {
+                  "type": "integer",
+                  "description": "Bonus icon width in pixels"
+                },
+                "imageHeight": {
+                  "type": "integer",
+                  "description": "Bonus icon height in pixels"
+                },
+                "imageType": {
+                  "type": "string",
+                  "description": "Bonus icon format",
+                  "enum": [
+                    "png",
+                    "jpg",
+                    "jpeg",
+                    "gif",
+                    "webp"
+                  ]
+                },
+                "multiplier": {
+                  "type": "number",
+                  "description": "Parsed numeric multiplier (e.g., 2 for 2×)"
+                },
+                "bonusType": {
+                  "type": "string",
+                  "description": "Parsed bonus category (e.g., XP, Stardust, Candy)"
+                }
               },
-              "required": ["text"],
+              "required": [
+                "text"
+              ],
               "additionalProperties": false
             }
           ]
@@ -943,55 +1109,146 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
       },
       "raids": {
         "type": "array",
+        "description": "Raid bosses featured in the event",
         "items": {
           "type": "object",
-          "required": ["name", "image"],
+          "required": [
+            "name",
+            "image"
+          ],
           "properties": {
-            "name": { "type": "string" },
-            "image": { "type": "string", "format": "uri" },
-            "tier": { "type": "string" },
-            "canBeShiny": { "type": "boolean" },
-            "imageWidth": { "type": "integer" },
-            "imageHeight": { "type": "integer" },
-            "imageType": { "type": "string" }
+            "name": {
+              "type": "string",
+              "description": "Pokemon name"
+            },
+            "image": {
+              "type": "string",
+              "format": "uri",
+              "description": "Pokemon image URL"
+            },
+            "tier": {
+              "type": "string",
+              "description": "Raid tier"
+            },
+            "canBeShiny": {
+              "type": "boolean",
+              "description": "Whether the Pokemon can be shiny"
+            },
+            "dexNumber": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "National Pokedex number"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "Image width in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "Image height in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "Image format"
+            }
           },
           "additionalProperties": false
         }
       },
       "eggs": {
         "oneOf": [
-          { "type": "array" },
-          { "type": "object", "description": "Keyed by distance (1km, 2km, 5km, 7km, 10km, 12km, adventure5km, adventure10km, route)" }
+          {
+            "type": "array",
+            "description": "Egg hatches as array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          {
+            "type": "object",
+            "description": "Egg hatches keyed by distance (1km, 2km, etc.)",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
         ]
       },
       "research": {
         "oneOf": [
-          { "type": "array" },
-          { "type": "object", "description": "Keyed by category (field, special, timed, masterwork, breakthrough)" }
+          {
+            "type": "array",
+            "description": "Research tasks as array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          },
+          {
+            "type": "object",
+            "description": "Research tasks as object (keyed by category)",
+            "additionalProperties": true
+          }
         ]
       },
       "shinies": {
         "type": "array",
+        "description": "Shiny Pokemon available",
         "items": {
           "type": "object",
           "properties": {
-            "name": { "type": "string" },
-            "image": { "type": "string", "format": "uri" },
-            "canBeShiny": { "type": "boolean" },
-            "imageWidth": { "type": "integer" },
-            "imageHeight": { "type": "integer" },
-            "imageType": { "type": "string" }
+            "name": {
+              "type": "string",
+              "description": "Pokemon name"
+            },
+            "image": {
+              "type": "string",
+              "format": "uri",
+              "description": "Pokemon image URL"
+            },
+            "canBeShiny": {
+              "type": "boolean"
+            },
+            "dexNumber": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "National Pokedex number"
+            },
+            "imageWidth": {
+              "type": "integer"
+            },
+            "imageHeight": {
+              "type": "integer"
+            },
+            "imageType": {
+              "type": "string"
+            }
           },
           "additionalProperties": false
         }
       },
       "leagues": {
         "type": "array",
+        "description": "GO Battle League information",
         "items": {
           "type": "object",
           "properties": {
-            "name": { "type": "string" },
-            "cpLimit": { "type": "integer" }
+            "name": {
+              "type": "string",
+              "description": "League name"
+            },
+            "cpLimit": {
+              "type": "integer",
+              "description": "CP limit for the league"
+            }
           },
           "additionalProperties": true
         }

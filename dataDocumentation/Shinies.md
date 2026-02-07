@@ -177,12 +177,20 @@ fetch('https://pokemn.quest/data/shinies.min.json')
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/shinies.schema.json",
   "title": "Pokemon GO Shinies Data",
   "description": "Schema for Pokemon GO shiny availability data",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["dexNumber", "name", "releasedDate", "family", "region", "forms"],
+    "required": [
+      "dexNumber",
+      "name",
+      "releasedDate",
+      "family",
+      "region",
+      "forms"
+    ],
     "properties": {
       "dexNumber": {
         "type": "integer",
@@ -194,23 +202,46 @@ fetch('https://pokemn.quest/data/shinies.min.json')
         "description": "English name of the Pokemon (includes regional prefix if applicable)"
       },
       "releasedDate": {
-        "type": ["string", "null"],
-        "description": "Date when the shiny was first released (YYYY-MM-DD format), or null if not yet released"
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date when the shiny was first released (YYYY-MM-DD format), or null if not yet released",
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        ]
       },
       "family": {
-        "type": ["string", "null"],
+        "type": [
+          "string",
+          "null"
+        ],
         "description": "Evolution family identifier"
       },
       "region": {
-        "type": ["string", "null"],
-        "description": "Regional variant label (e.g., alolan, galarian, hisuian, paldean)"
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Regional variant or form label (e.g., alolan, galarian, hisuian, paldean), or null for base form"
       },
       "forms": {
         "type": "array",
         "description": "Array of alternative forms/costumes for this Pokemon",
         "items": {
           "type": "object",
-          "required": ["name", "image", "imageWidth", "imageHeight"],
+          "required": [
+            "name",
+            "image",
+            "imageWidth",
+            "imageHeight"
+          ],
           "properties": {
             "name": {
               "type": "string",
@@ -238,16 +269,16 @@ fetch('https://pokemn.quest/data/shinies.min.json')
       "image": {
         "type": "string",
         "format": "uri",
-        "description": "URL to the base shiny sprite image"
+        "description": "URL to the base shiny sprite image (optional, not present for Pokemon with only forms)"
       },
       "imageWidth": {
         "type": "integer",
-        "description": "Image width in pixels",
+        "description": "Image width in pixels (optional, not present for Pokemon with only forms)",
         "const": 256
       },
       "imageHeight": {
         "type": "integer",
-        "description": "Image height in pixels",
+        "description": "Image height in pixels (optional, not present for Pokemon with only forms)",
         "const": 256
       }
     },
