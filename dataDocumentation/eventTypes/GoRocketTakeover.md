@@ -64,15 +64,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the Takeover event
-| **`name`**      | `string` | Event name
-| **`eventType`** | `string` | Always `"go-rocket-takeover"`
-| **`heading`**   | `string` | Always `"GO Rocket Takeover"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Event start time (ISO 8601 format)
-| **`end`**       | `string` | Event end time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the event
+| **`name`**         | `string`  | Event name
+| **`eventType`**    | `string`  | Always `"go-rocket-takeover"`
+| **`heading`**      | `string`  | Display heading for the event
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start date/time (ISO 8601 format)
+| **`end`**          | `string`  | Event end date/time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Rocket Takeover-Specific Fields
 

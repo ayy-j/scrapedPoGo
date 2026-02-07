@@ -56,15 +56,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the Research Breakthrough period
-| **`name`**      | `string` | Breakthrough period name (may be overwritten by featured Pokémon name)
-| **`eventType`** | `string` | Always `"research-breakthrough"`
-| **`heading`**   | `string` | Always `"Research Breakthrough"`
-| **`image`**     | `string` | Image URL (may be overwritten by featured Pokémon image)
-| **`start`**     | `string` | Breakthrough period start date (ISO 8601 format)
-| **`end`**       | `string` | Breakthrough period end date (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the event
+| **`name`**         | `string`  | Event name
+| **`eventType`**    | `string`  | Always `"research-breakthrough"`
+| **`heading`**      | `string`  | Display heading for the event
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start date/time (ISO 8601 format)
+| **`end`**          | `string`  | Event end date/time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Breakthrough-Specific Fields
 
