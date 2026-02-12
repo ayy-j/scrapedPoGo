@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Max Battle Day",
   "eventType": "max-battles",
   "heading": "Max Battles",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-02-15T14:00:00.000",
   "end": "2026-02-15T17:00:00.000"
 }
@@ -40,15 +40,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the Max Battle rotation
-| **`name`**      | `string` | Name indicating featured Dynamax Pokémon
-| **`eventType`** | `string` | Always `"max-battles"`
-| **`heading`**   | `string` | Always `"Max Battles"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Rotation start date/time (ISO 8601 format)
-| **`end`**       | `string` | Rotation end date/time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the Max Battle rotation
+| **`name`**         | `string`  | Name indicating featured Dynamax Pokémon
+| **`eventType`**    | `string`  | Always `"max-battles"`
+| **`heading`**      | `string`  | Always `"Max Battles"`
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Rotation start date/time (ISO 8601 format)
+| **`end`**          | `string`  | Rotation end date/time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Optional Fields
 

@@ -4,8 +4,7 @@
  * @module pages/detailed/spotlight
  */
 
-const { JSDOM } = require('jsdom');
-const { writeTempFile, handleScraperError, extractPokemonList } = require('../../utils/scraperUtils');
+const { writeTempFile, handleScraperError, extractPokemonList, getJSDOM } = require('../../utils/scraperUtils');
 
 /**
  * @typedef {Object} SpotlightData
@@ -36,7 +35,7 @@ const { writeTempFile, handleScraperError, extractPokemonList } = require('../..
  */
 async function get(url, id, bkp) {
     try {
-        const dom = await JSDOM.fromURL(url, {});
+        const dom = await getJSDOM(url);
         const doc = dom.window.document;
 
         const content = doc.querySelector('.pkmn-list-flex');
@@ -45,10 +44,9 @@ async function get(url, id, bkp) {
         const eventDesc = doc.querySelector('.event-description');
         let bonus = '';
         if (eventDesc) {
-            const temp = eventDesc.innerHTML;
-            const split = temp.split('<strong>');
-            if (split.length > 1) {
-                bonus = split[split.length - 1].split('</strong>')[0];
+            const strong = eventDesc.querySelector('strong');
+            if (strong) {
+                bonus = strong.textContent.trim();
             }
         }
 

@@ -9,12 +9,14 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 const { getMultipleImageDimensions, clearCache } = require('./imageDimensions');
+const { extractDexNumber } = require('./shinyData');
 
 /**
  * @typedef {Object} Pokemon
  * @property {string} name - Pokemon display name
  * @property {string} image - URL to Pokemon image
  * @property {boolean} canBeShiny - Whether this Pokemon can be shiny
+ * @property {number|null} [dexNumber] - National Pokedex number extracted from image URL
  * @property {number} [imageWidth] - Image width in pixels
  * @property {number} [imageHeight] - Image height in pixels
  * @property {string} [imageType] - Image format type
@@ -75,14 +77,44 @@ async function fetchJson(url, timeout = 30000) {
 }
 
 /**
+ * In-flight HTML fetch cache for request coalescing.
+ * When multiple scrapers request the same URL concurrently (e.g., generic.js
+ * and a type-specific scraper both fetching the same event page), only one
+ * HTTP request is made. Each caller gets its own JSDOM instance from the
+ * shared HTML to avoid DOM mutation conflicts.
+ *
+ * Performance impact: Eliminates ~50% of HTTP requests in Stage 2
+ * (detailedscrape.js), where every event URL is fetched by both the generic
+ * scraper and the type-specific scraper in parallel.
+ *
+ * @type {Map<string, Promise<string>>}
+ */
+const htmlFetchCache = new Map();
+
+/**
  * Fetches a URL and returns a JSDOM instance.
- * Replaces JSDOM.fromURL with a secure, timeout-enabled version.
+ * Uses request coalescing: concurrent calls for the same URL share a single
+ * HTTP fetch, then each receives its own independent JSDOM instance.
+ * Replaces JSDOM.fromURL with a secure, timeout-enabled, deduplicated version.
  * @param {string} url - URL to fetch
- * @returns {Promise<JSDOM>} JSDOM instance
+ * @returns {Promise<JSDOM>} JSDOM instance (unique per call, safe to mutate)
  */
 async function getJSDOM(url) {
-    const html = await fetchUrl(url);
+    // Coalesce concurrent fetches for the same URL into a single HTTP request
+    if (!htmlFetchCache.has(url)) {
+        htmlFetchCache.set(url, fetchUrl(url));
+    }
+    const html = await htmlFetchCache.get(url);
     return new JSDOM(html, { url });
+}
+
+/**
+ * Clears the HTML fetch cache used by getJSDOM for request coalescing.
+ * Call between pipeline stages or after a batch of scrapes to free memory.
+ * @returns {void}
+ */
+function clearHtmlCache() {
+    htmlFetchCache.clear();
 }
 
 // ============================================================================
@@ -200,7 +232,7 @@ async function extractPokemonList(container, options = {}) {
         
         // Name
         const nameEl = item.querySelector(':scope > .pkmn-name');
-        poke.name = nameEl ? nameEl.innerHTML.trim() : '';
+        poke.name = nameEl ? nameEl.textContent.trim() : '';
         
         // Image
         const imgEl = item.querySelector(':scope > .pkmn-list-img > img');
@@ -220,6 +252,12 @@ async function extractPokemonList(container, options = {}) {
         // Also check image src for shiny indicator
         if (poke.image && poke.image.includes('_shiny')) {
             poke.canBeShiny = true;
+        }
+        
+        // Extract dex number from image URL if possible
+        const dexNum = extractDexNumber(poke.image);
+        if (dexNum) {
+            poke.dexNumber = dexNum;
         }
         
         if (poke.name) {
@@ -311,7 +349,7 @@ async function extractSection(doc, sectionId) {
         
         // Paragraphs
         if (sibling.tagName === 'P') {
-            const text = sibling.innerHTML?.trim();
+            const text = sibling.textContent?.trim();
             if (text) {
                 result.paragraphs.push(text);
             }
@@ -321,7 +359,7 @@ async function extractSection(doc, sectionId) {
         if (sibling.tagName === 'UL' || sibling.tagName === 'OL') {
             const listItems = [];
             sibling.querySelectorAll('li').forEach(li => {
-                listItems.push(li.innerHTML?.trim());
+                listItems.push(li.textContent?.trim());
             });
             if (listItems.length > 0) {
                 result.lists.push(listItems);
@@ -371,7 +409,7 @@ function extractTable(table) {
     rows.forEach(row => {
         const cells = [];
         row.querySelectorAll('td').forEach(td => {
-            cells.push(td.innerHTML?.trim() || '');
+            cells.push(td.textContent?.trim() || '');
         });
         if (cells.length > 0) {
             data.rows.push(cells);
@@ -411,12 +449,19 @@ async function extractBonuses(doc) {
         const bonus = {};
         
         const textEl = item.querySelector(':scope > .bonus-text');
-        bonus.text = textEl ? textEl.innerHTML.trim() : '';
+        bonus.text = textEl ? textEl.textContent.trim() : '';
         
         const imgEl = item.querySelector(':scope > .item-circle > img');
         bonus.image = imgEl ? imgEl.src : '';
         
         if (bonus.text) {
+            // Parse multiplier from bonus text (e.g., "2× Catch XP" → {multiplier: 2, bonusType: "Catch XP"})
+            const parsed = parseBonusMultiplier(bonus.text);
+            if (parsed) {
+                bonus.multiplier = parsed.multiplier;
+                bonus.bonusType = parsed.bonusType;
+            }
+            
             result.bonuses.push(bonus);
             
             if (bonus.text.includes('*')) {
@@ -433,13 +478,22 @@ async function extractBonuses(doc) {
             
             while (sibling && sibling.tagName !== 'H2' && sibling.nextSibling) {
                 if (sibling.tagName === 'P') {
-                    const html = sibling.innerHTML;
-                    if (html.includes('<br>\n')) {
-                        html.split('<br>\n').forEach(s => {
-                            if (s.trim()) result.disclaimers.push(s.trim());
-                        });
-                    } else if (html.trim()) {
-                        result.disclaimers.push(html.trim());
+                    let currentText = '';
+                    sibling.childNodes.forEach(node => {
+                        if (node.nodeType === 1 && node.tagName === 'BR') {
+                            if (currentText.trim()) {
+                                result.disclaimers.push(currentText.trim());
+                            }
+                            currentText = '';
+                        } else if (node.nodeType === 1 && (node.tagName === 'SCRIPT' || node.tagName === 'STYLE')) {
+                            // Skip script and style tags
+                        } else {
+                            currentText += node.textContent || '';
+                        }
+                    });
+
+                    if (currentText.trim()) {
+                        result.disclaimers.push(currentText.trim());
                     }
                 }
                 sibling = sibling.nextSibling;
@@ -575,13 +629,13 @@ async function extractResearchTasks(doc, researchType = 'special') {
         // Step number
         const stepNumEl = stepItem.querySelector(':scope > .step-label > .step-number');
         if (stepNumEl) {
-            step.step = parseInt(stepNumEl.innerHTML) || 0;
+            step.step = parseInt(stepNumEl.textContent) || 0;
         }
         
         // Step name
         const stepNameEl = stepItem.querySelector(':scope > .task-reward-wrapper > .step-name');
         if (stepNameEl) {
-            step.name = stepNameEl.innerHTML?.trim() || '';
+            step.name = stepNameEl.textContent?.trim() || '';
         }
         
         // Tasks within step
@@ -597,12 +651,12 @@ async function extractResearchTasks(doc, researchType = 'special') {
             
             const taskTextEl = taskItem.querySelector(':scope > .task-text');
             if (taskTextEl) {
-                task.text = taskTextEl.innerHTML?.replace(/\n\s+/g, ' ').trim() || '';
+                task.text = taskTextEl.textContent?.replace(/\n\s+/g, ' ').trim() || '';
             }
             
             const rewardLabelEl = taskItem.querySelector(':scope > .reward-text > .reward-label');
             if (rewardLabelEl) {
-                task.reward.text = rewardLabelEl.innerHTML?.replace(/<span>|<\/span>/g, '').trim() || '';
+                task.reward.text = rewardLabelEl.textContent?.trim() || '';
             }
             
             const rewardImgEl = taskItem.querySelector(':scope > .reward-text > .reward-bubble > .reward-image');
@@ -625,7 +679,7 @@ async function extractResearchTasks(doc, researchType = 'special') {
             
             const labelEl = rewardItem.querySelector(':scope > .reward-label > span');
             if (labelEl) {
-                reward.text = labelEl.innerHTML?.trim() || '';
+                reward.text = labelEl.textContent?.trim() || '';
             }
             
             const imgEl = rewardItem.querySelector(':scope > .page-reward-item > .reward-image');
@@ -1242,37 +1296,27 @@ function extractGoPassTiers(doc) {
  */
 function deduplicateEvents(events) {
     const eventsByID = new Map();
-    events.forEach(e => {
+    const processedIDs = new Set();
+
+    for (const e of events) {
         if (!eventsByID.has(e.eventID)) {
-            eventsByID.set(e.eventID, []);
-        }
-        eventsByID.get(e.eventID).push(e);
-    });
+            eventsByID.set(e.eventID, e);
+        } else if (!processedIDs.has(e.eventID)) {
+            // Found the first duplicate - merge it
+            const firstEvent = eventsByID.get(e.eventID);
 
-    const deduplicatedEvents = [];
-
-    for (const duplicates of eventsByID.values()) {
-        if (duplicates.length > 1) {
-            const mergedEvent = duplicates[0]; // Use the first occurrence
-
-            if (duplicates[0].start)
-            {
-                mergedEvent.start = duplicates[0].start;
-                mergedEvent.end = duplicates[1].end;
-            }
-            else
-            {
-                mergedEvent.start = duplicates[1].start;
-                mergedEvent.end = duplicates[0].end;
+            if (firstEvent.start) {
+                firstEvent.end = e.end;
+            } else {
+                firstEvent.start = e.start;
             }
 
-            deduplicatedEvents.push(mergedEvent);
-        } else {
-            deduplicatedEvents.push(duplicates[0]);
+            processedIDs.add(e.eventID);
         }
+        // Subsequent duplicates are ignored
     }
 
-    return deduplicatedEvents;
+    return Array.from(eventsByID.values());
 }
 
 // ============================================================================
@@ -1284,6 +1328,7 @@ module.exports = {
     fetchUrl,
     fetchJson,
     getJSDOM,
+    clearHtmlCache,
     
     // File operations
     writeTempFile,

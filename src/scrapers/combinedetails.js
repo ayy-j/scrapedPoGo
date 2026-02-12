@@ -9,6 +9,8 @@ const fs = require('fs');
 const path = require('path');
 const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
+const { enrichMissingImageDimensions } = require('../utils/imageDimensions');
+const { isGlobalEvent } = require('../utils/scraperUtils');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -29,6 +31,27 @@ function sanitizeType(type) {
 }
 
 /**
+ * Computes event status based on current time vs event start/end dates.
+ * 
+ * @param {string} startStr - ISO date string for event start
+ * @param {string} endStr - ISO date string for event end
+ * @returns {"upcoming"|"active"|"ended"} Event status
+ */
+function computeEventStatus(startStr, endStr) {
+    try {
+        const now = new Date();
+        const start = startStr ? new Date(startStr) : null;
+        const end = endStr ? new Date(endStr) : null;
+        
+        if (start && now < start) return 'upcoming';
+        if (end && now > end) return 'ended';
+        return 'active';
+    } catch {
+        return 'active';
+    }
+}
+
+/**
  * Flattens event data into a consistent top-level structure.
  * All data fields are placed at the top level (no details wrapper).
  * No flags object is computed - consumers can check for field presence directly.
@@ -46,8 +69,13 @@ function segmentEventData(event) {
         eventType: event.eventType,
         heading: event.heading,
         image: event.image,
+        imageWidth: event.imageWidth,
+        imageHeight: event.imageHeight,
+        imageType: event.imageType,
         start: event.start,
-        end: event.end
+        end: event.end,
+        isGlobal: isGlobalEvent(event.start),
+        eventStatus: computeEventStatus(event.start, event.end)
     };
 
     // If event already has consolidated fields (already flattened),
@@ -310,7 +338,7 @@ function generateEventTypeFiles(eventsByType) {
  * - event, promo-codes
  * 
  * @function main
- * @returns {void}
+ * @returns {Promise<void>}
  * @throws {Error} Logs error and exits with code 1 on failure
  * 
  * @example
@@ -319,7 +347,7 @@ function generateEventTypeFiles(eventsByType) {
  * // Updates data/events.json with detailed event data
  * // Generates data/eventTypes/*.json files
  */
-function main()
+async function main()
 {
     const eventsData = JSON.parse(fs.readFileSync("./data/events.min.json"));
     
@@ -350,81 +378,79 @@ function main()
         });
     }
 
-    fs.readdir("data/temp", function (err, files) {
-        if (err) {
-            logger.warn('Unable to scan temp directory, writing events without details: ' + err);
-            // Still segment and write even without temp data
-            writeSegmentedOutput(events);
+    let files = [];
+    try {
+        files = await fs.promises.readdir("data/temp");
+    } catch (err) {
+        logger.warn('Unable to scan temp directory, writing events without details: ' + err);
+        // Still segment and write even without temp data
+        await writeSegmentedOutput(events);
+        return;
+    }
+
+    // Create a map for O(1) lookup
+    const eventMap = new Map();
+    events.forEach(e => {
+        if (e.eventID) {
+            eventMap.set(e.eventID, e);
+        }
+    });
+
+    files.forEach(f =>
+    {
+        // Skip empty files or non-JSON files
+        const filePath = "./data/temp/" + f;
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        if (!fileContent || fileContent.trim().length === 0) {
+            logger.warn(`Skipping empty temp file: ${f}`);
+            return;
+        }
+        
+        let data;
+        try {
+            data = JSON.parse(fileContent);
+        } catch (parseErr) {
+            logger.warn(`Skipping invalid JSON in temp file ${f}: ${parseErr.message}`);
             return;
         }
 
-        // Create a map for O(1) lookup
-        const eventMap = new Map();
-        events.forEach(e => {
-            if (e.eventID) {
-                eventMap.set(e.eventID, e);
-            }
-        });
-
-        files.forEach(f =>
+        if (eventMap.has(data.id))
         {
-            // Skip empty files or non-JSON files
-            const filePath = "./data/temp/" + f;
-            const fileContent = fs.readFileSync(filePath, 'utf8');
-            if (!fileContent || fileContent.trim().length === 0) {
-                logger.warn(`Skipping empty temp file: ${f}`);
-                return;
-            }
-            
-            let data;
-            try {
-                data = JSON.parse(fileContent);
-            } catch (parseErr) {
-                logger.warn(`Skipping invalid JSON in temp file ${f}: ${parseErr.message}`);
-                return;
-            }
-
-            if (eventMap.has(data.id))
+            const e = eventMap.get(data.id);
+            // add generic data fields directly to event (available for all possible events)
+            if (data.type == "generic")
             {
-                const e = eventMap.get(data.id);
-                // add generic data fields directly to event (available for all possible events)
-                if (data.type == "generic")
-                {
-                    Object.assign(e, data.data);
-                }
-                // add event specific data directly to event object
-                if (data.type == "research-breakthrough" ||
-                    data.type == "pokemon-spotlight-hour" ||
-                    data.type == "community-day" ||
-                    data.type == "raid-battles" ||
-                    data.type == "raid-hour" ||
-                    data.type == "raid-day" ||
-                    data.type == "team-go-rocket" ||
-                    data.type == "go-rocket-takeover" ||
-                    data.type == "go-battle-league" ||
-                    data.type == "season" ||
-                    data.type == "pokemon-go-tour" ||
-                    data.type == "timed-research" ||
-                    data.type == "special-research" ||
-                    data.type == "max-battles" ||
-                    data.type == "max-mondays" ||
-                    data.type == "go-pass" ||
-                    data.type == "pokestop-showcase" ||
-                    data.type == "research" ||
-                    data.type == "event" ||
-                    data.type == "promo-codes")
-                {
-                    Object.assign(e, data.data);
-                }
+                Object.assign(e, data.data);
             }
-        });
-
-        writeSegmentedOutput(events);
-
-        fs.rm("data/temp", { recursive: true }, (err) => {
-            if (err) { throw err; }
-        });
+            // add event specific data directly to event object
+            if (data.type == "research-breakthrough" ||
+                data.type == "pokemon-spotlight-hour" ||
+                data.type == "community-day" ||
+                data.type == "raid-battles" ||
+                data.type == "raid-hour" ||
+                data.type == "raid-day" ||
+                data.type == "team-go-rocket" ||
+                data.type == "go-rocket-takeover" ||
+                data.type == "go-battle-league" ||
+                data.type == "season" ||
+                data.type == "pokemon-go-tour" ||
+                data.type == "timed-research" ||
+                data.type == "special-research" ||
+                data.type == "max-battles" ||
+                data.type == "max-mondays" ||
+                data.type == "go-pass" ||
+                data.type == "pokestop-showcase" ||
+                data.type == "research" ||
+                data.type == "event" ||
+                data.type == "promo-codes")
+            {
+                Object.assign(e, data.data);
+            }
+        }
     });
+
+    await writeSegmentedOutput(events);
+    await fs.promises.rm("data/temp", { recursive: true, force: true });
 }
 
 /**
@@ -433,8 +459,9 @@ function main()
  * Per-type files are still generated for backward compatibility.
  * 
  * @param {Object[]} events - Array of flat event objects with merged detail data
+ * @returns {Promise<void>}
  */
-function writeSegmentedOutput(events) {
+async function writeSegmentedOutput(events) {
     // Transform all events with flattened structure
     const allEvents = events.map(event => segmentEventData(event));
 
@@ -445,16 +472,14 @@ function writeSegmentedOutput(events) {
         return dateA - dateB;
     });
 
+    // Fill missing image dimensions for nested event assets in one pass.
+    await enrichMissingImageDimensions(allEvents, { onlyMissing: true });
+
     const transformedEvents = transformUrls(allEvents);
 
     // Write main events file as a flat array
-    fs.writeFile('data/events.min.json', JSON.stringify(transformedEvents), err => {
-        if (err) {
-            logger.error(err);
-            return;
-        }
-        logger.success('Created data/events.min.json as flat array with ' + transformedEvents.length + ' events');
-    });
+    await fs.promises.writeFile('data/events.min.json', JSON.stringify(transformedEvents));
+    logger.success('Created data/events.min.json as flat array with ' + transformedEvents.length + ' events');
 
     // Group by eventType for per-type files (backward compatibility)
     const eventsByType = {};
@@ -470,12 +495,7 @@ function writeSegmentedOutput(events) {
     generateEventTypeFiles(eventsByType);
 }
 
-try
-{
-    main();
-}
-catch (e)
-{
+main().catch((e) => {
     logger.error("ERROR: " + e);
     process.exit(1);
-}
+});

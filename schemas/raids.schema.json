@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/raids.schema.json",
   "title": "Pokemon GO Raids Data",
-  "description": "Schema for Pokemon GO raid boss data from LeekDuck",
+  "description": "Schema for Pokemon GO raid boss data",
   "type": "array",
   "items": {
     "type": "object",
@@ -74,6 +74,19 @@
               "type": "string",
               "format": "uri",
               "description": "The image of the type"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "The width of the type icon in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "The height of the type icon in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "The type icon format",
+              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
             }
           },
           "additionalProperties": false
@@ -91,12 +104,12 @@
             "required": ["min", "max"],
             "properties": {
               "min": {
-                "type": "integer",
-                "description": "The minimum normal combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The minimum normal combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": "integer",
-                "description": "The maximum normal combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The maximum normal combat power of the Pokemon, or null if unknown"
               }
             },
             "additionalProperties": false
@@ -106,12 +119,12 @@
             "required": ["min", "max"],
             "properties": {
               "min": {
-                "type": "integer",
-                "description": "The minimum boosted combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The minimum boosted combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": "integer",
-                "description": "The maximum boosted combat power of the Pokemon"
+                "type": ["integer", "null"],
+                "description": "The maximum boosted combat power of the Pokemon, or null if unknown"
               }
             },
             "additionalProperties": false
@@ -135,6 +148,19 @@
               "type": "string",
               "format": "uri",
               "description": "The image of the weather type"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "The width of the weather icon in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "The height of the weather icon in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "The weather icon format",
+              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
             }
           },
           "additionalProperties": false

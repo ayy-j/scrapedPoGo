@@ -30,13 +30,13 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Toucannon, Ludicolo, and Quaquaval PokéStop Showcase",
   "eventType": "pokestop-showcase",
   "heading": "Pokestop Showcase",
-  "image": "https://cdn.leekduck.com/assets/img/events/pokestop-showcases-default.jpg",
+  "image": "https://pokemn.quest/events/pokestop-showcases-default.jpg",
   "start": "2026-02-02T10:00:00.000",
   "end": "2026-02-04T20:00:00.000",
   "pokemon": [
     {
       "name": "Ludicolo",
-      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_272_00.png",
+      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_272_00.png",
       "canBeShiny": false,
       "source": "featured"
     }
@@ -49,15 +49,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the showcase event
-| **`name`**      | `string` | Name including featured Pokémon
-| **`eventType`** | `string` | Always `"pokestop-showcase"`
-| **`heading`**   | `string` | Always `"Pokestop Showcase"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Event start date/time (ISO 8601 format)
-| **`end`**       | `string` | Event end date/time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the showcase event
+| **`name`**         | `string`  | Name including featured Pokémon
+| **`eventType`**    | `string`  | Always `"pokestop-showcase"`
+| **`heading`**      | `string`  | Display heading for the event
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start date/time (ISO 8601 format)
+| **`end`**          | `string`  | Event end date/time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Optional Fields
 

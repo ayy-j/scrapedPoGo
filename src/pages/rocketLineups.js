@@ -6,9 +6,10 @@
  */
 
 const fs = require('fs');
-const jsd = require('jsdom');
-const { JSDOM } = jsd;
-const https = require('https');
+const logger = require('../utils/logger');
+const { enrichMissingImageDimensions } = require('../utils/imageDimensions');
+const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
+const { transformUrls } = require('../utils/blobUrls');
 
 /**
  * @typedef {Object} WeaknessInfo
@@ -31,9 +32,7 @@ const https = require('https');
  * @property {string} name - Trainer name (e.g., "Giovanni", "Cliff", or grunt type)
  * @property {string} title - Display title (e.g., "Team GO Rocket Leader")
  * @property {string} type - Grunt type for typed grunts (e.g., "fire", "water") or empty
- * @property {ShadowPokemon[]} firstPokemon - Possible Pokemon in slot 1
- * @property {ShadowPokemon[]} secondPokemon - Possible Pokemon in slot 2
- * @property {ShadowPokemon[]} thirdPokemon - Possible Pokemon in slot 3
+ * @property {ShadowPokemon[][]} slots - Possible Pokemon per slot (3 slots, each an array of possible Pokemon)
  */
 
 /**
@@ -54,11 +53,11 @@ const https = require('https');
  * await rocketLineups.get();
  * // Creates data/rocketLineups.json and data/rocketLineups.min.json
  */
-function get() {
-    return new Promise(resolve => {
-        JSDOM.fromURL("https://leekduck.com/rocket-lineups/", {
-        })
-        .then((dom) => {
+async function get() {
+    logger.info("Scraping rocket lineups...");
+    try {
+        try {
+            const dom = await getJSDOM("https://leekduck.com/rocket-lineups/");
             const lineups = [];
             
             const rocketProfiles = dom.window.document.querySelectorAll('.rocket-profile');
@@ -68,9 +67,7 @@ function get() {
                     name: "",
                     title: "",
                     type: "",
-                    firstPokemon: [],
-                    secondPokemon: [],
-                    thirdPokemon: [],
+                    slots: [[], [], []]
                 };
 
                 let nameElement = profile.querySelector('.name');
@@ -134,52 +131,29 @@ function get() {
                         pokemonList.push(pokemon);
                     });
                     
-                    if (slotNumber === 1) {
-                        lineup.firstPokemon = pokemonList;
-                    } else if (slotNumber === 2) {
-                        lineup.secondPokemon = pokemonList;
-                    } else if (slotNumber === 3) {
-                        lineup.thirdPokemon = pokemonList;
-                    }    
+                    lineup.slots[index] = pokemonList;
 
                 });
                 
                 lineups.push(lineup);
             });
 
-            fs.writeFile('data/rocketLineups.min.json', JSON.stringify(lineups), err => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-            });
-        }).catch(_err => {
-            console.log(_err);
-            https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json", (res) => {
-                let body = "";
-                res.on("data", (chunk) => { body += chunk; });
+            // Populate image dimensions for all slot Pokemon.
+            await enrichMissingImageDimensions(lineups);
 
-                res.on("end", () => {
-                    try {
-                        let json = JSON.parse(body);
+            await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(transformUrls(lineups)));
+            logger.success("Rocket lineups saved.");
+        } catch (_err) {
+            logger.error(_err);
 
-                        fs.writeFile('data/rocketLineups.min.json', JSON.stringify(json), err => {
-                            if (err) {
-                                console.error(err);
-                                return;
-                            }
-                        });
-                    }
-                    catch (error) {
-                        console.error(error.message);
-                    };
-                });
+            const json = await fetchJson("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/rocketLineups.min.json");
 
-            }).on("error", (error) => {
-                console.error(error.message);
-            });
-        });
-    })
+            await fs.promises.writeFile('data/rocketLineups.min.json', JSON.stringify(transformUrls(json)));
+            logger.success("Rocket lineups saved (fallback).");
+        }
+    } catch (error) {
+        logger.error(error.message);
+    }
 }
 
 module.exports = { get }

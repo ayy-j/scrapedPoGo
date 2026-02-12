@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/events.schema.json",
   "title": "Pokemon GO Events Data",
-  "description": "Schema for Pokemon GO event data from LeekDuck. Note: additionalProperties is set to true as events can have many type-specific fields added by detailed scrapers.",
+  "description": "Schema for Pokemon GO event data. Note: additionalProperties is set to true as events can have many type-specific fields added by detailed scrapers.",
   "type": "array",
   "items": {
     "type": "object",
@@ -51,6 +51,19 @@
         "format": "uri",
         "description": "Event header/thumbnail image URL"
       },
+      "imageWidth": {
+        "type": "integer",
+        "description": "Stored event banner width in pixels"
+      },
+      "imageHeight": {
+        "type": "integer",
+        "description": "Stored event banner height in pixels"
+      },
+      "imageType": {
+        "type": "string",
+        "description": "Stored event banner format",
+        "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+      },
       "start": {
         "type": "string",
         "description": "Event start date/time (ISO 8601 format)",
@@ -60,6 +73,15 @@
         "type": "string",
         "description": "Event end date/time (ISO 8601 format)",
         "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}(Z)?$"
+      },
+      "isGlobal": {
+        "type": "boolean",
+        "description": "Whether the event uses a global start time (no local timezone offset)"
+      },
+      "eventStatus": {
+        "type": "string",
+        "description": "The computed status of the event based on current time",
+        "enum": ["upcoming", "active", "ended"]
       },
       "hasSpawns": {
         "type": "boolean",
@@ -110,6 +132,10 @@
               "type": "boolean",
               "description": "Whether the Pokemon can be shiny"
             },
+            "dexNumber": {
+              "type": ["integer", "null"],
+              "description": "National Pokedex number"
+            },
             "imageWidth": {
               "type": "integer",
               "description": "Image width in pixels"
@@ -141,7 +167,12 @@
               "type": "object",
               "properties": {
                 "text": { "type": "string" },
-                "image": { "type": "string", "format": "uri" }
+                "image": { "type": "string", "format": "uri" },
+                "imageWidth": { "type": "integer", "description": "Bonus icon width in pixels" },
+                "imageHeight": { "type": "integer", "description": "Bonus icon height in pixels" },
+                "imageType": { "type": "string", "description": "Bonus icon format", "enum": ["png", "jpg", "jpeg", "gif", "webp"] },
+                "multiplier": { "type": "number", "description": "Parsed numeric multiplier (e.g., 2 for 2×)" },
+                "bonusType": { "type": "string", "description": "Parsed bonus category (e.g., XP, Stardust, Candy)" }
               },
               "required": ["text"],
               "additionalProperties": false
@@ -172,6 +203,10 @@
             "canBeShiny": {
               "type": "boolean",
               "description": "Whether the Pokemon can be shiny"
+            },
+            "dexNumber": {
+              "type": ["integer", "null"],
+              "description": "National Pokedex number"
             },
             "imageWidth": {
               "type": "integer",
@@ -250,6 +285,10 @@
             },
             "canBeShiny": {
               "type": "boolean"
+            },
+            "dexNumber": {
+              "type": ["integer", "null"],
+              "description": "National Pokedex number"
             },
             "imageWidth": {
               "type": "integer"

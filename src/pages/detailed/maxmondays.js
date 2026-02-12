@@ -4,8 +4,7 @@
  * @module pages/detailed/maxmondays
  */
 
-const { JSDOM } = require('jsdom');
-const { writeTempFile, handleScraperError, extractPokemonList } = require('../../utils/scraperUtils');
+const { writeTempFile, handleScraperError, extractPokemonList, getJSDOM } = require('../../utils/scraperUtils');
 
 /**
  * @typedef {Object} MaxMondaysData
@@ -31,7 +30,7 @@ const { writeTempFile, handleScraperError, extractPokemonList } = require('../..
  */
 async function get(url, id, bkp) {
     try {
-        const dom = await JSDOM.fromURL(url, {});
+        const dom = await getJSDOM(url);
         const doc = dom.window.document;
         
         const maxMondaysData = {
@@ -51,7 +50,7 @@ async function get(url, id, bkp) {
         if (eventDesc) {
             const strong = eventDesc.querySelector('strong');
             if (strong) {
-                maxMondaysData.bonus = strong.innerHTML;
+                maxMondaysData.bonus = strong.textContent.trim();
             }
         }
 

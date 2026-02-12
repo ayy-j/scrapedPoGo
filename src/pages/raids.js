@@ -6,12 +6,11 @@
  */
 
 const fs = require('fs');
-const jsd = require('jsdom');
-const { JSDOM } = jsd;
-const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
-const { getMultipleImageDimensions } = require('../utils/imageDimensions');
+const { enrichMissingImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
+const logger = require('../utils/logger');
+const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
 
 /**
  * @typedef {Object} RaidCombatPower
@@ -105,7 +104,7 @@ function determineEventStatus(bossName, isShadowRaid, events) {
         // If no matching event found, return unknown
         return 'unknown';
     } catch (error) {
-        console.error('Error determining event status:', error.message);
+        logger.error('Error determining event status: ' + error.message);
         return 'unknown';
     }
 }
@@ -179,38 +178,38 @@ function cleanName(name) {
  * const bosses = await raids.get();
  * // Creates data/raids.json and data/raids.min.json
  */
-function get() {
-    return new Promise(resolve => {
-        JSDOM.fromURL("https://leekduck.com/raid-bosses/", {
-        })
-            .then(async (dom) => {
+async function get() {
+    logger.info("Scraping raids...");
+    try {
+        try {
+            const dom = await getJSDOM("https://leekduck.com/raid-bosses/");
 
-                let bosses = [];
-                
-                // Load shiny data for cross-referencing
-                const shinyMap = loadShinyData();
+            let bosses = [];
 
-                // Load events data for status determination
-                let events = [];
-                try {
-                    if (fs.existsSync('data/events.min.json')) {
-                        const eventsData = JSON.parse(fs.readFileSync('data/events.min.json', 'utf8'));
-                        // Flatten eventType-keyed structure into array if needed
-                        if (Array.isArray(eventsData)) {
-                            events = eventsData;
-                        } else if (eventsData && typeof eventsData === 'object') {
-                            Object.values(eventsData).forEach(typeArray => {
-                                if (Array.isArray(typeArray)) {
-                                    events = events.concat(typeArray);
-                                }
-                            });
-                        }
+            // Load shiny data for cross-referencing
+            const shinyMap = loadShinyData();
+
+            // Load events data for status determination
+            let events = [];
+            try {
+                if (fs.existsSync('data/events.min.json')) {
+                    const eventsData = JSON.parse(fs.readFileSync('data/events.min.json', 'utf8'));
+                    // Flatten eventType-keyed structure into array if needed
+                    if (Array.isArray(eventsData)) {
+                        events = eventsData;
+                    } else if (eventsData && typeof eventsData === 'object') {
+                        Object.values(eventsData).forEach(typeArray => {
+                            if (Array.isArray(typeArray)) {
+                                events = events.concat(typeArray);
+                            }
+                        });
                     }
-                } catch (error) {
-                    console.error('Error loading events data:', error.message);
                 }
-                
-                const raidBosses = dom.window.document.querySelectorAll('.raid-bosses, .shadow-raid-bosses');
+            } catch (error) {
+                logger.error('Error loading events data: ' + error.message);
+            }
+
+            const raidBosses = dom.window.document.querySelectorAll('.raid-bosses, .shadow-raid-bosses');
 
                 raidBosses.forEach(raidBossContainer => {
                     // Determine if this is a shadow raid container
@@ -238,8 +237,8 @@ function get() {
                                 canBeShiny: false,
                                 types: [],
                                 combatPower: {
-                                    normal: { min: -1, max: -1 },
-                                    boosted: { min: -1, max: -1 }
+                                    normal: { min: null, max: null },
+                                    boosted: { min: null, max: null }
                                 },
                                 boostedWeather: [],
                                 image: ""
@@ -270,14 +269,14 @@ function get() {
                             // Combat Power (normal)
                             let cpText = card.querySelector('.cp-range')?.textContent.replace('CP', '').trim() || "";
                             let [cpMin, cpMax] = cpText.split('-').map(s => parseInt(s.trim()));
-                            boss.combatPower.normal.min = cpMin || -1;
-                            boss.combatPower.normal.max = cpMax || -1;
+                            boss.combatPower.normal.min = cpMin || null;
+                            boss.combatPower.normal.max = cpMax || null;
 
                             // Combat Power (boosted)
                             let boostedText = card.querySelector('.boosted-cp-row .boosted-cp')?.textContent.replace('CP', '').trim() || "";
                             let [boostMin, boostMax] = boostedText.split('-').map(s => parseInt(s.trim()));
-                            boss.combatPower.boosted.min = boostMin || -1;
-                            boss.combatPower.boosted.max = boostMax || -1;
+                            boss.combatPower.boosted.min = boostMin || null;
+                            boss.combatPower.boosted.max = boostMax || null;
 
                             // Boosted Weather
                             card.querySelectorAll('.weather-boosted .boss-weather .weather-pill img').forEach(img => {
@@ -292,58 +291,28 @@ function get() {
                     });
                 });
 
-                // Fetch image dimensions for all boss images
-                const imageUrls = bosses.map(b => b.image).filter(Boolean);
-                const dimensionsMap = await getMultipleImageDimensions(imageUrls);
-                
-                // Assign dimensions back to bosses
-                bosses.forEach(boss => {
-                    if (boss.image && dimensionsMap.has(boss.image)) {
-                        const dims = dimensionsMap.get(boss.image);
-                        boss.imageWidth = dims.width;
-                        boss.imageHeight = dims.height;
-                        boss.imageType = dims.type;
-                    }
-                });
+            // Populate dimensions for raid bosses and nested image assets (types/weather).
+            await enrichMissingImageDimensions(bosses);
 
-                const output = transformUrls(bosses);
+            const output = transformUrls(bosses);
 
-                fs.writeFile('data/raids.min.json', JSON.stringify(output), err => {
-                    if (err) {
-                        console.error(err);
-                        return;
-                    }
-                });
-                resolve(output);
-            }).catch(_err => {
-                console.log(_err);
-                https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.min.json", (res) => {
-                    let body = "";
-                    res.on("data", (chunk) => { body += chunk; });
+            await fs.promises.writeFile('data/raids.min.json', JSON.stringify(output));
+            logger.success("Raids saved.");
+            return output;
 
-                    res.on("end", () => {
-                        try {
-                            let json = JSON.parse(body);
+        } catch (_err) {
+            logger.error(_err);
 
-                            const output = transformUrls(json);
+            const json = await fetchJson("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/raids.min.json");
+            const output = transformUrls(json);
 
-                            fs.writeFile('data/raids.min.json', JSON.stringify(output), err => {
-                                if (err) {
-                                    console.error(err);
-                                    return;
-                                }
-                            });
-                        }
-                        catch (error) {
-                            console.error(error.message);
-                        };
-                    });
-
-                }).on("error", (error) => {
-                    console.error(error.message);
-                });
-            });
-    })
+            await fs.promises.writeFile('data/raids.min.json', JSON.stringify(output));
+            logger.success("Raids saved (fallback).");
+            return output;
+        }
+    } catch (error) {
+        logger.error(error.message);
+    }
 }
 
 module.exports = { get }

@@ -69,7 +69,10 @@ Represents a Pokemon type with its icon.
 ```json
 {
     "name": "fire",
-    "image": "https://pokemn.quest/images/types/fire.png"
+    "image": "https://pokemn.quest/images/types/fire.png",
+    "imageWidth": 32,
+    "imageHeight": 32,
+    "imageType": "png"
 }
 ```
 
@@ -79,6 +82,9 @@ Represents a Pokemon type with its icon.
 |------------ |--------- |---------------------
 | **`name`**  | `string` | The name of the type (e.g., `fire`, `water`, `grass`, `electric`, `psychic`, `fighting`, `dark`, `steel`, `fairy`, `dragon`, `ghost`, `bug`, `rock`, `ground`, `ice`, `poison`, `normal`, `flying`)
 | **`image`** | `string` | The image URL of the type icon. Format: `https://pokemn.quest/images/types/<type>.png`
+| **`imageWidth`** | `int` | The width of the type icon in pixels (when available).
+| **`imageHeight`** | `int` | The height of the type icon in pixels (when available).
+| **`imageType`** | `string` | The type icon format (e.g., `png`) when available.
 
 ### CombatPower
 
@@ -102,10 +108,10 @@ Defines the CP (Combat Power) range for catching the raid boss.
 
 | Field             | Type  | Description
 |------------------ |------ |---------------------
-| **`normal.min`**  | `int` | The minimum CP when not weather boosted.
-| **`normal.max`**  | `int` | The maximum CP when not weather boosted.
-| **`boosted.min`** | `int` | The minimum CP when weather boosted.
-| **`boosted.max`** | `int` | The maximum CP when weather boosted.
+| **`normal.min`**  | `int\|null` | The minimum CP when not weather boosted, or `null` if unknown.
+| **`normal.max`**  | `int\|null` | The maximum CP when not weather boosted, or `null` if unknown.
+| **`boosted.min`** | `int\|null` | The minimum CP when weather boosted, or `null` if unknown.
+| **`boosted.max`** | `int\|null` | The maximum CP when weather boosted, or `null` if unknown.
 
 Weather boosting increases CP by approximately 25% and indicates better IVs (minimum 4/4/4 instead of 0/0/0).
 
@@ -117,7 +123,10 @@ Represents weather conditions that boost the raid boss.
 ```json
 {
     "name": "foggy",
-    "image": "https://pokemn.quest/images/weather/foggy.png"
+    "image": "https://pokemn.quest/images/weather/foggy.png",
+    "imageWidth": 32,
+    "imageHeight": 32,
+    "imageType": "png"
 }
 ```
 
@@ -127,6 +136,9 @@ Represents weather conditions that boost the raid boss.
 |------------ |--------- |---------------------
 | **`name`**  | `string` | The weather type. Values: `sunny`, `rainy`, `partly cloudy`, `cloudy`, `windy`, `snow`, `fog`
 | **`image`** | `string` | The image URL of the weather icon. Format: `https://pokemn.quest/images/weather/<weather>.png`
+| **`imageWidth`** | `int` | The width of the weather icon in pixels (when available).
+| **`imageHeight`** | `int` | The height of the weather icon in pixels (when available).
+| **`imageType`** | `string` | The weather icon format (e.g., `png`) when available.
 
 ## Field Details
 
@@ -174,7 +186,7 @@ The `eventStatus` field indicates when the boss is available:
 | Prefix                        | Stored Content                                      | Example URL (public) |
 |------------------------------|-----------------------------------------------------|----------------------|
 | `pokemon/<dex>-<slug>/...`   | Pokémon icons/sprites                               | `.../pokemon/001-bulbasaur/pokemon_icon_001_00.png` |
-| `events/<event>.jpg`         | Event banners                                      | `.../events/into-the-depths-2026.jpg` |
+| `events/<filename>.<ext>`    | Event banners                                      | `.../events/into-the-depths-2026.jpg`, `.../events/events-default-img.jpg` |
 | `types/<type>.png`           | Type icons                                         | `.../types/poison.png` |
 | `weather/<weather>.png`      | Weather icons                                      | `.../weather/cloudy.png` |
 | `bonuses/<bonus>.png`        | Bonus icons                                        | `.../bonuses/2x-stardust.png` |
@@ -196,7 +208,7 @@ The `eventStatus` field indicates when the boss is available:
 
 4. **Weather Arrays**: `boostedWeather` can contain 1-2 weather types depending on the Pokemon's types.
 
-5. **Image Dimensions**: Currently all images are 256×256 PNG files.
+5. **Image Dimensions**: Raid boss images are currently 256x256 PNG files. Nested type/weather icons include `imageWidth`/`imageHeight`/`imageType` when available.
 
 6. **Event Status**: The `unknown` status is used when raid availability timing isn't clearly defined or is part of the regular rotation.
 
@@ -215,6 +227,7 @@ Raid data can be cross-referenced with:
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/raids.schema.json",
   "title": "Pokemon GO Raids Data",
   "description": "Schema for Pokemon GO raid boss data",
   "type": "array",
@@ -247,18 +260,33 @@ Raid data can be cross-referenced with:
         "description": "The original name as displayed on the site (includes form/gender)"
       },
       "form": {
-        "type": ["string", "null"],
+        "type": [
+          "string",
+          "null"
+        ],
         "description": "The form of the Pokemon (e.g., Incarnate, Origin, Alola), or null if none"
       },
       "gender": {
-        "type": ["string", "null"],
+        "type": [
+          "string",
+          "null"
+        ],
         "description": "The gender of the Pokemon (male, female), or null if not specified",
-        "enum": ["male", "female", null]
+        "enum": [
+          "male",
+          "female",
+          null
+        ]
       },
       "tier": {
         "type": "string",
         "description": "The raid tier of the Pokemon",
-        "enum": ["1-Star Raids", "3-Star Raids", "5-Star Raids", "Mega Raids"]
+        "enum": [
+          "1-Star Raids",
+          "3-Star Raids",
+          "5-Star Raids",
+          "Mega Raids"
+        ]
       },
       "isShadowRaid": {
         "type": "boolean",
@@ -267,7 +295,12 @@ Raid data can be cross-referenced with:
       "eventStatus": {
         "type": "string",
         "description": "The status of the raid event",
-        "enum": ["ongoing", "upcoming", "inactive", "unknown"]
+        "enum": [
+          "ongoing",
+          "upcoming",
+          "inactive",
+          "unknown"
+        ]
       },
       "canBeShiny": {
         "type": "boolean",
@@ -278,7 +311,10 @@ Raid data can be cross-referenced with:
         "description": "The type(s) of the Pokemon",
         "items": {
           "type": "object",
-          "required": ["name", "image"],
+          "required": [
+            "name",
+            "image"
+          ],
           "properties": {
             "name": {
               "type": "string",
@@ -288,6 +324,25 @@ Raid data can be cross-referenced with:
               "type": "string",
               "format": "uri",
               "description": "The image of the type"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "The width of the type icon in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "The height of the type icon in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "The type icon format",
+              "enum": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "webp"
+              ]
             }
           },
           "additionalProperties": false
@@ -298,34 +353,55 @@ Raid data can be cross-referenced with:
       "combatPower": {
         "type": "object",
         "description": "The combat power range the Pokemon can be caught with",
-        "required": ["normal", "boosted"],
+        "required": [
+          "normal",
+          "boosted"
+        ],
         "properties": {
           "normal": {
             "type": "object",
-            "required": ["min", "max"],
+            "required": [
+              "min",
+              "max"
+            ],
             "properties": {
               "min": {
-                "type": "integer",
-                "description": "The minimum normal combat power of the Pokemon"
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "The minimum normal combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": "integer",
-                "description": "The maximum normal combat power of the Pokemon"
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "The maximum normal combat power of the Pokemon, or null if unknown"
               }
             },
             "additionalProperties": false
           },
           "boosted": {
             "type": "object",
-            "required": ["min", "max"],
+            "required": [
+              "min",
+              "max"
+            ],
             "properties": {
               "min": {
-                "type": "integer",
-                "description": "The minimum boosted combat power of the Pokemon"
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "The minimum boosted combat power of the Pokemon, or null if unknown"
               },
               "max": {
-                "type": "integer",
-                "description": "The maximum boosted combat power of the Pokemon"
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "description": "The maximum boosted combat power of the Pokemon, or null if unknown"
               }
             },
             "additionalProperties": false
@@ -338,17 +414,47 @@ Raid data can be cross-referenced with:
         "description": "The type(s) of weather that boost the Pokemon's combat power",
         "items": {
           "type": "object",
-          "required": ["name", "image"],
+          "required": [
+            "name",
+            "image"
+          ],
           "properties": {
             "name": {
               "type": "string",
               "description": "The name of the weather type",
-              "enum": ["sunny", "rainy", "partly cloudy", "cloudy", "windy", "snow", "fog"]
+              "enum": [
+                "sunny",
+                "rainy",
+                "partly cloudy",
+                "cloudy",
+                "windy",
+                "snow",
+                "fog"
+              ]
             },
             "image": {
               "type": "string",
               "format": "uri",
               "description": "The image of the weather type"
+            },
+            "imageWidth": {
+              "type": "integer",
+              "description": "The width of the weather icon in pixels"
+            },
+            "imageHeight": {
+              "type": "integer",
+              "description": "The height of the weather icon in pixels"
+            },
+            "imageType": {
+              "type": "string",
+              "description": "The weather icon format",
+              "enum": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "webp"
+              ]
             }
           },
           "additionalProperties": false
@@ -370,7 +476,13 @@ Raid data can be cross-referenced with:
       "imageType": {
         "type": "string",
         "description": "The image format",
-        "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+        "enum": [
+          "png",
+          "jpg",
+          "jpeg",
+          "gif",
+          "webp"
+        ]
       }
     },
     "additionalProperties": false

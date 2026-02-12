@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Great League, Ultra League, and Master League | Precious Paths",
   "eventType": "go-battle-league",
   "heading": "Go Battle League",
-  "image": "https://cdn.leekduck.com/assets/img/events/go-battle-league-season-25-precious-paths.jpg",
+  "image": "https://pokemn.quest/events/go-battle-league-season-25-precious-paths.jpg",
   "start": "2026-01-27T21:00:00.000Z",
   "end": "2026-02-03T21:00:00.000Z",
   "battle": {
@@ -62,15 +62,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the GO Battle League rotation
-| **`name`**      | `string` | Name of the rotation (includes active leagues)
-| **`eventType`** | `string` | Always `"go-battle-league"`
-| **`heading`**   | `string` | Always `"Go Battle League"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Rotation start date/time (ISO 8601 format with Z suffix for UTC)
-| **`end`**       | `string` | Rotation end date/time (ISO 8601 format with Z suffix for UTC)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the GO Battle League rotation
+| **`name`**         | `string`  | Name of the rotation (includes active leagues)
+| **`eventType`**    | `string`  | Always `"go-battle-league"`
+| **`heading`**      | `string`  | Always `"Go Battle League"`
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Rotation start date/time (ISO 8601 format with Z suffix for UTC)
+| **`end`**          | `string`  | Rotation end date/time (ISO 8601 format with Z suffix for UTC)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Battle Object
 

@@ -6,12 +6,11 @@
  */
 
 const fs = require('fs');
-const jsd = require('jsdom');
-const { JSDOM } = jsd;
-const https = require('https');
 const { loadShinyData, extractDexNumber, hasShiny } = require('../utils/shinyData');
 const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const { transformUrls } = require('../utils/blobUrls');
+const logger = require('../utils/logger');
+const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
 
 /**
  * @typedef {Object} CombatPower
@@ -53,12 +52,12 @@ const { transformUrls } = require('../utils/blobUrls');
  * await eggs.get();
  * // Creates data/eggs.json and data/eggs.min.json
  */
-function get()
+async function get()
 {
-    return new Promise(resolve => {
-        JSDOM.fromURL("https://leekduck.com/eggs/", {
-        })
-        .then(async (dom) => {
+    logger.info("Scraping eggs...");
+    try {
+        try {
+            const dom = await getJSDOM("https://leekduck.com/eggs/");
 
             var content = dom.window.document.querySelector('.page-content').childNodes;
 
@@ -74,10 +73,19 @@ function get()
             {
                 if (c.tagName == "H2")
                 {
-                    currentType = c.innerHTML.trim();
+                    currentType = c.textContent.trim();
                     currentAdventureSync = currentType.includes("(Adventure Sync Rewards)");
                     currentGiftExchange = currentType.includes("(From Route Gift)");
                     currentType = currentType.split(" Eggs")[0];
+                    // Normalize to compact format: "2 km" → "2km", "Adventure Sync 5 km" → "adventure5km"
+                    if (currentAdventureSync) {
+                        const kmMatch = currentType.match(/(\d+)\s*km/i);
+                        currentType = kmMatch ? `adventure${kmMatch[1]}km` : currentType.replace(/\s+/g, '').toLowerCase();
+                    } else if (currentGiftExchange) {
+                        currentType = 'route';
+                    } else {
+                        currentType = currentType.replace(/\s+/g, '').toLowerCase();
+                    }
                 }
                 else if (c.className == "egg-grid")
                 {
@@ -90,15 +98,15 @@ function get()
                             image: "",
                             canBeShiny: false,
                             combatPower: {
-                                min: -1,
-                                max: -1
+                                min: null,
+                                max: null
                             },
                             isRegional: false,
                             isGiftExchange: false,
                             rarity: 0
                         };
 
-                        pokemon.name = e.querySelector(".name").innerHTML || "";
+                        pokemon.name = e.querySelector(".name")?.textContent.trim() || "";
                         pokemon.eggType = currentType;
                         pokemon.isAdventureSync = currentAdventureSync;
                         pokemon.image = e.querySelector(".icon img").src || "";
@@ -112,16 +120,16 @@ function get()
                         pokemon.isRegional = e.querySelector(".regional-icon") != null;
                         pokemon.isGiftExchange = currentGiftExchange;
 
-                        var cpText = e.querySelector(".cp-range").innerHTML;
-                        var cpValue = cpText.replace('<span class="label">CP </span>', '').trim();
+                        var cpText = e.querySelector(".cp-range")?.textContent.trim() || "";
+                        var cpValue = cpText.replace(/^CP\s*/i, '').trim();
                         
                         // Logic to handle single CP value if no range is provided 
                         if (cpValue.includes(' - ')) {
-                            pokemon.combatPower.min = parseInt(cpValue.split(' - ')[0]);
-                            pokemon.combatPower.max = parseInt(cpValue.split(' - ')[1]);
+                            pokemon.combatPower.min = parseInt(cpValue.split(' - ')[0]) || null;
+                            pokemon.combatPower.max = parseInt(cpValue.split(' - ')[1]) || null;
                         } else {
-                            pokemon.combatPower.min = parseInt(cpValue);
-                            pokemon.combatPower.max = parseInt(cpValue);
+                            pokemon.combatPower.min = parseInt(cpValue) || null;
+                            pokemon.combatPower.max = parseInt(cpValue) || null;
                         }
 
                         var rarityDiv = e.querySelector(".rarity");
@@ -151,45 +159,20 @@ function get()
 
             const output = transformUrls(eggs);
 
-            fs.writeFile('data/eggs.min.json', JSON.stringify(output), err => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-            });
-        }).catch(_err =>
-            {
-                console.log(_err);
-                https.get("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.min.json", (res) =>
-                {
-                    let body = "";
-                    res.on("data", (chunk) => { body += chunk; });
-                
-                    res.on("end", () => {
-                        try
-                        {
-                            let json = JSON.parse(body);
-    
-                            const output = transformUrls(json);
+            await fs.promises.writeFile('data/eggs.min.json', JSON.stringify(output));
+            logger.success("Eggs saved.");
+        } catch (_err) {
+            logger.error(_err);
 
-                            fs.writeFile('data/eggs.min.json', JSON.stringify(output), err => {
-                                if (err) {
-                                    console.error(err);
-                                    return;
-                                }
-                            });
-                        }
-                        catch (error)
-                        {
-                            console.error(error.message);
-                        };
-                    });
-                
-                }).on("error", (error) => {
-                    console.error(error.message);
-                });
-            });
-    })
+            const json = await fetchJson("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/eggs.min.json");
+            const output = transformUrls(json);
+
+            await fs.promises.writeFile('data/eggs.min.json', JSON.stringify(output));
+            logger.success("Eggs saved (fallback).");
+        }
+    } catch (error) {
+        logger.error(error.message);
+    }
 }
 
 module.exports = { get }

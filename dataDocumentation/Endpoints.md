@@ -19,6 +19,10 @@
 | Research Day                     | `https://pokemn.quest/data/eventTypes/research-day.min.json` |
 | Season                           | `https://pokemn.quest/data/eventTypes/season.min.json`       |
 | Team GO Rocket                   | `https://pokemn.quest/data/eventTypes/team-go-rocket.min.json` |
+| GO Rocket Takeover               | `https://pokemn.quest/data/eventTypes/go-rocket-takeover.min.json` |
+| Research Breakthrough            | `https://pokemn.quest/data/eventTypes/research-breakthrough.min.json` |
+| Special Research                 | `https://pokemn.quest/data/eventTypes/special-research.min.json` |
+| Timed Research                   | `https://pokemn.quest/data/eventTypes/timed-research.min.json` |
 | **Raids**                        | `https://pokemn.quest/data/raids.min.json`                    |
 | **Research**                     | `https://pokemn.quest/data/research.min.json`                 |
 | **Eggs**                         | `https://pokemn.quest/data/eggs.min.json`                     |

@@ -1,11 +1,12 @@
 # scrapedPoGo
 
-A comprehensive web scraper for Pokémon GO event data from [LeekDuck.com](https://leekduck.com).
+A comprehensive web scraper for Pokémon GO event data.
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
 - [API Endpoints](#api-endpoints)
+- [Data Visualization](#data-visualization)
 - [Data Quality Metrics](#data-quality-metrics)
 - [JSON Schemas](#json-schemas)
 - [Project Structure](#project-structure)
@@ -26,11 +27,8 @@ npm install
 ### Running Scrapers
 
 ```bash
-# Scrape all basic data (events, raids, research, eggs, rocket lineups)
+# Scrape all basic data (events, raids, research, eggs, rocket lineups, shinies)
 npm run scrape
-
-# Scrape shiny Pokemon data
-npm run scrapeshinies
 
 # Scrape detailed event information
 npm run detailedscrape
@@ -80,7 +78,7 @@ The unified endpoint combines all datasets into a single payload with:
 ### Events
 - Formatted: `https://pokemn.quest/data/events.json`
 - Minimized: `https://pokemn.quest/data/events.min.json`
-- [Documentation](docs/Events.md)
+- [Documentation](dataDocumentation/Events.md)
 
 #### Event Types (per-type files)
 
@@ -92,43 +90,73 @@ Each `eventType` has its own file containing only events of that type (automatic
 ### Raids
 - Formatted: `https://pokemn.quest/data/raids.json`
 - Minimized: `https://pokemn.quest/data/raids.min.json`
-- [Documentation](docs/Raids.md)
+- [Documentation](dataDocumentation/Raids.md)
 
 ### Research
 - Formatted: `https://pokemn.quest/data/research.json`
 - Minimized: `https://pokemn.quest/data/research.min.json`
-- [Documentation](docs/Research.md)
+- [Documentation](dataDocumentation/Research.md)
 
 ### Eggs
 - Formatted: `https://pokemn.quest/data/eggs.json`
 - Minimized: `https://pokemn.quest/data/eggs.min.json`
-- [Documentation](docs/Eggs.md)
+- [Documentation](dataDocumentation/Eggs.md)
 
 ### Rocket Lineups
 - Formatted: `https://pokemn.quest/data/rocketLineups.json`
 - Minimized: `https://pokemn.quest/data/rocketLineups.min.json`
-- [Documentation](docs/RocketLineups.md)
+- [Documentation](dataDocumentation/RocketLineups.md)
 
 ### Shinies
 - Formatted: `https://pokemn.quest/data/shinies.json`
 - Minimized: `https://pokemn.quest/data/shinies.min.json`
-- [Documentation](docs/Shinies.md)
+- [Documentation](dataDocumentation/Shinies.md)
 
 ---
 
-## Data Quality Metrics
+## Data Visualization
 
-Monitor the health and completeness of scraped data with the built-in metrics dashboard.
+A simple front-end visualization tool is included to browse and verify the scraped data.
 
-### Metrics Dashboard
+### Quick Start
 
-Access the live dashboard at: **https://pokemn.quest/web/metrics.html**
+```bash
+# Start the local server
+npm run serve
 
-The dashboard provides:
-- **System Overview**: Overall health status, total records, average completeness
-- **Dataset Health Cards**: Individual status for each dataset with completeness bars
-- **Issue Detection**: Automatic identification of missing fields, invalid data, and other problems
-- **Auto-Refresh**: Updates every 5 minutes to show current data quality
+# Open in browser
+# http://localhost:3000
+```
+
+### Features
+
+The visualization provides:
+- **Visual catalogue** of all data types (Events, Raids, Research, Eggs, Rocket Lineups, Shinies)
+- **Event type examples** showing one event of each type (Community Day, GO Tour, Raid Battles, etc.)
+- **Endpoint verification** with status indicators for each API endpoint
+- **Responsive design** that works on desktop and mobile
+- **Live data loading** from local data files or production API
+
+### What's Displayed
+
+- **Events**: First 3 events with images, dates, and featured Pokemon
+- **Raids**: First 6 raid bosses with CP ranges, types, and shiny availability
+- **Research**: First 3 research items with task counts
+- **Eggs**: First 6 egg hatches with rarity and shiny info
+- **Rocket Lineups**: First 4 Team GO Rocket lineups with slot details
+- **Shinies**: First 12 shiny Pokemon with release dates
+- **Event Types**: One example of each of the 20 event types
+- **Unified Data**: Summary statistics for all datasets
+
+### Configuration
+
+The visualization can load data from:
+- **Local files** (default): Serves from `data/` directory
+- **Production API**: Change `USE_LOCAL_DATA` to `false` in `public/app.js`
+
+See [public/README.md](public/README.md) for detailed documentation.
+
+---
 
 ## JSON Schemas
 
@@ -151,6 +179,30 @@ Validate all data files against their schemas:
 npm run validate
 ```
 
+### Schema/Data/Docs Comparison
+
+Compare canonical schemas, canonical data files, and markdown documentation:
+
+```bash
+npm run compare:schemas
+```
+
+Run in strict mode (non-zero exit only for canonical mismatches):
+
+```bash
+npm run compare:schemas:strict
+```
+
+By default, reports are written to:
+- `reports/schema-comparison.json`
+- `reports/schema-comparison.md`
+
+You can also run the script directly:
+
+```bash
+node src/scripts/compare-docs-data-schemas.js --mode report|strict --json-out <path> --md-out <path> [--no-write]
+```
+
 ### Usage
 
 See the [schemas README](schemas/README.md) for:
@@ -165,12 +217,19 @@ See the [schemas README](schemas/README.md) for:
 ```
 scrapedPoGo/
 ├── src/                    # Source code
-│   ├── scrapers/           # Main scraper scripts
+│   ├── scrapers/           # Pipeline orchestrators
 │   ├── pages/              # Page-specific scraper modules
-│   │   └── detailed/       # Detailed event scrapers
-│   └── utils/              # Utility functions
-├── data/                   # Output data files (JSON)
-├── docs/                   # API and data structure documentation
+│   │   └── detailed/       # Detailed event scrapers (one per eventType)
+│   ├── utils/              # Utility functions and helpers
+│   └── scripts/            # Validation, comparison, upload scripts
+├── data/                   # Output data files (JSON + .min.json)
+│   └── eventTypes/         # Per-eventType output files
+├── dataDocumentation/      # API and data structure documentation
+│   └── eventTypes/         # Per-eventType documentation
+├── schemas/                # JSON Schema definitions (draft-07)
+├── public/                 # Visualization front-end
+├── test/                   # Test files
+├── .github/                # CI/CD workflows and Copilot config
 ├── package.json            # Dependencies and scripts
 └── README.md               # This file
 ```
@@ -181,17 +240,16 @@ scrapedPoGo/
 
 | File | Description |
 |------|-------------|
-| `scrape.js` | Primary scraper for basic data (events, raids, research, eggs, rocket lineups) |
-| `detailedscrape.js` | Scraper for detailed event information |
-| `combinedetails.js` | Combines detailed data with basic event data and generates per-eventType files |
-| `scrapeShinies.js` | Scrapes shiny Pokemon availability data |
-| `explore.js` | Utility for exploring page structure (development/debugging) |
+| `scrape.js` | Stage 1: Scrapes all basic data types in parallel (events, raids, research, eggs, rocket lineups, shinies) |
+| `detailedscrape.js` | Stage 2: Dispatches to type-specific scrapers for detailed event pages (concurrency limit: 5) |
+| `combinedetails.js` | Stage 3: Merges temp files into events, flattens structure, generates per-eventType files |
+| `combineAll.js` | Bonus: Generates unified data file with all datasets, indices, and statistics |
 
 #### Page Scrapers (`src/pages/`)
 
 | File | Description |
 |------|-------------|
-| `events.js` | Scrapes event information from LeekDuck |
+| `events.js` | Scrapes event information |
 | `raids.js` | Scrapes raid boss data |
 | `research.js` | Scrapes field research tasks and rewards |
 | `eggs.js` | Scrapes egg hatch pool data |
@@ -309,11 +367,7 @@ Scrapes additional event-specific data and merges it into the events data. This 
 
 ### Shiny Pokemon Data
 
-```bash
-npm run scrapeshinies
-```
-
-Generates shiny availability data used to augment `canBeShiny` fields in other endpoints.
+Shiny availability data is scraped as part of `npm run scrape` and used to augment `canBeShiny` fields in other endpoints.
 
 ---
 
@@ -322,7 +376,6 @@ Generates shiny availability data used to augment `canBeShiny` fields in other e
 ### Technical Notes
 
 - All scrapers use [JSDOM](https://github.com/jsdom/jsdom) for HTML parsing
-- Data is fetched from LeekDuck.com with permission
 - Temporary files during detailed scraping are stored in `data/temp/` and cleaned up automatically
 - The project uses [moment.js](https://momentjs.com/) for date/time handling
 
@@ -336,18 +389,17 @@ Generates shiny availability data used to augment `canBeShiny` fields in other e
 Example:
 
 ```javascript
-const { JSDOM } = require('jsdom');
-const { writeTempFile, handleScraperError, extractPokemonList } = require('../../utils/scraperUtils');
+const { getJSDOM, writeTempFile, handleScraperError, extractPokemonList } = require('../../utils/scraperUtils');
 
 async function get(url, id, bkp) {
     try {
-        const dom = await JSDOM.fromURL(url, {});
+        const dom = await getJSDOM(url);
         const doc = dom.window.document;
-        
+
         const data = {
             featured: await extractPokemonList(doc.querySelector('.pkmn-list-flex'))
         };
-        
+
         if (data.featured.length > 0) {
             writeTempFile(id, 'my-event-type', data);
         }
@@ -363,12 +415,18 @@ module.exports = { get };
 
 | Script | Description |
 |--------|-------------|
-| `npm run scrape` | Run basic scraper (all data types) |
-| `npm run scrapeshinies` | Run shiny Pokemon scraper |
+| `npm run scrape` | Run all scrapers (events, raids, research, eggs, rocket, shinies) |
 | `npm run detailedscrape` | Scrape detailed event information |
 | `npm run combinedetails` | Combine detailed data with basic events and generate per-eventType files |
+| `npm run combineall` | Generate unified data file with all datasets and indices |
 | `npm run validate` | Validate all data files against JSON schemas |
 | `npm run blob:upload` | Upload images to Vercel Blob Storage (supports `--dry-run`, `--force`) |
+| `npm run serve` | Start local visualization server on http://localhost:3000 |
+| `npm run build` | Copy data files to public/data for visualization |
+| `npm run test` | Run test suite (`node --test`) |
+| `npm run compare:schemas` | Compare schemas, data, and docs for consistency |
+| `npm run compare:schemas:strict` | Strict mode — non-zero exit only for canonical mismatches |
+| `npm run pipeline` | Full pipeline (all stages with `USE_BLOB_URLS=true`) |
 
 ---
 
@@ -400,6 +458,7 @@ npm run blob:upload -- --force
 Set the `USE_BLOB_URLS=true` environment variable to transform image URLs in JSON output to use Vercel Blob storage URLs instead of external CDNs.
 
 The URL mapping is stored in `src/utils/blob-url-map.json` and automatically updated during uploads.
+Event banner images are resized to 50% of their source dimensions before upload; corresponding event `imageWidth`/`imageHeight` values reflect the stored (resized) banner dimensions.
 
 ### Blob Pathname Scheme
 
@@ -407,7 +466,7 @@ Images are organized by **content type**, not by source. The folder structure is
 
 ```
 pokemon/<dex>-<name>/<filename> # Pokemon sprites/icons (e.g., pokemon/155-cyndaquil/pm155.icon.png)
-events/<slug>.<ext>             # Event banners (e.g., events/2026-02-28-pokemon-go-tour-kalos-global-2026.jpg)
+events/<filename>.<ext>         # Event banners (e.g., events/into-the-depths-2026.jpg, events/events-default-img.jpg)
 types/<type>.png               # Type icons (e.g., types/fire.png)
 weather/<weather>.png          # Weather icons (e.g., weather/sunny.png)
 bonuses/<bonus>.png            # Bonus icons (e.g., bonuses/candy.png)
@@ -418,39 +477,29 @@ stickers/<file>                # Sticker images
 misc/<file>                    # Anything else
 ```
 
-### Download Images Locally
-
-You can download a local mirror of all referenced images using the same folder structure:
-
-```bash
-# Preview what would be downloaded
-npm run images:download -- --dry-run
-
-# Download all images
-npm run images:download
-```
-
-By default, images are written under `data/blob-images/`:
-
-```
-data/blob-images/pokemon/155-cyndaquil/pm155.icon.png
-data/blob-images/events/2026-02-14-valentines-day-2026.jpg
-data/blob-images/types/fire.png
-```
-
 ---
 
 ## Documentation
 
-Detailed API documentation for each endpoint:
+### Complete API Reference
 
-- [Events](docs/Events.md) - Event data with type-specific fields
-- [Raids](docs/Raids.md) - Raid boss data with CP ranges
-- [Research](docs/Research.md) - Field research tasks and rewards
-- [Eggs](docs/Eggs.md) - Egg hatch pools by distance
-- [Rocket Lineups](docs/RocketLineups.md) - Team GO Rocket lineups
-- [Shinies](docs/Shinies.md) - Shiny Pokemon availability
-- [Architecture Diagrams](docs/architecture-diagrams.md) - Mermaid system and flow diagrams
+**📘 [Complete API Documentation](dataDocumentation/API.md)** - Everything in one place (~3,300 lines)
+
+Comprehensive single-file reference covering all endpoints, data types, event types, field schemas, conventions, and usage examples.
+
+### Modular Documentation
+
+Detailed documentation split by data type:
+
+- [Endpoints](dataDocumentation/Endpoints.md) - Complete API endpoint listing
+- [Events](dataDocumentation/Events.md) - Event data with type-specific fields (20 event types)
+- [Raids](dataDocumentation/Raids.md) - Raid boss data with CP ranges
+- [Research](dataDocumentation/Research.md) - Field research tasks and rewards
+- [Eggs](dataDocumentation/Eggs.md) - Egg hatch pools by distance
+- [Rocket Lineups](dataDocumentation/RocketLineups.md) - Team GO Rocket lineups
+- [Shinies](dataDocumentation/Shinies.md) - Shiny Pokemon availability
+- [Unified Data](dataDocumentation/UnifiedData.md) - Combined dataset with indices
+- [Pokémon GO Context](.github/docs/POKEMON_GO_CONTEXT.md) - Game mechanics reference
 
 ---
 

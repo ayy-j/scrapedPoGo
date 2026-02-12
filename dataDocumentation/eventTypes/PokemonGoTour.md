@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Pokémon GO Tour: Kalos - Tainan 2026",
   "eventType": "pokemon-go-tour",
   "heading": "Pokemon GO Tour",
-  "image": "https://cdn.leekduck.com/assets/img/events/pogo-tour-kalos.jpg",
+  "image": "https://pokemn.quest/events/pogo-tour-kalos.jpg",
   "start": "2026-02-20T09:00:00.000",
   "end": "2026-02-22T17:00:00.000",
   "eventInfo": {
@@ -44,7 +44,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "pokemon": [
     {
       "name": "Chespin",
-      "image": "https://cdn.leekduck.com/assets/img/pokemon_icons/pokemon_icon_650_00.png",
+      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_650_00.png",
       "canBeShiny": true,
       "source": "spawn"
     }
@@ -70,15 +70,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the GO Tour event
-| **`name`**      | `string` | Name of the GO Tour (typically includes region/theme)
-| **`eventType`** | `string` | Always `"pokemon-go-tour"`
-| **`heading`**   | `string` | Always `"Pokemon GO Tour"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Event start date/time (ISO 8601 format)
-| **`end`**       | `string` | Event end date/time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the GO Tour event
+| **`name`**         | `string`  | Name of the GO Tour (typically includes region/theme)
+| **`eventType`**    | `string`  | Always `"pokemon-go-tour"`
+| **`heading`**      | `string`  | Always `"Pokemon GO Tour"`
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start date/time (ISO 8601 format)
+| **`end`**          | `string`  | Event end date/time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Optional Fields
 

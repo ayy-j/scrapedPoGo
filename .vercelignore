@@ -1,0 +1,24 @@
+# Development files
+node_modules
+.env.local
+.DS_Store
+
+# Source files (not needed in deployment)
+src
+schemas
+test
+
+# Documentation
+dataDocumentation
+*.md
+!README.md
+
+# Configuration
+.gitignore
+.github
+serve.js
+POKEMON_GO_CONTEXT.md
+.jules
+
+# Keep these directories - they're needed for the build script
+# public/ and data/ will be copied to .vercel/output/static by the build script

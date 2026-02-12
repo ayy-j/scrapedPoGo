@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/research.schema.json",
   "title": "Pokemon GO Research Data",
-  "description": "Schema for Pokemon GO field research tasks and rewards from LeekDuck",
+  "description": "Schema for Pokemon GO field research tasks and rewards",
   "type": "array",
   "items": {
     "type": "object",
@@ -65,12 +65,12 @@
               "required": ["min", "max"],
               "properties": {
                 "min": {
-                  "type": "integer",
-                  "description": "The minimum combat power of the reward Pokemon"
+                  "type": ["integer", "null"],
+                  "description": "The minimum combat power of the reward Pokemon, or null if unknown"
                 },
                 "max": {
-                  "type": "integer",
-                  "description": "The maximum combat power of the reward Pokemon"
+                  "type": ["integer", "null"],
+                  "description": "The maximum combat power of the reward Pokemon, or null if unknown"
                 }
               },
               "additionalProperties": false

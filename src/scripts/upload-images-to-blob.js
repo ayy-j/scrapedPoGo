@@ -3,6 +3,7 @@
 /**
  * @fileoverview Upload scraped images to Vercel Blob Storage.
  * Reads image URLs from JSON data files, downloads, and uploads to Blob.
+ * Event banner images are resized to 50% dimensions prior to upload.
  * @usage node scripts/upload-images-to-blob.js [--dry-run] [--force]
  */
 
@@ -10,6 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const http = require('http');
+const sharp = require('sharp');
 const dotenv = require('dotenv');
 const { canonicalizeExternalImageUrl, externalUrlToBlobPathname } = require('../utils/blobNaming');
 
@@ -131,6 +133,59 @@ function getContentType(url) {
 }
 
 /**
+ * Check whether a blob pathname is an event banner path.
+ * @param {string} pathname - Blob pathname
+ * @returns {boolean}
+ */
+function isEventBannerPath(pathname) {
+    return typeof pathname === 'string' && pathname.startsWith('events/');
+}
+
+/**
+ * Resize event banners to 50% before upload.
+ * Keeps original format and aspect ratio.
+ *
+ * @param {Buffer} imageBuffer - Original image data
+ * @param {string} pathname - Blob pathname
+ * @param {string} contentType - MIME content type
+ * @returns {Promise<{buffer: Buffer, resized: boolean}>}
+ */
+async function maybeResizeEventBanner(imageBuffer, pathname, contentType) {
+    if (!isEventBannerPath(pathname)) {
+        return { buffer: imageBuffer, resized: false };
+    }
+
+    // Skip formats we do not want to transform.
+    if (contentType === 'image/svg+xml' || contentType === 'image/gif') {
+        return { buffer: imageBuffer, resized: false };
+    }
+
+    const image = sharp(imageBuffer, { failOnError: false });
+    const metadata = await image.metadata();
+    if (!metadata.width || !metadata.height) {
+        return { buffer: imageBuffer, resized: false };
+    }
+
+    const targetWidth = Math.max(1, Math.round(metadata.width * 0.5));
+    const targetHeight = Math.max(1, Math.round(metadata.height * 0.5));
+
+    if (targetWidth === metadata.width && targetHeight === metadata.height) {
+        return { buffer: imageBuffer, resized: false };
+    }
+
+    const resizedBuffer = await image
+        .resize({
+            width: targetWidth,
+            height: targetHeight,
+            fit: 'inside',
+            withoutEnlargement: true
+        })
+        .toBuffer();
+
+    return { buffer: resizedBuffer, resized: true };
+}
+
+/**
  * Read all JSON files from data directory recursively
  * @param {string} dir - Directory to read
  * @param {Object[]} files - Accumulator array
@@ -221,16 +276,33 @@ async function main() {
         }
     }
 
-    // Filter out URLs that are already mapped (unless forcing)
-    const urlsToProcess = FORCE 
-        ? uniqueUrls 
-        : uniqueUrls.filter(url => !urlMap[url]);
+    // Filter out URLs that are already mapped (unless forcing).
+    // Event banners are always reprocessed so they are consistently stored at 50% size.
+    let reprocessEventBanners = 0;
+    const urlsToProcess = FORCE
+        ? uniqueUrls
+        : uniqueUrls.filter(url => {
+            const pathname = urlToPathname(url);
+            const isEventBanner = isEventBannerPath(pathname);
+
+            if (isEventBanner) {
+                if (urlMap[url]) {
+                    reprocessEventBanners++;
+                }
+                return true;
+            }
+
+            return !urlMap[url];
+        });
     
     const alreadyMapped = uniqueUrls.length - urlsToProcess.length;
     if (alreadyMapped > 0) {
         console.log(`   ⏭ ${alreadyMapped} URLs already in blob storage (skipping)`);
     }
-    console.log(`   📤 ${urlsToProcess.length} new URLs to upload\n`);
+    if (reprocessEventBanners > 0) {
+        console.log(`   ♻ ${reprocessEventBanners} mapped event banners will be resized and overwritten`);
+    }
+    console.log(`   📤 ${urlsToProcess.length} URLs to upload\n`);
 
     // Early exit if nothing to upload
     if (urlsToProcess.length === 0 && !DRY_RUN) {
@@ -263,14 +335,19 @@ async function main() {
                     // Download image
                     const imageBuffer = await downloadImage(url);
                     const contentType = getContentType(url);
+                    const { buffer: uploadBuffer, resized } = await maybeResizeEventBanner(
+                        imageBuffer,
+                        pathname,
+                        contentType
+                    );
 
                     // Upload to blob
                     // Note: addRandomSuffix defaults to false in put()
-                    // allowOverwrite is needed when FORCE is true to overwrite existing blobs
-                    const blob = await put(pathname, imageBuffer, {
+                    // allowOverwrite is used for --force and for event banner refreshes.
+                    const blob = await put(pathname, uploadBuffer, {
                         access: 'public',
                         addRandomSuffix: false,
-                        allowOverwrite: FORCE,
+                        allowOverwrite: FORCE || isEventBannerPath(pathname),
                         contentType: contentType,
                     });
 
@@ -291,14 +368,30 @@ async function main() {
                     results.success++;
 
                     if (VERBOSE) {
-                        console.log(`  ✓ ${pathname} (${(imageBuffer.length / 1024).toFixed(1)} KB)`);
+                        const sizeText = `${(uploadBuffer.length / 1024).toFixed(1)} KB`;
+                        const resizeNote = resized ? ' [resized 50%]' : '';
+                        console.log(`  ✓ ${pathname} (${sizeText})${resizeNote}`);
                     }
                 } catch (err) {
-                    errors.push({ url, error: err.message });
-                    results.failed++;
+                    // If blob already exists, generate the mapping from the pathname
+                    if (err.message && err.message.includes('already exists')) {
+                        const blobUrl = `${BLOB_CUSTOM_DOMAIN}/${pathname}`;
+                        urlMap[url] = blobUrl;
+                        if (canonicalUrl && canonicalUrl !== url) {
+                            urlMap[canonicalUrl] = blobUrl;
+                        }
+                        results.success++;
 
-                    if (VERBOSE) {
-                        console.error(`  ✗ ${url}: ${err.message}`);
+                        if (VERBOSE) {
+                            console.log(`  ≡ ${pathname} (already in blob, mapped)`);
+                        }
+                    } else {
+                        errors.push({ url, error: err.message });
+                        results.failed++;
+
+                        if (VERBOSE) {
+                            console.error(`  ✗ ${url}: ${err.message}`);
+                        }
                     }
                 }
             })

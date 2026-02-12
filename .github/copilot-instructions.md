@@ -1,78 +1,115 @@
-# Copilot Instructions for scrapedPoGo
+# scrapedPoGo Copilot Instructions
 
-This project scrapes Pokémon GO event data from [LeekDuck.com](https://leekduck.com) and serves it as a JSON API at `https://pokemn.quest/data/`.
+scrapedPoGo is a Node.js (CommonJS) scraper pipeline for Pokémon GO data. It scrapes upstream sources, normalizes data, and serves static JSON from `data/` (plus a simple UI in `public/`).
 
-## Architecture Overview
+## Start Here (High-Signal Anchors)
+- `package.json`: canonical scripts and runtime dependencies
+- `src/scrapers/scrape.js`: stage 1 orchestration (events first, then parallel scrapers)
+- `src/scrapers/detailedscrape.js`: stage 2 detailed dispatch + concurrency control
+- `src/scrapers/combinedetails.js`: stage 3 merge/flatten + eventType file generation
+- `src/scrapers/combineAll.js`: unified dataset + indices/statistics
+- `src/utils/scraperUtils.js`: shared fetch/extraction/error-handling contract
+- `src/scripts/lib/schema-manifest.js`: canonical schema/data/doc triplets
+- `.github/workflows/scraper.yaml`: CI source of truth (Node 20, scheduled every 8 hours)
 
-**Three-stage scraping pipeline:**
-1. `npm run scrape` → Basic event metadata (name, dates, images) → `data/events.min.json`
-2. `npm run detailedscrape` → Event-specific content (Pokemon, bonuses, raids) → `data/temp/*.json`
-3. `npm run combinedetails` → Merges temp files + generates per-eventType files → `data/eventTypes/*.json`
+## Project Type and Stack
+- Single-package Node.js repository (not a monorepo)
+- CommonJS modules (`require` / `module.exports`), not ESM
+- Scraping/parsing: `jsdom`
+- Validation: `ajv` + `ajv-formats`
+- Optional image hosting rewrite: `@vercel/blob` + URL mapping utilities
+- Tests: built-in `node:test` (see `test/compare-docs-data-schemas.test.js`)
+- Deployment target: Vercel (see `vercel.json` and `.vercel/`)
 
-**Key directories:**
-- `src/pages/` - Basic scrapers for each data type (events, raids, eggs, research, shinies)
-- `src/pages/detailed/` - Type-specific detailed scrapers (one per eventType)
-- `src/utils/scraperUtils.js` - **Core utility library** with 1200+ lines of shared extraction functions
-- `schemas/` - JSON schemas for validation (`npm run validate`)
-- `data/` - Output JSON files (both `.json` formatted and `.min.json` minified)
+## Exact Commands
+Use `npm` in this repo (CI and lockfile are npm-based).
 
-## Scraper Patterns
+- Install deps: `npm install`
+- Run stage 1 scrape: `npm run scrape`
+- Run stage 2 detailed scrape: `npm run detailedscrape`
+- Run stage 3 merge/flatten: `npm run combinedetails`
+- Build unified file: `npm run combineall`
+- Full pipeline: `npm run pipeline`
+- Validate data vs schemas: `npm run validate`
+- Compare schema/data/docs (report mode): `npm run compare:schemas`
+- Compare schema/data/docs (strict mode): `npm run compare:schemas:strict`
+- Upload new images to Blob: `npm run blob:upload -- --dry-run` then `npm run blob:upload`
+- Run local visualizer: `npm run serve` (default `http://localhost:3000`)
+- Prepare static `public/data` for static hosting: `npm run build`
+- Run tests: `npm test`
+- Deploy to Vercel (uses `vercel.json` rewrites): `npx vercel --prod` (run `npm run build` first so `public/data` is populated)
 
-**Adding a new eventType scraper:**
-1. Create `src/pages/detailed/{eventtype}.js` following existing patterns (see `communityday.js`)
-2. Register in `src/scrapers/detailedscrape.js` switch statement
-3. Add event type to `schemas/events.schema.json` enum
-4. Document in `docs/eventTypes/{EventType}.md`
+## Pipeline Architecture (How Data Flows)
+1. Stage 1 (`src/scrapers/scrape.js`)
+- Scrapes base datasets into `data/*.min.json`
+- `events.get()` runs before raids/research/eggs/rocket/shinies because raids depend on event data
 
-**Standard scraper structure:**
-```javascript
-const { writeTempFile, handleScraperError, extractPokemonList, extractBonuses } = require('../../utils/scraperUtils');
+2. Stage 2 (`src/scrapers/detailedscrape.js`)
+- Reads `data/events.min.json`
+- For each event, always runs `generic.get(...)` plus a type-specific scraper
+- Uses concurrency limit 5 via `runWithConcurrency`
+- Writes temporary files to `data/temp/*.json`
 
-async function get(url, id, bkp) {
-    try {
-        const dom = await JSDOM.fromURL(url);
-        const doc = dom.window.document;
-        // Extract data using scraperUtils helpers
-        writeTempFile(id, 'event-type', data);
-    } catch (err) {
-        handleScraperError(err, id, 'event-type', bkp, 'scraperKey');
-    }
-}
-```
+3. Stage 3 (`src/scrapers/combinedetails.js`)
+- Merges temp files into events
+- Flattens event objects through `segmentEventData(...)`
+- Computes `isGlobal` and `eventStatus`
+- Writes `data/events.min.json` and `data/eventTypes/*.min.json`
+- Deletes `data/temp/`
 
-**Key extraction utilities in `scraperUtils.js`:**
-- `extractPokemonList(container)` - Parses `.pkmn-list-flex` containers
-- `extractBonuses(container)` - Parses bonus sections
-- `extractResearchTasks(container)` - Parses research task lists
-- `extractSection(doc, sectionId)` - Gets content from event sections
-- `writeTempFile(id, type, data)` - Writes to `data/temp/` for later combination
+4. Unified stage (`src/scrapers/combineAll.js`)
+- Reads base datasets + `data/eventTypes/*.min.json`
+- Builds `pokemonIndex`, `indices`, and `stats`
+- Writes `data/unified.min.json`
 
-## Data Conventions
+## Core Conventions to Follow
 
-**Event data structure:** All fields flattened to top level (no nested `details` wrapper):
-```javascript
-{ eventID, name, eventType, heading, image, start, end, pokemon: [], raids: [], bonuses: [] }
-```
+### Scraper module contracts
+- Top-level scrapers export `get()` (see `src/pages/events.js`, `src/pages/raids.js`)
+- Detailed scrapers export `get(url, id, bkp)` (see `src/pages/detailed/communityday.js`)
+- Detailed scrapers write temp payloads with `writeTempFile(...)` from `src/utils/scraperUtils.js`
+- On failures, use `handleScraperError(...)` fallback path from `src/utils/scraperUtils.js`
 
-**Pokemon objects** always include `source` field: `'spawn'`, `'featured'`, `'incense'`, `'costumed'`, `'debut'`, `'maxDebut'`
+### Shared extraction/utilities
+- Prefer existing helpers in `src/utils/scraperUtils.js` before adding custom parsing
+- Use `getJSDOM(...)` instead of ad-hoc fetch/parsing; it includes request coalescing and timeout behavior
+- Use selector null-checks defensively; upstream HTML shape changes frequently
+- Use `textContent`-based extraction patterns used across existing scrapers
 
-**Date format:** ISO 8601 with milliseconds: `2026-01-29T10:00:00.000`
+### Data outputs and schemas
+- Scraper pipeline source-of-truth outputs are minified files in `data/*.min.json`
+- Canonical schema/data/doc mapping lives in `src/scripts/lib/schema-manifest.js`
+- Schema files are in `schemas/*.schema.json`
 
-## Commands Reference
+## Adding a New `eventType` Scraper
+When adding a new detailed event type, update all of these:
+- Add scraper file: `src/pages/detailed/<type>.js` (follow `communityday.js` pattern)
+- Register dispatch in `src/scrapers/detailedscrape.js`
+- Add merge allowlist handling in `src/scrapers/combinedetails.js`
+- Ensure flattened field mapping is covered in `segmentEventData(...)` if needed
+- Add `eventType` enum value in `schemas/events.schema.json`
+- Add/refresh docs in `dataDocumentation/eventTypes/`
 
-```bash
-npm run pipeline          # Full scrape (all stages)
-npm run validate          # Validate data against JSON schemas
-npm run blob:upload       # Upload images to Vercel Blob (requires BLOB_READ_WRITE_TOKEN)
-```
+## Blob/Image URL Workflow
+- Blob URL rewrites are controlled by `USE_BLOB_URLS` (`src/utils/blobUrls.js`)
+- URL mapping file: `src/utils/blob-url-map.json`
+- Path generation/canonicalization logic: `src/utils/blobNaming.js`
+- Upload script: `src/scripts/upload-images-to-blob.js`
+- CI sets `USE_BLOB_URLS=true` and runs upload only when `BLOB_READ_WRITE_TOKEN` exists (`.github/workflows/scraper.yaml`)
 
-## CI/CD
+## Deployment (Vercel)
+- Hosting lives on Vercel; production config is `vercel.json` (public output served from `public/`, data under `/data/*` with cache headers and blob rewrites)
+- Build assets/data locally with `npm run build` before `npx vercel --prod`
+- Use the Vercel MCP tools (`vercel/*`) for inspecting deployments, logs, and project metadata when automation is needed
 
-GitHub Actions runs the full pipeline every 8 hours (see `.github/workflows/scraper.yaml`). Individual scrape steps use `continue-on-error: true` for resilience.
+## Testing and Validation Expectations
+- Always run `npm test` after touching scraper/utility/script logic
+- Run `npm run validate` after pipeline/schema changes
+- If changing docs or schemas, run `npm run compare:schemas`
+- Strict compare currently surfaces many canonical mismatches in this repo; use strict mode when intentionally reconciling schema/data/doc parity
 
-## External Dependencies
-
-- **jsdom** - DOM parsing for scraping
-- **moment** - Date handling
-- **@vercel/blob** - Image storage (optional, controlled by `USE_BLOB_URLS` env var)
-- Data source: `https://leekduck.com/events/` and `/feeds/events.json`
+## Known Gotchas
+- `detailedscrape` assumes `data/events.min.json` already exists from stage 1
+- `combineall` depends on `data/eventTypes/*.min.json` from stage 3
+- There is no lint script in `package.json`; do not reference `npm run lint` unless you add it
+- `npm run build` only copies `data/` into `public/data/`; it is not a transpile/bundle build

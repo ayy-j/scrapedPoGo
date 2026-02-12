@@ -13,6 +13,7 @@ const raids = require('../pages/raids')
 const research = require('../pages/research')
 const eggs = require('../pages/eggs')
 const rocketLineups = require('../pages/rocketLineups')
+const shinies = require('../pages/shinies')
 
 dotenv.config();
 dotenv.config({ path: '.env.local' });
@@ -31,28 +32,29 @@ dotenv.config({ path: '.env.local' });
  * // node src/scrapers/scrape.js
  * // Creates data/*.json files for all sources
  */
-function main()
+async function main()
 {
     logger.start("Starting primary scrapers...");
 
     if (!fs.existsSync('data'))
         fs.mkdirSync('data');
 
-    events.get();
-    raids.get();
-    research.get();
-    eggs.get();
-    rocketLineups.get();
+    // Events must be scraped first as Raids scraper depends on events data
+    await events.get();
 
-    logger.info("Scrapers initiated.");
+    // Run remaining scrapers in parallel
+    await Promise.all([
+        raids.get(),
+        research.get(),
+        eggs.get(),
+        rocketLineups.get(),
+        shinies.get()
+    ]);
+
+    logger.success("All primary scrapers completed.");
 }
 
-try
-{
-    main();
-}
-catch (e)
-{
+main().catch(e => {
     logger.error(e);
     process.exit(1);
-}
+});

@@ -5,12 +5,12 @@
  * @module pages/detailed/gobattleleague
  */
 
-const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
     handleScraperError, 
     extractSection, 
-    getSectionHeaders 
+    getSectionHeaders,
+    getJSDOM
 } = require('../../utils/scraperUtils');
 
 /**
@@ -44,7 +44,7 @@ const {
  */
 async function get(url, id, bkp) {
     try {
-        const dom = await JSDOM.fromURL(url, {});
+        const dom = await getJSDOM(url);
         const doc = dom.window.document;
         
         const gblData = { leagues: [] };
@@ -73,7 +73,7 @@ async function get(url, id, bkp) {
                     // Type restriction detection
                     const typeMatch = item.match(/Only\s+([\w,\s-]+)-type/i);
                     if (typeMatch) {
-                        league.typeRestrictions = typeMatch[1].split(/,\s*and\s*|,\s*/).map(t => t.trim());
+                        league.typeRestrictions = typeMatch[1].split(/,\s*and\s*|,\s*/).map(t => t.trim().replace(/-$/, ''));
                     }
                     
                     league.rules.push(item);

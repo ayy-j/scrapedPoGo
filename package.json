@@ -1,31 +1,35 @@
 {
   "name": "scrapedpogo",
   "version": "1.0.0",
-  "description": "Scrape LeekDuck.com for relevant information about Pokemon GO",
+  "description": "Web scraper for Pokemon GO event data",
   "main": "index.js",
   "scripts": {
     "scrape": "node ./src/scrapers/scrape.js",
     "detailedscrape": "node ./src/scrapers/detailedscrape.js",
     "combinedetails": "node ./src/scrapers/combinedetails.js",
     "combineall": "USE_BLOB_URLS=true node ./src/scrapers/combineAll.js",
-    "scrapeshinies": "node ./src/scrapers/scrapeShinies.js",
-    "pipeline": "USE_BLOB_URLS=true npm run scrapeshinies && USE_BLOB_URLS=true npm run scrape && USE_BLOB_URLS=true npm run detailedscrape && USE_BLOB_URLS=true npm run combinedetails && npm run combineall",
+    "pipeline": "USE_BLOB_URLS=true npm run scrape && USE_BLOB_URLS=true npm run detailedscrape && USE_BLOB_URLS=true npm run combinedetails && npm run combineall",
     "validate": "node src/scripts/validate-schemas.js",
+    "compare:schemas": "node src/scripts/compare-docs-data-schemas.js --mode report",
+    "compare:schemas:strict": "node src/scripts/compare-docs-data-schemas.js --mode strict",
+    "test": "node --test",
     "blob:upload": "node src/scripts/upload-images-to-blob.js",
-    "blob:transform": "USE_BLOB_URLS=true node src/scripts/transform-all-urls.js",
-    "images:download": "node src/scripts/download-images-locally.js"
+    "serve": "node serve.js",
+    "dev": "npm run serve",
+    "build": "node -e \"require('fs').cpSync('data', 'public/data', {recursive: true});\""
   },
   "author": "quantNebula",
   "license": "MIT",
   "dependencies": {
-    "@vercel/blob": "^2.0.1",
+    "@vercel/blob": "^2.2.0",
     "dotenv": "^17.2.3",
     "image-size": "^2.0.2",
-    "jsdom": "27.4.0",
+    "jsdom": "28.0.0",
     "moment": "latest"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "sharp": "^0.34.5"
   }
 }

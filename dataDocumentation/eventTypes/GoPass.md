@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Party Play Pass",
   "eventType": "go-pass",
   "heading": "Go Pass",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-02-01T10:00:00.000",
   "end": "2026-02-03T20:00:00.000",
   "pricing": {
@@ -64,15 +64,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the GO Pass event
-| **`name`**      | `string` | Name of the ticketed event
-| **`eventType`** | `string` | Always `"go-pass"`
-| **`heading`**   | `string` | Always `"Go Pass"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Event start date/time (ISO 8601 format)
-| **`end`**       | `string` | Event end date/time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the GO Pass event
+| **`name`**         | `string`  | Name of the ticketed event
+| **`eventType`**    | `string`  | Always `"go-pass"`
+| **`heading`**      | `string`  | Always `"Go Pass"`
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start date/time (ISO 8601 format)
+| **`end`**          | `string`  | Event end date/time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Optional Fields
 
@@ -85,7 +90,7 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ## Additional Sections
 
-GO Pass events may include detailed task and reward structures when scraped from LeekDuck event pages.
+GO Pass events may include detailed task and reward structures when scraped from event pages.
 
 
 

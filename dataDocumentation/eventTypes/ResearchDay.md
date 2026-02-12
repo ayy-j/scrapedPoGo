@@ -30,7 +30,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Research Day",
   "eventType": "research-day",
   "heading": "Research Day",
-  "image": "https://cdn.leekduck.com/assets/img/events/events-default-img.jpg",
+  "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-03-21T14:00:00.000",
   "end": "2026-03-21T17:00:00.000",
   "description": "",
@@ -56,15 +56,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the Research Day
-| **`name`**      | `string` | Name including featured Pokémon or theme
-| **`eventType`** | `string` | Always `"research-day"`
-| **`heading`**   | `string` | Always `"Research Day"`
-| **`image`**     | `string` | Event header/thumbnail image URL
-| **`start`**     | `string` | Event start time (ISO 8601 format)
-| **`end`**       | `string` | Event end time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the Research Day
+| **`name`**         | `string`  | Name including featured Pokémon or theme
+| **`eventType`**    | `string`  | Always `"research-day"`
+| **`heading`**      | `string`  | Always `"Research Day"`
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start time (ISO 8601 format)
+| **`end`**          | `string`  | Event end time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Optional Fields
 
@@ -89,7 +94,7 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`hasEggs`**             | `boolean` | Whether the event has egg pool changes
 | **`hasShiny`**            | `boolean` | Whether the event has shiny debuts
 
-Note: Unlike other event types, Research Day events may not use the `details` wrapper structure consistently.
+Note: Content flags are always at the top level of the event object, consistent with all other event types.
 
 
 

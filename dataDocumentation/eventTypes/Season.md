@@ -37,7 +37,7 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Precious Paths",
   "eventType": "season",
   "heading": "Season",
-  "image": "https://cdn.leekduck.com/assets/img/events/article-images/2025/2025-12-02-season-21-precious-paths/season-21-precious-paths.jpg",
+  "image": "https://pokemn.quest/events/article-images/2025/2025-12-02-season-21-precious-paths/season-21-precious-paths.jpg",
   "start": "2025-12-02T10:00:00.000",
   "end": "2026-03-03T10:00:00.000",
   "eggs": {
@@ -52,7 +52,7 @@ The file contains an array of event objects with the `eventType` field set to `"
     "adventure10km": [{"name": "Gible", "image": "...", "canBeShiny": true}]
   },
   "bonuses": [
-    {"text": "One additional Special Trade per day", "image": "https://cdn.leekduck.com/assets/img/events/bonuses/trade.png"}
+    {"text": "One additional Special Trade per day", "image": "https://pokemn.quest/events/bonuses/trade.png"}
   ],
   "research": {
     "breakthrough": [{"name": "Galarian Mr. Mime", "image": "...", "canBeShiny": true}],
@@ -67,15 +67,20 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Core Fields
 
-| Field           | Type     | Description
-|---------------- |--------- |---------------------
-| **`eventID`**   | `string` | Unique identifier for the season
-| **`name`**      | `string` | Name of the season
-| **`eventType`** | `string` | Always `"season"`
-| **`heading`**   | `string` | Always `"Season"`
-| **`image`**     | `string` | Season header/thumbnail image URL
-| **`start`**     | `string` | Season start date/time (ISO 8601 format)
-| **`end`**       | `string` | Season end date/time (ISO 8601 format)
+| Field              | Type      | Description
+|------------------- |---------- |---------------------
+| **`eventID`**      | `string`  | Unique identifier for the season
+| **`name`**         | `string`  | Name of the season
+| **`eventType`**    | `string`  | Always `"season"`
+| **`heading`**      | `string`  | Display heading for the event
+| **`image`**        | `string`  | Event header/thumbnail image URL
+| **`imageWidth`**   | `int`     | Event banner image width in pixels
+| **`imageHeight`**  | `int`     | Event banner image height in pixels
+| **`imageType`**    | `string`  | Event banner image format (e.g., `jpg`, `png`)
+| **`start`**        | `string`  | Event start date/time (ISO 8601 format)
+| **`end`**          | `string`  | Event end date/time (ISO 8601 format)
+| **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
+| **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
 ### Season-Specific Fields
 

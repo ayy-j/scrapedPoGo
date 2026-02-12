@@ -21,13 +21,13 @@ The endpoint returns a JSON array of shiny Pokémon entries:
   {
     "dexNumber": 1,
     "name": "Bulbasaur",
-    "releasedDate": "2018/03/25",
+    "releasedDate": "2018-03-25",
     "family": "Bulbasaur",
-    "typeCode": null,
+    "region": null,
     "forms": [...],
-    "imageUrl": "...",
-    "width": 256,
-    "height": 256
+    "image": "...",
+    "imageWidth": 256,
+    "imageHeight": 256
   },
   ...
 ]
@@ -41,26 +41,26 @@ Each entry in the `shinies` array represents a Pokémon (or regional variant) wi
 {
   "dexNumber": 1,
   "name": "Bulbasaur",
-  "releasedDate": "2018/03/25",
+  "releasedDate": "2018-03-25",
   "family": "Bulbasaur",
-  "typeCode": null,
+  "region": null,
   "forms": [
     {
       "name": "f19",
-      "imageUrl": "https://pokemn.quest/images/pokemon/shiny/pm0001_fall2019.png",
-      "width": 256,
-      "height": 256
+      "image": "https://pokemn.quest/images/pokemon/shiny/pm0001_fall2019.png",
+      "imageWidth": 256,
+      "imageHeight": 256
     },
     {
       "name": "11",
-      "imageUrl": "https://pokemn.quest/images/pokemon/shiny/pm001.png",
-      "width": 256,
-      "height": 256
+      "image": "https://pokemn.quest/images/pokemon/shiny/pm001.png",
+      "imageWidth": 256,
+      "imageHeight": 256
     }
   ],
-  "imageUrl": "https://pokemn.quest/images/pokemon/shiny/pm001.png",
-  "width": 256,
-  "height": 256
+  "image": "https://pokemn.quest/images/pokemon/shiny/pm001.png",
+  "imageWidth": 256,
+  "imageHeight": 256
 }
 ```
 
@@ -70,13 +70,13 @@ Each entry in the `shinies` array represents a Pokémon (or regional variant) wi
 |-------|------|-------------|
 | `dexNumber` | number | National Pokédex number |
 | `name` | string | English name of the Pokémon (includes regional prefix if applicable) |
-| `releasedDate` | string\|null | Date when the shiny was first released (YYYY/MM/DD format) |
+| `releasedDate` | string\|null | Date when the shiny was first released (YYYY-MM-DD format) |
 | `family` | string\|null | Evolution family identifier |
-| `typeCode` | string\|null | Regional variant code (`_61` = Alolan, `_31` = Galarian, `_51` = Hisuian, `_52` = Paldean) |
+| `region` | string\|null | Regional variant label (e.g., `alolan`, `galarian`, `hisuian`, `paldean`), or `null` for base form |
 | `forms` | array | Array of alternative forms/costumes for this Pokémon |
-| `imageUrl` | string | URL to the base shiny sprite image |
-| `width` | number | Image width in pixels (always 256) |
-| `height` | number | Image height in pixels (always 256) |
+| `image` | string | URL to the base shiny sprite image. *Optional* — absent for Pokémon that only have form variants. |
+| `imageWidth` | number | Image width in pixels (always 256). *Optional* — absent when `image` is absent. |
+| `imageHeight` | number | Image height in pixels (always 256). *Optional* — absent when `image` is absent. |
 
 ## Form Entry Structure
 
@@ -85,33 +85,33 @@ Each form in the `forms` array represents a costume or variant:
 | Field | Type | Description |
 |-------|------|-------------|
 | `name` | string | Form identifier (e.g., "f19" for Fall 2019, "11" for costume variant) |
-| `imageUrl` | string | URL to the form's shiny sprite image |
-| `width` | number | Image width in pixels (always 256) |
-| `height` | number | Image height in pixels (always 256) |
+| `image` | string | URL to the form's shiny sprite image |
+| `imageWidth` | number | Image width in pixels (always 256) |
+| `imageHeight` | number | Image height in pixels (always 256) |
 
 ## Regional Variants
 
-Regional variants are represented as separate entries with their own `dexNumber` and `typeCode`:
+Regional variants are represented as separate entries with their own `dexNumber` and `region`:
 
 **Example - Alolan Vulpix**:
 ```json
 {
   "dexNumber": 37,
   "name": "Alolan Vulpix",
-  "releasedDate": "2019/06/04",
+  "releasedDate": "2019-06-04",
   "family": "Vulpix_61",
-  "typeCode": "_61",
-  "imageUrl": "https://pokemn.quest/images/pokemon/shiny/pm037_61.png",
-  "width": 256,
-  "height": 256
+  "region": "alolan",
+  "image": "https://pokemn.quest/images/pokemon/shiny/pm037_61.png",
+  "imageWidth": 256,
+  "imageHeight": 256
 }
 ```
 
-**Type Codes**:
-- `_61`: Alolan form
-- `_31`: Galarian form  
-- `_51`: Hisuian form
-- `_52`: Paldean form
+**Region Values**:
+- `alolan`: Alolan form
+- `galarian`: Galarian form
+- `hisuian`: Hisuian form
+- `paldean`: Paldean form
 
 ## Integration with Other Endpoints
 
@@ -131,7 +131,7 @@ fetch('https://pokemn.quest/data/shinies.min.json')
   .then(r => r.json())
   .then(data => {
     const bulbasaur = data.find(p => 
-      p.dexNumber === 1 && !p.typeCode
+      p.dexNumber === 1 && !p.region
     );
     console.log(`Bulbasaur shiny released: ${bulbasaur?.releasedDate}`);
   });
@@ -154,7 +154,7 @@ fetch('https://pokemn.quest/data/shinies.min.json')
 fetch('https://pokemn.quest/data/shinies.min.json')
   .then(r => r.json())
   .then(data => {
-    const alolan = data.filter(p => p.typeCode === '_61');
+    const alolan = data.filter(p => p.region === 'alolan');
     console.log(`${alolan.length} Alolan Pokémon have shinies`);
     alolan.forEach(p => console.log(p.name));
   });
@@ -166,7 +166,7 @@ fetch('https://pokemn.quest/data/shinies.min.json')
   .then(r => r.json())
   .then(data => {
     const year2018 = data.filter(p => 
-      p.releasedDate?.startsWith('2018/')
+      p.releasedDate?.startsWith('2018-')
     );
     console.log(`${year2018.length} shinies released in 2018`);
   });
@@ -177,12 +177,20 @@ fetch('https://pokemn.quest/data/shinies.min.json')
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/shinies.schema.json",
   "title": "Pokemon GO Shinies Data",
-  "description": "Schema for Pokemon GO shiny availability data from LeekDuck",
+  "description": "Schema for Pokemon GO shiny availability data",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["dexNumber", "name", "releasedDate", "family", "typeCode", "forms"],
+    "required": [
+      "dexNumber",
+      "name",
+      "releasedDate",
+      "family",
+      "region",
+      "forms"
+    ],
     "properties": {
       "dexNumber": {
         "type": "integer",
@@ -194,39 +202,62 @@ fetch('https://pokemn.quest/data/shinies.min.json')
         "description": "English name of the Pokemon (includes regional prefix if applicable)"
       },
       "releasedDate": {
-        "type": ["string", "null"],
-        "description": "Date when the shiny was first released (YYYY/MM/DD format), or null if not yet released"
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Date when the shiny was first released (YYYY-MM-DD format), or null if not yet released",
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          }
+        ]
       },
       "family": {
-        "type": ["string", "null"],
+        "type": [
+          "string",
+          "null"
+        ],
         "description": "Evolution family identifier"
       },
-      "typeCode": {
-        "type": ["string", "null"],
-        "description": "Regional variant or form code (_61 = Alolan, _31 = Galarian, _51 = Hisuian, _52 = Paldean)"
+      "region": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Regional variant or form label (e.g., alolan, galarian, hisuian, paldean), or null for base form"
       },
       "forms": {
         "type": "array",
         "description": "Array of alternative forms/costumes for this Pokemon",
         "items": {
           "type": "object",
-          "required": ["name", "imageUrl", "width", "height"],
+          "required": [
+            "name",
+            "image",
+            "imageWidth",
+            "imageHeight"
+          ],
           "properties": {
             "name": {
               "type": "string",
               "description": "Form identifier (e.g., f19 for Fall 2019, 11 for costume variant)"
             },
-            "imageUrl": {
+            "image": {
               "type": "string",
               "format": "uri",
               "description": "URL to the form's shiny sprite image"
             },
-            "width": {
+            "imageWidth": {
               "type": "integer",
               "description": "Image width in pixels",
               "const": 256
             },
-            "height": {
+            "imageHeight": {
               "type": "integer",
               "description": "Image height in pixels",
               "const": 256
@@ -235,19 +266,19 @@ fetch('https://pokemn.quest/data/shinies.min.json')
           "additionalProperties": false
         }
       },
-      "imageUrl": {
+      "image": {
         "type": "string",
         "format": "uri",
-        "description": "URL to the base shiny sprite image"
+        "description": "URL to the base shiny sprite image (optional, not present for Pokemon with only forms)"
       },
-      "width": {
+      "imageWidth": {
         "type": "integer",
-        "description": "Image width in pixels",
+        "description": "Image width in pixels (optional, not present for Pokemon with only forms)",
         "const": 256
       },
-      "height": {
+      "imageHeight": {
         "type": "integer",
-        "description": "Image height in pixels",
+        "description": "Image height in pixels (optional, not present for Pokemon with only forms)",
         "const": 256
       }
     },

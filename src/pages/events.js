@@ -5,8 +5,9 @@
  * @module pages/events
  */
 
-const fs = require('fs');
+const fs = require('fs').promises;
 const { normalizeDatePair, deduplicateEvents, fetchJson, getJSDOM } = require('../utils/scraperUtils');
+const { getMultipleImageDimensions } = require('../utils/imageDimensions');
 const logger = require('../utils/logger');
 const { transformUrls } = require('../utils/blobUrls');
 
@@ -16,6 +17,9 @@ const { transformUrls } = require('../utils/blobUrls');
  * @property {string} name - Display name of the event
  * @property {string} eventType - Event category (e.g., "community-day", "raid-battles", "spotlight")
  * @property {string} image - URL to event banner image
+ * @property {number} [imageWidth] - Banner width in pixels (stored at 50% upload size)
+ * @property {number} [imageHeight] - Banner height in pixels (stored at 50% upload size)
+ * @property {string} [imageType] - Image format type
  * @property {string|null} start - ISO 8601 start datetime or null if unknown
  * @property {string|null} end - ISO 8601 end datetime or null if unknown
  */
@@ -39,8 +43,31 @@ const { transformUrls } = require('../utils/blobUrls');
  * events.get();
  * // Creates data/events.json and data/events.min.json
  */
+function halfSize(value) {
+    return Math.max(1, Math.round(value * 0.5));
+}
+
+async function applyBannerDimensions(events) {
+    if (!Array.isArray(events) || events.length === 0) return;
+
+    const bannerUrls = events.map(e => e.image).filter(Boolean);
+    if (bannerUrls.length === 0) return;
+
+    const dimensionsMap = await getMultipleImageDimensions(bannerUrls);
+    events.forEach(event => {
+        if (!event.image || !dimensionsMap.has(event.image)) return;
+        const dims = dimensionsMap.get(event.image);
+
+        // Event banners are uploaded at 50% size to Blob, so persist half-scale dimensions.
+        event.imageWidth = halfSize(dims.width);
+        event.imageHeight = halfSize(dims.height);
+        event.imageType = dims.type;
+    });
+}
+
 async function get()
 {
+    logger.info("Scraping events...");
     try {
         // Fetch event dates from JSON feed
         const feedJson = await fetchJson("https://leekduck.com/feeds/events.json");
@@ -67,7 +94,7 @@ async function get()
 
                 events.forEach (e =>
                 {
-                    var name = e.querySelector(":scope > .event-item-wrapper > .event-item > .event-text-container > .event-text > h2").innerHTML;
+                    var name = e.querySelector(":scope > .event-item-wrapper > .event-item > .event-text-container > .event-text > h2").textContent;
                     var image = e.querySelector(":scope > .event-item-wrapper > .event-item > .event-img-wrapper > img").src;
                     if (image.includes("cdn-cgi"))
                     {
@@ -107,28 +134,24 @@ async function get()
             // Optimization: Deduplicate events using a Map to reduce iterations and lookups
             allEvents = deduplicateEvents(allEvents);
 
+            await applyBannerDimensions(allEvents);
+
             const output = transformUrls(allEvents);
 
-            fs.writeFile('data/events.min.json', JSON.stringify(output), err => {
-                if (err) {
-                    logger.error(err);
-                    return;
-                }
-            });
+            await fs.writeFile('data/events.min.json', JSON.stringify(output));
+            logger.success("Events saved.");
         } catch (_err) {
             logger.error(_err);
             
             // Fallback to cached CDN data
             const json = await fetchJson("https://cdn.jsdelivr.net/gh/quantNebula/scrapedPoGo@main/data/events.min.json");
 
+            await applyBannerDimensions(json);
+
             const output = transformUrls(json);
 
-            fs.writeFile('data/events.min.json', JSON.stringify(output), err => {
-                if (err) {
-                    logger.error(err);
-                    return;
-                }
-            });
+            await fs.writeFile('data/events.min.json', JSON.stringify(output));
+            logger.success("Events saved (fallback).");
         }
     } catch (error) {
         logger.error(error.message);

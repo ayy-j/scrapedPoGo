@@ -46,11 +46,11 @@ function loadShinyData() {
 		const data = JSON.parse(fs.readFileSync(shinyFilePath, 'utf8'));
 		const shinyMap = new Map();
 		
-		if (data.shinies && Array.isArray(data.shinies)) {
-			data.shinies.forEach(entry => {
-				shinyMap.set(entry.dexNumber, entry);
-			});
-		}
+		// Handle both flat array format and wrapped {shinies: [...]} format
+		const entries = Array.isArray(data) ? data : (data.shinies && Array.isArray(data.shinies) ? data.shinies : []);
+		entries.forEach(entry => {
+			shinyMap.set(entry.dexNumber, entry);
+		});
 		
 		// Cache avoids re-reading ~400KB file; measured ~1.3ms per read+parse on local data.
 		shinyDataCache = shinyMap;
@@ -75,8 +75,15 @@ function loadShinyData() {
 function extractDexNumber(imageUrl) {
 	if (!imageUrl) return null;
 	
+	// Match LeekDuck format: pmXXX.icon.png
 	const match = imageUrl.match(/pm(\d+)\.icon\.png/);
-	return match ? parseInt(match[1], 10) : null;
+	if (match) return parseInt(match[1], 10);
+	
+	// Match older PokeMiners format: pokemon_icon_XXX_00.png
+	const legacyMatch = imageUrl.match(/pokemon_icon_(\d+)/);
+	if (legacyMatch) return parseInt(legacyMatch[1], 10);
+	
+	return null;
 }
 
 /**
@@ -103,13 +110,19 @@ function hasShiny(shinyMap, dexNumber, form = null) {
 	const shinyData = shinyMap.get(dexNumber);
 	if (!shinyData) return false;
 	
-	// If no specific form requested, just check if Pokemon has any shiny
-	if (!form) return shinyData.hasShiny;
+	// All entries in the shiny data file are shiny-available Pokemon,
+	// so existence in the map means shiny is available
+	if (!form) return true;
 	
-	// Check if specific form has shiny
-	// Note: This is a simplified check. You may need to adjust based on 
-	// how forms map between LeekDuck names and PogoAssets form IDs
-	return shinyData.hasShiny;
+	// Check if specific form has shiny by looking through forms array
+	if (shinyData.forms && Array.isArray(shinyData.forms)) {
+		return shinyData.forms.some(f => 
+			f.name && form.toLowerCase().includes(f.name.toLowerCase())
+		);
+	}
+	
+	// No forms data but entry exists — assume base form is shiny
+	return true;
 }
 
 module.exports = {

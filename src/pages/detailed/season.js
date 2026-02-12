@@ -5,7 +5,6 @@
  * @module pages/detailed/season
  */
 
-const { JSDOM } = require('jsdom');
 const { 
     writeTempFile, 
     handleScraperError, 
@@ -17,7 +16,8 @@ const {
     parsePokemonFromText,
     extractPrice,
     parseGBLCups,
-    extractGoPassTiers
+    extractGoPassTiers,
+    getJSDOM
 } = require('../../utils/scraperUtils');
 
 /**
@@ -67,7 +67,7 @@ const {
  */
 async function get(url, id, bkp) {
     try {
-        const dom = await JSDOM.fromURL(url, {});
+        const dom = await getJSDOM(url);
         const doc = dom.window.document;
         
         const seasonData = {

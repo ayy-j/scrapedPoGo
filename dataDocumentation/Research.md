@@ -109,8 +109,8 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
 | Field                 | Type      | Description
 |---------------------- |---------- |---------------------
 | **`canBeShiny`**      | `boolean` | Whether or not the reward Pokemon can be shiny.
-| **`combatPower.min`** | `int`     | The minimum combat power of the reward Pokemon.
-| **`combatPower.max`** | `int`     | The maximum combat power of the reward Pokemon.
+| **`combatPower.min`** | `int\|null` | The minimum combat power of the reward Pokemon, or `null` if unknown.
+| **`combatPower.max`** | `int\|null` | The maximum combat power of the reward Pokemon, or `null` if unknown.
 
 #### Item/Resource-Only Fields
 
@@ -123,33 +123,64 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ayy-j/scrapedPoGo/main/schemas/research.schema.json",
   "title": "Pokemon GO Research Data",
-  "description": "Schema for Pokemon GO field research tasks and rewards from LeekDuck",
+  "description": "Schema for Pokemon GO field research tasks and rewards",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["text", "type", "rewards"],
+    "required": [
+      "text",
+      "type",
+      "rewards"
+    ],
     "properties": {
       "text": {
         "type": "string",
         "description": "The research task text"
       },
       "type": {
-        "type": ["string", "null"],
+        "type": [
+          "string",
+          "null"
+        ],
         "description": "The type of research",
-        "enum": ["event", "catch", "throw", "battle", "explore", "training", "rocket", "buddy", "ar", "sponsored", null]
+        "enum": [
+          "event",
+          "catch",
+          "throw",
+          "battle",
+          "explore",
+          "training",
+          "rocket",
+          "buddy",
+          "ar",
+          "sponsored",
+          null
+        ]
       },
       "rewards": {
         "type": "array",
         "description": "The rewards for completing the research task",
         "items": {
           "type": "object",
-          "required": ["type", "name", "image", "imageWidth", "imageHeight", "imageType"],
+          "required": [
+            "type",
+            "name",
+            "image",
+            "imageWidth",
+            "imageHeight",
+            "imageType"
+          ],
           "properties": {
             "type": {
               "type": "string",
               "description": "The type of reward",
-              "enum": ["encounter", "item", "resource"]
+              "enum": [
+                "encounter",
+                "item",
+                "resource"
+              ]
             },
             "name": {
               "type": "string",
@@ -171,7 +202,13 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
             "imageType": {
               "type": "string",
               "description": "The image format",
-              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+              "enum": [
+                "png",
+                "jpg",
+                "jpeg",
+                "gif",
+                "webp"
+              ]
             },
             "canBeShiny": {
               "type": "boolean",
@@ -180,15 +217,24 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
             "combatPower": {
               "type": "object",
               "description": "The combat power range of the reward Pokemon (encounter type only)",
-              "required": ["min", "max"],
+              "required": [
+                "min",
+                "max"
+              ],
               "properties": {
                 "min": {
-                  "type": "integer",
-                  "description": "The minimum combat power of the reward Pokemon"
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "description": "The minimum combat power of the reward Pokemon, or null if unknown"
                 },
                 "max": {
-                  "type": "integer",
-                  "description": "The maximum combat power of the reward Pokemon"
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "description": "The maximum combat power of the reward Pokemon, or null if unknown"
                 }
               },
               "additionalProperties": false
@@ -198,7 +244,41 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
               "description": "The quantity of the item/resource rewarded (item/resource type only)"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "encounter"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "canBeShiny",
+                  "combatPower"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "item",
+                      "resource"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "quantity"
+                ]
+              }
+            }
+          ]
         },
         "minItems": 1
       }

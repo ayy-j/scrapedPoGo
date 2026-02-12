@@ -13,15 +13,15 @@ The unified data file (`unified.min.json`) combines all scraped Pokémon GO data
 | Field | Type | Description |
 |-------|------|-------------|
 | `meta` | object | Metadata about the unified file |
-| `events` | array | All events |
-| `eventTypes` | object | Events grouped by event type |
+| `events` | array | All events (flat model with type-specific fields) |
+| `eventTypes` | object | Events grouped by event type slug |
 | `raids` | array | Current raid bosses |
-| `eggs` | array | Egg hatches |
+| `eggs` | array | Egg hatch pool |
 | `research` | array | Field research tasks |
 | `shinies` | array | Shiny-eligible Pokemon |
 | `rocketLineups` | array | Team GO Rocket lineups |
-| `pokemonIndex` | object | Deduplicated Pokemon index |
-| `indices` | object | Pre-computed lookup indices |
+| `pokemonIndex` | object | Deduplicated Pokemon index keyed by normalized name |
+| `indices` | object | Pre-computed lookup indices for fast access |
 | `stats` | object | Summary statistics |
 
 ---
@@ -35,65 +35,60 @@ Metadata about the unified file generation.
 | `version` | string | Data format version (e.g., `"1.0.0"`) |
 | `generatedAt` | string | ISO 8601 timestamp when file was generated |
 | `schemaVersion` | string | Schema version for validation |
-| `dataSource` | string | Source of scraped data (`"leekduck.com"`) |
-| `imageBase` | string | Base URL for image assets |
 
 ---
 
 ## `events`
 
-Array of all Pokémon GO events.
+Array of all Pokémon GO events. Each event uses a **flat model** — there is no nested `details` wrapper. Type-specific fields are merged directly onto the event object.
 
-### Event Object
+### Core Event Fields (always present)
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `eventID` | string | ✓ | Unique identifier for the event |
+| `eventID` | string | ✓ | Unique identifier (URL slug, e.g., `"community-day-january-2026"`) |
 | `name` | string | ✓ | Display name of the event |
 | `eventType` | string | ✓ | Type classification (see Event Types below) |
-| `heading` | string | ✓ | Category heading |
+| `heading` | string | ✓ | Category heading (auto-generated from eventType) |
 | `image` | string | ✓ | URL to event banner image |
 | `start` | string | ✓ | Start timestamp (ISO 8601 with milliseconds) |
 | `end` | string | ✓ | End timestamp (ISO 8601 with milliseconds) |
-| `pokemon` | array | | Featured Pokemon list |
-| `raids` | object | | Raid Pokemon by tier |
-| `bonuses` | array | | Active bonuses during event |
-| `eggs` | object | | Egg hatches by distance |
-| `research` | array | | Event-specific research tasks |
-| `specialresearch` | array | | Special research storylines |
-| `timedresearch` | array | | Timed research tasks |
-| `fieldresearch` | array | | Field research tasks |
-| `pokemon7km` | array | | Pokemon from 7km eggs |
-| `pokemon2km` | array | | Pokemon from 2km eggs |
-| `pokemon5km` | array | | Pokemon from 5km eggs |
-| `pokemon10km` | array | | Pokemon from 10km eggs |
-| `pokemonOneStarRaids` | array | | 1-Star raid Pokemon |
-| `pokemonThreeStarRaids` | array | | 3-Star raid Pokemon |
-| `pokemonFiveStarRaids` | array | | 5-Star raid Pokemon |
-| `pokemonMegaRaids` | array | | Mega raid Pokemon |
-| `pokemonShadowRaids` | array | | Shadow raid Pokemon |
-| `spotlightPokemon` | object | | Spotlight Hour featured Pokemon |
-| `spotlightBonus` | string | | Spotlight Hour bonus description |
-| `leagues` | array | | GO Battle League rotations |
-| `featuredAttack` | string | | Featured attack for evolutions |
-| `shadows` | array | | New shadow Pokemon |
-| `leaders` | array | | Team Rocket leader lineups |
-| `giovanni` | object | | Giovanni lineup |
-| `grunts` | array | | Grunt type rotations |
-| `costumedPokemon` | array | | Costumed Pokemon available |
-| `pokemon_wild` | array | | Wild spawns |
-| `pokemon_incense` | array | | Incense spawns |
-| `pokemon_lure` | array | | Lure spawns |
-| `pokemon_debut` | array | | Debuting Pokemon |
-| `pokemon_maxdebut` | array | | Dynamax debuts |
-| `maxBattles` | array | | Max Battle Pokemon |
-| `showcasePokemon` | array | | PokéStop Showcase Pokemon |
-| `showcase` | object | | Showcase details |
-| `passes` | array | | Pass/ticket details |
-| `shiniesReleased` | boolean | | Whether new shinies released |
-| `pokemon_evolve` | array | | Pokemon with special evolutions |
-| `pokemon_hatch` | array | | Pokemon hatching from eggs |
-| `pokemon_featured` | array | | Featured Pokemon |
+
+### Optional Event Fields (added by detailed scrapers)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `pokemon` | array | Featured Pokémon list (flat array with `source` field) |
+| `raids` | array | Featured raid bosses by tier |
+| `bonuses` | array | Active bonuses during event |
+| `bonusDisclaimers` | array | Qualifying notes for bonuses (e.g., `"*Regional only"`) |
+| `imageWidth` | integer | Stored banner width in pixels (50% of source width when uploaded to Blob) |
+| `imageHeight` | integer | Stored banner height in pixels (50% of source height when uploaded to Blob) |
+| `imageType` | string | Banner image format (e.g., `"jpg"`, `"png"`) |
+| `eggs` | array | Modified egg pools |
+| `research` | object | Research tasks: `{ field, special, timed }` arrays |
+| `rewards` | object | Ticketed rewards: `{ ticketedResearch, ticketBonuses, ticketPrice }` |
+| `battle` | object | GO Battle League info: `{ leagues }` |
+| `rocket` | object | Team Rocket changes: `{ shadows, leaders, giovanni }` |
+| `showcases` | array | PokéStop Showcase details |
+| `habitats` | array | GO Tour habitat rotations |
+| `goPass` | object | GO Pass tier structure |
+| `shinies` | array | Newly available or featured shinies |
+| `photobomb` | object | Photobomb details: `{ description, pokemon }` |
+| `featuredAttack` | string | Exclusive move for Community Day evolutions |
+| `customSections` | object | Generic extracted sections (from `event.js` scraper) |
+
+### Boolean Flags
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `hasSpawns` | boolean | Whether event has wild spawns |
+| `hasFieldResearchTasks` | boolean | Whether event has field research |
+| `hasBonuses` | boolean | Whether event has active bonuses |
+| `hasRaids` | boolean | Whether event has raid content |
+| `hasEggs` | boolean | Whether event has egg pool changes |
+| `hasShiny` | boolean | Whether event has shiny debuts/features |
+| `isGlobal` | boolean | Whether event is available globally |
 
 ### Event Types
 
@@ -103,6 +98,7 @@ Array of all Pokémon GO events.
 | `event` | General in-game events |
 | `go-battle-league` | GO Battle League seasons |
 | `go-pass` | Paid pass events |
+| `go-rocket-takeover` | GO Rocket Takeover events |
 | `max-battles` | Max Battle events |
 | `max-mondays` | Max Monday events |
 | `pokemon-go-tour` | Pokémon GO Tour events |
@@ -111,13 +107,13 @@ Array of all Pokémon GO events.
 | `raid-battles` | Raid rotation events |
 | `raid-day` | Raid Day events |
 | `raid-hour` | Raid Hour events |
+| `research` | Special/Masterwork Research events |
+| `research-breakthrough` | Research Breakthrough events |
 | `research-day` | Research Day events |
 | `season` | Seasonal events |
+| `special-research` | Special Research storylines |
 | `team-go-rocket` | Team GO Rocket events |
-| `go-rocket-takeover` | GO Rocket Takeover events |
 | `timed-research` | Timed Research events |
-| `safari-zone` | Safari Zone events |
-| `go-fest` | GO Fest events |
 
 ### Pokemon Object (within events)
 
@@ -126,14 +122,35 @@ Array of all Pokémon GO events.
 | `name` | string | Pokemon name |
 | `image` | string | URL to Pokemon image |
 | `canBeShiny` | boolean | Whether shiny form is available |
-| `source` | string | Source type: `"spawn"`, `"featured"`, `"incense"`, `"costumed"`, `"debut"`, `"maxDebut"` |
+| `source` | string | Encounter source (see below) |
+| `imageWidth` | number | Image width in pixels (when available) |
+| `imageHeight` | number | Image height in pixels (when available) |
+
+**Source values:**
+
+| Value | Description |
+|-------|-------------|
+| `"spawn"` | Standard wild spawn |
+| `"featured"` | Highlighted/boosted spawn |
+| `"incense"` | Incense-exclusive spawn |
+| `"costumed"` | Wearing event costume |
+| `"debut"` | Newly released Pokémon |
+| `"maxDebut"` | New Dynamax form debut |
+| `"raid"` | Available in raids |
+| `"egg"` | Hatchable from eggs |
+| `"research"` | Research task encounter reward |
+| `"reward"` | Event/completion reward |
+| `"encounter"` | Generic catch encounter |
 
 ### Bonus Object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Bonus description |
-| `pokemon` | object | Associated Pokemon (if applicable) |
+| `text` | string | Bonus description (e.g., `"2× Catch XP"`) |
+| `image` | string | URL to bonus icon image |
+| `imageWidth` | integer | Bonus icon width in pixels (when available) |
+| `imageHeight` | integer | Bonus icon height in pixels (when available) |
+| `imageType` | string | Bonus icon format (e.g., `"png"`) when available |
 
 ---
 
@@ -141,11 +158,15 @@ Array of all Pokémon GO events.
 
 Object containing events grouped by their `eventType` value. Each key is an event type slug, and its value is an array of event objects matching that type.
 
-| Key Pattern | Value Type | Description |
-|-------------|------------|-------------|
-| `"community-day"` | array | Array of Community Day event objects |
-| `"raid-hour"` | array | Array of Raid Hour event objects |
-| `"<event-type>"` | array | Array of events of that type |
+```json
+{
+  "community-day": [ /* Community Day event objects */ ],
+  "raid-hour": [ /* Raid Hour event objects */ ],
+  "season": [ /* Season event objects */ ]
+}
+```
+
+These are read from the per-eventType files in `data/eventTypes/`.
 
 ---
 
@@ -157,16 +178,16 @@ Array of current raid bosses.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `name` | string | ✓ | Pokemon name |
-| `originalName` | string | ✓ | Full original name including form |
-| `form` | string | | Form variant (e.g., `"Incarnate"`, `"Curly"`) |
-| `gender` | string | | Gender if relevant |
+| `name` | string | ✓ | Cleaned Pokemon name |
+| `originalName` | string | ✓ | Full display name including form/gender |
+| `form` | string\|null | ✓ | Form variant (e.g., `"Origin"`, `"Alola"`) or `null` |
+| `gender` | string\|null | ✓ | Gender if relevant or `null` |
 | `tier` | string | ✓ | Raid tier |
 | `isShadowRaid` | boolean | ✓ | Whether this is a shadow raid |
-| `eventStatus` | string | ✓ | Status: `"ongoing"`, `"upcoming"`, `"unknown"` |
+| `eventStatus` | string | ✓ | Status: `"ongoing"`, `"upcoming"`, `"inactive"`, `"unknown"` |
 | `canBeShiny` | boolean | ✓ | Whether shiny form is available |
 | `types` | array | ✓ | Pokemon types |
-| `combatPower` | object | ✓ | CP ranges |
+| `combatPower` | object | ✓ | CP ranges (normal and boosted) |
 | `boostedWeather` | array | ✓ | Weather boost conditions |
 | `image` | string | ✓ | URL to Pokemon image |
 | `imageWidth` | number | ✓ | Image width in pixels |
@@ -186,7 +207,7 @@ Array of current raid bosses.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Type name (lowercase) |
+| `name` | string | Type name (lowercase, e.g., `"fire"`, `"water"`) |
 | `image` | string | URL to type icon |
 
 ### Combat Power Object
@@ -194,17 +215,17 @@ Array of current raid bosses.
 | Field | Type | Description |
 |-------|------|-------------|
 | `normal` | object | Non-boosted CP range |
-| `normal.min` | number | Minimum CP |
-| `normal.max` | number | Maximum CP |
+| `normal.min` | integer\|null | Minimum CP, or `null` if unknown |
+| `normal.max` | integer\|null | Maximum CP, or `null` if unknown |
 | `boosted` | object | Weather-boosted CP range |
-| `boosted.min` | number | Minimum boosted CP |
-| `boosted.max` | number | Maximum boosted CP |
+| `boosted.min` | integer\|null | Minimum boosted CP, or `null` if unknown |
+| `boosted.max` | integer\|null | Maximum boosted CP, or `null` if unknown |
 
-### Weather Object
+### Boosted Weather Object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Weather condition name |
+| `name` | string | Weather condition (e.g., `"sunny"`, `"rainy"`, `"fog"`) |
 | `image` | string | URL to weather icon |
 
 ---
@@ -218,35 +239,38 @@ Array of Pokemon that can hatch from eggs.
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `name` | string | ✓ | Pokemon name |
-| `eggType` | string | ✓ | Egg distance |
+| `eggType` | string | ✓ | Egg distance tier |
 | `isAdventureSync` | boolean | ✓ | Whether from Adventure Sync rewards |
 | `image` | string | ✓ | URL to Pokemon image |
 | `canBeShiny` | boolean | ✓ | Whether shiny form is available |
 | `combatPower` | object | ✓ | CP range at hatch |
 | `isRegional` | boolean | ✓ | Whether regionally exclusive |
 | `isGiftExchange` | boolean | ✓ | Whether from gift eggs |
-| `rarity` | number | ✓ | Rarity tier (1-5, higher = rarer) |
-| `imageWidth` | number | ✓ | Image width in pixels |
-| `imageHeight` | number | ✓ | Image height in pixels |
+| `rarity` | integer | ✓ | Rarity tier (0–5, higher = rarer) |
+| `imageWidth` | integer | ✓ | Image width in pixels |
+| `imageHeight` | integer | ✓ | Image height in pixels |
 | `imageType` | string | ✓ | Image format |
 
 ### Egg Types
 
 | Value | Description |
 |-------|-------------|
-| `"1 km"` | 1 kilometer eggs (starter Pokemon) |
-| `"2 km"` | 2 kilometer eggs |
-| `"5 km"` | 5 kilometer eggs |
-| `"7 km"` | 7 kilometer eggs (gift eggs) |
-| `"10 km"` | 10 kilometer eggs |
-| `"12 km"` | 12 kilometer eggs (strange eggs from Rocket) |
+| `"1km"` | 1 kilometer eggs |
+| `"2km"` | 2 kilometer eggs |
+| `"5km"` | 5 kilometer eggs |
+| `"7km"` | 7 kilometer eggs (from friend gifts) |
+| `"10km"` | 10 kilometer eggs |
+| `"12km"` | 12 kilometer eggs (from Rocket Leaders) |
+| `"route"` | Route gift eggs |
+| `"adventure5km"` | Adventure Sync 5 km rewards |
+| `"adventure10km"` | Adventure Sync 10 km rewards |
 
 ### Egg Combat Power Object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `min` | number | Minimum CP at hatch |
-| `max` | number | Maximum CP at hatch |
+| `min` | integer\|null | Minimum CP at hatch, or `null` if unknown |
+| `max` | integer\|null | Maximum CP at hatch, or `null` if unknown |
 
 ---
 
@@ -266,10 +290,11 @@ Array of field research tasks.
 
 | Value | Description |
 |-------|-------------|
+| `"event"` | Event-specific tasks |
 | `"catch"` | Catch Pokemon tasks |
 | `"throw"` | Throwing technique tasks |
 | `"explore"` | Exploration tasks (walking, spinning) |
-| `"battle"` | Battle tasks (raids, trainers, rockets) |
+| `"battle"` | Battle tasks (raids, trainers) |
 | `"training"` | Pokemon training tasks (power up, evolve) |
 | `"buddy"` | Buddy Pokemon tasks |
 | `"rocket"` | Team GO Rocket tasks |
@@ -283,11 +308,11 @@ Array of field research tasks.
 | `type` | string | ✓ | Reward type: `"encounter"`, `"item"`, `"resource"` |
 | `name` | string | ✓ | Reward name |
 | `image` | string | ✓ | URL to reward image |
-| `imageWidth` | number | ✓ | Image width in pixels |
-| `imageHeight` | number | ✓ | Image height in pixels |
+| `imageWidth` | integer | ✓ | Image width in pixels |
+| `imageHeight` | integer | ✓ | Image height in pixels |
 | `imageType` | string | ✓ | Image format |
 | `canBeShiny` | boolean | | For encounters: shiny availability |
-| `combatPower` | object | | For encounters: CP range |
+| `combatPower` | object | | For encounters: CP range (`min`/`max`, integer or null) |
 | `quantity` | number | | For items/resources: amount given |
 
 ---
@@ -300,24 +325,24 @@ Array of all shiny-eligible Pokemon.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `dexNumber` | number | ✓ | National Pokedex number |
-| `name` | string | ✓ | Pokemon name |
-| `releasedDate` | string | ✓ | Date shiny was released (YYYY/MM/DD) |
-| `family` | string | ✓ | Evolution family identifier |
-| `typeCode` | string | | Form/variant code (e.g., `"_51"` for Hisuian) |
-| `forms` | array | | Available shiny forms |
-| `imageUrl` | string | | URL to default shiny sprite |
-| `width` | number | | Image width in pixels |
-| `height` | number | | Image height in pixels |
+| `dexNumber` | integer | ✓ | National Pokédex number |
+| `name` | string | ✓ | Pokemon name (includes regional prefix if applicable) |
+| `releasedDate` | string\|null | ✓ | Date shiny was released (`YYYY-MM-DD`), or `null` if not yet released |
+| `family` | string\|null | ✓ | Evolution family identifier |
+| `region` | string\|null | ✓ | Regional variant label (e.g., `"alolan"`, `"galarian"`, `"hisuian"`, `"paldean"`), or `null` for base form |
+| `forms` | array | ✓ | Available shiny forms (may be empty) |
+| `image` | string | | URL to base shiny sprite (absent for Pokemon with only form variants) |
+| `imageWidth` | integer | | Image width in pixels (absent when `image` is absent) |
+| `imageHeight` | integer | | Image height in pixels (absent when `image` is absent) |
 
 ### Shiny Form Object
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `name` | string | Form identifier |
-| `imageUrl` | string | URL to form's shiny sprite |
-| `width` | number | Image width in pixels |
-| `height` | number | Image height in pixels |
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | ✓ | Form identifier (e.g., `"f19"` for Fall 2019, `"11"` for costume) |
+| `image` | string | ✓ | URL to form's shiny sprite |
+| `imageWidth` | integer | ✓ | Image width in pixels |
+| `imageHeight` | integer | ✓ | Image height in pixels |
 
 ---
 
@@ -329,44 +354,41 @@ Array of Team GO Rocket lineups.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `name` | string | ✓ | Character name or grunt type |
-| `title` | string | ✓ | Character title |
-| `type` | string | ✓ | Pokemon type specialization (empty for leaders) |
-| `firstPokemon` | array | ✓ | First slot Pokemon options |
-| `secondPokemon` | array | ✓ | Second slot Pokemon options |
-| `thirdPokemon` | array | ✓ | Third slot Pokemon options |
+| `name` | string | ✓ | Character name or grunt type (e.g., `"Giovanni"`, `"Fire-type Female Grunt"`) |
+| `title` | string | ✓ | Character title: `"Team GO Rocket Boss"`, `"Team GO Rocket Leader"`, or `"Team GO Rocket Grunt"` |
+| `type` | string | ✓ | Pokemon type specialization (empty string for Leaders/Giovanni) |
+| `slots` | array | ✓ | Array of exactly 3 battle slots, each containing an array of possible Shadow Pokemon |
 
-### Lineup Names
+### Slot Structure
 
-| Value | Title | Description |
-|-------|-------|-------------|
-| `"Giovanni"` | Team GO Rocket Boss | Main boss |
-| `"Cliff"` | Team GO Rocket Leader | Leader |
-| `"Arlo"` | Team GO Rocket Leader | Leader |
-| `"Sierra"` | Team GO Rocket Leader | Leader |
-| `"<Type>-type Male Grunt"` | Team GO Rocket Grunt | Type-specific grunt |
-| `"<Type>-type Female Grunt"` | Team GO Rocket Grunt | Type-specific grunt |
-| `"Male Grunt"` | Team GO Rocket Grunt | Generic grunt |
-| `"Female Grunt"` | Team GO Rocket Grunt | Generic grunt |
-| `"Decoy Female Grunt"` | Team GO Rocket Grunt | Decoy grunt |
+```json
+"slots": [
+  [ /* Slot 1: array of possible Pokemon (usually 1, fixed) */ ],
+  [ /* Slot 2: array of possible Pokemon (usually 2-3) */ ],
+  [ /* Slot 3: array of possible Pokemon (usually 2-3) */ ]
+]
+```
 
-### Rocket Pokemon Object
+### Shadow Pokemon Object
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `name` | string | ✓ | Pokemon name |
 | `image` | string | ✓ | URL to Pokemon image |
-| `types` | array | ✓ | Pokemon types (string array) |
+| `imageWidth` | integer | | Pokemon image width in pixels (when available) |
+| `imageHeight` | integer | | Pokemon image height in pixels (when available) |
+| `imageType` | string | | Pokemon image format (e.g., `"png"`) when available |
+| `types` | array | ✓ | Pokemon type(s) as lowercase strings (1–2 items) |
 | `weaknesses` | object | ✓ | Type weaknesses |
-| `isEncounter` | boolean | ✓ | Whether catchable after battle |
-| `canBeShiny` | boolean | ✓ | Whether shiny form is available |
+| `isEncounter` | boolean | ✓ | Whether catchable after winning the battle |
+| `canBeShiny` | boolean | ✓ | Whether the encounter can be shiny |
 
 ### Weaknesses Object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `double` | array | Types that deal 2x damage |
-| `single` | array | Types that deal 1.6x damage |
+| `double` | array | Types that deal 4× (double super-effective) damage |
+| `single` | array | Types that deal 2× (single super-effective) damage |
 
 ---
 
@@ -374,16 +396,18 @@ Array of Team GO Rocket lineups.
 
 Object containing deduplicated Pokemon entries, keyed by normalized name (lowercase, special characters removed).
 
+Built by cross-referencing all datasets: shinies (primary source with authoritative dex numbers), raids, eggs, research rewards, and rocket lineups.
+
 ### Pokemon Index Entry
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `name` | string | Display name of the Pokemon |
-| `dexNumber` | number | National Pokedex number (if known) |
-| `family` | string | Evolution family identifier |
-| `typeCode` | string | Form/variant code |
+| `dexNumber` | integer\|null | National Pokédex number (from shinies data or extracted from image URL) |
+| `family` | string\|null | Evolution family identifier (from shinies data) |
+| `typeCode` | string\|null | Form/variant type code (from shinies data) |
 | `canBeShiny` | boolean | Whether shiny form is available in-game |
-| `types` | array | Pokemon types (when available) |
+| `types` | array | Pokemon types as strings (when available from raids or rocket data) |
 | `sources` | array | Which datasets reference this Pokemon |
 
 ### Source Values
@@ -404,26 +428,18 @@ Pre-computed lookup indices for fast data access.
 
 ### `indices.eventsById`
 
-Object mapping `eventID` string to full event object.
-
-| Key | Value |
-|-----|-------|
-| `"<eventID>"` | Event object |
+Object mapping `eventID` → full event object.
 
 ### `indices.eventsByType`
 
-Object mapping event type slug to array of event IDs.
-
-| Key | Value |
-|-----|-------|
-| `"<eventType>"` | Array of `eventID` strings |
+Object mapping event type slug → array of `eventID` strings.
 
 ### `indices.raidsByTier`
 
-Object mapping raid tier to array of Pokemon names.
+Object mapping raid tier → array of Pokemon names.
 
-| Key | Value |
-|-----|-------|
+| Key Examples | Value |
+|--------------|-------|
 | `"1-Star Raids"` | Array of Pokemon names |
 | `"3-Star Raids"` | Array of Pokemon names |
 | `"5-Star Raids"` | Array of Pokemon names |
@@ -431,57 +447,32 @@ Object mapping raid tier to array of Pokemon names.
 
 ### `indices.raidsByPokemon`
 
-Object mapping normalized Pokemon name to array of indices into `raids` array.
-
-| Key | Value |
-|-----|-------|
-| `"<normalized-name>"` | Array of numeric indices |
+Object mapping normalized Pokemon name → array of numeric indices into the `raids` array.
 
 ### `indices.eggsByDistance`
 
-Object mapping egg distance to array of indices into `eggs` array.
+Object mapping egg distance tier → array of numeric indices into the `eggs` array.
 
-| Key | Value |
-|-----|-------|
-| `"1 km"` | Array of numeric indices |
-| `"2 km"` | Array of numeric indices |
-| `"5 km"` | Array of numeric indices |
-| `"7 km"` | Array of numeric indices |
-| `"10 km"` | Array of numeric indices |
-| `"12 km"` | Array of numeric indices |
+| Key Examples | Value |
+|--------------|-------|
+| `"1km"`, `"2km"`, `"5km"`, `"7km"`, `"10km"`, `"12km"` | Array of indices |
+| `"route"`, `"adventure5km"`, `"adventure10km"` | Array of indices |
 
 ### `indices.researchByType`
 
-Object mapping research type to array of indices into `research` array.
-
-| Key | Value |
-|-----|-------|
-| `"<research-type>"` | Array of numeric indices |
+Object mapping research type → array of numeric indices into the `research` array.
 
 ### `indices.shiniesByDex`
 
-Object mapping Pokedex number to array of indices into `shinies` array.
-
-| Key | Value |
-|-----|-------|
-| `<dexNumber>` | Array of numeric indices |
+Object mapping Pokédex number → array of numeric indices into the `shinies` array. Multiple entries per dex number are possible (regional forms, costumes).
 
 ### `indices.shiniesByName`
 
-Object mapping normalized Pokemon name to single index into `shinies` array.
-
-| Key | Value |
-|-----|-------|
-| `"<normalized-name>"` | Numeric index |
+Object mapping normalized Pokemon name → single numeric index into the `shinies` array.
 
 ### `indices.rocketsByType`
 
-Object mapping grunt type to array of indices into `rocketLineups` array.
-
-| Key | Value |
-|-----|-------|
-| `"<type>"` | Array of numeric indices |
-| `"leader"` | Array of indices for leaders (empty type) |
+Object mapping grunt type → array of numeric indices into the `rocketLineups` array. Leaders and Giovanni use the key `"leader"` (since their `type` is an empty string).
 
 ---
 
@@ -491,16 +482,16 @@ Summary statistics about the unified data.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `totalEvents` | number | Count of events in `events` array |
-| `totalRaids` | number | Count of raids in `raids` array |
-| `totalEggs` | number | Count of eggs in `eggs` array |
-| `totalResearch` | number | Count of research tasks in `research` array |
-| `totalShinies` | number | Count of shinies in `shinies` array |
-| `totalRocketLineups` | number | Count of lineups in `rocketLineups` array |
+| `totalEvents` | number | Count of events |
+| `totalRaids` | number | Count of raid bosses |
+| `totalEggs` | number | Count of egg hatches |
+| `totalResearch` | number | Count of research tasks |
+| `totalShinies` | number | Count of shiny entries |
+| `totalRocketLineups` | number | Count of Rocket lineups |
 | `totalUniquePokemon` | number | Count of entries in `pokemonIndex` |
-| `eventTypesCounts` | object | Object mapping event type to count |
-| `raidTierCounts` | object | Object mapping raid tier to count |
-| `eggDistanceCounts` | object | Object mapping egg distance to count |
+| `eventTypesCounts` | object | Object mapping event type slug → count |
+| `raidTierCounts` | object | Object mapping raid tier → count |
+| `eggDistanceCounts` | object | Object mapping egg distance → count |
 
 ---
 
@@ -518,11 +509,60 @@ Example: `"2026-03-14T14:00:00.000"`
 
 ## Image URLs
 
-Images are served from multiple sources:
+When Vercel Blob storage is enabled (`USE_BLOB_URLS=true`), image URLs are served from `pokemn.quest` with a semantic folder structure:
 
-| Base URL | Content |
-|----------|---------|
-| `https://cdn.leekduck.com/assets/img/` | Event banners, Pokemon icons, type icons |
-| `https://raw.githubusercontent.com/PokeMiners/pogo_assets/master/Images/` | Shiny sprites |
+| Path Pattern | Content |
+|--------------|---------|
+| `pokemon/<dex>-<name>/<filename>` | Pokemon sprites and icons |
+| `events/<filename>.<ext>` | Event banner images |
+| `types/<type>.png` | Type icons |
+| `weather/<weather>.png` | Weather icons |
+| `bonuses/<bonus>.png` | Bonus icons |
+| `items/<item>.png` | Item icons |
+| `eggs/<file>` | Egg-related images |
+| `raids/<file>` | Raid-related images |
 
-Standard Pokemon icon dimensions: 256×256 pixels
+When Blob URLs are enabled, images are served from `https://pokemn.quest/` with semantic folder organization.
+
+Standard Pokemon icon dimensions: 256×256 pixels.
+Event banner uploads are resized to 50% dimensions before storage; `event.imageWidth` and `event.imageHeight` represent the stored banner size.
+
+---
+
+## Example Usage
+
+### Fetch all data
+
+```javascript
+const response = await fetch('https://pokemn.quest/data/unified.min.json');
+const data = await response.json();
+```
+
+### Look up a Pokemon across all datasets
+
+```javascript
+const { pokemonIndex } = data;
+const pikachu = pokemonIndex['pikachu'];
+// → { name: 'Pikachu', dexNumber: 25, canBeShiny: true, sources: ['shinies', 'raids', 'eggs'] }
+```
+
+### Find all 5-Star raid bosses
+
+```javascript
+const fiveStarIndices = data.indices.raidsByTier['5-Star Raids'];
+const fiveStarBosses = fiveStarIndices.map(i => data.raids[i]);
+```
+
+### Get events by type
+
+```javascript
+const communityDayIds = data.indices.eventsByType['community-day'];
+const communityDays = communityDayIds.map(id => data.indices.eventsById[id]);
+```
+
+### Get eggs by distance
+
+```javascript
+const tenKmIndices = data.indices.eggsByDistance['10km'];
+const tenKmEggs = tenKmIndices.map(i => data.eggs[i]);
+```

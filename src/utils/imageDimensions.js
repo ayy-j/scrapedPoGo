@@ -20,6 +20,9 @@ const { imageSize } = require('image-size');
 /** @type {Map<string, ImageDimensions>} Cache to avoid redundant fetches */
 const dimensionCache = new Map();
 
+/** @type {Map<string, Promise<ImageDimensions|null>>} Map of in-flight requests */
+const pendingRequests = new Map();
+
 /**
  * Fetches image dimensions from a URL by reading image headers.
  * Results are cached to avoid redundant network requests.
@@ -42,34 +45,46 @@ async function getImageDimensions(url, timeout = 5000) {
     if (dimensionCache.has(url)) {
         return dimensionCache.get(url);
     }
-    
-    try {
-        const buffer = await fetchImageBuffer(url, timeout);
-        if (!buffer || buffer.length === 0) {
-            return null;
-        }
-        
-        const dimensions = imageSize(buffer);
-        if (dimensions && dimensions.width && dimensions.height) {
-            const result = {
-                width: dimensions.width,
-                height: dimensions.height,
-                type: dimensions.type || 'unknown'
-            };
-            
-            // Cache the result
-            dimensionCache.set(url, result);
-            return result;
-        }
-        
-        return null;
-    } catch (err) {
-        // Log in debug mode only
-        if (process.env.DEBUG) {
-            console.error(`Error getting dimensions for ${url}:`, err.message);
-        }
-        return null;
+
+    // Check pending requests
+    if (pendingRequests.has(url)) {
+        return pendingRequests.get(url);
     }
+    
+    const promise = (async () => {
+        try {
+            const buffer = await fetchImageBuffer(url, timeout);
+            if (!buffer || buffer.length === 0) {
+                return null;
+            }
+            
+            const dimensions = imageSize(buffer);
+            if (dimensions && dimensions.width && dimensions.height) {
+                const result = {
+                    width: dimensions.width,
+                    height: dimensions.height,
+                    type: dimensions.type || 'unknown'
+                };
+
+                // Cache the result
+                dimensionCache.set(url, result);
+                return result;
+            }
+
+            return null;
+        } catch (err) {
+            // Log in debug mode only
+            if (process.env.DEBUG) {
+                console.error(`Error getting dimensions for ${url}:`, err.message);
+            }
+            return null;
+        } finally {
+            pendingRequests.delete(url);
+        }
+    })();
+
+    pendingRequests.set(url, promise);
+    return promise;
 }
 
 /**
@@ -179,6 +194,84 @@ async function getMultipleImageDimensions(urls, batchSize = 10) {
 }
 
 /**
+ * Recursively traverses an object/array and fills missing image dimension fields
+ * for objects that contain an image URL in the `image` property.
+ *
+ * Mutates the input object in-place.
+ *
+ * @async
+ * @param {any} root - Object/array tree to enrich
+ * @param {Object} [options] - Enrichment options
+ * @param {string} [options.imageKey='image'] - Property name containing image URL
+ * @param {string} [options.widthKey='imageWidth'] - Width property name
+ * @param {string} [options.heightKey='imageHeight'] - Height property name
+ * @param {string} [options.typeKey='imageType'] - Image type property name
+ * @param {boolean} [options.onlyMissing=true] - Only fill when width/height are missing
+ * @returns {Promise<{candidates:number,enriched:number,missing:number}>} Enrichment stats
+ */
+async function enrichMissingImageDimensions(root, options = {}) {
+    const {
+        imageKey = 'image',
+        widthKey = 'imageWidth',
+        heightKey = 'imageHeight',
+        typeKey = 'imageType',
+        onlyMissing = true
+    } = options;
+
+    /** @type {{node:Object,url:string}[]} */
+    const targets = [];
+
+    function walk(node) {
+        if (!node) return;
+
+        if (Array.isArray(node)) {
+            node.forEach(walk);
+            return;
+        }
+
+        if (typeof node !== 'object') return;
+
+        const imageUrl = node[imageKey];
+        if (typeof imageUrl === 'string' && imageUrl.length > 0) {
+            const hasWidth = Number.isFinite(node[widthKey]);
+            const hasHeight = Number.isFinite(node[heightKey]);
+
+            if (!onlyMissing || !(hasWidth && hasHeight)) {
+                targets.push({ node, url: imageUrl });
+            }
+        }
+
+        Object.values(node).forEach(walk);
+    }
+
+    walk(root);
+
+    if (targets.length === 0) {
+        return { candidates: 0, enriched: 0, missing: 0 };
+    }
+
+    const uniqueUrls = [...new Set(targets.map(t => t.url))];
+    const dimensionsMap = await getMultipleImageDimensions(uniqueUrls);
+
+    let enriched = 0;
+    targets.forEach(({ node, url }) => {
+        if (!dimensionsMap.has(url)) return;
+
+        const dims = dimensionsMap.get(url);
+        node[widthKey] = dims.width;
+        node[heightKey] = dims.height;
+        node[typeKey] = dims.type;
+        enriched++;
+    });
+
+    return {
+        candidates: targets.length,
+        enriched,
+        missing: targets.length - enriched
+    };
+}
+
+/**
  * Clears the image dimension cache.
  * Useful between scrapes to free memory or force fresh fetches.
  * 
@@ -200,6 +293,7 @@ function getCacheSize() {
 module.exports = {
     getImageDimensions,
     getMultipleImageDimensions,
+    enrichMissingImageDimensions,
     clearCache,
     getCacheSize
 };

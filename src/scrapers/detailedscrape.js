@@ -6,7 +6,7 @@
  */
 
 const fs = require('fs');
-const { fetchJson } = require('../utils/scraperUtils');
+const { fetchJson, clearHtmlCache } = require('../utils/scraperUtils');
 const logger = require('../utils/logger');
 
 const breakthrough = require('../pages/detailed/breakthrough')
@@ -106,7 +106,8 @@ async function main()
 
         // Helper to process a single event
         async function processEvent(e, bkp) {
-            // Construct the event link from eventID
+            // Construct the event detail page URL from eventID
+            // The eventID typically matches the URL path segment
             const link = `https://www.leekduck.com/events/${e.eventID}/`;
             const p = [];
             
@@ -207,6 +208,8 @@ async function main()
 
         // Run with concurrency limit of 5
         await runWithConcurrency(events, 5, (e) => processEvent(e, bkp));
+        // Free cached HTML after all events are scraped
+        clearHtmlCache();
         logger.success(`Completed scraping detailed event pages`);
     } catch (error) {
         logger.error(error.message);
