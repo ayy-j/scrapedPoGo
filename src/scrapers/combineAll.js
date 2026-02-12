@@ -29,15 +29,26 @@ function readJsonFile(filePath) {
 }
 
 // Helper to read all eventType files
-function readEventTypeFiles() {
+async function readEventTypeFiles() {
     const eventTypes = {};
     try {
-        const files = fs.readdirSync(EVENT_TYPES_DIR);
-        for (const file of files) {
-            if (file.endsWith('.min.json')) {
-                const typeName = file.replace('.min.json', '');
-                eventTypes[typeName] = readJsonFile(path.join(EVENT_TYPES_DIR, file));
+        const files = await fs.promises.readdir(EVENT_TYPES_DIR);
+        const jsonFiles = files.filter(file => file.endsWith('.min.json'));
+
+        const results = await Promise.all(jsonFiles.map(async (file) => {
+            const typeName = file.replace('.min.json', '');
+            const fullPath = path.join(EVENT_TYPES_DIR, file);
+            try {
+                const content = await fs.promises.readFile(fullPath, 'utf8');
+                return { typeName, data: JSON.parse(content) };
+            } catch (err) {
+                logger.warn(`Could not read ${fullPath}: ${err.message}`);
+                return { typeName, data: [] };
             }
+        }));
+
+        for (const { typeName, data } of results) {
+            eventTypes[typeName] = data;
         }
     } catch (err) {
         logger.warn(`Could not read eventTypes directory: ${err.message}`);
@@ -320,7 +331,7 @@ async function main() {
     const research = readJsonFile(path.join(DATA_DIR, 'research.min.json'));
     const shinies = readJsonFile(path.join(DATA_DIR, 'shinies.min.json'));
     const rocketLineups = readJsonFile(path.join(DATA_DIR, 'rocketLineups.min.json'));
-    const eventTypes = readEventTypeFiles();
+    const eventTypes = await readEventTypeFiles();
     
     logger.info(`  Events: ${events.length}`);
     logger.info(`  Raids: ${raids.length}`);
