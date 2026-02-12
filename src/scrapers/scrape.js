@@ -14,6 +14,7 @@ const research = require('../pages/research')
 const eggs = require('../pages/eggs')
 const rocketLineups = require('../pages/rocketLineups')
 const shinies = require('../pages/shinies')
+const { saveCache } = require('../utils/imageDimensions');
 
 dotenv.config();
 dotenv.config({ path: '.env.local' });
@@ -51,6 +52,7 @@ async function main()
         shinies.get()
     ]);
 
+    saveCache();
     logger.success("All primary scrapers completed.");
 }
 
