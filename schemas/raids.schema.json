@@ -157,6 +157,10 @@
         "type": "string",
         "description": "The image format",
         "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+      },
+      "altText": {
+        "type": "string",
+        "description": "Accessible alt text for the image"
       }
     },
     "additionalProperties": false

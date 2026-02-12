@@ -206,8 +206,10 @@ async function extractPokemonList(container, options = {}) {
         const imgEl = item.querySelector(':scope > .pkmn-list-img > img');
         if (imgEl) {
             poke.image = imgEl.src || '';
+            poke.altText = imgEl.alt || '';
         } else {
             poke.image = '';
+            poke.altText = '';
         }
         
         // Shiny indicator - check for shiny icon or class
