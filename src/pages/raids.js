@@ -248,7 +248,9 @@ async function get() {
                             boss.eventStatus = determineEventStatus(boss.name, isShadowRaid, events);
 
                             // Image
-                            boss.image = card.querySelector('.boss-img img')?.src || "";
+                            const img = card.querySelector('.boss-img img');
+                            boss.image = img?.src || "";
+                            boss.altText = img?.alt || "";
 
                             // Shiny - check both LeekDuck icon and PogoAssets data
                             const hasShinyIcon = !!card.querySelector('.boss-img .shiny-icon');

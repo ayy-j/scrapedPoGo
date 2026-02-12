@@ -148,6 +148,10 @@
               "type": "string",
               "description": "Image format",
               "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+            },
+            "altText": {
+              "type": "string",
+              "description": "Accessible alt text for the image"
             }
           },
           "additionalProperties": false
@@ -215,6 +219,10 @@
             "imageType": {
               "type": "string",
               "description": "Image format"
+            },
+            "altText": {
+              "type": "string",
+              "description": "Accessible alt text for the image"
             }
           },
           "additionalProperties": false
@@ -290,6 +298,10 @@
             },
             "imageType": {
               "type": "string"
+            },
+            "altText": {
+              "type": "string",
+              "description": "Accessible alt text for the image"
             }
           },
           "additionalProperties": false
