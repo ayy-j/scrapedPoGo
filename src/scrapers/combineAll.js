@@ -18,9 +18,9 @@ const DATA_DIR = path.join(__dirname, '../../data');
 const EVENT_TYPES_DIR = path.join(DATA_DIR, 'eventTypes');
 
 // Helper to safely read JSON file
-function readJsonFile(filePath) {
+async function readJsonFile(filePath) {
     try {
-        const content = fs.readFileSync(filePath, 'utf8');
+        const content = await fs.promises.readFile(filePath, 'utf8');
         return JSON.parse(content);
     } catch (err) {
         logger.warn(`Could not read ${filePath}: ${err.message}`);
@@ -325,13 +325,15 @@ async function main() {
     
     // Read all data files
     logger.info('Reading data files...');
-    const events = readJsonFile(path.join(DATA_DIR, 'events.min.json'));
-    const raids = readJsonFile(path.join(DATA_DIR, 'raids.min.json'));
-    const eggs = readJsonFile(path.join(DATA_DIR, 'eggs.min.json'));
-    const research = readJsonFile(path.join(DATA_DIR, 'research.min.json'));
-    const shinies = readJsonFile(path.join(DATA_DIR, 'shinies.min.json'));
-    const rocketLineups = readJsonFile(path.join(DATA_DIR, 'rocketLineups.min.json'));
-    const eventTypes = await readEventTypeFiles();
+    const [events, raids, eggs, research, shinies, rocketLineups, eventTypes] = await Promise.all([
+        readJsonFile(path.join(DATA_DIR, 'events.min.json')),
+        readJsonFile(path.join(DATA_DIR, 'raids.min.json')),
+        readJsonFile(path.join(DATA_DIR, 'eggs.min.json')),
+        readJsonFile(path.join(DATA_DIR, 'research.min.json')),
+        readJsonFile(path.join(DATA_DIR, 'shinies.min.json')),
+        readJsonFile(path.join(DATA_DIR, 'rocketLineups.min.json')),
+        readEventTypeFiles()
+    ]);
     
     logger.info(`  Events: ${events.length}`);
     logger.info(`  Raids: ${raids.length}`);
@@ -382,8 +384,9 @@ async function main() {
 
     // Write minified file
     const minifiedPath = path.join(DATA_DIR, 'unified.min.json');
-    fs.writeFileSync(minifiedPath, JSON.stringify(outputData));
-    const minSize = fs.statSync(minifiedPath).size;
+    const jsonString = JSON.stringify(outputData);
+    await fs.promises.writeFile(minifiedPath, jsonString);
+    const minSize = Buffer.byteLength(jsonString);
     logger.success(`Wrote: ${minifiedPath} (${(minSize / 1024).toFixed(1)} KB)`);
     
     // Print summary
