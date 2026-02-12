@@ -37,11 +37,12 @@ async function readEventTypeFiles() {
 
         const results = await Promise.all(jsonFiles.map(async (file) => {
             const typeName = file.replace('.min.json', '');
+            const fullPath = path.join(EVENT_TYPES_DIR, file);
             try {
-                const content = await fs.promises.readFile(path.join(EVENT_TYPES_DIR, file), 'utf8');
+                const content = await fs.promises.readFile(fullPath, 'utf8');
                 return { typeName, data: JSON.parse(content) };
             } catch (err) {
-                logger.warn(`Could not read ${file}: ${err.message}`);
+                logger.warn(`Could not read ${fullPath}: ${err.message}`);
                 return { typeName, data: [] };
             }
         }));
