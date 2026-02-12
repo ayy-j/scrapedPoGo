@@ -371,8 +371,9 @@ async function main() {
 
     // Write minified file
     const minifiedPath = path.join(DATA_DIR, 'unified.min.json');
-    fs.writeFileSync(minifiedPath, JSON.stringify(outputData));
-    const minSize = fs.statSync(minifiedPath).size;
+    const jsonContent = JSON.stringify(outputData);
+    await fs.promises.writeFile(minifiedPath, jsonContent);
+    const minSize = Buffer.byteLength(jsonContent);
     logger.success(`Wrote: ${minifiedPath} (${(minSize / 1024).toFixed(1)} KB)`);
     
     // Print summary
