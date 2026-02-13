@@ -7,6 +7,7 @@
 
 const fs = require('fs');
 const { fetchJson, clearHtmlCache } = require('../utils/scraperUtils');
+const { saveCache } = require('../utils/imageDimensions');
 const logger = require('../utils/logger');
 
 const breakthrough = require('../pages/detailed/breakthrough')
@@ -210,6 +211,7 @@ async function main()
         await runWithConcurrency(events, 5, (e) => processEvent(e, bkp));
         // Free cached HTML after all events are scraped
         clearHtmlCache();
+        saveCache();
         logger.success(`Completed scraping detailed event pages`);
     } catch (error) {
         logger.error(error.message);

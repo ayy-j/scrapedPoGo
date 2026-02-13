@@ -6,6 +6,8 @@
  * @module utils/imageDimensions
  */
 
+const fs = require('fs');
+const path = require('path');
 const https = require('https');
 const http = require('http');
 const { imageSize } = require('image-size');
@@ -22,6 +24,52 @@ const dimensionCache = new Map();
 
 /** @type {Map<string, Promise<ImageDimensions|null>>} Map of in-flight requests */
 const pendingRequests = new Map();
+
+const CACHE_DIR = path.join(__dirname, '../../.cache');
+const CACHE_FILE = path.join(CACHE_DIR, 'imageDimensions.json');
+
+/**
+ * Loads the dimension cache from disk.
+ * Called automatically on module load.
+ */
+function loadCache() {
+    try {
+        if (!fs.existsSync(CACHE_FILE)) return;
+
+        const data = fs.readFileSync(CACHE_FILE, 'utf8');
+        const json = JSON.parse(data);
+
+        if (json && typeof json === 'object') {
+            Object.entries(json).forEach(([url, dims]) => {
+                dimensionCache.set(url, dims);
+            });
+        }
+    } catch (err) {
+        if (process.env.DEBUG) {
+            console.error('Error loading dimension cache:', err.message);
+        }
+    }
+}
+
+/**
+ * Saves the dimension cache to disk.
+ * Should be called before process exit.
+ */
+function saveCache() {
+    try {
+        if (!fs.existsSync(CACHE_DIR)) {
+            fs.mkdirSync(CACHE_DIR, { recursive: true });
+        }
+
+        const json = Object.fromEntries(dimensionCache);
+        fs.writeFileSync(CACHE_FILE, JSON.stringify(json, null, 2), 'utf8');
+    } catch (err) {
+        console.error('Error saving dimension cache:', err.message);
+    }
+}
+
+// Initialize cache on module load
+loadCache();
 
 /**
  * Fetches image dimensions from a URL by reading image headers.
@@ -295,5 +343,6 @@ module.exports = {
     getMultipleImageDimensions,
     enrichMissingImageDimensions,
     clearCache,
+    saveCache,
     getCacheSize
 };
