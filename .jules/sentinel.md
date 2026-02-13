@@ -7,3 +7,8 @@
 **Vulnerability:** Using `innerHTML.split('<br>')` to parse multi-line text (like disclaimers) exposes the application to XSS because `innerHTML` parses all tags, including `<script>`.
 **Learning:** When you need to preserve specific structural elements (like line breaks) while extracting text, `textContent` on the parent is insufficient because it flattens the structure.
 **Prevention:** Iterate over `childNodes` and manually collect text from `nodeType === 3` (Text) nodes, handling specific Element nodes (like `BR`) as delimiters. This ignores all other elements (scripts, images) by default.
+
+## 2025-02-19 - SSRF Prevention in Image Fetcher
+**Vulnerability:** The image dimension fetcher allowed requests to any URL, including private IP addresses (localhost, 10.x.x.x), enabling Server-Side Request Forgery (SSRF).
+**Learning:** Fetching external resources without validating the destination allows attackers to probe internal networks. Even if only metadata (image size) is returned, the connection attempt itself can be malicious or leak info.
+**Prevention:** Validate URL protocol (http/https only) and hostname (block private IPs/localhost) before making any network request.
