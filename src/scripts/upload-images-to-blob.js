@@ -216,6 +216,18 @@ function readJsonFiles(dir, files = []) {
 }
 
 /**
+ * Determine which URLs need upload.
+ * @param {string[]} uniqueUrls - Candidate image URLs
+ * @param {Record<string, string>} urlMap - Existing URL mappings
+ * @param {boolean} force - Whether to re-upload all URLs
+ * @returns {string[]} URLs to process
+ */
+function getUrlsToProcess(uniqueUrls, urlMap, force) {
+    if (force) return uniqueUrls;
+    return uniqueUrls.filter((url) => !urlMap[url]);
+}
+
+/**
  * Main upload process
  */
 async function main() {
@@ -278,29 +290,11 @@ async function main() {
 
     // Filter out URLs that are already mapped (unless forcing).
     // Event banners are always reprocessed so they are consistently stored at 50% size.
-    let reprocessEventBanners = 0;
-    const urlsToProcess = FORCE
-        ? uniqueUrls
-        : uniqueUrls.filter(url => {
-            const pathname = urlToPathname(url);
-            const isEventBanner = isEventBannerPath(pathname);
-
-            if (isEventBanner) {
-                if (urlMap[url]) {
-                    reprocessEventBanners++;
-                }
-                return true;
-            }
-
-            return !urlMap[url];
-        });
+    const urlsToProcess = getUrlsToProcess(uniqueUrls, urlMap, FORCE);
     
     const alreadyMapped = uniqueUrls.length - urlsToProcess.length;
     if (alreadyMapped > 0) {
         console.log(`   ⏭ ${alreadyMapped} URLs already in blob storage (skipping)`);
-    }
-    if (reprocessEventBanners > 0) {
-        console.log(`   ♻ ${reprocessEventBanners} mapped event banners will be resized and overwritten`);
     }
     console.log(`   📤 ${urlsToProcess.length} URLs to upload\n`);
 
@@ -435,11 +429,15 @@ async function main() {
     console.log('\n✅ Upload complete!');
 }
 
-// Run main function
-main().catch((err) => {
-    console.error('\n❌ Fatal error:', err.message);
-    if (VERBOSE) {
-        console.error(err.stack);
-    }
-    process.exit(1);
-});
+if (require.main === module) {
+    // Run main function
+    main().catch((err) => {
+        console.error('\n❌ Fatal error:', err.message);
+        if (VERBOSE) {
+            console.error(err.stack);
+        }
+        process.exit(1);
+    });
+}
+
+module.exports = { getUrlsToProcess };
