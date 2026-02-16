@@ -192,21 +192,22 @@ async function get() {
             // Load events data for status determination
             let events = [];
             try {
-                if (fs.existsSync('data/events.min.json')) {
-                    const eventsData = JSON.parse(fs.readFileSync('data/events.min.json', 'utf8'));
-                    // Flatten eventType-keyed structure into array if needed
-                    if (Array.isArray(eventsData)) {
-                        events = eventsData;
-                    } else if (eventsData && typeof eventsData === 'object') {
-                        Object.values(eventsData).forEach(typeArray => {
-                            if (Array.isArray(typeArray)) {
-                                events = events.concat(typeArray);
-                            }
-                        });
-                    }
+                const eventsDataRaw = await fs.promises.readFile('data/events.min.json', 'utf8');
+                const eventsData = JSON.parse(eventsDataRaw);
+                // Flatten eventType-keyed structure into array if needed
+                if (Array.isArray(eventsData)) {
+                    events = eventsData;
+                } else if (eventsData && typeof eventsData === 'object') {
+                    Object.values(eventsData).forEach(typeArray => {
+                        if (Array.isArray(typeArray)) {
+                            events = events.concat(typeArray);
+                        }
+                    });
                 }
             } catch (error) {
-                logger.error('Error loading events data: ' + error.message);
+                if (error.code !== 'ENOENT') {
+                    logger.error('Error loading events data: ' + error.message);
+                }
             }
 
             const raidBosses = dom.window.document.querySelectorAll('.raid-bosses, .shadow-raid-bosses');
