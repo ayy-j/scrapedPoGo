@@ -9,3 +9,7 @@
 ## 2026-02-02 - Image Dimension Fetch Coalescing
 **Learning:** Multiple scrapers (or parallelized logic within one scraper) can request dimensions for the same image URL concurrently. Simple caching (`Map<url, result>`) only prevents re-fetching *after* the first request completes. During the initial "cold" concurrent burst, multiple network requests are still sent (Thundering Herd).
 **Action:** When caching async operations that might be called concurrently, cache the **Promise** (`pendingRequests`) as well as the result. If a request is in-flight, return the existing Promise to coalesce all callers into a single network request.
+
+## 2026-02-03 - Synchronous File Writes in Loops
+**Learning:** Using `fs.writeFileSync` inside a loop for generating multiple files (like segmented event type files) blocks the event loop and is significantly slower than asynchronous alternatives. In `src/scrapers/combinedetails.js`, switching to `await Promise.all(items.map(...))` with `fs.promises.writeFile` reduced execution time by approximately 40% (from ~64ms to ~40ms for 1000 files).
+**Action:** Prefer `fs.promises` and `Promise.all` for batch file operations to improve I/O throughput and responsiveness.
