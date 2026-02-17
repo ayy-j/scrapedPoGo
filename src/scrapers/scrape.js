@@ -15,6 +15,7 @@ const eggs = require('../pages/eggs')
 const rocketLineups = require('../pages/rocketLineups')
 const shinies = require('../pages/shinies')
 const { saveCache } = require('../utils/imageDimensions');
+const { initUrlMap } = require('../utils/blobUrls');
 
 dotenv.config();
 dotenv.config({ path: '.env.local' });
@@ -36,6 +37,8 @@ dotenv.config({ path: '.env.local' });
 async function main()
 {
     logger.start("Starting primary scrapers...");
+
+    await initUrlMap();
 
     if (!fs.existsSync('data'))
         fs.mkdirSync('data');
