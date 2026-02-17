@@ -349,7 +349,7 @@ function generateEventTypeFiles(eventsByType) {
  */
 async function main()
 {
-    const eventsData = JSON.parse(fs.readFileSync("./data/events.min.json"));
+    const eventsData = JSON.parse(await fs.promises.readFile("./data/events.min.json", "utf8"));
     
     // Flatten events data - handle both array format and eventType-keyed object format
     let events = [];
