@@ -129,10 +129,10 @@ async function get(url, id, bkp) {
         }
 
         if (timedResearchData.name || timedResearchData.tasks.length > 0 || timedResearchData.encounters.length > 0) {
-            writeTempFile(id, 'timed-research', timedResearchData);
+            await writeTempFile(id, 'timed-research', timedResearchData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'timed-research', bkp, 'timedresearch');
+        await handleScraperError(err, id, 'timed-research', bkp, 'timedresearch');
     }
 }
 

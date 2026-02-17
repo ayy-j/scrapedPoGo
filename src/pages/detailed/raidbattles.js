@@ -118,10 +118,10 @@ async function get(url, id, bkp) {
         }
 
         if (raidboss.bosses.length > 0 || Object.values(raidboss.tiers).some(t => t.length > 0)) {
-            writeTempFile(id, 'raid-battles', raidboss);
+            await writeTempFile(id, 'raid-battles', raidboss);
         }
     } catch (err) {
-        handleScraperError(err, id, 'raid-battles', bkp, 'raidbattles');
+        await handleScraperError(err, id, 'raid-battles', bkp, 'raidbattles');
     }
 }
 

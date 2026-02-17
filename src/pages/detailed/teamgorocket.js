@@ -128,10 +128,10 @@ async function get(url, id, bkp) {
         if (rocketData.shadowPokemon.length > 0 || 
             rocketData.giovanni.length > 0 || 
             Object.values(rocketData.leaders).some(l => l.length > 0)) {
-            writeTempFile(id, 'team-go-rocket', rocketData);
+            await writeTempFile(id, 'team-go-rocket', rocketData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'team-go-rocket', bkp, 'teamgorocket');
+        await handleScraperError(err, id, 'team-go-rocket', bkp, 'teamgorocket');
     }
 }
 

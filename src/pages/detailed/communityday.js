@@ -181,10 +181,10 @@ async function get(url, id, bkp) {
 
         // Only write if we have meaningful data
         if (commday.spawns.length > 0 || commday.bonuses.length > 0 || commday.specialresearch.length > 0) {
-            writeTempFile(id, 'community-day', commday);
+            await writeTempFile(id, 'community-day', commday);
         }
     } catch (err) {
-        handleScraperError(err, id, 'community-day', bkp, 'communityday');
+        await handleScraperError(err, id, 'community-day', bkp, 'communityday');
     }
 }
 

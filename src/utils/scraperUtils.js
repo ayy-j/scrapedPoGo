@@ -137,30 +137,31 @@ function sanitizeFilename(name) {
  * Writes a temporary JSON file for scraped event data.
  * Files are written to data/temp/ directory and later combined by combinedetails.js.
  * 
+ * @async
  * @param {string} id - Event ID (URL slug)
  * @param {string} type - Event type identifier (e.g., 'community-day', 'raid-battles')
  * @param {Object} data - Scraped data object to serialize
  * @param {string} [suffix=''] - Optional filename suffix (e.g., '_generic', '_codes')
- * @returns {void}
+ * @returns {Promise<void>}
  * 
  * @example
- * writeTempFile('january-community-day', 'community-day', { spawns: [...] });
+ * await writeTempFile('january-community-day', 'community-day', { spawns: [...] });
  * // Creates: data/temp/january-community-day.json
  * 
- * writeTempFile('event-id', 'promo-codes', ['CODE1', 'CODE2'], '_codes');
+ * await writeTempFile('event-id', 'promo-codes', ['CODE1', 'CODE2'], '_codes');
  * // Creates: data/temp/event-id_codes.json
  */
-function writeTempFile(id, type, data, suffix = '') {
+async function writeTempFile(id, type, data, suffix = '') {
     const safeId = sanitizeFilename(id);
     const safeSuffix = sanitizeFilename(suffix);
     const filename = path.join('data/temp', `${safeId}${safeSuffix}.json`);
     const content = JSON.stringify({ id, type, data });
     
-    fs.writeFile(filename, content, err => {
-        if (err) {
-            console.error(`Error writing ${filename}:`, err);
-        }
-    });
+    try {
+        await fs.promises.writeFile(filename, content);
+    } catch (err) {
+        console.error(`Error writing ${filename}:`, err);
+    }
 }
 
 /**
@@ -168,21 +169,22 @@ function writeTempFile(id, type, data, suffix = '') {
  * When scraping fails, searches backup data for previously scraped content
  * and writes it to maintain data availability.
  * 
+ * @async
  * @param {Error} err - The error that occurred during scraping
  * @param {string} id - Event ID (URL slug)
  * @param {string} type - Event type for the output file
  * @param {Object[]} bkp - Backup data array from events_min.json (CDN fallback)
  * @param {string} scraperKey - Key to look up in extraData (e.g., 'communityday', 'raidbattles')
- * @returns {void}
+ * @returns {Promise<void>}
  * 
  * @example
  * try {
  *   // scraping code
  * } catch (err) {
- *   handleScraperError(err, 'event-id', 'community-day', backupData, 'communityday');
+ *   await handleScraperError(err, 'event-id', 'community-day', backupData, 'communityday');
  * }
  */
-function handleScraperError(err, id, type, bkp, scraperKey) {
+async function handleScraperError(err, id, type, bkp, scraperKey) {
     // Log error for debugging
     if (process.env.DEBUG) {
         console.error(`Scraper error for ${id} (${type}):`, err.message);
@@ -192,7 +194,7 @@ function handleScraperError(err, id, type, bkp, scraperKey) {
     for (let i = 0; i < bkp.length; i++) {
         if (bkp[i].eventID === id && bkp[i].extraData != null) {
             if (scraperKey in bkp[i].extraData) {
-                writeTempFile(id, type, bkp[i].extraData[scraperKey].data);
+                await writeTempFile(id, type, bkp[i].extraData[scraperKey].data);
                 return;
             }
         }

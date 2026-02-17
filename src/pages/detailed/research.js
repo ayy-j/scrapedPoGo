@@ -159,15 +159,15 @@ async function get(url, id, bkp) {
 
         // Write data if we have meaningful content
         if (researchData.name || researchData.tasks.length > 0 || researchData.promoCodes.length > 0) {
-            writeTempFile(id, 'research', researchData);
+            await writeTempFile(id, 'research', researchData);
         }
 
         // Write promo codes separately if found
         if (researchData.promoCodes.length > 0) {
-            writeTempFile(id, 'promo-codes', researchData.promoCodes, '_codes');
+            await writeTempFile(id, 'promo-codes', researchData.promoCodes, '_codes');
         }
     } catch (err) {
-        handleScraperError(err, id, 'research', bkp, 'research');
+        await handleScraperError(err, id, 'research', bkp, 'research');
     }
 }
 
