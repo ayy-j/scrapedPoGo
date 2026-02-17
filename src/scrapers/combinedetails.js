@@ -396,11 +396,17 @@ async function main()
         }
     });
 
-    files.forEach(f =>
-    {
+    await Promise.all(files.map(async (f) => {
         // Skip empty files or non-JSON files
         const filePath = "./data/temp/" + f;
-        const fileContent = fs.readFileSync(filePath, 'utf8');
+        let fileContent;
+        try {
+            fileContent = await fs.promises.readFile(filePath, 'utf8');
+        } catch (readErr) {
+            logger.warn(`Error reading temp file ${f}: ${readErr.message}`);
+            return;
+        }
+
         if (!fileContent || fileContent.trim().length === 0) {
             logger.warn(`Skipping empty temp file: ${f}`);
             return;
@@ -447,7 +453,7 @@ async function main()
                 Object.assign(e, data.data);
             }
         }
-    });
+    }));
 
     await writeSegmentedOutput(events);
     await fs.promises.rm("data/temp", { recursive: true, force: true });
