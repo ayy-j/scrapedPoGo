@@ -28,48 +28,71 @@ const pendingRequests = new Map();
 const CACHE_DIR = path.join(__dirname, '../../.cache');
 const CACHE_FILE = path.join(CACHE_DIR, 'imageDimensions.json');
 
+let loadPromise = null;
+let isCleared = false;
+
 /**
- * Loads the dimension cache from disk.
- * Called automatically on module load.
+ * Loads the dimension cache from disk asynchronously.
+ * Uses a singleton promise to ensure only one load operation happens.
+ * @returns {Promise<void>}
  */
-function loadCache() {
-    try {
-        if (!fs.existsSync(CACHE_FILE)) return;
+function ensureCacheLoaded() {
+    if (loadPromise) return loadPromise;
 
-        const data = fs.readFileSync(CACHE_FILE, 'utf8');
-        const json = JSON.parse(data);
+    loadPromise = (async () => {
+        try {
+            // If the cache was already cleared, we shouldn't populate it with stale data
+            if (isCleared) return;
 
-        if (json && typeof json === 'object') {
-            Object.entries(json).forEach(([url, dims]) => {
-                dimensionCache.set(url, dims);
-            });
+            // Check if file exists asynchronously
+            try {
+                await fs.promises.access(CACHE_FILE, fs.constants.F_OK);
+            } catch {
+                return; // File doesn't exist
+            }
+
+            const data = await fs.promises.readFile(CACHE_FILE, 'utf8');
+
+            // Check cleared flag again after await
+            if (isCleared) return;
+
+            const json = JSON.parse(data);
+
+            if (json && typeof json === 'object') {
+                Object.entries(json).forEach(([url, dims]) => {
+                    dimensionCache.set(url, dims);
+                });
+            }
+        } catch (err) {
+            if (process.env.DEBUG) {
+                console.error('Error loading dimension cache:', err.message);
+            }
         }
-    } catch (err) {
-        if (process.env.DEBUG) {
-            console.error('Error loading dimension cache:', err.message);
-        }
-    }
+    })();
+
+    return loadPromise;
 }
 
 /**
  * Saves the dimension cache to disk.
  * Should be called before process exit.
+ * @returns {Promise<void>}
  */
-function saveCache() {
+async function saveCache() {
     try {
+        // Ensure we don't overwrite the cache with empty data if we haven't loaded it yet
+        await ensureCacheLoaded();
+
         if (!fs.existsSync(CACHE_DIR)) {
-            fs.mkdirSync(CACHE_DIR, { recursive: true });
+            await fs.promises.mkdir(CACHE_DIR, { recursive: true });
         }
 
         const json = Object.fromEntries(dimensionCache);
-        fs.writeFileSync(CACHE_FILE, JSON.stringify(json, null, 2), 'utf8');
+        await fs.promises.writeFile(CACHE_FILE, JSON.stringify(json, null, 2), 'utf8');
     } catch (err) {
         console.error('Error saving dimension cache:', err.message);
     }
 }
-
-// Initialize cache on module load
-loadCache();
 
 /**
  * Validates a URL to prevent SSRF attacks.
@@ -145,6 +168,8 @@ function validateUrl(urlString) {
 async function getImageDimensions(url, timeout = 5000) {
     if (!url) return null;
     
+    await ensureCacheLoaded();
+
     // Check cache first
     if (dimensionCache.has(url)) {
         return dimensionCache.get(url);
@@ -387,6 +412,7 @@ async function enrichMissingImageDimensions(root, options = {}) {
  * @returns {void}
  */
 function clearCache() {
+    isCleared = true;
     dimensionCache.clear();
 }
 

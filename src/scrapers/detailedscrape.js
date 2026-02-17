@@ -211,7 +211,7 @@ async function main()
         await runWithConcurrency(events, 5, (e) => processEvent(e, bkp));
         // Free cached HTML after all events are scraped
         clearHtmlCache();
-        saveCache();
+        await saveCache();
         logger.success(`Completed scraping detailed event pages`);
     } catch (error) {
         logger.error(error.message);

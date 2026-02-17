@@ -55,7 +55,7 @@ async function main()
         shinies.get()
     ]);
 
-    saveCache();
+    await saveCache();
     logger.success("All primary scrapers completed.");
 }
 
