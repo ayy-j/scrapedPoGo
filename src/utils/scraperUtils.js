@@ -102,7 +102,14 @@ const htmlFetchCache = new Map();
 async function getJSDOM(url) {
     // Coalesce concurrent fetches for the same URL into a single HTTP request
     if (!htmlFetchCache.has(url)) {
-        htmlFetchCache.set(url, fetchUrl(url));
+        const promise = fetchUrl(url);
+        htmlFetchCache.set(url, promise);
+
+        // Remove from cache after the fetch is complete (success or failure)
+        // to prevent unbounded cache growth.
+        promise.finally(() => {
+            htmlFetchCache.delete(url);
+        });
     }
     const html = await htmlFetchCache.get(url);
     return new JSDOM(html, { url });
