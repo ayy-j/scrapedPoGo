@@ -15,12 +15,32 @@ const URL_MAP_FILE = path.join(__dirname, 'blob-url-map.json');
 let urlMap = null;
 
 /**
+ * Asynchronously initialize the URL map.
+ * Call this at the start of the application to avoid blocking synchronous reads later.
+ * @returns {Promise<void>}
+ */
+async function initUrlMap() {
+    if (urlMap !== null) return;
+
+    try {
+        const content = await fs.promises.readFile(URL_MAP_FILE, 'utf8');
+        urlMap = JSON.parse(content);
+    } catch (err) {
+        if (err.code !== 'ENOENT') {
+            console.warn(`[blobUrls] Failed to load URL map: ${err.message}`);
+        }
+        urlMap = {};
+    }
+}
+
+/**
  * Load URL mapping from file (cached)
  * @returns {Object<string, string>} Map of original URL to Blob URL
  */
 function loadUrlMap() {
     if (urlMap !== null) return urlMap;
 
+    // Fallback to synchronous load if initUrlMap wasn't called
     if (fs.existsSync(URL_MAP_FILE)) {
         try {
             urlMap = JSON.parse(fs.readFileSync(URL_MAP_FILE, 'utf8'));
@@ -158,6 +178,7 @@ function getStats() {
 }
 
 module.exports = {
+    initUrlMap,
     loadUrlMap,
     clearCache,
     isEnabled,

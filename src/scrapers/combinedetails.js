@@ -8,7 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 const logger = require('../utils/logger');
-const { transformUrls } = require('../utils/blobUrls');
+const { transformUrls, initUrlMap } = require('../utils/blobUrls');
 const { enrichMissingImageDimensions } = require('../utils/imageDimensions');
 const { isGlobalEvent } = require('../utils/scraperUtils');
 const dotenv = require('dotenv');
@@ -348,6 +348,8 @@ async function generateEventTypeFiles(eventsByType) {
  */
 async function main()
 {
+    await initUrlMap();
+
     const eventsData = JSON.parse(fs.readFileSync("./data/events.min.json"));
     
     // Flatten events data - handle both array format and eventType-keyed object format

@@ -12,7 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 const logger = require('../utils/logger');
-const { transformUrls, isEnabled: isBlobEnabled } = require('../utils/blobUrls');
+const { transformUrls, isEnabled: isBlobEnabled, initUrlMap } = require('../utils/blobUrls');
 
 const DATA_DIR = path.join(__dirname, '../../data');
 const EVENT_TYPES_DIR = path.join(DATA_DIR, 'eventTypes');
@@ -323,6 +323,8 @@ function calculateStats(data) {
 async function main() {
     logger.start('Building unified data file...');
     
+    await initUrlMap();
+
     // Read all data files
     logger.info('Reading data files...');
     const events = readJsonFile(path.join(DATA_DIR, 'events.min.json'));
