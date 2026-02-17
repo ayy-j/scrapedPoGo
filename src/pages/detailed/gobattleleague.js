@@ -90,10 +90,10 @@ async function get(url, id, bkp) {
         }
 
         if (gblData.leagues.length > 0) {
-            writeTempFile(id, 'go-battle-league', gblData);
+            await writeTempFile(id, 'go-battle-league', gblData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'go-battle-league', bkp, 'gobattleleague');
+        await handleScraperError(err, id, 'go-battle-league', bkp, 'gobattleleague');
     }
 }
 

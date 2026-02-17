@@ -53,9 +53,9 @@ async function get(url, id, bkp) {
             list: pokemonList
         };
 
-        writeTempFile(id, 'research-breakthrough', reward);
+        await writeTempFile(id, 'research-breakthrough', reward);
     } catch (err) {
-        handleScraperError(err, id, 'research-breakthrough', bkp, 'breakthrough');
+        await handleScraperError(err, id, 'research-breakthrough', bkp, 'breakthrough');
     }
 }
 

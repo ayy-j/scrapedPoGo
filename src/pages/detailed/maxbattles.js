@@ -75,10 +75,10 @@ async function get(url, id, bkp) {
         }
 
         if (maxBattlesData.featured.length > 0 || maxBattlesData.gigantamax.length > 0 || maxBattlesData.dynamax.length > 0) {
-            writeTempFile(id, 'max-battles', maxBattlesData);
+            await writeTempFile(id, 'max-battles', maxBattlesData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'max-battles', bkp, 'maxbattles');
+        await handleScraperError(err, id, 'max-battles', bkp, 'maxbattles');
     }
 }
 

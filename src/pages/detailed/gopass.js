@@ -178,10 +178,10 @@ async function get(url, id, bkp) {
             goPassData.pricing.deluxe || 
             goPassData.featuredPokemon.length > 0 ||
             goPassData.ranks.length > 0) {
-            writeTempFile(id, 'go-pass', goPassData);
+            await writeTempFile(id, 'go-pass', goPassData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'go-pass', bkp, 'gopass');
+        await handleScraperError(err, id, 'go-pass', bkp, 'gopass');
     }
 }
 

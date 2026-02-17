@@ -55,10 +55,10 @@ async function get(url, id, bkp) {
         }
 
         if (maxMondaysData.featured) {
-            writeTempFile(id, 'max-mondays', maxMondaysData);
+            await writeTempFile(id, 'max-mondays', maxMondaysData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'max-mondays', bkp, 'maxmondays');
+        await handleScraperError(err, id, 'max-mondays', bkp, 'maxmondays');
     }
 }
 

@@ -69,10 +69,10 @@ async function get(url, id, bkp) {
         raidHourData.bonusDisclaimers = bonusData.disclaimers;
 
         if (raidHourData.featured) {
-            writeTempFile(id, 'raid-hour', raidHourData);
+            await writeTempFile(id, 'raid-hour', raidHourData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'raid-hour', bkp, 'raidhour');
+        await handleScraperError(err, id, 'raid-hour', bkp, 'raidhour');
     }
 }
 

@@ -66,9 +66,9 @@ async function get(url, id, bkp) {
             list: pokemonList
         };
 
-        writeTempFile(id, 'pokemon-spotlight-hour', spotlight);
+        await writeTempFile(id, 'pokemon-spotlight-hour', spotlight);
     } catch (err) {
-        handleScraperError(err, id, 'pokemon-spotlight-hour', bkp, 'spotlight');
+        await handleScraperError(err, id, 'pokemon-spotlight-hour', bkp, 'spotlight');
     }
 }
 

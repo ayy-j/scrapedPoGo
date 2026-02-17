@@ -50,9 +50,9 @@ async function get(url, id, bkp) {
             hasShiny: doc.getElementById('shiny') !== null
         };
 
-        writeTempFile(id, 'generic', generic, '_generic');
+        await writeTempFile(id, 'generic', generic, '_generic');
     } catch (err) {
-        handleScraperError(err, id, 'generic', bkp, 'generic');
+        await handleScraperError(err, id, 'generic', bkp, 'generic');
     }
 }
 

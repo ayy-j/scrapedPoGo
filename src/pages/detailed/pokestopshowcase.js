@@ -55,10 +55,10 @@ async function get(url, id, bkp) {
         showcaseData.featured.push(...showcaseSection.pokemon);
 
         if (showcaseData.featured.length > 0) {
-            writeTempFile(id, 'pokestop-showcase', showcaseData);
+            await writeTempFile(id, 'pokestop-showcase', showcaseData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'pokestop-showcase', bkp, 'pokestopshowcase');
+        await handleScraperError(err, id, 'pokestop-showcase', bkp, 'pokestopshowcase');
     }
 }
 

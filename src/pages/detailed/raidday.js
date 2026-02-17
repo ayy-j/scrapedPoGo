@@ -144,10 +144,10 @@ async function get(url, id, bkp) {
         }
 
         if (raidDayData.featured.length > 0 || raidDayData.raids.fiveStar.length > 0) {
-            writeTempFile(id, 'raid-day', raidDayData);
+            await writeTempFile(id, 'raid-day', raidDayData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'raid-day', bkp, 'raidday');
+        await handleScraperError(err, id, 'raid-day', bkp, 'raidday');
     }
 }
 

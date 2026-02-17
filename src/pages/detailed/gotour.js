@@ -261,10 +261,10 @@ async function get(url, id, bkp) {
         }
 
         if (tourData.eventInfo.name || Object.keys(tourData.habitats).length > 0) {
-            writeTempFile(id, 'pokemon-go-tour', tourData);
+            await writeTempFile(id, 'pokemon-go-tour', tourData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'pokemon-go-tour', bkp, 'gotour');
+        await handleScraperError(err, id, 'pokemon-go-tour', bkp, 'gotour');
     }
 }
 

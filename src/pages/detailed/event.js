@@ -87,10 +87,10 @@ async function get(url, id, bkp) {
         if (eventData.bonuses.length > 0 || 
             eventData.spawns.length > 0 || 
             Object.keys(eventData.customSections).length > 0) {
-            writeTempFile(id, 'event', eventData);
+            await writeTempFile(id, 'event', eventData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'event', bkp, 'event');
+        await handleScraperError(err, id, 'event', bkp, 'event');
     }
 }
 

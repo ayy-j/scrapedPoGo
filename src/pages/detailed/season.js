@@ -208,10 +208,10 @@ async function get(url, id, bkp) {
         }
 
         if (seasonData.name || seasonData.bonuses.length > 0) {
-            writeTempFile(id, 'season', seasonData);
+            await writeTempFile(id, 'season', seasonData);
         }
     } catch (err) {
-        handleScraperError(err, id, 'season', bkp, 'season');
+        await handleScraperError(err, id, 'season', bkp, 'season');
     }
 }
 
