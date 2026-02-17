@@ -289,37 +289,36 @@ function segmentEventData(event) {
  * Creates data/eventTypes/ directory and writes minified JSON for each event type.
  * 
  * @param {Object} eventsByType - Object with eventType keys and arrays of segmented events
- * @returns {void}
+ * @returns {Promise<void>}
  */
-function generateEventTypeFiles(eventsByType) {
+async function generateEventTypeFiles(eventsByType) {
     const outputDir = './data/eventTypes';
     
     // Create output directory
-    if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir, { recursive: true });
-    }
+    await fs.promises.mkdir(outputDir, { recursive: true });
     
     // Clear existing JSON files to avoid stale types
-    if (fs.existsSync(outputDir)) {
-        const files = fs.readdirSync(outputDir);
-        files.forEach(file => {
-            if (file.endsWith('.json')) {
-                fs.unlinkSync(path.join(outputDir, file));
-            }
-        });
+    try {
+        const files = await fs.promises.readdir(outputDir);
+        const deletePromises = files
+            .filter(file => file.endsWith('.json'))
+            .map(file => fs.promises.unlink(path.join(outputDir, file)));
+        await Promise.all(deletePromises);
+    } catch (err) {
+        if (err.code !== 'ENOENT') throw err;
     }
     
     // Write per-type files - eventsByType is already grouped and segmented
-    let count = 0;
-    Object.entries(eventsByType).forEach(([type, items]) => {
+    const writePromises = Object.entries(eventsByType).map(async ([type, items]) => {
         const safeType = sanitizeType(type);
         const minPath = path.join(outputDir, `${safeType}.min.json`);
         
-        fs.writeFileSync(minPath, JSON.stringify(items));
-        count++;
+        await fs.promises.writeFile(minPath, JSON.stringify(items));
     });
+
+    await Promise.all(writePromises);
     
-    logger.success(`Generated ${count} eventType files in ${outputDir}`);
+    logger.success(`Generated ${Object.keys(eventsByType).length} eventType files in ${outputDir}`);
 }
 
 /**
@@ -492,7 +491,7 @@ async function writeSegmentedOutput(events) {
     });
 
     // Generate per-eventType files with matching structure
-    generateEventTypeFiles(eventsByType);
+    await generateEventTypeFiles(eventsByType);
 }
 
 main().catch((e) => {
