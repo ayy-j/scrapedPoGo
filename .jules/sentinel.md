@@ -12,3 +12,8 @@
 **Vulnerability:** The image dimension fetcher allowed requests to any URL, including private IP addresses (localhost, 10.x.x.x), enabling Server-Side Request Forgery (SSRF).
 **Learning:** Fetching external resources without validating the destination allows attackers to probe internal networks. Even if only metadata (image size) is returned, the connection attempt itself can be malicious or leak info.
 **Prevention:** Validate URL protocol (http/https only) and hostname (block private IPs/localhost) before making any network request.
+
+## 2025-02-19 - Centralized Security Validation
+**Vulnerability:** Security logic (SSRF checks) was duplicated or missing in different parts of the application (image fetcher vs general fetcher).
+**Learning:** Duplicated security logic leads to inconsistencies where one part of the app is secure and another is not.
+**Prevention:** Centralize security-critical functions (like `validateUrl`) in a dedicated module (`src/utils/security.js`) and reuse them across the codebase.
