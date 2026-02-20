@@ -56,27 +56,22 @@ const { fetchJson, getJSDOM } = require('../utils/scraperUtils');
  * 
  * @param {string} bossName - Name of the raid boss to check
  * @param {boolean} isShadowRaid - Whether this is a shadow raid
+ * @param {Array<Object>} raidEvents - Pre-filtered array of raid events with startDate/endDate properties
+ * @param {Date} now - Current date/time to compare against
  * @returns {string} Event status: "ongoing", "upcoming", "inactive", or "unknown"
  * 
  * @example
- * const status = determineEventStatus("Giratina", false);
+ * const status = determineEventStatus("Giratina", false, raidEvents, new Date());
  * // Returns "ongoing" if Giratina raid event is currently active
  */
-function determineEventStatus(bossName, isShadowRaid, events) {
+function determineEventStatus(bossName, isShadowRaid, raidEvents, now) {
     try {
-        if (!events || !Array.isArray(events)) {
+        if (!raidEvents || !Array.isArray(raidEvents)) {
             return 'unknown';
         }
 
-        const now = new Date();
-        
         // Look for raid-related events that match this boss
-        for (const event of events) {
-            // Check if event is raid-related
-            if (!['raid-battles', 'raid-hour', 'raid-day'].includes(event.eventType)) {
-                continue;
-            }
-            
+        for (const event of raidEvents) {
             // Check if event mentions this boss
             const eventNameLower = event.name.toLowerCase();
             const bossNameLower = bossName.toLowerCase();
@@ -85,8 +80,8 @@ function determineEventStatus(bossName, isShadowRaid, events) {
             const bossBaseName = bossNameLower.split('(')[0].trim();
             
             if (eventNameLower.includes(bossBaseName)) {
-                const startDate = event.start ? new Date(event.start) : null;
-                const endDate = event.end ? new Date(event.end) : null;
+                const startDate = event.startDate;
+                const endDate = event.endDate;
                 
                 // Determine status based on dates
                 if (startDate && endDate) {
@@ -210,6 +205,16 @@ async function get() {
                 }
             }
 
+            // Pre-process events for performance: filter relevant types and parse dates once
+            const now = new Date();
+            const raidEvents = events
+                .filter(e => ['raid-battles', 'raid-hour', 'raid-day'].includes(e.eventType))
+                .map(e => ({
+                    ...e,
+                    startDate: e.start ? new Date(e.start) : null,
+                    endDate: e.end ? new Date(e.end) : null
+                }));
+
             const raidBosses = dom.window.document.querySelectorAll('.raid-bosses, .shadow-raid-bosses');
 
                 raidBosses.forEach(raidBossContainer => {
@@ -246,7 +251,7 @@ async function get() {
                             };
                             
                             // Determine event status based on events data
-                            boss.eventStatus = determineEventStatus(boss.name, isShadowRaid, events);
+                            boss.eventStatus = determineEventStatus(boss.name, isShadowRaid, raidEvents, now);
 
                             // Image
                             const img = card.querySelector('.boss-img img');
