@@ -10,6 +10,7 @@ const path = require('path');
 const { JSDOM } = require('jsdom');
 const { getMultipleImageDimensions, clearCache } = require('./imageDimensions');
 const { extractDexNumber } = require('./shinyData');
+const { validateUrl } = require('./security');
 
 /**
  * @typedef {Object} Pokemon
@@ -47,6 +48,9 @@ const { extractDexNumber } = require('./shinyData');
  * @returns {Promise<string>} Response text
  */
 async function fetchUrl(url, timeout = 30000) {
+    if (!validateUrl(url)) {
+        throw new Error(`Invalid or blocked URL: ${url}`);
+    }
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
     try {
