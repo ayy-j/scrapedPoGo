@@ -131,21 +131,23 @@ function segmentEventData(event) {
     if (event.bosses && event.bosses.length > 0) {
         raids.push(...event.bosses);
     }
-    if (event.tiers) {
+    // Handle tiers from raidbattles.js and similar scrapers
+    const tiersSource = event.tiers || event.raids;
+    if (tiersSource) {
         // Handle both object format { mega: [], fiveStar: [] } and array format [{ tier, pokemon }]
-        if (Array.isArray(event.tiers)) {
+        if (Array.isArray(tiersSource)) {
             // Array format: flatten tiers into raids array with tier info
-            event.tiers.forEach(tier => {
+            tiersSource.forEach(tier => {
                 if (tier.pokemon && tier.pokemon.length > 0) {
                     tier.pokemon.forEach(p => {
                         raids.push({ ...p, tier: tier.tier || tier.name });
                     });
                 }
             });
-        } else if (typeof event.tiers === 'object') {
-            // Object format from raidbattles.js: { mega: [], fiveStar: [], threeStar: [], oneStar: [] }
+        } else if (typeof tiersSource === 'object') {
+            // Object format: { mega: [], fiveStar: [], threeStar: [], oneStar: [] }
             const tierMap = { mega: 'Mega', fiveStar: '5-Star', threeStar: '3-Star', oneStar: '1-Star' };
-            Object.entries(event.tiers).forEach(([tierKey, pokemon]) => {
+            Object.entries(tiersSource).forEach(([tierKey, pokemon]) => {
                 if (Array.isArray(pokemon) && pokemon.length > 0) {
                     pokemon.forEach(p => {
                         raids.push({ ...p, tier: tierMap[tierKey] || tierKey });
@@ -261,9 +263,27 @@ function segmentEventData(event) {
 
     // GO Tour specific sections
     if (event.eventInfo) flattened.eventInfo = event.eventInfo;
-    if (event.habitats && event.habitats.length > 0) flattened.habitats = event.habitats;
+    if (event.habitats) {
+        // Handle both array format and object format (keyed by habitat name)
+        if (Array.isArray(event.habitats) && event.habitats.length > 0) {
+            flattened.habitats = event.habitats;
+        } else if (typeof event.habitats === 'object' && !Array.isArray(event.habitats) && Object.keys(event.habitats).length > 0) {
+            flattened.habitats = event.habitats;
+        }
+    }
     if (event.whatsNew && event.whatsNew.length > 0) flattened.whatsNew = event.whatsNew;
     if (event.sales && event.sales.length > 0) flattened.sales = event.sales;
+    if (event.bonusCategories && event.bonusCategories.length > 0) flattened.bonusCategories = event.bonusCategories;
+    if (event.megaRaidSchedule) flattened.megaRaidSchedule = event.megaRaidSchedule;
+    if (event.habitatRotation && event.habitatRotation.length > 0) flattened.habitatRotation = event.habitatRotation;
+    if (event.routes) flattened.routes = event.routes;
+    if (event.timedResearchRegions && event.timedResearchRegions.length > 0) flattened.timedResearchRegions = event.timedResearchRegions;
+    if (event.branchingResearch) flattened.branchingResearch = event.branchingResearch;
+    if (event.eventLocations && event.eventLocations.length > 0) flattened.eventLocations = event.eventLocations;
+    if (event.eventTags && event.eventTags.length > 0) flattened.eventTags = event.eventTags;
+    if (event.costumedPokemon && event.costumedPokemon.length > 0) flattened.costumedPokemon = event.costumedPokemon;
+    if (event.megaDebuts && event.megaDebuts.length > 0) flattened.megaDebuts = event.megaDebuts;
+    if (event.specialBackgrounds && event.specialBackgrounds.length > 0) flattened.specialBackgrounds = event.specialBackgrounds;
 
     // Custom sections from generic event scraper
     if (event.customSections && Object.keys(event.customSections).length > 0) {

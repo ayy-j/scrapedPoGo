@@ -518,6 +518,318 @@ async function extractBonuses(doc) {
 }
 
 // ============================================================================
+// Categorized Bonus Extraction
+// ============================================================================
+
+/**
+ * Extracts bonuses grouped by their section headers.
+ * Handles pages with multiple bonus categories (General, All-Day, Exclusive, etc.)
+ * Each category contains its bonus items parsed from .bonus-list containers.
+ * 
+ * @async
+ * @param {Document} doc - DOM document
+ * @returns {Promise<Object[]>} Array of bonus categories:
+ *   { category: string, timeframe: string, bonuses: { text, image, multiplier?, bonusType? }[] }
+ * 
+ * @example
+ * const categories = await extractBonusByCategory(doc);
+ * // [{ category: 'General Bonuses', timeframe: '10:00 a.m. to 6:00 p.m.', bonuses: [...] }, ...]
+ */
+async function extractBonusByCategory(doc) {
+    const categories = [];
+    const bonusLists = doc.querySelectorAll('.bonus-list');
+
+    for (const bonusList of bonusLists) {
+        // Walk backwards to find the h2 header for this bonus list
+        let header = bonusList.previousElementSibling;
+        while (header && header.tagName !== 'H2') {
+            header = header.previousElementSibling;
+        }
+
+        const category = {
+            category: header ? header.textContent.trim() : 'Bonuses',
+            timeframe: '',
+            bonuses: []
+        };
+
+        // The paragraph between header and bonus-list often has the timeframe
+        if (header) {
+            let el = header.nextElementSibling;
+            while (el && el !== bonusList) {
+                if (el.tagName === 'P') {
+                    const text = el.textContent.trim();
+                    // Look for time range patterns
+                    const timeMatch = text.match(/between\s+(.+?)\s+(?:local\s+time|on\s+event)/i) ||
+                                      text.match(/(\d{1,2}:\d{2}\s*[ap]\.?m\.?\s*(?:to|and|-|–)\s*\d{1,2}:\d{2}\s*[ap]\.?m\.?)/i);
+                    if (timeMatch) {
+                        category.timeframe = text;
+                    }
+                }
+                el = el.nextElementSibling;
+            }
+        }
+
+        // Parse bonus items within this list
+        const items = bonusList.querySelectorAll('.bonus-item');
+        for (const item of items) {
+            const bonus = {};
+            const textEl = item.querySelector('.bonus-text');
+            bonus.text = textEl ? textEl.textContent.trim() : '';
+            const imgEl = item.querySelector('.item-circle > img');
+            bonus.image = imgEl ? imgEl.src : '';
+            if (bonus.text) {
+                const parsed = parseBonusMultiplier(bonus.text);
+                if (parsed) {
+                    bonus.multiplier = parsed.multiplier;
+                    bonus.bonusType = parsed.bonusType;
+                }
+                category.bonuses.push(bonus);
+            }
+        }
+
+        if (category.bonuses.length > 0) {
+            categories.push(category);
+        }
+    }
+
+    return categories;
+}
+
+// ============================================================================
+// Schedule Extraction
+// ============================================================================
+
+/**
+ * Extracts time-based schedules from structured lists.
+ * Handles patterns like: "<strong>10:00 a.m. – 11:00 a.m.:</strong> Mega Charizard X, Mega Charizard Y"
+ * found in UL elements after a given header.
+ * 
+ * @param {Document} doc - DOM document
+ * @param {string} sectionId - Section header ID to extract schedule from
+ * @returns {Object[]} Array of schedule entries: { start: string, end: string, items: string[] }
+ * 
+ * @example
+ * const schedule = extractSchedule(doc, 'saturday-february-28');
+ * // [{ start: '10:00 a.m.', end: '11:00 a.m.', items: ['Mega Charizard X', 'Mega Charizard Y'] }, ...]
+ */
+function extractSchedule(doc, sectionId) {
+    const schedule = [];
+    const header = doc.getElementById(sectionId);
+    if (!header) return schedule;
+
+    let el = header.nextElementSibling;
+    while (el && el.tagName !== 'H2' && el.tagName !== 'H3') {
+        if (el.tagName === 'UL' || el.tagName === 'OL') {
+            const lis = el.querySelectorAll('li');
+            for (const li of lis) {
+                const text = li.textContent.trim();
+                // Match pattern: "10:00 a.m. – 11:00 a.m.: Item1, Item2"
+                const match = text.match(/^(\d{1,2}:\d{2}\s*[ap]\.?m\.?)\s*[–\-—to]+\s*(\d{1,2}:\d{2}\s*[ap]\.?m\.?)\s*:?\s*(.*)/i);
+                if (match) {
+                    const items = match[3].split(/,\s*/).map(s => s.trim()).filter(Boolean);
+                    schedule.push({
+                        start: match[1].trim(),
+                        end: match[2].trim(),
+                        items: items
+                    });
+                }
+            }
+            break;
+        }
+        el = el.nextElementSibling;
+    }
+
+    return schedule;
+}
+
+/**
+ * Extracts habitat rotation schedules from structured p/ul patterns.
+ * Handles the pattern: <p><strong>Name:</strong></p><ul><li>time to time</li></ul>
+ * 
+ * @param {Document} doc - DOM document
+ * @param {string} sectionId - Section header ID for the rotation schedule
+ * @returns {Object[]} Array: { name: string, timeSlots: { start: string, end: string }[] }
+ * 
+ * @example
+ * const rotations = extractHabitatRotation(doc, 'habitat-rotation-schedule');
+ * // [{ name: 'Central Village', timeSlots: [{ start: '10:00 AM', end: '11:00 AM' }, ...] }, ...]
+ */
+function extractHabitatRotation(doc, sectionId) {
+    const rotations = [];
+    const header = doc.getElementById(sectionId);
+    if (!header) return rotations;
+
+    let el = header.nextElementSibling;
+    let currentHabitat = null;
+
+    while (el && el.tagName !== 'H2' && !el.classList?.contains('event-section-header')) {
+        if (el.tagName === 'HR') {
+            el = el.nextElementSibling;
+            continue;
+        }
+        if (el.tagName === 'P') {
+            const strong = el.querySelector('strong');
+            if (strong) {
+                const name = strong.textContent.trim().replace(/:$/, '');
+                if (name) {
+                    currentHabitat = { name, timeSlots: [] };
+                    rotations.push(currentHabitat);
+                }
+            }
+        }
+        if ((el.tagName === 'UL' || el.tagName === 'OL') && currentHabitat) {
+            const items = el.querySelectorAll('li');
+            for (const li of items) {
+                const text = li.textContent.trim();
+                const match = text.match(/^(\d{1,2}:\d{2}\s*[AP]M)\s*to\s*(\d{1,2}:\d{2}\s*[AP]M)/i);
+                if (match) {
+                    currentHabitat.timeSlots.push({
+                        start: match[1].trim(),
+                        end: match[2].trim()
+                    });
+                }
+            }
+        }
+        el = el.nextElementSibling;
+    }
+
+    return rotations;
+}
+
+// ============================================================================
+// Event Meta Extraction
+// ============================================================================
+
+/**
+ * Extracts structured event metadata from the page header.
+ * Pulls from .header-page (title, tags, dates) and .event-description
+ * (ticket URL, other locations, intro text).
+ * 
+ * @param {Document} doc - DOM document
+ * @returns {Object} Event metadata:
+ *   { title, tags, startDate, startTime, endDate, endTime, ticketUrl, otherLocations, introText }
+ */
+function extractEventMeta(doc) {
+    const meta = {
+        title: '',
+        tags: [],
+        startDate: '',
+        startTime: '',
+        endDate: '',
+        endTime: '',
+        ticketUrl: '',
+        otherLocations: [],
+        introText: ''
+    };
+
+    // Title
+    const titleEl = doc.querySelector('.page-title') || doc.querySelector('h1');
+    if (titleEl) {
+        meta.title = titleEl.textContent.trim();
+    }
+
+    // Tags
+    const tagEls = doc.querySelectorAll('.page-tags .tag');
+    for (const tag of tagEls) {
+        meta.tags.push(tag.textContent.trim());
+    }
+
+    // Dates and times
+    const startDate = doc.getElementById('event-date-start');
+    const startTime = doc.getElementById('event-time-start');
+    const endDate = doc.getElementById('event-date-end');
+    const endTime = doc.getElementById('event-time-end');
+    if (startDate) meta.startDate = startDate.textContent.trim().replace(/,$/, '');
+    if (startTime) meta.startTime = startTime.textContent.trim().replace(/^at\s*/i, '');
+    if (endDate) meta.endDate = endDate.textContent.trim().replace(/,$/, '');
+    if (endTime) meta.endTime = endTime.textContent.trim().replace(/^at\s*/i, '');
+
+    // Other event locations from event-description
+    const descEl = doc.querySelector('.event-description');
+    if (descEl) {
+        const links = descEl.querySelectorAll('a[href*="/events/"]');
+        for (const link of links) {
+            const text = link.textContent.trim();
+            const href = link.getAttribute('href');
+            if (text && href) {
+                meta.otherLocations.push({ name: text, url: href });
+            }
+        }
+
+        // Ticket URL
+        const ticketLink = descEl.querySelector('a[href*="store.pokemongo"]') ||
+                           descEl.querySelector('a[href*="ticket"]');
+        if (ticketLink) {
+            meta.ticketUrl = ticketLink.getAttribute('href') || '';
+        }
+
+        // Intro text (first substantial paragraph)
+        const paragraphs = descEl.querySelectorAll('p');
+        for (const p of paragraphs) {
+            const text = p.textContent.trim();
+            if (text.length > 50 && !text.startsWith('Other Event') && !text.startsWith('Buy ticket')) {
+                meta.introText = text;
+                break;
+            }
+        }
+    }
+
+    return meta;
+}
+
+// ============================================================================
+// Regional Pokemon Group Extraction
+// ============================================================================
+
+/**
+ * Extracts regionally-grouped Pokemon lists from a section.
+ * Handles the pattern where a region label paragraph precedes a .pkmn-list-flex.
+ * Used for Furfrou timed research regions, Flabébé route spawns, etc.
+ * 
+ * @async
+ * @param {Document} doc - DOM document
+ * @param {string} sectionId - Section header ID to extract from
+ * @returns {Promise<Object[]>} Array: { region: string, pokemon: Pokemon[] }
+ * 
+ * @example
+ * const groups = await extractRegionalGroups(doc, 'take-part-in-some-trim-mendous-timed-research');
+ * // [{ region: 'In the Americas:', pokemon: [{name: 'Furfrou (Star)', ...}, ...] }, ...]
+ */
+async function extractRegionalGroups(doc, sectionId) {
+    const groups = [];
+    const header = doc.getElementById(sectionId);
+    if (!header) return groups;
+
+    let el = header.nextElementSibling;
+    let currentRegion = null;
+
+    while (el && el.tagName !== 'H2' && !el.classList?.contains('event-section-header')) {
+        if (el.tagName === 'P') {
+            const text = el.textContent.trim();
+            // Region labels typically start with "In " and end with ":"
+            if (/^In\s+.+:$/i.test(text) || /region|americas|europe|asia|france|japan|egypt/i.test(text)) {
+                currentRegion = text;
+            }
+        }
+
+        if (el.className === 'pkmn-list-flex' && currentRegion) {
+            const pokemon = await extractPokemonList(el, { fetchDimensions: false });
+            if (pokemon.length > 0) {
+                groups.push({
+                    region: currentRegion,
+                    pokemon: pokemon
+                });
+            }
+            currentRegion = null;
+        }
+
+        el = el.nextElementSibling;
+    }
+
+    return groups;
+}
+
+// ============================================================================
 // Raid Extraction
 // ============================================================================
 
@@ -1361,6 +1673,17 @@ module.exports = {
     
     // Bonus extraction
     extractBonuses,
+    extractBonusByCategory,
+    
+    // Schedule extraction
+    extractSchedule,
+    extractHabitatRotation,
+    
+    // Event meta extraction
+    extractEventMeta,
+    
+    // Regional group extraction
+    extractRegionalGroups,
     
     // Raid extraction
     extractRaidInfo,
