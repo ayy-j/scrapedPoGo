@@ -14,6 +14,8 @@
     "compare:schemas:strict": "node src/scripts/compare-docs-data-schemas.js --mode strict",
     "test": "node --test",
     "blob:upload": "node src/scripts/upload-images-to-blob.js",
+    "blob:repair": "node src/scripts/upload-images-to-blob.js --repair",
+    "blob:repair-dry": "node src/scripts/upload-images-to-blob.js --repair --dry-run",
     "serve": "node serve.js",
     "dev": "npm run serve",
     "build": "node -e \"require('fs').cpSync('data', 'public/data', {recursive: true});\""

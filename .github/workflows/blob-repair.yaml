@@ -1,0 +1,50 @@
+name: Repair Blob Storage
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run only (no actual uploads)'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+env:
+  BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check BLOB token
+        if: env.BLOB_READ_WRITE_TOKEN == ''
+        run: |
+          echo "❌ BLOB_READ_WRITE_TOKEN secret is not set. Cannot repair."
+          exit 1
+
+      - name: Repair missing blobs (dry run)
+        if: ${{ inputs.dry_run }}
+        run: |
+          echo "🧪 Dry-run repair — checking which blobs are missing..."
+          npm run blob:repair-dry
+
+      - name: Repair missing blobs (live)
+        if: ${{ !inputs.dry_run }}
+        run: |
+          echo "🔧 Repairing missing blobs in Vercel Blob storage..."
+          npm run blob:repair -- --verbose || echo "⚠ Some repairs failed (source images may be unavailable)"

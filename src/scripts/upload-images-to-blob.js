@@ -23,6 +23,7 @@ const DATA_DIR = path.join(__dirname, '..', '..', 'data');
 const PARALLEL_UPLOADS = 5;
 const DRY_RUN = process.argv.includes('--dry-run');
 const FORCE = process.argv.includes('--force');
+const REPAIR = process.argv.includes('--repair');
 const VERBOSE = process.argv.includes('--verbose') || process.argv.includes('-v');
 
 // Custom domain for blob storage (replaces raw vercel-storage.com URLs)
@@ -228,11 +229,168 @@ function getUrlsToProcess(uniqueUrls, urlMap, force) {
 }
 
 /**
+ * Check whether a URL is accessible (returns 200).
+ * Used by repair mode to detect missing blobs.
+ * @param {string} url - URL to check
+ * @returns {Promise<boolean>} True if URL returns 200
+ */
+function isBlobAccessible(url) {
+    return new Promise((resolve) => {
+        const protocol = url.startsWith('https') ? https : http;
+        const req = protocol.request(url, { method: 'HEAD', timeout: 10000 }, (res) => {
+            resolve(res.statusCode === 200);
+        });
+        req.on('error', () => resolve(false));
+        req.on('timeout', () => { req.destroy(); resolve(false); });
+        req.end();
+    });
+}
+
+/**
+ * Repair mode: find blobs in blob-url-map.json that are inaccessible (403/404)
+ * and re-upload them from their original source URLs.
+ *
+ * @param {Function} put - @vercel/blob put function
+ * @param {Record<string, string>} urlMap - Existing URL→blobUrl mappings
+ * @returns {Promise<void>}
+ */
+async function runRepair(put, urlMap) {
+    const entries = Object.entries(urlMap);
+    console.log(`🔍 Repair mode: checking ${entries.length} existing blob mappings...\n`);
+
+    // De-duplicate by target blob URL (multiple source keys may map to the same blob)
+    const blobToSource = new Map();
+    for (const [sourceUrl, blobUrl] of entries) {
+        if (!blobToSource.has(blobUrl)) {
+            blobToSource.set(blobUrl, sourceUrl);
+        }
+    }
+
+    const uniqueBlobs = [...blobToSource.entries()];
+    console.log(`   Unique blob targets: ${uniqueBlobs.length}`);
+
+    // Sample a small batch first to detect systemic failures
+    const sampleSize = Math.min(10, uniqueBlobs.length);
+    const sample = uniqueBlobs.slice(0, sampleSize);
+    let sampleFails = 0;
+    for (const [blobUrl] of sample) {
+        const ok = await isBlobAccessible(blobUrl);
+        if (!ok) sampleFails++;
+    }
+
+    const systemic = sampleFails === sampleSize;
+    console.log(`   Sample check (${sampleSize}): ${sampleFails} unreachable`);
+    if (systemic) {
+        console.log('   ⚠ All sampled blobs unreachable — treating as systemic failure, re-uploading all.\n');
+    } else {
+        console.log(`   Checking remaining blobs individually...\n`);
+    }
+
+    // Identify which blobs need repair
+    let toRepair;
+    if (systemic) {
+        toRepair = uniqueBlobs;
+    } else {
+        toRepair = [];
+        for (let i = 0; i < uniqueBlobs.length; i += PARALLEL_UPLOADS) {
+            const batch = uniqueBlobs.slice(i, i + PARALLEL_UPLOADS);
+            const results = await Promise.all(batch.map(async ([blobUrl, sourceUrl]) => {
+                const ok = await isBlobAccessible(blobUrl);
+                return ok ? null : [blobUrl, sourceUrl];
+            }));
+            toRepair.push(...results.filter(Boolean));
+        }
+    }
+
+    console.log(`   🔧 Blobs to repair: ${toRepair.length}\n`);
+
+    if (toRepair.length === 0) {
+        console.log('✅ All blobs are accessible. Nothing to repair.\n');
+        return;
+    }
+
+    if (DRY_RUN) {
+        toRepair.forEach(([blobUrl, sourceUrl]) => {
+            // Extract pathname from pokemn.quest URL
+            const pathname = blobUrl.replace(/^https:\/\/pokemn\.quest\//, '');
+            console.log(`  [DRY REPAIR] Would re-upload: ${pathname}`);
+            console.log(`    from: ${sourceUrl}`);
+        });
+        console.log(`\n   Would repair ${toRepair.length} blobs.`);
+        return;
+    }
+
+    const results = { success: 0, failed: 0 };
+    const errors = [];
+
+    for (let i = 0; i < toRepair.length; i += PARALLEL_UPLOADS) {
+        const batch = toRepair.slice(i, i + PARALLEL_UPLOADS);
+
+        await Promise.all(batch.map(async ([blobUrl, sourceUrl]) => {
+            const pathname = blobUrl.replace(/^https:\/\/pokemn\.quest\//, '');
+            try {
+                const imageBuffer = await downloadImage(sourceUrl);
+                const contentType = getContentType(sourceUrl);
+                const { buffer: uploadBuffer, resized } = await maybeResizeEventBanner(
+                    imageBuffer,
+                    pathname,
+                    contentType
+                );
+
+                await put(pathname, uploadBuffer, {
+                    access: 'public',
+                    addRandomSuffix: false,
+                    allowOverwrite: true,
+                    contentType,
+                });
+
+                results.success++;
+                if (VERBOSE) {
+                    const sizeText = `${(uploadBuffer.length / 1024).toFixed(1)} KB`;
+                    const resizeNote = resized ? ' [resized 50%]' : '';
+                    console.log(`  ✓ ${pathname} (${sizeText})${resizeNote}`);
+                }
+            } catch (err) {
+                errors.push({ url: sourceUrl, error: err.message });
+                results.failed++;
+                if (VERBOSE) {
+                    console.error(`  ✗ ${sourceUrl}: ${err.message}`);
+                }
+            }
+        }));
+
+        const progress = Math.min(i + PARALLEL_UPLOADS, toRepair.length);
+        const percent = ((progress / toRepair.length) * 100).toFixed(0);
+        process.stdout.write(`\r   Progress: ${progress}/${toRepair.length} (${percent}%)`);
+    }
+
+    console.log('\n');
+    console.log('━'.repeat(50));
+    console.log('📊 Repair Summary');
+    console.log('━'.repeat(50));
+    console.log(`   🔧 Repaired:  ${results.success}`);
+    console.log(`   ✗ Failed:    ${results.failed}`);
+
+    if (errors.length > 0 && errors.length <= 10) {
+        console.log('\n⚠ Failed repairs (source images may be unavailable):');
+        errors.forEach(({ url, error }) => {
+            console.log(`   • ${url}`);
+            console.log(`     ${error}`);
+        });
+    } else if (errors.length > 10) {
+        console.log(`\n⚠ ${errors.length} repairs failed. Run with --verbose for details.`);
+    }
+
+    console.log('\n✅ Repair complete!');
+}
+
+/**
  * Main upload process
  */
 async function main() {
     console.log('🚀 Vercel Blob Upload Script');
     console.log(`   Mode: ${DRY_RUN ? '🧪 DRY RUN' : '📤 LIVE UPLOAD'}`);
+    console.log(`   Repair mode: ${REPAIR ? 'YES' : 'NO'}`);
     console.log(`   Force overwrite: ${FORCE ? 'YES' : 'NO'}\n`);
 
     // Check for @vercel/blob module
@@ -259,6 +417,23 @@ async function main() {
         process.exit(1);
     }
 
+    // Load existing URL map (needed for both repair and normal upload)
+    let urlMap = {};
+    if (fs.existsSync(URL_MAP_FILE)) {
+        try {
+            urlMap = JSON.parse(fs.readFileSync(URL_MAP_FILE, 'utf8'));
+            console.log(`📋 Loaded ${Object.keys(urlMap).length} existing URL mappings`);
+        } catch (err) {
+            console.warn(`⚠ Could not load URL map: ${err.message}`);
+        }
+    }
+
+    // Repair mode: re-upload any blobs that are inaccessible
+    if (REPAIR) {
+        await runRepair(put, urlMap);
+        return;
+    }
+
     // Read all JSON files
     console.log('📁 Reading JSON files from data directory...');
     const jsonFiles = readJsonFiles(DATA_DIR);
@@ -276,17 +451,6 @@ async function main() {
 
     console.log(`🖼️  Found ${allUrls.length} total image references`);
     console.log(`   Unique URLs: ${uniqueUrls.length}\n`);
-
-    // Load existing URL map
-    let urlMap = {};
-    if (fs.existsSync(URL_MAP_FILE)) {
-        try {
-            urlMap = JSON.parse(fs.readFileSync(URL_MAP_FILE, 'utf8'));
-            console.log(`📋 Loaded ${Object.keys(urlMap).length} existing URL mappings`);
-        } catch (err) {
-            console.warn(`⚠ Could not load URL map: ${err.message}`);
-        }
-    }
 
     // Filter out URLs that are already mapped (unless forcing).
     // Event banners are always reprocessed so they are consistently stored at 50% size.
