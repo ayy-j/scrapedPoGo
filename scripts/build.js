@@ -6,7 +6,7 @@ const path = require('path');
 const root = path.join(__dirname, '..');
 const publicDir = path.join(root, 'public');
 const dataDir = path.join(root, 'data');
-const indexSrc = path.join(root, 'src', 'index.html');
+const indexSrc = path.join(root, 'index.html');
 const indexDst = path.join(publicDir, 'index.html');
 
 fs.mkdirSync(publicDir, { recursive: true });
