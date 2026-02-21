@@ -20,6 +20,7 @@ const validations = schemaManifest.map(({ schema, data }) => ({ schema, data }))
 let allValid = true;
 let totalValidations = 0;
 let successfulValidations = 0;
+const schemaValidators = new Map();
 
 console.log('🔍 Validating data files against schemas...\n');
 
@@ -47,8 +48,12 @@ for (const { schema, data } of validations) {
     const schemaContent = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
     const dataContent = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
     
-    // Compile and validate
-    const validate = ajv.compile(schemaContent);
+    // Compile once per schema file, reuse for same-schema entries
+    let validate = schemaValidators.get(schema);
+    if (!validate) {
+      validate = ajv.compile(schemaContent);
+      schemaValidators.set(schema, validate);
+    }
     const valid = validate(dataContent);
     
     if (valid) {

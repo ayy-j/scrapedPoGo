@@ -483,6 +483,10 @@ Raid data can be cross-referenced with:
           "gif",
           "webp"
         ]
+      },
+      "altText": {
+        "type": "string",
+        "description": "Accessible alt text for the image"
       }
     },
     "additionalProperties": false

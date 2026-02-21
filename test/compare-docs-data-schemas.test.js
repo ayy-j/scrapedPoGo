@@ -188,9 +188,10 @@ test('integration: report mode writes reports and includes coverage warnings on 
 
   const report = JSON.parse(fs.readFileSync(jsonOut, 'utf8'));
   assert.equal(report.mode, 'report');
-  assert.equal(Object.keys(report.summary.byDataset).length, 6);
-  assert.ok(report.coverage.unmatchedDataFiles.length > 0);
-  assert.ok(report.coverage.unmatchedDocFiles.length > 0);
+  assert.ok(Object.keys(report.summary.byDataset).length >= 6, 'should have at least 6 canonical datasets');
+  // Coverage gaps are now zero because eventType entries and auxiliaryFiles cover all files
+  assert.equal(report.coverage.unmatchedDataFiles.length, 0);
+  assert.equal(report.coverage.unmatchedDocFiles.length, 0);
 });
 
 test('data contracts: real repo has zero errors between data, schemas, and docs', () => {

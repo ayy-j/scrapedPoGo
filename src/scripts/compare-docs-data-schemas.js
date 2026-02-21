@@ -1035,6 +1035,7 @@ function runComparison(rawOptions = {}, runtime = {}) {
   addFormats(ajv);
 
   const schemaCache = new Map();
+  const validatorCache = new Map();
 
   for (const entry of manifest) {
     const schemaResult = safeReadJson(repoRoot, entry.schema);
@@ -1053,15 +1054,23 @@ function runComparison(rawOptions = {}, runtime = {}) {
     schemaCache.set(entry.dataset, schemaResult.json);
 
     if (!dataResult.ok) {
-      addFinding(findings, {
-        severity: 'error',
-        category: 'schema-data',
-        dataset: entry.dataset,
-        file: entry.data,
-        message: dataResult.error
-      });
+      if (entry.dataOptional) {
+        // Periodic event types may not have data files when inactive
+      } else {
+        addFinding(findings, {
+          severity: 'error',
+          category: 'schema-data',
+          dataset: entry.dataset,
+          file: entry.data,
+          message: dataResult.error
+        });
+      }
     } else {
-      const validate = ajv.compile(schemaResult.json);
+      let validate = validatorCache.get(entry.schema);
+      if (!validate) {
+        validate = ajv.compile(schemaResult.json);
+        validatorCache.set(entry.schema, validate);
+      }
       const isValid = validate(dataResult.json);
       if (!isValid) {
         addFinding(findings, {
@@ -1089,13 +1098,17 @@ function runComparison(rawOptions = {}, runtime = {}) {
 
     const block = extractJsonSchemaBlock(docResult.content);
     if (!block.ok) {
-      addFinding(findings, {
-        severity: 'error',
-        category: 'doc-schema-block',
-        dataset: entry.dataset,
-        file: entry.doc,
-        message: block.error
-      });
+      // Sub-dataset docs (e.g., events:community-day) reference a parent schema
+      // and are not required to embed their own JSON Schema section.
+      if (!entry.dataset.includes(':')) {
+        addFinding(findings, {
+          severity: 'error',
+          category: 'doc-schema-block',
+          dataset: entry.dataset,
+          file: entry.doc,
+          message: block.error
+        });
+      }
     } else {
       try {
         const docSchema = JSON.parse(block.jsonText);
@@ -1148,7 +1161,7 @@ function runComparison(rawOptions = {}, runtime = {}) {
       const explicitPath = token.includes('.') || token.includes('[]');
       if (!explicitPath && !isTopLevelFieldsContext(row.context)) {
         addFinding(findings, {
-          severity: 'warning',
+          severity: 'info',
           category: 'doc-field-table',
           dataset: entry.dataset,
           file: entry.doc,
@@ -1164,7 +1177,7 @@ function runComparison(rawOptions = {}, runtime = {}) {
       const resolved = resolveFieldPath(schema, token);
       if (!resolved.ok) {
         addFinding(findings, {
-          severity: resolved.allowedByAdditionalProperties ? 'warning' : 'error',
+          severity: resolved.allowedByAdditionalProperties ? 'info' : 'error',
           category: 'doc-field-table',
           dataset: entry.dataset,
           file: entry.doc,
@@ -1227,13 +1240,14 @@ function runComparison(rawOptions = {}, runtime = {}) {
 
   const canonicalDataFiles = new Set(manifest.map((entry) => entry.data));
   const canonicalDocFiles = new Set(manifest.map((entry) => entry.doc));
+  const auxiliary = new Set(manifest.auxiliaryFiles || []);
 
   const dataRoot = path.join(repoRoot, 'data');
   const docsRoot = path.join(repoRoot, 'dataDocumentation');
   const allDataFiles = listFilesRecursive(dataRoot, '.json', repoRoot).sort();
   const allDocFiles = listFilesRecursive(docsRoot, '.md', repoRoot).sort();
-  const unmatchedDataFiles = allDataFiles.filter((file) => !canonicalDataFiles.has(file));
-  const unmatchedDocFiles = allDocFiles.filter((file) => !canonicalDocFiles.has(file));
+  const unmatchedDataFiles = allDataFiles.filter((file) => !canonicalDataFiles.has(file) && !auxiliary.has(file));
+  const unmatchedDocFiles = allDocFiles.filter((file) => !canonicalDocFiles.has(file) && !auxiliary.has(file));
 
   for (const file of unmatchedDataFiles) {
     addFinding(findings, {

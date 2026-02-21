@@ -143,7 +143,7 @@ Depending on the event type and content, events may include any of the following
 | **`rocket`** | `object` | Team GO Rocket information |
 | **`rocket.shadows`** | `array` | Shadow Pokemon available |
 | **`rocket.leaders`** | `array` | Leader lineup information |
-| **`rocket.giovanni`** | `object` | Giovanni encounter details |
+| **`rocket.giovanni`** | `object\|array` | Giovanni encounter details |
 | **`rocket.grunts`** | `array` | Grunt lineup information |
 
 ### Eggs
@@ -163,10 +163,10 @@ Depending on the event type and content, events may include any of the following
 
 | Field | Type | Description |
 |-------|------|-------------|
-| **`rewards`** | `object` | Ticketed content and rewards |
+| **`rewards`** | `array\|object` | Event rewards as an array, or ticketed content as an object |
 | **`rewards.ticketedResearch`** | `object` | Paid research ticket details |
 | **`rewards.ticketBonuses`** | `array` | Bonuses for ticket holders |
-| **`rewards.ticketPrice`** | `int` | Ticket price in USD |
+| **`rewards.ticketPrice`** | `number\|null` | Ticket price in USD, or `null` if free |
 | **`rewards.ticketAddOns`** | `array` | Additional purchasable content |
 
 ### Showcases
@@ -189,7 +189,7 @@ Depending on the event type and content, events may include any of the following
 |-------|------|-------------|
 | **`communityDays`** | `array` | Community Days scheduled during the season |
 | **`features`** | `array` | Season feature descriptions |
-| **`goBattleLeague`** | `object` | Seasonal GO Battle League information |
+| **`goBattleLeague`** | `string` | Seasonal GO Battle League description text |
 
 ### GO Pass Specific
 
@@ -197,7 +197,7 @@ Depending on the event type and content, events may include any of the following
 |-------|------|-------------|
 | **`goPass`** | `object` | GO Pass details |
 | **`pricing`** | `object` | Pricing information |
-| **`pointTasks`** | `array` | Tasks that award points |
+| **`pointTasks`** | `object` | Tasks that award points (with `daily`, `weekly`, `bonus` arrays) |
 | **`ranks`** | `array` | Rank tiers and rewards |
 | **`featuredPokemon`** | `array` | Featured Pokemon for GO Pass |
 | **`milestoneBonuses`** | `object` | Milestone reward information |
@@ -207,7 +207,7 @@ Depending on the event type and content, events may include any of the following
 | Field | Type | Description |
 |-------|------|-------------|
 | **`eventInfo`** | `object` | Event venue and timing details |
-| **`habitats`** | `array` | Rotating habitat information |
+| **`habitats`** | `object` | Rotating habitat areas keyed by habitat name |
 | **`whatsNew`** | `array` | New features for the tour |
 | **`sales`** | `array` | In-game sales and offers |
 
@@ -249,7 +249,7 @@ These boolean flags indicate what content is available for an event (flat at top
 | **`availability`** | `object` | Event availability window with `start` and `end` fields |
 | **`encounters`** | `array` | Encounter Pokemon list |
 | **`isPaid`** | `boolean` | Whether the event requires payment |
-| **`price`** | `string \| number` | Event ticket price |
+| **`price`** | `number\|null` | Event ticket price, or `null` if free |
 | **`tasks`** | `array` | Research tasks (alternative structure) |
 
 **eventInfo Object Structure:**
@@ -863,15 +863,7 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
   "type": "array",
   "items": {
     "type": "object",
-    "required": [
-      "eventID",
-      "name",
-      "eventType",
-      "heading",
-      "image",
-      "start",
-      "end"
-    ],
+    "required": ["eventID", "name", "eventType", "heading", "image", "start", "end"],
     "properties": {
       "eventID": {
         "type": "string",
@@ -927,13 +919,7 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
       "imageType": {
         "type": "string",
         "description": "Stored event banner format",
-        "enum": [
-          "png",
-          "jpg",
-          "jpeg",
-          "gif",
-          "webp"
-        ]
+        "enum": ["png", "jpg", "jpeg", "gif", "webp"]
       },
       "start": {
         "type": "string",
@@ -952,11 +938,7 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
       "eventStatus": {
         "type": "string",
         "description": "The computed status of the event based on current time",
-        "enum": [
-          "upcoming",
-          "active",
-          "ended"
-        ]
+        "enum": ["upcoming", "active", "ended"]
       },
       "hasSpawns": {
         "type": "boolean",
@@ -987,11 +969,7 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
         "description": "Featured Pokemon in the event",
         "items": {
           "type": "object",
-          "required": [
-            "name",
-            "image",
-            "source"
-          ],
+          "required": ["name", "image", "source"],
           "properties": {
             "name": {
               "type": "string",
@@ -1005,29 +983,14 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
             "source": {
               "type": "string",
               "description": "Where the Pokemon appears",
-              "enum": [
-                "spawn",
-                "featured",
-                "incense",
-                "costumed",
-                "debut",
-                "maxDebut",
-                "raid",
-                "egg",
-                "research",
-                "reward",
-                "encounter"
-              ]
+              "enum": ["spawn", "featured", "incense", "costumed", "debut", "maxDebut", "raid", "egg", "research", "reward", "encounter"]
             },
             "canBeShiny": {
               "type": "boolean",
               "description": "Whether the Pokemon can be shiny"
             },
             "dexNumber": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "National Pokedex number"
             },
             "imageWidth": {
@@ -1041,13 +1004,11 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
             "imageType": {
               "type": "string",
               "description": "Image format",
-              "enum": [
-                "png",
-                "jpg",
-                "jpeg",
-                "gif",
-                "webp"
-              ]
+              "enum": ["png", "jpg", "jpeg", "gif", "webp"]
+            },
+            "altText": {
+              "type": "string",
+              "description": "Accessible alt text for the image"
             }
           },
           "additionalProperties": false
@@ -1058,50 +1019,19 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
         "description": "Event bonuses (e.g., 2× XP, 2× Stardust)",
         "items": {
           "oneOf": [
-            {
-              "type": "string"
-            },
+            { "type": "string" },
             {
               "type": "object",
               "properties": {
-                "text": {
-                  "type": "string"
-                },
-                "image": {
-                  "type": "string",
-                  "format": "uri"
-                },
-                "imageWidth": {
-                  "type": "integer",
-                  "description": "Bonus icon width in pixels"
-                },
-                "imageHeight": {
-                  "type": "integer",
-                  "description": "Bonus icon height in pixels"
-                },
-                "imageType": {
-                  "type": "string",
-                  "description": "Bonus icon format",
-                  "enum": [
-                    "png",
-                    "jpg",
-                    "jpeg",
-                    "gif",
-                    "webp"
-                  ]
-                },
-                "multiplier": {
-                  "type": "number",
-                  "description": "Parsed numeric multiplier (e.g., 2 for 2×)"
-                },
-                "bonusType": {
-                  "type": "string",
-                  "description": "Parsed bonus category (e.g., XP, Stardust, Candy)"
-                }
+                "text": { "type": "string" },
+                "image": { "type": "string", "format": "uri" },
+                "imageWidth": { "type": "integer", "description": "Bonus icon width in pixels" },
+                "imageHeight": { "type": "integer", "description": "Bonus icon height in pixels" },
+                "imageType": { "type": "string", "description": "Bonus icon format", "enum": ["png", "jpg", "jpeg", "gif", "webp"] },
+                "multiplier": { "type": "number", "description": "Parsed numeric multiplier (e.g., 2 for 2×)" },
+                "bonusType": { "type": "string", "description": "Parsed bonus category (e.g., XP, Stardust, Candy)" }
               },
-              "required": [
-                "text"
-              ],
+              "required": ["text"],
               "additionalProperties": false
             }
           ]
@@ -1112,10 +1042,7 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
         "description": "Raid bosses featured in the event",
         "items": {
           "type": "object",
-          "required": [
-            "name",
-            "image"
-          ],
+          "required": ["name", "image"],
           "properties": {
             "name": {
               "type": "string",
@@ -1135,10 +1062,7 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
               "description": "Whether the Pokemon can be shiny"
             },
             "dexNumber": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "National Pokedex number"
             },
             "imageWidth": {
@@ -1152,6 +1076,10 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
             "imageType": {
               "type": "string",
               "description": "Image format"
+            },
+            "altText": {
+              "type": "string",
+              "description": "Accessible alt text for the image"
             }
           },
           "additionalProperties": false
@@ -1216,10 +1144,7 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
               "type": "boolean"
             },
             "dexNumber": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": ["integer", "null"],
               "description": "National Pokedex number"
             },
             "imageWidth": {
@@ -1230,28 +1155,773 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
             },
             "imageType": {
               "type": "string"
+            },
+            "altText": {
+              "type": "string",
+              "description": "Accessible alt text for the image"
             }
           },
           "additionalProperties": false
         }
       },
-      "leagues": {
+      "battle": {
+        "type": "object",
+        "description": "GO Battle League battle information",
+        "properties": {
+          "leagues": {
+            "type": "array",
+            "description": "Available battle leagues",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "League name"
+                },
+                "cpCap": {
+                  "type": ["integer", "null"],
+                  "description": "CP limit for the league"
+                },
+                "typeRestrictions": {
+                  "type": "array",
+                  "description": "Type restrictions for the league",
+                  "items": { "type": "string" }
+                },
+                "rules": {
+                  "type": "array",
+                  "description": "League-specific rules",
+                  "items": { "type": "string" }
+                }
+              },
+              "required": ["name"],
+              "additionalProperties": false
+            }
+          },
+          "featuredAttack": {
+            "type": "string",
+            "description": "Featured attack for the battle period"
+          }
+        },
+        "additionalProperties": false
+      },
+      "rocket": {
+        "type": "object",
+        "description": "Team GO Rocket takeover information",
+        "properties": {
+          "shadows": {
+            "type": "array",
+            "description": "Shadow Pokemon available",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "image": { "type": "string", "format": "uri" },
+                "altText": { "type": "string" },
+                "canBeShiny": { "type": "boolean" },
+                "dexNumber": { "type": ["integer", "null"] },
+                "imageWidth": { "type": "integer" },
+                "imageHeight": { "type": "integer" },
+                "imageType": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "leaders": {
+            "type": "array",
+            "description": "Team GO Rocket Leaders and their lineups",
+            "items": { "type": "object", "additionalProperties": true }
+          },
+          "giovanni": {
+            "description": "Giovanni's lineup",
+            "oneOf": [
+              { "type": "object", "additionalProperties": true },
+              { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+            ]
+          },
+          "grunts": {
+            "type": "array",
+            "description": "Team GO Rocket Grunt types",
+            "items": { "type": "object", "additionalProperties": true }
+          }
+        },
+        "additionalProperties": false
+      },
+      "rewards": {
+        "description": "Event rewards or ticketed research rewards",
+        "oneOf": [
+          {
+            "type": "array",
+            "items": { "type": "object", "additionalProperties": true }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "ticketedResearch": {
+                "type": "object",
+                "properties": {
+                  "price": { "type": "number" },
+                  "description": { "type": "string" }
+                },
+                "additionalProperties": false
+              },
+              "ticketBonuses": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "ticketPrice": {
+                "type": ["number", "null"]
+              },
+              "ticketAddOns": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "bonus": {
+        "type": "string",
+        "description": "Bonus description (e.g., date string for Spotlight Hour)"
+      },
+      "bonusDisclaimers": {
         "type": "array",
-        "description": "GO Battle League information",
+        "description": "Disclaimer text for event bonuses",
+        "items": { "type": "string" }
+      },
+      "lureModuleBonus": {
+        "type": "string",
+        "description": "Lure module bonus description"
+      },
+      "exclusiveBonuses": {
+        "type": "array",
+        "description": "Exclusive bonuses for ticket holders or attendees",
+        "items": { "type": "string" }
+      },
+      "canBeShiny": {
+        "type": "boolean",
+        "description": "Whether the featured Pokemon can be shiny"
+      },
+      "description": {
+        "type": "string",
+        "description": "Event description text"
+      },
+      "isPaid": {
+        "type": "boolean",
+        "description": "Whether the event requires a ticket or payment"
+      },
+      "price": {
+        "type": ["number", "null"],
+        "description": "Price of the event ticket, or null if free"
+      },
+      "raidAlternation": {
+        "type": "string",
+        "description": "Raid alternation pattern description"
+      },
+      "raidFeaturedAttacks": {
+        "type": "array",
+        "description": "Featured attacks available during raid events",
+        "items": { "type": "string" }
+      },
+      "shinyDebuts": {
+        "type": "array",
+        "description": "New shiny Pokemon debuting in this event",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "image": { "type": "string", "format": "uri" },
+            "altText": { "type": "string" },
+            "canBeShiny": { "type": "boolean" },
+            "dexNumber": { "type": ["integer", "null"] },
+            "imageWidth": { "type": "integer" },
+            "imageHeight": { "type": "integer" },
+            "imageType": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "showcases": {
+        "type": "array",
+        "description": "PokeStop Showcase Pokemon",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "image": { "type": "string", "format": "uri" },
+            "altText": { "type": "string" },
+            "canBeShiny": { "type": "boolean" },
+            "dexNumber": { "type": ["integer", "null"] },
+            "imageWidth": { "type": "integer" },
+            "imageHeight": { "type": "integer" },
+            "imageType": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "photobomb": {
+        "type": "object",
+        "description": "Photobomb encounter information",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Photobomb description"
+          },
+          "pokemon": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "image": { "type": "string", "format": "uri" },
+                "altText": { "type": "string" },
+                "canBeShiny": { "type": "boolean" },
+                "dexNumber": { "type": ["integer", "null"] },
+                "imageWidth": { "type": "integer" },
+                "imageHeight": { "type": "integer" },
+                "imageType": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "customSections": {
+        "type": "object",
+        "description": "Dynamically extracted sections not matching standard fields",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "paragraphs": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "lists": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "pokemon": {
+              "type": "array",
+              "items": { "type": "object", "additionalProperties": true }
+            },
+            "tables": { "type": "array" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "tasks": {
+        "type": "array",
+        "description": "Research tasks with steps and rewards",
         "items": {
           "type": "object",
           "properties": {
             "name": {
               "type": "string",
-              "description": "League name"
+              "description": "Research step name"
             },
-            "cpLimit": {
+            "step": {
               "type": "integer",
-              "description": "CP limit for the league"
+              "description": "Step number"
+            },
+            "tasks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": { "type": "string" },
+                  "reward": {
+                    "type": "object",
+                    "properties": {
+                      "text": { "type": "string" },
+                      "image": { "type": "string", "format": "uri" },
+                      "imageWidth": { "type": "integer" },
+                      "imageHeight": { "type": "integer" },
+                      "imageType": { "type": "string" }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "rewards": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": { "type": "string" },
+                  "image": { "type": "string", "format": "uri" },
+                  "imageWidth": { "type": "integer" },
+                  "imageHeight": { "type": "integer" },
+                  "imageType": { "type": "string" }
+                },
+                "additionalProperties": false
+              }
             }
           },
-          "additionalProperties": true
+          "additionalProperties": false
         }
+      },
+      "encounters": {
+        "type": "array",
+        "description": "Encounter Pokemon available in the research",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "image": { "type": "string", "format": "uri" },
+            "altText": { "type": "string" },
+            "canBeShiny": { "type": "boolean" },
+            "dexNumber": { "type": ["integer", "null"] },
+            "imageWidth": { "type": "integer" },
+            "imageHeight": { "type": "integer" },
+            "imageType": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "researchType": {
+        "type": "string",
+        "description": "Type of research",
+        "enum": ["special", "masterwork", "timed"]
+      },
+      "expires": {
+        "type": "boolean",
+        "description": "Whether the research expires"
+      },
+      "availability": {
+        "type": "object",
+        "description": "Availability window for the research",
+        "properties": {
+          "start": { "type": "string" },
+          "end": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "webStoreInfo": {
+        "type": "string",
+        "description": "Web store information or URL"
+      },
+      "promoCodes": {
+        "type": "array",
+        "description": "Promotional codes associated with the event",
+        "items": { "type": "string" }
+      },
+      "pricing": {
+        "type": "object",
+        "description": "GO Pass pricing information",
+        "properties": {
+          "deluxe": {
+            "type": ["number", "null"],
+            "description": "Deluxe tier price"
+          },
+          "deluxePlus": {
+            "type": ["number", "null"],
+            "description": "Deluxe Plus tier price"
+          }
+        },
+        "additionalProperties": false
+      },
+      "pointTasks": {
+        "type": "object",
+        "description": "GO Pass point-earning tasks",
+        "properties": {
+          "daily": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "task": { "type": "string" },
+                "points": { "type": "integer" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "weekly": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "task": { "type": "string" },
+                "points": { "type": "integer" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "bonus": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "task": { "type": "string" },
+                "points": { "type": "integer" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "ranks": {
+        "type": "array",
+        "description": "GO Pass ranks and rewards",
+        "items": { "type": "object", "additionalProperties": true }
+      },
+      "featuredPokemon": {
+        "type": "array",
+        "description": "Featured Pokemon for GO Pass",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "image": { "type": "string", "format": "uri" },
+            "altText": { "type": "string" },
+            "canBeShiny": { "type": "boolean" },
+            "dexNumber": { "type": ["integer", "null"] },
+            "imageWidth": { "type": "integer" },
+            "imageHeight": { "type": "integer" },
+            "imageType": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "milestoneBonuses": {
+        "type": "object",
+        "description": "GO Pass milestone bonuses by tier",
+        "properties": {
+          "free": {
+            "type": "array",
+            "items": { "type": "object", "additionalProperties": true }
+          },
+          "deluxe": {
+            "type": "array",
+            "items": { "type": "object", "additionalProperties": true }
+          }
+        },
+        "additionalProperties": false
+      },
+      "goPass": {
+        "type": "object",
+        "description": "GO Pass information",
+        "additionalProperties": true
+      },
+      "eventInfo": {
+        "type": "object",
+        "description": "In-person event logistical information",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Event name"
+          },
+          "location": {
+            "type": "string",
+            "description": "Event location"
+          },
+          "dates": {
+            "type": "string",
+            "description": "Event dates"
+          },
+          "time": {
+            "type": "string",
+            "description": "Event hours"
+          },
+          "ticketPrice": {
+            "type": ["number", "null"],
+            "description": "Ticket price"
+          },
+          "ticketUrl": {
+            "type": "string",
+            "description": "Ticket purchase URL"
+          }
+        },
+        "additionalProperties": false
+      },
+      "habitats": {
+        "type": "object",
+        "description": "Habitat areas with spawning Pokemon, keyed by habitat name",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "timeInfo": { "type": "string" },
+            "spawns": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "image": { "type": "string", "format": "uri" },
+                  "altText": { "type": "string" },
+                  "canBeShiny": { "type": "boolean" },
+                  "dexNumber": { "type": ["integer", "null"] },
+                  "imageWidth": { "type": "integer" },
+                  "imageHeight": { "type": "integer" },
+                  "imageType": { "type": "string" }
+                },
+                "additionalProperties": false
+              }
+            },
+            "rareSpawns": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "image": { "type": "string", "format": "uri" },
+                  "altText": { "type": "string" },
+                  "canBeShiny": { "type": "boolean" },
+                  "dexNumber": { "type": ["integer", "null"] },
+                  "imageWidth": { "type": "integer" },
+                  "imageHeight": { "type": "integer" },
+                  "imageType": { "type": "string" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "habitatRotation": {
+        "type": "array",
+        "description": "Habitat rotation schedule",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Habitat name"
+            },
+            "timeSlots": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "start": { "type": "string" },
+                  "end": { "type": "string" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "megaRaidSchedule": {
+        "type": "object",
+        "description": "Mega Raid boss schedule by day",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": { "type": "string" },
+              "end": { "type": "string" },
+              "items": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "bonusCategories": {
+        "type": "array",
+        "description": "Categorized bonus groups",
+        "items": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "description": "Bonus category name"
+            },
+            "timeframe": {
+              "type": "string",
+              "description": "When the bonuses are active"
+            },
+            "bonuses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": { "type": "string" },
+                  "image": { "type": "string", "format": "uri" },
+                  "imageWidth": { "type": "integer" },
+                  "imageHeight": { "type": "integer" },
+                  "imageType": { "type": "string" },
+                  "multiplier": { "type": "number" },
+                  "bonusType": { "type": "string" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": ["category"],
+          "additionalProperties": false
+        }
+      },
+      "branchingResearch": {
+        "type": "object",
+        "description": "Branching Special Research paths",
+        "properties": {
+          "description": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "paths": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "details": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "timedResearchRegions": {
+        "type": "array",
+        "description": "Region-specific Timed Research encounters",
+        "items": {
+          "type": "object",
+          "properties": {
+            "region": {
+              "type": "string",
+              "description": "Region description"
+            },
+            "pokemon": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "image": { "type": "string", "format": "uri" },
+                  "altText": { "type": "string" },
+                  "canBeShiny": { "type": "boolean" },
+                  "imageWidth": { "type": "integer" },
+                  "imageHeight": { "type": "integer" },
+                  "imageType": { "type": "string" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "routes": {
+        "type": "object",
+        "description": "Route-related Pokemon and information",
+        "properties": {
+          "description": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "pokemon": {
+            "type": "array",
+            "items": { "type": "object", "additionalProperties": true }
+          },
+          "regionalAppearances": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "pokemon": { "type": "string" },
+                "region": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "whatsNew": {
+        "type": "array",
+        "description": "What's new highlights for the event",
+        "items": { "type": "string" }
+      },
+      "sales": {
+        "type": "array",
+        "description": "Event-related sales information",
+        "items": { "type": "string" }
+      },
+      "eventLocations": {
+        "type": "array",
+        "description": "In-person event locations",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Location name"
+            },
+            "url": {
+              "type": "string",
+              "description": "Location event URL"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "eventTags": {
+        "type": "array",
+        "description": "Tags categorizing the event",
+        "items": { "type": "string" }
+      },
+      "costumedPokemon": {
+        "type": "array",
+        "description": "Costumed Pokemon appearing in the event",
+        "items": {
+          "type": "object",
+          "properties": {
+            "description": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "megaDebuts": {
+        "type": "array",
+        "description": "New Mega Evolutions debuting in this event",
+        "items": { "type": "string" }
+      },
+      "specialBackgrounds": {
+        "type": "array",
+        "description": "Special backgrounds available during the event",
+        "items": { "type": "string" }
+      },
+      "communityDays": {
+        "type": "array",
+        "description": "Community Day dates in the season",
+        "items": { "type": "string" }
+      },
+      "features": {
+        "type": "array",
+        "description": "Season features and highlights",
+        "items": { "type": "string" }
+      },
+      "goBattleLeague": {
+        "type": "string",
+        "description": "GO Battle League season information"
+      },
+      "maxBattles": {
+        "type": "object",
+        "description": "Max Battles event information",
+        "additionalProperties": true
+      },
+      "maxMondays": {
+        "type": "object",
+        "description": "Max Mondays event information",
+        "additionalProperties": true
       }
     },
     "additionalProperties": true
@@ -1259,4 +1929,4 @@ The canonical schema is maintained at [`schemas/events.schema.json`](../schemas/
 }
 ```
 
-> **Note:** This is a summary. The canonical schema includes additional detail — see [`schemas/events.schema.json`](../schemas/events.schema.json) for the full definition.
+> **Note:** This is the full canonical schema. The source of truth is [`schemas/events.schema.json`](../schemas/events.schema.json).

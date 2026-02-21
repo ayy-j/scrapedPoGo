@@ -210,6 +210,10 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
                 "webp"
               ]
             },
+            "altText": {
+              "type": "string",
+              "description": "Accessible alt text for the image"
+            },
             "canBeShiny": {
               "type": "boolean",
               "description": "Whether or not the reward Pokemon can be shiny (encounter type only)"

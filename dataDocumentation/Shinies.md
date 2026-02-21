@@ -33,7 +33,7 @@ The endpoint returns a JSON array of shiny Pokémon entries:
 ]
 ```
 
-## Shiny Entry Structure
+## Shiny Entry Fields
 
 Each entry in the `shinies` array represents a Pokémon (or regional variant) with shiny availability:
 
@@ -68,17 +68,17 @@ Each entry in the `shinies` array represents a Pokémon (or regional variant) wi
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `dexNumber` | number | National Pokédex number |
+| `dexNumber` | integer | National Pokédex number |
 | `name` | string | English name of the Pokémon (includes regional prefix if applicable) |
 | `releasedDate` | string\|null | Date when the shiny was first released (YYYY-MM-DD format) |
 | `family` | string\|null | Evolution family identifier |
 | `region` | string\|null | Regional variant label (e.g., `alolan`, `galarian`, `hisuian`, `paldean`), or `null` for base form |
 | `forms` | array | Array of alternative forms/costumes for this Pokémon |
 | `image` | string | URL to the base shiny sprite image. *Optional* — absent for Pokémon that only have form variants. |
-| `imageWidth` | number | Image width in pixels (always 256). *Optional* — absent when `image` is absent. |
-| `imageHeight` | number | Image height in pixels (always 256). *Optional* — absent when `image` is absent. |
+| `imageWidth` | integer | Image width in pixels (always 256). *Optional* — absent when `image` is absent. |
+| `imageHeight` | integer | Image height in pixels (always 256). *Optional* — absent when `image` is absent. |
 
-## Form Entry Structure
+## Form Entry Fields
 
 Each form in the `forms` array represents a costume or variant:
 
@@ -86,8 +86,8 @@ Each form in the `forms` array represents a costume or variant:
 |-------|------|-------------|
 | `name` | string | Form identifier (e.g., "f19" for Fall 2019, "11" for costume variant) |
 | `image` | string | URL to the form's shiny sprite image |
-| `imageWidth` | number | Image width in pixels (always 256) |
-| `imageHeight` | number | Image height in pixels (always 256) |
+| `imageWidth` | integer | Image width in pixels (always 256) |
+| `imageHeight` | integer | Image height in pixels (always 256) |
 
 ## Regional Variants
 

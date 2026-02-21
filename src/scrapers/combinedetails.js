@@ -450,7 +450,11 @@ async function main()
                 Object.assign(e, data.data);
             }
             // add event specific data directly to event object
-            if (data.type == "research-breakthrough" ||
+            if (data.type == "promo-codes")
+            {
+                e.promoCodes = data.data;
+            }
+            else if (data.type == "research-breakthrough" ||
                 data.type == "pokemon-spotlight-hour" ||
                 data.type == "community-day" ||
                 data.type == "raid-battles" ||
@@ -468,8 +472,7 @@ async function main()
                 data.type == "go-pass" ||
                 data.type == "pokestop-showcase" ||
                 data.type == "research" ||
-                data.type == "event" ||
-                data.type == "promo-codes")
+                data.type == "event")
             {
                 Object.assign(e, data.data);
             }

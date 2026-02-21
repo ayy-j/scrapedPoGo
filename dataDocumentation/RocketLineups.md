@@ -250,6 +250,10 @@
             "webp"
           ]
         },
+        "altText": {
+          "type": "string",
+          "description": "Accessible alt text for the image"
+        },
         "types": {
           "type": "array",
           "description": "The type(s) of the Pokemon (lowercase)",

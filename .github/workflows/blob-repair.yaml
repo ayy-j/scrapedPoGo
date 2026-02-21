@@ -41,10 +41,10 @@ jobs:
         if: ${{ inputs.dry_run }}
         run: |
           echo "🧪 Dry-run repair — checking which blobs are missing..."
-          npm run blob:repair-dry
+          npm run blob:upload -- --repair --dry-run
 
       - name: Repair missing blobs (live)
         if: ${{ !inputs.dry_run }}
         run: |
           echo "🔧 Repairing missing blobs in Vercel Blob storage..."
-          npm run blob:repair -- --verbose || echo "⚠ Some repairs failed (source images may be unavailable)"
+          npm run blob:upload -- --repair --verbose || echo "⚠ Some repairs failed (source images may be unavailable)"
