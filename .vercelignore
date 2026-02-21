@@ -2,6 +2,7 @@
 node_modules
 .env.local
 .DS_Store
+.env
 
 # Source files (not needed in deployment)
 src
