@@ -6,6 +6,7 @@ node_modules
 
 # Source files (not needed in deployment)
 src
+!src/index.html
 schemas
 test
 
