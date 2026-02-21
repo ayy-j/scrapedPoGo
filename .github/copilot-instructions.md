@@ -80,7 +80,6 @@ async function get(url, id, bkp) {
         const dom = await getJSDOM(url);
         const doc = dom.window.document;
         // Extract data using doc.querySelector / doc.querySelectorAll
-        // Use shared extractors: extractPokemonList, extractBonuses, extractResearchTasks, etc.
         await writeTempFile(id, 'event-type', data);
     } catch (err) {
         await handleScraperError(err, id, 'event-type', bkp, 'scraperKey');
@@ -88,6 +87,25 @@ async function get(url, id, bkp) {
 }
 module.exports = { get };
 ```
+
+Key shared extractors from `scraperUtils.js` — prefer these over rolling your own:
+
+| Extractor | Use for |
+|-----------|--------|
+| `extractPokemonList(container)` | Any `<ul>` of Pokémon cards with image/name |
+| `extractBonuses(doc)` | Active bonuses section (returns `{ bonuses, bonusDisclaimers }`) |
+| `extractResearchTasks(container)` | Field/timed research task lists with rewards |
+| `extractSection(doc, id)` | Generic section by element ID → `{ paragraphs, lists, pokemon, tables }` |
+| `extractPrice(el)` | Parse a USD price string from an element |
+| `isGlobalEvent(event)` | Detect if an event is global vs. regional |
+
+### Adding a New Event Type
+
+1. Create `src/pages/detailed/<typename>.js` with `async function get(url, id, bkp)` and `module.exports = { get }`.
+2. Add a `require` and dispatch case in `src/scrapers/detailedscrape.js` (match the `eventType` string from `events.min.json`).
+3. Add a `{ slug: '...', doc: '...' }` entry to `eventTypes` in `src/scripts/lib/schema-manifest.js`.
+4. Create `dataDocumentation/eventTypes/<Name>.md` with a Fields table and an embedded `## JSON Schema` block matching `schemas/events.schema.json`.
+5. Run `npm run test` — the data-contract test will catch any missing or mismatched fields.
 
 ### Image Handling
 
