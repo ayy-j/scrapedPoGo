@@ -90,6 +90,9 @@ dist
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 
+# Build output directory for Vercel
+public
+
 # vuepress build output
 .vuepress/dist
 
