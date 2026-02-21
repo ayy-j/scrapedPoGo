@@ -308,6 +308,41 @@
       white-space: nowrap;
     }
 
+    /* Type Badges */
+    .type-badges {
+      display: flex;
+      gap: 3px;
+      justify-content: center;
+      margin-top: 2px;
+      flex-wrap: wrap;
+    }
+
+    .type-badge {
+      font-size: 0.55rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .habitat-spawns .type-badges {
+      margin-top: 1px;
+    }
+
+    .habitat-spawns .type-badge {
+      font-size: 0.5rem;
+      padding: 0 4px;
+    }
+
+    .habitat-spawn-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .shiny-badge {
       position: absolute;
       top: 4px;
@@ -815,6 +850,202 @@
     .hidden {
       display: none !important;
     }
+
+    /* Ticket CTA */
+    .ticket-cta {
+      display: block;
+      width: 100%;
+      padding: var(--spacing-lg);
+      background: linear-gradient(135deg, rgba(240, 192, 64, 0.25), rgba(217, 74, 109, 0.2));
+      border: 1px solid rgba(240, 192, 64, 0.4);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .ticket-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(240, 192, 64, 0.2);
+    }
+
+    .ticket-cta:active {
+      transform: scale(0.98);
+    }
+
+    .ticket-cta-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--mega-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+    }
+
+    .ticket-cta-label svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--mega-gold);
+    }
+
+    .ticket-cta-bonuses {
+      margin-top: var(--spacing-md);
+      text-align: left;
+    }
+
+    .ticket-cta-bonuses li {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    /* Mega Debut Card */
+    .mega-debut-card {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: linear-gradient(135deg, rgba(240, 192, 64, 0.15), rgba(240, 192, 64, 0.05));
+      border: 1px solid rgba(240, 192, 64, 0.3);
+      border-radius: var(--radius-md);
+    }
+
+    .mega-debut-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--mega-gold);
+    }
+
+    .mega-debut-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(240, 192, 64, 0.15);
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+
+    .mega-debut-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--mega-gold);
+    }
+
+    .mega-debuts-grid {
+      display: grid;
+      gap: var(--spacing-md);
+    }
+
+    /* Costume Card */
+    .costume-card {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .costume-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(74, 144, 217, 0.15);
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+
+    .costume-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--x-blue);
+    }
+
+    .costume-text {
+      font-size: 0.95rem;
+      color: #e8e8f0;
+    }
+
+    .costume-grid {
+      display: grid;
+      gap: var(--spacing-md);
+    }
+
+    /* Route Region */
+    .route-region {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: var(--radius-sm);
+    }
+
+    .route-region-name {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--x-blue);
+      min-width: 100px;
+      flex-shrink: 0;
+    }
+
+    .route-region-pokemon {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .route-regions-list {
+      display: grid;
+      gap: var(--spacing-sm);
+      margin-top: var(--spacing-lg);
+    }
+
+    /* Special Backgrounds */
+    .special-bg-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md) 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .special-bg-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .special-bg-item:first-child {
+      padding-top: 0;
+    }
+
+    .special-bg-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .special-bg-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .special-bg-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
@@ -856,7 +1087,19 @@
     'use strict';
 
     const API_URL = 'https://pokemn.quest/data/eventTypes/pokemon-go-tour.min.json';
-    
+    const UNIFIED_URL = 'https://pokemn.quest/data/unified.min.json';
+    const POKEAPI_URL = 'https://pokeapi.co/api/v2/pokemon/';
+    const POKEAPI_CACHE_KEY = 'pokeapi_type_cache';
+    const POKEAPI_CONCURRENCY = 5;
+
+    const TYPE_COLORS = {
+      normal: '#A8A77A', fire: '#EE8130', water: '#6390F0', electric: '#F7D02C',
+      grass: '#7AC74C', ice: '#96D9D6', fighting: '#C22E28', poison: '#A33EA1',
+      ground: '#E2BF65', flying: '#A98FF3', psychic: '#F95587', bug: '#A6B91A',
+      rock: '#B6A136', ghost: '#735797', dragon: '#6F35FC', dark: '#705746',
+      steel: '#B7B7CE', fairy: '#D685AD'
+    };
+
     const elements = {
       loadingState: null,
       errorState: null,
@@ -866,6 +1109,7 @@
     };
 
     let eventData = null;
+    let typeIndex = {};
 
     document.addEventListener('DOMContentLoaded', function() {
       elements.loadingState = document.getElementById('loadingState');
@@ -885,12 +1129,37 @@
       showLoading();
 
       try {
-        const response = await fetch(API_URL);
-        if (!response.ok) {
+        const [eventResponse, unifiedResponse] = await Promise.all([
+          fetch(API_URL),
+          fetch(UNIFIED_URL).catch(() => null)
+        ]);
+
+        if (!eventResponse.ok) {
           throw new Error('Failed to fetch data');
         }
 
-        const data = await response.json();
+        if (unifiedResponse && unifiedResponse.ok) {
+          try {
+            const unified = await unifiedResponse.json();
+            const pokemonIndex = unified.pokemonIndex || {};
+            typeIndex = {};
+            for (const [key, entry] of Object.entries(pokemonIndex)) {
+              if (entry.types && entry.types.length > 0) {
+                typeIndex[key] = entry.types;
+                if (entry.dexNumber) {
+                  if (!typeIndex['__dex_' + entry.dexNumber]) {
+                    typeIndex['__dex_' + entry.dexNumber] = entry.types;
+                  }
+                }
+              }
+            }
+          } catch (e) {
+            console.warn('Failed to parse unified data:', e);
+            typeIndex = {};
+          }
+        }
+
+        const data = await eventResponse.json();
         
         const globalEvent = data.find(event => 
           event.eventID && event.eventID.includes('global')
@@ -901,6 +1170,10 @@
         }
 
         eventData = globalEvent;
+
+        if (elements.statusText) elements.statusText.textContent = 'Loading type data...';
+        await fetchMissingTypes(collectAllPokemon(eventData));
+
         renderEvent(eventData);
         showContent();
 
@@ -963,18 +1236,48 @@
           </div>
         </section>
 
+        ${renderTicketCTA(event.eventInfo, event.exclusiveBonuses)}
         ${renderShinyDebuts(event.shinyDebuts)}
+        ${renderMegaDebuts(event.megaDebuts)}
+        ${renderCostumedPokemon(event.costumedPokemon)}
         ${renderBranchingResearch(event.branchingResearch)}
         ${renderHabitats(event.habitats, event.habitatRotation)}
+        ${renderRoutes(event.routes)}
+        ${renderTimedResearchRegions(event.timedResearchRegions)}
         ${renderMegaSchedule(event.megaRaidSchedule)}
         ${renderPokemon(event.pokemon, event.raids)}
         ${renderEggs(event.eggs)}
         ${renderBonuses(event.bonusCategories)}
+        ${renderSpecialBackgrounds(event.specialBackgrounds)}
+        ${renderSales(event.sales)}
         ${renderWhatsNew(event.whatsNew)}
       `;
 
       elements.eventContent.innerHTML = html;
       initAccordions();
+    }
+
+    function renderTicketCTA(eventInfo, exclusiveBonuses) {
+      if (!eventInfo || !eventInfo.ticketUrl) return '';
+
+      const hasBonuses = exclusiveBonuses && exclusiveBonuses.length > 0;
+
+      return `
+        <a href="${escapeHtml(eventInfo.ticketUrl)}" class="ticket-cta" target="_blank" rel="noopener noreferrer">
+          <span class="ticket-cta-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+              <path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/>
+            </svg>
+            Get Your Ticket
+          </span>
+          ${hasBonuses ? `
+            <ul class="ticket-cta-bonuses">
+              ${exclusiveBonuses.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
+            </ul>
+          ` : ''}
+        </a>
+      `;
     }
 
     function renderShinyDebuts(debuts) {
@@ -1001,6 +1304,7 @@
                     loading="lazy"
                   >
                   <span class="pokemon-name">${escapeHtml(p.name)}</span>
+                  ${renderTypeBadges(p)}
                 </div>
                 <div class="shiny-badge" title="Shiny available">
                   <svg viewBox="0 0 24 24">
@@ -1014,8 +1318,70 @@
       `;
     }
 
+    function renderMegaDebuts(megaDebuts) {
+      if (!megaDebuts || megaDebuts.length === 0) return '';
+
+      return `
+        <section class="section" aria-labelledby="mega-debuts-title">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--mega-gold)" stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <h2 id="mega-debuts-title" class="section-title">New Mega Evolutions</h2>
+          </div>
+          <div class="mega-debuts-grid">
+            ${megaDebuts.map(name => `
+              <div class="mega-debut-card">
+                <div class="mega-debut-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                </div>
+                <span class="mega-debut-name">${escapeHtml(name)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderCostumedPokemon(costumed) {
+      if (!costumed || costumed.length === 0) return '';
+
+      return `
+        <section class="section" aria-labelledby="costumed-title">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--x-blue)" stroke-width="2">
+                <path d="M12 2a4 4 0 0 0-4 4c0 2 2 3 2 6H6s0 4 6 4 6-4 6-4h-4c0-3 2-4 2-6a4 4 0 0 0-4-4z"/>
+                <path d="M8 16v2a4 4 0 0 0 8 0v-2"/>
+              </svg>
+            </div>
+            <h2 id="costumed-title" class="section-title">Costumed Pokémon</h2>
+          </div>
+          <div class="costume-grid">
+            ${costumed.map(c => `
+              <div class="costume-card">
+                <div class="costume-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a4 4 0 0 0-4 4c0 2 2 3 2 6H6s0 4 6 4 6-4 6-4h-4c0-3 2-4 2-6a4 4 0 0 0-4-4z"/>
+                    <path d="M8 16v2a4 4 0 0 0 8 0v-2"/>
+                  </svg>
+                </div>
+                <span class="costume-text">${escapeHtml(c.description)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }
+
     function renderBranchingResearch(research) {
       if (!research || !research.paths) return '';
+
+      const hasDescription = research.description && research.description.length > 0;
 
       return `
         <section class="section" aria-labelledby="branching-title">
@@ -1031,12 +1397,20 @@
             <h2 id="branching-title" class="section-title">Choose Your Path</h2>
           </div>
           
-          <div class="card" style="margin-bottom: var(--spacing-lg);">
-            <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">
-              During the event, ticket-holding Trainers can choose between two Special Research paths. 
-              Complete to receive an encounter with a Legendary featuring a Special Background!
-            </p>
-          </div>
+          ${hasDescription ? `
+            <div class="card" style="margin-bottom: var(--spacing-lg);">
+              ${research.description.map(p => `
+                <p style="margin: 0 0 var(--spacing-md); color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">${escapeHtml(p)}</p>
+              `).join('')}
+            </div>
+          ` : `
+            <div class="card" style="margin-bottom: var(--spacing-lg);">
+              <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">
+                During the event, ticket-holding Trainers can choose between two Special Research paths. 
+                Complete to receive an encounter with a Legendary featuring a Special Background!
+              </p>
+            </div>
+          `}
 
           <div class="version-cards">
             ${research.paths.map((path, index) => `
@@ -1092,18 +1466,159 @@
                   </div>
                   <div class="habitat-spawns">
                     ${(habitat.spawns || []).slice(0, 12).map(p => `
-                      <img 
-                        src="${escapeHtml(p.image)}" 
-                        alt="${escapeHtml(p.name)}"
-                        class="pokemon-img"
-                        loading="lazy"
-                        title="${escapeHtml(p.name)}"
-                      >
+                      <div class="habitat-spawn-item">
+                        <img 
+                          src="${escapeHtml(p.image)}" 
+                          alt="${escapeHtml(p.name)}"
+                          class="pokemon-img"
+                          loading="lazy"
+                          title="${escapeHtml(p.name)}"
+                        >
+                        ${renderTypeBadges(p)}
+                      </div>
                     `).join('')}
                   </div>
                 </div>
               `;
             }).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderRoutes(routes) {
+      if (!routes) return '';
+
+      const hasDescription = routes.description && routes.description.length > 0;
+      const hasPokemon = routes.pokemon && routes.pokemon.length > 0;
+      const hasRegional = routes.regionalAppearances && routes.regionalAppearances.length > 0;
+
+      if (!hasDescription && !hasPokemon && !hasRegional) return '';
+
+      return `
+        <section class="section" aria-labelledby="routes-title">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--x-blue)" stroke-width="2">
+                <circle cx="6" cy="19" r="3"/>
+                <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/>
+                <circle cx="18" cy="5" r="3"/>
+              </svg>
+            </div>
+            <h2 id="routes-title" class="section-title">Routes</h2>
+          </div>
+
+          ${hasDescription ? `
+            <div class="card" style="margin-bottom: var(--spacing-lg);">
+              ${routes.description.map(p => `
+                <p style="margin: 0 0 var(--spacing-md); color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">${escapeHtml(p)}</p>
+              `).join('')}
+            </div>
+          ` : ''}
+
+          ${hasPokemon ? `
+            <div class="card" style="margin-bottom: var(--spacing-lg);">
+              <h3 style="margin: 0 0 var(--spacing-md); font-size: 1rem;">Route Pokémon</h3>
+              <div class="pokemon-grid">
+                ${routes.pokemon.map(p => `
+                  <div class="pokemon-card-wrapper">
+                    <div class="pokemon-card" tabindex="0" role="button" aria-label="${escapeHtml(p.name)}">
+                      <img 
+                        src="${escapeHtml(p.image)}" 
+                        alt="${escapeHtml(p.name)}"
+                        class="pokemon-img"
+                        loading="lazy"
+                      >
+                      <span class="pokemon-name">${escapeHtml(p.name)}</span>
+                      ${renderTypeBadges(p)}
+                    </div>
+                    ${p.canBeShiny ? `
+                      <div class="shiny-badge" title="Shiny available">
+                        <svg viewBox="0 0 24 24">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                        </svg>
+                      </div>
+                    ` : ''}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+
+          ${hasRegional ? `
+            <div class="card">
+              <h3 style="margin: 0 0 var(--spacing-md); font-size: 1rem;">Regional Appearances</h3>
+              <div class="route-regions-list">
+                ${routes.regionalAppearances.map(r => `
+                  <div class="route-region">
+                    <span class="route-region-name">${escapeHtml(r.region)}</span>
+                    <span class="route-region-pokemon">${escapeHtml(r.pokemon)}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </section>
+      `;
+    }
+
+    function renderTimedResearchRegions(regions) {
+      if (!regions || regions.length === 0) return '';
+
+      return `
+        <section class="section" aria-labelledby="timed-research-title">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--y-red)" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <h2 id="timed-research-title" class="section-title">Timed Research by Region</h2>
+          </div>
+
+          <div class="accordion">
+            ${regions.map((r, index) => `
+              <div class="accordion-item ${index === 0 ? 'open' : ''}">
+                <button 
+                  class="accordion-header" 
+                  aria-expanded="${index === 0 ? 'true' : 'false'}"
+                  aria-controls="timed-research-content-${index}"
+                >
+                  <span>${escapeHtml(r.region)}</span>
+                  <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </button>
+                <div class="accordion-content" id="timed-research-content-${index}">
+                  <div class="accordion-body">
+                    <div class="pokemon-grid">
+                      ${(r.pokemon || []).map(p => `
+                        <div class="pokemon-card-wrapper">
+                          <div class="pokemon-card" tabindex="0" role="button" aria-label="${escapeHtml(p.name)}">
+                            <img 
+                              src="${escapeHtml(p.image)}" 
+                              alt="${escapeHtml(p.name)}"
+                              class="pokemon-img"
+                              loading="lazy"
+                            >
+                            <span class="pokemon-name">${escapeHtml(p.name)}</span>
+                            ${renderTypeBadges(p)}
+                          </div>
+                          ${p.canBeShiny ? `
+                            <div class="shiny-badge" title="Shiny available">
+                              <svg viewBox="0 0 24 24">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                              </svg>
+                            </div>
+                          ` : ''}
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
           </div>
         </section>
       `;
@@ -1193,6 +1708,7 @@
                         loading="lazy"
                       >
                       <span class="pokemon-name">${escapeHtml(p.name)}</span>
+                      ${renderTypeBadges(p)}
                     </div>
                     ${p.canBeShiny ? `
                       <div class="shiny-badge" title="Shiny available">
@@ -1221,6 +1737,7 @@
                         loading="lazy"
                       >
                       <span class="pokemon-name">${escapeHtml(p.name)}</span>
+                      ${renderTypeBadges(p)}
                     </div>
                     ${p.canBeShiny ? `
                       <div class="shiny-badge" title="Shiny available">
@@ -1278,6 +1795,7 @@
                           loading="lazy"
                         >
                         <span class="pokemon-name">${escapeHtml(p.name)}</span>
+                        ${renderTypeBadges(p)}
                       </div>
                       ${p.canBeShiny ? `
                         <div class="shiny-badge" title="Shiny available">
@@ -1343,6 +1861,66 @@
                 </div>
               </div>
             `).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderSpecialBackgrounds(backgrounds) {
+      if (!backgrounds || backgrounds.length === 0) return '';
+
+      return `
+        <section class="section" aria-labelledby="special-bg-title">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--shiny-pink)" stroke-width="2">
+                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                <circle cx="12" cy="13" r="3"/>
+              </svg>
+            </div>
+            <h2 id="special-bg-title" class="section-title">Special Backgrounds</h2>
+          </div>
+
+          <div class="card">
+            ${backgrounds.map(text => `
+              <div class="special-bg-item">
+                <div class="special-bg-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="var(--shiny-pink)" stroke-width="2">
+                    <path d="M12 3l1.5 4.5H18l-3.5 2.5L16 14.5 12 11.5 8 14.5l1.5-4.5L6 7.5h4.5z"/>
+                  </svg>
+                </div>
+                <span class="special-bg-text">${escapeHtml(text)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderSales(items) {
+      if (!items || items.length === 0) return '';
+
+      return `
+        <section class="section" aria-labelledby="sales-title">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--mega-gold)" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+            </div>
+            <h2 id="sales-title" class="section-title">Shop &amp; Avatar Items</h2>
+          </div>
+
+          <div class="card">
+            <ul style="margin: 0; padding-left: var(--spacing-lg);">
+              ${items.map(item => `
+                <li style="margin-bottom: var(--spacing-md); color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                  ${escapeHtml(item)}
+                </li>
+              `).join('')}
+            </ul>
           </div>
         </section>
       `;
@@ -1432,6 +2010,236 @@
       if (!slots || slots.length === 0) return '';
       
       return slots.map(slot => `${slot.start} - ${slot.end}`).join(' & ');
+    }
+
+    function typeBadgeTextColor(hex) {
+      const r = parseInt(hex.slice(1, 3), 16) / 255;
+      const g = parseInt(hex.slice(3, 5), 16) / 255;
+      const b = parseInt(hex.slice(5, 7), 16) / 255;
+      const toLinear = c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      const luminance = 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
+      return luminance > 0.45 ? '#1a1a2e' : '#ffffff';
+    }
+
+    /**
+     * Collect all Pokémon objects from every section of the event data.
+     * Only collects objects with a `name` property (skips strings, schedule slots, etc.).
+     */
+    function collectAllPokemon(event) {
+      if (!event) return [];
+      const all = [];
+      const push = arr => {
+        if (!Array.isArray(arr)) return;
+        for (const item of arr) {
+          if (item && typeof item === 'object' && item.name) all.push(item);
+        }
+      };
+
+      push(event.shinyDebuts);
+      push(event.pokemon);
+      push(event.raids);
+
+      // Habitats: { "Habitat Name": { spawns: [...], rareSpawns: [...] } }
+      if (event.habitats) {
+        for (const habitat of Object.values(event.habitats)) {
+          if (habitat && typeof habitat === 'object') {
+            push(habitat.spawns);
+            push(habitat.rareSpawns);
+          }
+        }
+      }
+      if (event.routes) {
+        push(event.routes.pokemon);
+      }
+      if (event.timedResearchRegions) {
+        for (const region of event.timedResearchRegions) {
+          push(region.pokemon);
+        }
+      }
+      if (event.eggs) {
+        for (const eggGroup of Object.values(event.eggs)) {
+          push(eggGroup);
+        }
+      }
+      return all;
+    }
+
+    /**
+     * Normalize a Pokémon name for PokéAPI lookup.
+     * Strips costume prefixes, converts to lowercase, handles special forms.
+     */
+    function normalizeForPokeApi(name) {
+      if (!name) return null;
+      let n = name.toLowerCase().trim();
+
+      // Strip common costume/hat prefixes that appear before the base name
+      // e.g. "Calem's Hat Pikachu" → "pikachu", "Flower Crown Eevee" → "eevee"
+      const costumePatterns = [
+        /^.*?'s\s+hat\s+/i,
+        /^.*?\s+hat\s+/i,
+        /^flower\s+crown\s+/i,
+        /^festive\s+/i,
+        /^party\s+/i,
+        /^winter\s+/i,
+        /^summer\s+/i,
+        /^spring\s+/i,
+        /^autumn\s+/i,
+        /^halloween\s+/i,
+        /^holiday\s+/i,
+        /^costume\s+/i,
+        /^shadow\s+/i,
+      ];
+      for (const pat of costumePatterns) {
+        const cleaned = n.replace(pat, '');
+        if (cleaned && cleaned !== n) {
+          n = cleaned;
+          break;
+        }
+      }
+
+      // Handle variant/form prefixes: "Blue Flower Flabébé" → "flabebe"
+      // Keep only the last word if it looks like a Pokémon name after a form descriptor
+      const colorFormPattern = /^(?:red|blue|orange|yellow|white|black|pink|green|purple)\s+(?:flower|stripe|core)\s+/i;
+      n = n.replace(colorFormPattern, '');
+
+      // Strip parenthetical form info: "Furfrou (Debutante)" → "furfrou"
+      // PokéAPI uses the base species name; form variants share types
+      n = n.replace(/\s*\(.*?\)\s*/g, '').trim();
+
+      // Normalize special characters
+      n = n.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); // Remove diacritics (é → e)
+      n = n.replace(/['\u2019.:]/g, '');                      // Remove apostrophes, periods, colons
+      n = n.replace(/\s+/g, '-');                              // Spaces → hyphens
+      n = n.replace(/[^a-z0-9-]/g, '');                        // Strip remaining special chars
+      n = n.replace(/-+/g, '-').replace(/^-|-$/g, '');          // Clean up hyphens
+
+      return n || null;
+    }
+
+    /**
+     * Load PokéAPI type cache from sessionStorage.
+     */
+    function loadPokeApiCache() {
+      try {
+        const raw = sessionStorage.getItem(POKEAPI_CACHE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    /**
+     * Save PokéAPI type cache to sessionStorage.
+     */
+    function savePokeApiCache(cache) {
+      try {
+        sessionStorage.setItem(POKEAPI_CACHE_KEY, JSON.stringify(cache));
+      } catch (e) { /* quota exceeded, ignore */ }
+    }
+
+    /**
+     * Fetch a single Pokémon's types from PokéAPI.
+     * Returns array of type strings or null on failure.
+     */
+    async function fetchPokeApiTypes(identifier) {
+      try {
+        const resp = await fetch(POKEAPI_URL + encodeURIComponent(identifier));
+        if (!resp.ok) return null;
+        const data = await resp.json();
+        if (!data.types || data.types.length === 0) return null;
+        return data.types
+          .sort((a, b) => a.slot - b.slot)
+          .map(t => t.type.name);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    /**
+     * Fetch missing type data from PokéAPI for Pokémon not in typeIndex.
+     * Uses dexNumber (preferred) or cleaned name as the lookup key.
+     * Respects concurrency limits and caches results in sessionStorage.
+     */
+    async function fetchMissingTypes(pokemonList) {
+      if (!pokemonList || pokemonList.length === 0) return;
+
+      const cache = loadPokeApiCache();
+
+      // Restore cached entries into typeIndex first
+      for (const [key, types] of Object.entries(cache)) {
+        if (!typeIndex[key]) typeIndex[key] = types;
+        if (key.startsWith('__dex_') && !typeIndex[key]) {
+          typeIndex[key] = types;
+        }
+      }
+
+      // Collect unique Pokémon that still need lookups
+      const needed = new Map(); // key → { dex, apiName }
+      for (const p of pokemonList) {
+        if (!p || !p.name) continue;
+        const name = p.name.toLowerCase();
+        const dex = p.dexNumber;
+        if (typeIndex[name] || (dex && typeIndex['__dex_' + dex])) continue;
+
+        // Prefer dexNumber lookup, fall back to normalized name
+        const lookupKey = dex ? String(dex) : normalizeForPokeApi(p.name);
+        if (!lookupKey) continue;
+
+        // Check cache
+        const cacheKey = dex ? '__dex_' + dex : name;
+        if (cache[cacheKey]) {
+          typeIndex[name] = cache[cacheKey];
+          if (dex) typeIndex['__dex_' + dex] = cache[cacheKey];
+          continue;
+        }
+
+        if (!needed.has(lookupKey)) {
+          needed.set(lookupKey, { dex, name, lookupKey });
+        }
+      }
+
+      if (needed.size === 0) return;
+
+      // Fetch in batches with limited concurrency
+      const entries = [...needed.values()];
+      let dirty = false;
+
+      for (let i = 0; i < entries.length; i += POKEAPI_CONCURRENCY) {
+        const batch = entries.slice(i, i + POKEAPI_CONCURRENCY);
+        const results = await Promise.all(
+          batch.map(async ({ dex, name, lookupKey }) => {
+            const types = await fetchPokeApiTypes(lookupKey);
+            return { dex, name, types };
+          })
+        );
+
+        for (const { dex, name, types } of results) {
+          if (!types) continue;
+          dirty = true;
+          typeIndex[name] = types;
+          if (dex) {
+            typeIndex['__dex_' + dex] = types;
+            cache['__dex_' + dex] = types;
+          }
+          cache[name] = types;
+        }
+      }
+
+      if (dirty) savePokeApiCache(cache);
+    }
+
+    function renderTypeBadges(pokemon) {
+      if (!pokemon) return '';
+      const name = (pokemon.name || '').toLowerCase();
+      const dex = pokemon.dexNumber;
+      const types = typeIndex[name] || (dex ? typeIndex['__dex_' + dex] : null);
+      if (!types || types.length === 0) return '';
+
+      return `<div class="type-badges">${types.map(t => {
+        const color = TYPE_COLORS[t] || '#666';
+        const textColor = typeBadgeTextColor(color);
+        return `<span class="type-badge" style="background:${color};color:${textColor}">${escapeHtml(t)}</span>`;
+      }).join('')}</div>`;
     }
 
     function escapeHtml(str) {
