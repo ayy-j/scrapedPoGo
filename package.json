@@ -15,11 +15,12 @@
     "test": "node --test",
     "blob:upload": "node src/scripts/upload-images-to-blob.js",
     "serve": "node serve.js",
-    "build": "node -e \"require('fs').cpSync('data', 'public/data', {recursive: true});\""
+    "build": "node -e \"const fs = require('fs'); if (!fs.existsSync('public')) fs.mkdirSync('public', {recursive: true}); fs.cpSync('data', 'public/data', {recursive: true}); fs.copyFileSync('index.html', 'public/index.html');\""
   },
   "author": "quantNebula",
   "license": "MIT",
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "@vercel/blob": "^2.2.0",
     "dotenv": "^17.3.1",
     "image-size": "^2.0.2",
