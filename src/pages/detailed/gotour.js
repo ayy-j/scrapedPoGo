@@ -226,8 +226,8 @@ async function get(url, id, bkp) {
                     const matches = p.match(/Mega\s+[A-Z][a-z]+/g);
                     if (matches) {
                         matches.forEach(name => {
-                            // Exclude generic terms like "Mega Raids", "Mega Evolution"
-                            if (!/Mega\s+(Raid|Evolution|Evolv|Battle|Energy)/i.test(name) &&
+                            // Exclude generic terms like "Mega Raids", "Mega Evolution", "Mega Night"
+                            if (!/Mega\s+(Raid|Evolution|Evolv|Battle|Energy|Night|Event|Week)/i.test(name) &&
                                 !tourData.megaDebuts.includes(name)) {
                                 tourData.megaDebuts.push(name);
                             }
@@ -344,18 +344,33 @@ async function get(url, id, bkp) {
             // Costumed Pokemon (e.g., "looking-good-pikachu")
             if (sectionId.includes('looking-good') || sectionId.includes('costumed') ||
                 sectionId.includes('costume')) {
+                // Pokemon grids in this section are typically shiny debuts, not costumed
+                // Add them to shinyDebuts instead
                 sectionContent.pokemon.forEach(p => {
-                    if (!tourData.costumedPokemon.find(c => c.name === p.name)) {
-                        tourData.costumedPokemon.push(p);
+                    if (p.canBeShiny && !tourData.shinyDebuts.find(s => s.name === p.name)) {
+                        tourData.shinyDebuts.push(p);
                     }
                 });
-                // Also extract costume references from paragraph text
+                // Extract costume references from paragraph text
                 sectionContent.paragraphs.forEach(p => {
-                    // Match patterns like "Pikachu wearing Calem's hat" (handles smart quotes)
-                    const costumeMatches = p.match(/(\w+)\s+wearing\s+[\w\s'''`´]+(?:hat|outfit|costume)/gi);
+                    // Match "Pikachu wearing Calem's hat" patterns (smart/curly quote safe)
+                    // Uses RegExp constructor with \u escapes to prevent file-save encoding issues
+                    const costumeRe = new RegExp('(\\w+)\\s+wearing\\s+[\\w\\s\u2018\u2019\u0027`\u00b4]+(?:hat|outfit|costume)', 'gi');
+                    const costumeMatches = p.match(costumeRe);
                     if (costumeMatches) {
                         costumeMatches.forEach(m => {
-                            if (!tourData.costumedPokemon.find(c => c.name === m || c.description === m)) {
+                            // Split compound descriptions like "X wearing A's hat or B's hat"
+                            const orSplit = m.match(/^(\w+)\s+wearing\s+(.+)$/i);
+                            if (orSplit) {
+                                const pokemon = orSplit[1];
+                                const costumeParts = orSplit[2].split(/\s+or\s+/i);
+                                costumeParts.forEach(part => {
+                                    const desc = `${pokemon} wearing ${part.trim()}`;
+                                    if (!tourData.costumedPokemon.find(c => c.description === desc)) {
+                                        tourData.costumedPokemon.push({ description: desc });
+                                    }
+                                });
+                            } else if (!tourData.costumedPokemon.find(c => c.description === m.trim())) {
                                 tourData.costumedPokemon.push({ description: m.trim() });
                             }
                         });

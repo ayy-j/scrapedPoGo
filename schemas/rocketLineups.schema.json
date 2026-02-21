@@ -55,6 +55,7 @@
         "altText": {
           "type": "string",
           "description": "Accessible alt text for the image"
+        },
         "imageWidth": {
           "type": "integer",
           "description": "The image width in pixels"
