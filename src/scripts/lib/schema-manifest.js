@@ -79,10 +79,8 @@ const eventTypeEntries = eventTypes.map((et) => ({
 }));
 
 const auxiliaryFiles = [
-  'data/unified.min.json',
   'dataDocumentation/API.md',
-  'dataDocumentation/Endpoints.md',
-  'dataDocumentation/UnifiedData.md'
+  'dataDocumentation/Endpoints.md'
 ];
 
 module.exports = [...canonicalDatasets, ...eventTypeEntries];

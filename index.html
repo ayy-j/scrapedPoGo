@@ -1087,7 +1087,6 @@
     'use strict';
 
     const API_URL = 'https://pokemn.quest/data/eventTypes/pokemon-go-tour.min.json';
-    const UNIFIED_URL = 'https://pokemn.quest/data/unified.min.json';
     const POKEAPI_URL = 'https://pokeapi.co/api/v2/pokemon/';
     const POKEAPI_CACHE_KEY = 'pokeapi_type_cache';
     const POKEAPI_CONCURRENCY = 5;
@@ -1129,34 +1128,10 @@
       showLoading();
 
       try {
-        const [eventResponse, unifiedResponse] = await Promise.all([
-          fetch(API_URL),
-          fetch(UNIFIED_URL).catch(() => null)
-        ]);
+        const eventResponse = await fetch(API_URL);
 
         if (!eventResponse.ok) {
           throw new Error('Failed to fetch data');
-        }
-
-        if (unifiedResponse && unifiedResponse.ok) {
-          try {
-            const unified = await unifiedResponse.json();
-            const pokemonIndex = unified.pokemonIndex || {};
-            typeIndex = {};
-            for (const [key, entry] of Object.entries(pokemonIndex)) {
-              if (entry.types && entry.types.length > 0) {
-                typeIndex[key] = entry.types;
-                if (entry.dexNumber) {
-                  if (!typeIndex['__dex_' + entry.dexNumber]) {
-                    typeIndex['__dex_' + entry.dexNumber] = entry.types;
-                  }
-                }
-              }
-            }
-          } catch (e) {
-            console.warn('Failed to parse unified data:', e);
-            typeIndex = {};
-          }
         }
 
         const data = await eventResponse.json();

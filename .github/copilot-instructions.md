@@ -6,14 +6,13 @@ A Node.js web scraper that extracts Pokémon GO game data from [LeekDuck](https:
 
 ## Architecture
 
-### Four-Stage Pipeline
+### Three-Stage Pipeline
 
 The scraper runs as an ordered pipeline (`npm run pipeline`). Each stage depends on the previous:
 
 1. **`scrape`** — Primary scrapers (`src/pages/*.js`) fetch top-level data (events, raids, eggs, research, rockets, shinies). Events must run first since raids depends on event data. Output: `data/*.min.json`.
 2. **`detailedscrape`** — Detailed scrapers (`src/pages/detailed/*.js`) iterate each event, dispatching to a type-specific scraper (e.g., `communityday.js`, `raidhour.js`) plus the `generic.js` metadata scraper. Output: `data/temp/*.json`.
 3. **`combinedetails`** — Merges temp files back into events, generates per-eventType files (`data/eventTypes/*.min.json`), computes `eventStatus`, flattens nested `details` wrappers, then deletes `data/temp/`.
-4. **`combineall`** — Builds `data/unified.min.json` with a cross-referenced Pokémon index from all datasets.
 
 ### Key Directories
 
@@ -31,11 +30,10 @@ The scraper runs as an ordered pipeline (`npm run pipeline`). Each stage depends
 ## Commands
 
 ```bash
-npm run pipeline          # Full scrape (stages 1–4, sets USE_BLOB_URLS=true)
+npm run pipeline          # Full scrape (stages 1–3, sets USE_BLOB_URLS=true)
 npm run scrape            # Stage 1 only
 npm run detailedscrape    # Stage 2 only
 npm run combinedetails    # Stage 3 only
-npm run combineall        # Stage 4 only
 npm run validate          # Validate data/*.min.json against schemas/*.schema.json (ajv)
 npm run compare:schemas   # Check alignment of schemas ↔ data ↔ docs (report mode)
 npm run test              # node --test (runs test/*.test.js)

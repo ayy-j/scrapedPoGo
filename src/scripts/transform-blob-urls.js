@@ -48,22 +48,6 @@ async function main() {
         console.log(`Transformed ${files.length} eventTypes files`);
     }
 
-    // Transform unified
-    const unifiedFp = path.join('data', 'unified.min.json');
-    if (fs.existsSync(unifiedFp)) {
-        const data = JSON.parse(fs.readFileSync(unifiedFp, 'utf8'));
-        const transformed = transformUrls(data);
-        fs.writeFileSync(unifiedFp, JSON.stringify(transformed));
-        fs.writeFileSync(path.join('data', 'unified.json'), JSON.stringify(transformed, null, 2));
-
-        let cdn = 0;
-        JSON.stringify(transformed, (k, v) => {
-            if (typeof v === 'string' && v.includes('cdn.leekduck.com')) cdn++;
-            return v;
-        });
-        console.log(`unified: ${cdn} CDN URLs remaining`);
-    }
-
     console.log('Done!');
 }
 
