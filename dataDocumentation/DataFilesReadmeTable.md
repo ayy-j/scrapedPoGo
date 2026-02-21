@@ -8,7 +8,6 @@
 | `data/research.min.json` | `dataDocumentation/Research.md` |
 | `data/rocketLineups.min.json` | `dataDocumentation/RocketLineups.md` |
 | `data/shinies.min.json` | `dataDocumentation/Shinies.md` |
-| `data/unified.min.json` | `dataDocumentation/UnifiedData.md` |
 | `data/eventTypes/community-day.min.json` | `dataDocumentation/eventTypes/CommunityDay.md` |
 | `data/eventTypes/event.min.json` | `dataDocumentation/eventTypes/Event.md` |
 | `data/eventTypes/go-battle-league.min.json` | `dataDocumentation/eventTypes/GoBattleLeague.md` |

@@ -17,7 +17,7 @@ The endpoint returns a minified JSON array of event objects sorted chronological
     "name": "Into the Depths",
     "eventType": "event",
     "heading": "Event",
-    "image": "https://pokemn.quest/images/...",
+    "image": "https://pokemn.quest/events/into-the-depths-2026.jpg",
     "start": "2026-01-27T10:00:00.000",
     "end": "2026-02-01T20:00:00.000",
     "isGlobal": false,
@@ -60,6 +60,7 @@ Depending on the event type and content, events may include any of the following
 | **`pokemon`** | `array` | Featured Pokemon in the event (spawns, debuts, featured encounters) |
 | **`pokemon[].name`** | `string` | Pokemon name |
 | **`pokemon[].image`** | `string` | Pokemon image URL |
+| **`pokemon[].altText`** | `string` | Accessible alt text for the image |
 | **`pokemon[].source`** | `string` | Where the Pokemon appears.<br />Values: `spawn`, `featured`, `incense`, `costumed`, `debut`, `maxDebut`, `raid`, `egg`, `research`, `reward`, `encounter` |
 | **`pokemon[].canBeShiny`** | `boolean` | Whether the Pokemon can be encountered as shiny |
 | **`pokemon[].dexNumber`** | `int\|null` | National Pokédex number, or `null` if not determinable |
@@ -91,7 +92,10 @@ Depending on the event type and content, events may include any of the following
 | **`raids`** | `array` | Raid bosses featured in the event |
 | **`raids[].name`** | `string` | Pokemon name |
 | **`raids[].image`** | `string` | Pokemon image URL |
+| **`raids[].altText`** | `string` | Accessible alt text for the image |
 | **`raids[].canBeShiny`** | `boolean` | Whether the raid boss can be shiny |
+| **`raids[].dexNumber`** | `int\|null` | National Pokédex number, or `null` if not determinable |
+| **`raids[].tier`** | `string` | Raid tier (e.g., `1-Star`, `3-Star`, `5-Star`, `Mega`) |
 | **`raids[].imageWidth`** | `int` | Image width in pixels |
 | **`raids[].imageHeight`** | `int` | Image height in pixels |
 | **`raids[].imageType`** | `string` | Image format (e.g., `png`) |
@@ -251,6 +255,21 @@ These boolean flags indicate what content is available for an event (flat at top
 | **`isPaid`** | `boolean` | Whether the event requires payment |
 | **`price`** | `number\|null` | Event ticket price, or `null` if free |
 | **`tasks`** | `array` | Research tasks (alternative structure) |
+| **`habitatRotation`** | `array` | GO Tour habitat rotation schedule |
+| **`megaRaidSchedule`** | `array` | Mega Raid boss schedule by day |
+| **`bonusCategories`** | `array` | Categorized bonus groups (e.g., GO Tour bonus categories) |
+| **`branchingResearch`** | `object` | Branching Special Research paths |
+| **`costumedPokemon`** | `array` | Costumed Pokemon available during the event |
+| **`megaDebuts`** | `array` | New Mega Evolutions debuting during the event |
+| **`specialBackgrounds`** | `array` | Special backgrounds available during the event |
+| **`timedResearchRegions`** | `array` | Region-specific Timed Research details |
+| **`routes`** | `array` | Route-related Pokemon/information |
+| **`eventLocations`** | `array` | In-person event locations |
+| **`eventTags`** | `array` | Event categorization tags |
+| **`researchType`** | `string` | Type of research (special, masterwork, timed) |
+| **`expires`** | `boolean` | Whether the research expires |
+| **`webStoreInfo`** | `object` | Web store information/URL |
+| **`promoCodes`** | `array` | Promotional codes for the event |
 
 **eventInfo Object Structure:**
 ```json
@@ -280,35 +299,12 @@ Each Pokemon object in the `pokemon` array has the following structure:
 
 ```json
 {
-  "name": "Chinchou",
-  "image": "https://pokemn.quest/images/pokemon/pm170.png",
+  "name": "Ponyta",
+  "image": "https://pokemn.quest/pokemon/077-ponyta/pokemon_icon_077_00.png",
+  "altText": "",
+  "canBeShiny": true,
+  "dexNumber": 77,
   "source": "spawn",
-  "canBeShiny": true,
-  "imageWidth": 78,
-  "imageHeight": 87,
-  "imageType": "png"
-}
-```
-
-| Field | Type | Description |
-|-------|------|-------------|
-| **`name`** | `string` | Pokemon name |
-| **`image`** | `string` | Pokemon image URL |
-| **`source`** | `string` | Source type: `spawn`, `featured`, `incense`, `costumed`, `debut`, `maxDebut`, `raid`, `egg`, `research`, `reward`, `encounter` |
-| **`canBeShiny`** | `boolean` | Whether the Pokemon can be shiny |
-| **`imageWidth`** | `int` | Image width in pixels |
-| **`imageHeight`** | `int` | Image height in pixels |
-| **`imageType`** | `string` | Image format (e.g., `png`) |
-
-### Raid
-
-Each raid object in the `raids` array has the following structure:
-
-```json
-{
-  "name": "Tornadus (Incarnate)",
-  "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_641_11.png",
-  "canBeShiny": true,
   "imageWidth": 256,
   "imageHeight": 256,
   "imageType": "png"
@@ -319,7 +315,39 @@ Each raid object in the `raids` array has the following structure:
 |-------|------|-------------|
 | **`name`** | `string` | Pokemon name |
 | **`image`** | `string` | Pokemon image URL |
+| **`altText`** | `string` | Accessible alt text for the image |
+| **`source`** | `string` | Source type: `spawn`, `featured`, `incense`, `costumed`, `debut`, `maxDebut`, `raid`, `egg`, `research`, `reward`, `encounter` |
+| **`canBeShiny`** | `boolean` | Whether the Pokemon can be shiny |
+| **`dexNumber`** | `int\|null` | National Pokédex number, or `null` if not determinable |
+| **`imageWidth`** | `int` | Image width in pixels |
+| **`imageHeight`** | `int` | Image height in pixels |
+| **`imageType`** | `string` | Image format (e.g., `png`) |
+
+### Raid
+
+Each raid object in the `raids` array has the following structure:
+
+```json
+{
+  "name": "Regigigas",
+  "image": "https://pokemn.quest/pokemon/486-regigigas/pokemon_icon_486_00.png",
+  "altText": "",
+  "canBeShiny": true,
+  "dexNumber": 486,
+  "imageWidth": 256,
+  "imageHeight": 256,
+  "imageType": "png"
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| **`name`** | `string` | Pokemon name |
+| **`image`** | `string` | Pokemon image URL |
+| **`altText`** | `string` | Accessible alt text for the image |
 | **`canBeShiny`** | `boolean` | Whether the raid boss can be shiny |
+| **`dexNumber`** | `int\|null` | National Pokédex number, or `null` if not determinable |
+| **`tier`** | `string` | Raid tier (e.g., `1-Star`, `3-Star`, `5-Star`, `Mega`) |
 | **`imageWidth`** | `int` | Image width in pixels |
 | **`imageHeight`** | `int` | Image height in pixels |
 | **`imageType`** | `string` | Image format (e.g., `png`) |

@@ -37,9 +37,14 @@ The file contains an array of event objects with the `eventType` field set to `"
   "name": "Whismur Spotlight Hour",
   "eventType": "pokemon-spotlight-hour",
   "heading": "Pokemon Spotlight Hour",
-  "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_293_00.png",
+  "image": "https://pokemn.quest/pokemon/293-whismur/pokemon_icon_293_00.png",
+  "imageWidth": 256,
+  "imageHeight": 256,
+  "imageType": "jpg",
   "start": "2026-02-03T18:00:00.000",
   "end": "2026-02-03T19:00:00.000",
+  "isGlobal": false,
+  "eventStatus": "ended",
   "canBeShiny": true,
   "bonus": "2× Catch Stardust"
 }
@@ -63,10 +68,12 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`end`**          | `string`  | Event end time (ISO 8601 format, typically 19:00 local time)
 | **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
 | **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
+| **`canBeShiny`**   | `boolean` | Whether the featured Pokémon can be encountered as shiny
+| **`bonus`**        | `string`  | The gameplay bonus active during the hour (e.g., `"2× Catch Stardust"`)
 
 ## Additional Sections
 
-Spotlight Hour events have minimal structure with the core fields plus `canBeShiny` and `bonus` at the top level.
+Spotlight Hour events have a flat structure with the core fields plus `canBeShiny` and `bonus` at the top level — no nested pokemon arrays or detail sections.
 
 
 

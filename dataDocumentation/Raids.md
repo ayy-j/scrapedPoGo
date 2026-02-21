@@ -28,7 +28,8 @@ The endpoint returns a JSON array of raid boss objects:
     "types": [...],
     "combatPower": {...},
     "boostedWeather": [...],
-    "image": "https://pokemn.quest/images/pokemon/...",
+    "image": "https://pokemn.quest/pokemon/023-ekans/pm23.icon.png",
+    "altText": "",
     "imageWidth": 256,
     "imageHeight": 256,
     "imageType": "png"
@@ -57,6 +58,7 @@ All raid boss objects contain these fields:
 | **`image`**          | `string`      | Yes      | The image URL of the Pokemon.
 | **`imageWidth`**     | `int`         | Yes      | The width of the image in pixels.
 | **`imageHeight`**    | `int`         | Yes      | The height of the image in pixels.
+| **`altText`**        | `string`      | Yes      | Accessible alt text for the image.
 | **`imageType`**      | `string`      | Yes      | The image format (e.g., `png`).
 
 ## Nested Objects
@@ -69,7 +71,7 @@ Represents a Pokemon type with its icon.
 ```json
 {
     "name": "fire",
-    "image": "https://pokemn.quest/images/types/fire.png",
+    "image": "https://pokemn.quest/types/fire.png",
     "imageWidth": 32,
     "imageHeight": 32,
     "imageType": "png"
@@ -81,7 +83,7 @@ Represents a Pokemon type with its icon.
 | Field       | Type     | Description
 |------------ |--------- |---------------------
 | **`name`**  | `string` | The name of the type (e.g., `fire`, `water`, `grass`, `electric`, `psychic`, `fighting`, `dark`, `steel`, `fairy`, `dragon`, `ghost`, `bug`, `rock`, `ground`, `ice`, `poison`, `normal`, `flying`)
-| **`image`** | `string` | The image URL of the type icon. Format: `https://pokemn.quest/images/types/<type>.png`
+| **`image`** | `string` | The image URL of the type icon. Format: `https://pokemn.quest/types/<type>.png`
 | **`imageWidth`** | `int` | The width of the type icon in pixels (when available).
 | **`imageHeight`** | `int` | The height of the type icon in pixels (when available).
 | **`imageType`** | `string` | The type icon format (e.g., `png`) when available.
@@ -122,8 +124,8 @@ Represents weather conditions that boost the raid boss.
 **Example:**
 ```json
 {
-    "name": "foggy",
-    "image": "https://pokemn.quest/images/weather/foggy.png",
+    "name": "fog",
+    "image": "https://pokemn.quest/weather/foggy.png",
     "imageWidth": 32,
     "imageHeight": 32,
     "imageType": "png"
@@ -135,7 +137,7 @@ Represents weather conditions that boost the raid boss.
 | Field       | Type     | Description
 |------------ |--------- |---------------------
 | **`name`**  | `string` | The weather type. Values: `sunny`, `rainy`, `partly cloudy`, `cloudy`, `windy`, `snow`, `fog`
-| **`image`** | `string` | The image URL of the weather icon. Format: `https://pokemn.quest/images/weather/<weather>.png`
+| **`image`** | `string` | The image URL of the weather icon. Format: `https://pokemn.quest/weather/<weather>.png`
 | **`imageWidth`** | `int` | The width of the weather icon in pixels (when available).
 | **`imageHeight`** | `int` | The height of the weather icon in pixels (when available).
 | **`imageType`** | `string` | The weather icon format (e.g., `png`) when available.
@@ -179,7 +181,7 @@ The `eventStatus` field indicates when the boss is available:
 
 ## Image Paths (`pokemn.quest`)
 
-**Public**: `https://pokemn.quest/images/<path>`
+**Public**: `https://pokemn.quest/<path>`
 
 ### Canonical Path Scheme (blobNaming.js)
 
@@ -196,7 +198,7 @@ The `eventStatus` field indicates when the boss is available:
 | `stickers/<file>.png`        | Stickers                                           | `.../stickers/pikachu.png` |
 | `misc/<hash-or-file>`        | Fallback                                           | `.../misc/<hash>.bin` |
 
-> Publicly served by prefixing with `https://pokemn.quest/images/`
+> Publicly served by prefixing with `https://pokemn.quest/`
 
 ## Data Quality Notes
 

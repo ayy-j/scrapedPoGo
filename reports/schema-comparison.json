@@ -1,0 +1,509 @@
+{
+  "generatedAt": "2026-02-21T06:09:20.224Z",
+  "mode": "report",
+  "summary": {
+    "totals": {
+      "error": 0,
+      "warning": 1,
+      "info": 22
+    },
+    "byCategory": {
+      "coverage-doc": {
+        "error": 0,
+        "warning": 1,
+        "info": 0
+      },
+      "doc-field-table": {
+        "error": 0,
+        "warning": 0,
+        "info": 22
+      }
+    },
+    "byDataset": {
+      "eggs": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "raids": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "research": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "rocketLineups": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "shinies": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:community-day": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:event": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:go-battle-league": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:go-pass": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:go-rocket-takeover": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:max-battles": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:max-mondays": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:pokemon-go-tour": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:pokemon-spotlight-hour": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:pokestop-showcase": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:raid-battles": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:raid-day": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:raid-hour": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:research": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:research-breakthrough": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:research-day": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:season": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:special-research": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:team-go-rocket": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      },
+      "events:timed-research": {
+        "errors": 0,
+        "warnings": 0,
+        "status": "pass"
+      }
+    }
+  },
+  "findings": [
+    {
+      "severity": "warning",
+      "category": "coverage-doc",
+      "dataset": null,
+      "file": "dataDocumentation/DataFilesReadmeTable.md",
+      "path": null,
+      "message": "Documentation file is not mapped to a canonical schema/data/doc triplet: dataDocumentation/DataFilesReadmeTable.md",
+      "details": null
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Field \"research.field\" is not explicitly defined in canonical schema but allowed by additionalProperties (Field \"field\" not found while resolving \"research.field\".).",
+      "details": {
+        "line": 106,
+        "token": "research.field",
+        "error": "Field \"field\" not found while resolving \"research.field\"."
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Field \"research.special\" is not explicitly defined in canonical schema but allowed by additionalProperties (Field \"special\" not found while resolving \"research.special\".).",
+      "details": {
+        "line": 107,
+        "token": "research.special",
+        "error": "Field \"special\" not found while resolving \"research.special\"."
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Field \"research.timed\" is not explicitly defined in canonical schema but allowed by additionalProperties (Field \"timed\" not found while resolving \"research.timed\".).",
+      "details": {
+        "line": 108,
+        "token": "research.timed",
+        "error": "Field \"timed\" not found while resolving \"research.timed\"."
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Field \"research.masterwork\" is not explicitly defined in canonical schema but allowed by additionalProperties (Field \"masterwork\" not found while resolving \"research.masterwork\".).",
+      "details": {
+        "line": 109,
+        "token": "research.masterwork",
+        "error": "Field \"masterwork\" not found while resolving \"research.masterwork\"."
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Field \"research.breakthrough\" is not explicitly defined in canonical schema but allowed by additionalProperties (Field \"breakthrough\" not found while resolving \"research.breakthrough\".).",
+      "details": {
+        "line": 110,
+        "token": "research.breakthrough",
+        "error": "Field \"breakthrough\" not found while resolving \"research.breakthrough\"."
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"name\" at line 295 outside a top-level fields section.",
+      "details": {
+        "line": 295,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Pokemon"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"image\" at line 296 outside a top-level fields section.",
+      "details": {
+        "line": 296,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Pokemon"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"source\" at line 297 outside a top-level fields section.",
+      "details": {
+        "line": 297,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Pokemon"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"canBeShiny\" at line 298 outside a top-level fields section.",
+      "details": {
+        "line": 298,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Pokemon"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"imageWidth\" at line 299 outside a top-level fields section.",
+      "details": {
+        "line": 299,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Pokemon"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"imageHeight\" at line 300 outside a top-level fields section.",
+      "details": {
+        "line": 300,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Pokemon"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"imageType\" at line 301 outside a top-level fields section.",
+      "details": {
+        "line": 301,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Pokemon"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"name\" at line 320 outside a top-level fields section.",
+      "details": {
+        "line": 320,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Raid"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"image\" at line 321 outside a top-level fields section.",
+      "details": {
+        "line": 321,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Raid"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"canBeShiny\" at line 322 outside a top-level fields section.",
+      "details": {
+        "line": 322,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Raid"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"imageWidth\" at line 323 outside a top-level fields section.",
+      "details": {
+        "line": 323,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Raid"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"imageHeight\" at line 324 outside a top-level fields section.",
+      "details": {
+        "line": 324,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Raid"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"imageType\" at line 325 outside a top-level fields section.",
+      "details": {
+        "line": 325,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Raid"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"name\" at line 345 outside a top-level fields section.",
+      "details": {
+        "line": 345,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Battle.League"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"cpCap\" at line 346 outside a top-level fields section.",
+      "details": {
+        "line": 346,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Battle.League"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"typeRestrictions\" at line 347 outside a top-level fields section.",
+      "details": {
+        "line": 347,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Battle.League"
+        ]
+      }
+    },
+    {
+      "severity": "info",
+      "category": "doc-field-table",
+      "dataset": "events",
+      "file": "dataDocumentation/Events.md",
+      "path": null,
+      "message": "Skipping ambiguous field token \"rules\" at line 348 outside a top-level fields section.",
+      "details": {
+        "line": 348,
+        "context": [
+          "Events Data",
+          "Other Objects",
+          "Battle.League"
+        ]
+      }
+    }
+  ],
+  "coverage": {
+    "unmatchedDataFiles": [],
+    "unmatchedDocFiles": [
+      "dataDocumentation/DataFilesReadmeTable.md"
+    ]
+  }
+}

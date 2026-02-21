@@ -11,7 +11,7 @@
     "name": "Bulbasaur",
     "eggType": "1km",
     "isAdventureSync": false,
-    "image": "https://pokemn.quest/images/pokemon/pm1.png",
+    "image": "https://pokemn.quest/pokemon/001-bulbasaur/pm1.icon.png",
     "canBeShiny": true,
     "combatPower": {
         "min": 637,

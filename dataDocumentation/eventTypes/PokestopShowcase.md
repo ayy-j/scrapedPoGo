@@ -33,11 +33,18 @@ The file contains an array of event objects with the `eventType` field set to `"
   "image": "https://pokemn.quest/events/pokestop-showcases-default.jpg",
   "start": "2026-02-02T10:00:00.000",
   "end": "2026-02-04T20:00:00.000",
+  "isGlobal": false,
+  "eventStatus": "ended",
   "pokemon": [
     {
       "name": "Ludicolo",
-      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_272_00.png",
+      "image": "https://pokemn.quest/pokemon/272-ludicolo/pokemon_icon_272_00.png",
+      "altText": "",
       "canBeShiny": false,
+      "dexNumber": 272,
+      "imageWidth": 256,
+      "imageHeight": 256,
+      "imageType": "png",
       "source": "featured"
     }
   ],
@@ -68,8 +75,24 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field           | Type     | Description
 |---------------- |--------- |---------------------
-| **`pokemon`**   | `array`  | Featured Pokémon eligible for showcase with `name`, `image`, `canBeShiny`, `source`
+| **`pokemon`**   | `array`  | Featured Pokémon eligible for showcase (see Pokémon Item Fields below)
 | **`description`**| `string`| Competition rules and details
+
+### Pokémon Item Fields
+
+Each object in the `pokemon` array has:
+
+| Field              | Type          | Description
+|------------------- |-------------- |---------------------
+| **`name`**         | `string`      | Pokémon name (e.g., `"Ludicolo"`)
+| **`image`**        | `string`      | Image URL for the Pokémon
+| **`altText`**      | `string`      | Alt text for the image (may be empty)
+| **`canBeShiny`**   | `boolean`     | Whether this Pokémon can be encountered as shiny
+| **`dexNumber`**    | `int \| null` | National Pokédex number, or `null` if unavailable
+| **`imageWidth`**   | `int`         | Image width in pixels
+| **`imageHeight`**  | `int`         | Image height in pixels
+| **`imageType`**    | `string`      | Image format (e.g., `"png"`)
+| **`source`**       | `string`      | Source context (e.g., `"featured"`)
 
 
 

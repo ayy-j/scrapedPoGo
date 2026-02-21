@@ -36,8 +36,13 @@ The file contains an array of event objects with the `eventType` field set to `"
   "shadowPokemon": [
     {
       "name": "Shadow Beldum",
-      "image": "https://pokemn.quest/images/pokemon/pm374.png",
-      "canBeShiny": true
+      "image": "https://pokemn.quest/pokemon/374-beldum/pm374.icon.png",
+      "altText": "",
+      "canBeShiny": true,
+      "dexNumber": 374,
+      "imageWidth": 256,
+      "imageHeight": 256,
+      "imageType": "png"
     }
   ],
   "leaders": {
@@ -48,8 +53,13 @@ The file contains an array of event objects with the `eventType` field set to `"
   "giovanni": [
     {
       "name": "Shadow Lugia",
-      "image": "https://pokemn.quest/images/pokemon/pm249.png",
-      "canBeShiny": false
+      "image": "https://pokemn.quest/pokemon/249-lugia/pm249.icon.png",
+      "altText": "",
+      "canBeShiny": false,
+      "dexNumber": 249,
+      "imageWidth": 256,
+      "imageHeight": 256,
+      "imageType": "png"
     }
   ],
   "grunts": [],
@@ -100,11 +110,16 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### Pokémon Entry (in shadowPokemon, leaders, giovanni, grunts)
 
-| Field            | Type      | Description
-|----------------- |---------- |---------------------
-| **`name`**       | `string`  | Pokémon name
-| **`image`**      | `string`  | Pokémon image URL
-| **`canBeShiny`** | `boolean` | Whether this Pokémon can be shiny
+| Field            | Type         | Description
+|----------------- |------------- |---------------------
+| **`name`**       | `string`     | Pokémon name
+| **`image`**      | `string`     | Pokémon image URL (e.g., `https://pokemn.quest/pokemon/374-beldum/pm374.icon.png`)
+| **`altText`**    | `string`     | Accessible alt text for the image
+| **`canBeShiny`** | `boolean`    | Whether this Pokémon can be shiny
+| **`dexNumber`**  | `int\|null`  | National Pokédex number, or `null` if unavailable
+| **`imageWidth`** | `int`        | Pokémon image width in pixels
+| **`imageHeight`**| `int`        | Pokémon image height in pixels
+| **`imageType`**  | `string`     | Image format (e.g., `"png"`)
 
 ## Scraper
 

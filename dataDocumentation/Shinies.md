@@ -47,18 +47,18 @@ Each entry in the `shinies` array represents a Pokémon (or regional variant) wi
   "forms": [
     {
       "name": "f19",
-      "image": "https://pokemn.quest/images/pokemon/shiny/pm0001_fall2019.png",
+      "image": "https://pokemn.quest/pokemon/001-bulbasaur/pm1.fFALL_2019.s.icon.png",
       "imageWidth": 256,
       "imageHeight": 256
     },
     {
       "name": "11",
-      "image": "https://pokemn.quest/images/pokemon/shiny/pm001.png",
+      "image": "https://pokemn.quest/pokemon/001-bulbasaur/pokemon_icon_001_00_shiny.png",
       "imageWidth": 256,
       "imageHeight": 256
     }
   ],
-  "image": "https://pokemn.quest/images/pokemon/shiny/pm001.png",
+  "image": "https://pokemn.quest/pokemon/001-bulbasaur/pokemon_icon_001_00_shiny.png",
   "imageWidth": 256,
   "imageHeight": 256
 }
@@ -101,7 +101,8 @@ Regional variants are represented as separate entries with their own `dexNumber`
   "releasedDate": "2019-06-04",
   "family": "Vulpix_61",
   "region": "alolan",
-  "image": "https://pokemn.quest/images/pokemon/shiny/pm037_61.png",
+  "forms": [],
+  "image": "https://pokemn.quest/pokemon/037-vulpix/pm37.f61.s.icon.png",
   "imageWidth": 256,
   "imageHeight": 256
 }

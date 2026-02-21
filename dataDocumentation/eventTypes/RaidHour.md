@@ -63,9 +63,11 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`isGlobal`**     | `boolean` | Whether the event uses a global start time (no local timezone offset)
 | **`eventStatus`**  | `string`  | Computed status: `upcoming`, `active`, or `ended`
 
-## Additional Sections
+### Raid Hour-Specific Fields
 
-Raid Hour events have minimal structure with the core fields and `canBeShiny` flag.
+| Field            | Type      | Description
+|----------------- |---------- |---------------------
+| **`canBeShiny`** | `boolean` | Whether the featured raid boss can be shiny
 
 
 

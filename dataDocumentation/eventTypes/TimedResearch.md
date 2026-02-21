@@ -48,8 +48,13 @@ The file contains an array of event objects with the `eventType` field set to `"
   "encounters": [
     {
       "name": "Furfrou",
-      "image": "https://pokemn.quest/images/pokemon/pm676.png",
-      "canBeShiny": true
+      "image": "https://pokemn.quest/pokemon/676-furfrou/pm676.icon.png",
+      "altText": "",
+      "canBeShiny": true,
+      "dexNumber": 676,
+      "imageWidth": 128,
+      "imageHeight": 128,
+      "imageType": "png"
     }
   ],
   "availability": {
@@ -87,8 +92,21 @@ The file contains an array of event objects with the `eventType` field set to `"
 | **`price`**        | `number\|null`| Ticket price in USD if paid, `null` otherwise
 | **`tasks`**        | `array`       | Research task steps (may be individual tasks or step-grouped)
 | **`rewards`**      | `array`       | List of reward descriptions
-| **`encounters`**   | `array`       | Pokémon encounter rewards with `name`, `image`, `canBeShiny`
+| **`encounters`**   | `array`       | Pokémon encounter rewards (see encounters[] Entry below)
 | **`availability`** | `object`      | Human-readable availability window
+
+### encounters[] Entry
+
+| Field            | Type         | Description
+|----------------- |------------- |---------------------
+| **`name`**       | `string`     | Pokémon name
+| **`image`**      | `string`     | Pokémon image URL (e.g., `https://pokemn.quest/pokemon/676-furfrou/pm676.icon.png`)
+| **`altText`**    | `string`     | Accessible alt text for the image
+| **`canBeShiny`** | `boolean`    | Whether this Pokémon can be shiny
+| **`dexNumber`**  | `int\|null`  | National Pokédex number, or `null` if unavailable
+| **`imageWidth`** | `int`        | Pokémon image width in pixels
+| **`imageHeight`**| `int`        | Pokémon image height in pixels
+| **`imageType`**  | `string`     | Image format (e.g., `"png"`)
 
 ### availability Object
 

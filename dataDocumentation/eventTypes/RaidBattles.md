@@ -33,18 +33,25 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ```json
 {
-  "eventID": "mega-ampharos-in-mega-raids-january-2026",
-  "name": "Mega Ampharos in Mega Raids",
+  "eventID": "mega-sableye-in-mega-raids-february-2026",
+  "name": "Mega Sableye in Mega Raids",
   "eventType": "raid-battles",
   "heading": "Raid Battles",
   "image": "https://pokemn.quest/events/mega-default.jpg",
-  "start": "2026-01-25T10:00:00.000",
-  "end": "2026-02-04T10:00:00.000",
+  "imageWidth": 524,
+  "imageHeight": 256,
+  "imageType": "jpg",
+  "start": "2026-02-16T10:00:00.000",
+  "end": "2026-02-21T10:00:00.000",
+  "isGlobal": false,
+  "eventStatus": "active",
   "raids": [
     {
-      "name": "Mega Ampharos",
-      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_181_51.png",
+      "name": "Mega Sableye",
+      "image": "https://pokemn.quest/pokemon/302-sableye/pokemon_icon_302_51.png",
+      "altText": "",
       "canBeShiny": true,
+      "dexNumber": 302,
       "imageWidth": 256,
       "imageHeight": 256,
       "imageType": "png"
@@ -52,9 +59,14 @@ The file contains an array of event objects with the `eventType` field set to `"
   ],
   "shinies": [
     {
-      "name": "Ampharos",
-      "image": "https://pokemn.quest/pokemon_icons/pokemon_icon_181_00_shiny.png",
-      "canBeShiny": true
+      "name": "Sableye",
+      "image": "https://pokemn.quest/pokemon/302-sableye/pokemon_icon_302_00_shiny.png",
+      "altText": "",
+      "canBeShiny": true,
+      "dexNumber": 302,
+      "imageWidth": 256,
+      "imageHeight": 256,
+      "imageType": "png"
     }
   ]
 }
@@ -83,8 +95,8 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field           | Type     | Description
 |---------------- |--------- |---------------------
-| **`raids`**     | `array`  | Array of raid boss objects with `name`, `image`, `canBeShiny`, `imageWidth`, `imageHeight`, `imageType`
-| **`shinies`**   | `array`  | Array of shiny-eligible Pokemon objects
+| **`raids`**     | `array`  | Array of raid boss objects with `name`, `image`, `altText`, `canBeShiny`, `dexNumber`, `imageWidth`, `imageHeight`, `imageType`
+| **`shinies`**   | `array`  | Array of shiny-eligible Pokemon objects with `name`, `image`, `altText`, `canBeShiny`, `dexNumber`, `imageWidth`, `imageHeight`, `imageType`
 | **`raidAlternation`** | `string` | Rotation pattern description (if bosses alternate)
 | **`raidFeaturedAttacks`** | `array` | Featured exclusive moves available during the event
 

@@ -77,7 +77,7 @@ The file contains an array of event objects with the `eventType` field set to `"
 |---------------- |---------- |---------------------
 | **`description`**| `string` | Event description text
 | **`isPaid`**    | `boolean` | Whether the event requires payment
-| **`price`**     | `string\|null` | Ticket price if paid event
+| **`price`**     | `number\|null` | Ticket price in USD if paid event, `null` otherwise
 | **`tasks`**     | `array`   | Research tasks available
 | **`rewards`**   | `array`   | Event rewards
 | **`encounters`**| `array`   | Encounter Pokémon

@@ -33,24 +33,27 @@ The file contains an array of event objects with the `eventType` field set to `"
   "image": "https://pokemn.quest/events/events-default-img.jpg",
   "start": "2026-01-01T13:00:00.000",
   "end": "2026-02-01T13:00:00.000",
-  "name": "Furfrou",
+  "featuredName": "Furfrou",
   "canBeShiny": true,
-  "image": "https://pokemn.quest/images/pokemon/pm676.png",
+  "featuredImage": "https://pokemn.quest/pokemon/676-furfrou/pm676.icon.png",
   "imageWidth": 128,
   "imageHeight": 128,
   "list": [
     {
       "name": "Furfrou",
-      "image": "https://pokemn.quest/images/pokemon/pm676.png",
+      "image": "https://pokemn.quest/pokemon/676-furfrou/pm676.icon.png",
+      "altText": "",
       "canBeShiny": true,
+      "dexNumber": 676,
       "imageWidth": 128,
-      "imageHeight": 128
+      "imageHeight": 128,
+      "imageType": "png"
     }
   ]
 }
 ```
 
-> **Note:** The breakthrough scraper `Object.assign`s its data directly onto the event, so fields like `name`, `image`, `canBeShiny`, and `list` appear at the top level.
+> **Note:** The breakthrough scraper `Object.assign`s its data directly onto the event, so fields like `featuredName`, `featuredImage`, `canBeShiny`, and `list` appear at the top level.
 
 ## Fields
 
@@ -82,13 +85,16 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ### list[] Entry
 
-| Field            | Type      | Description
-|----------------- |---------- |---------------------
-| **`name`**       | `string`  | Pokémon name
-| **`image`**      | `string`  | Pokémon image URL
-| **`canBeShiny`** | `boolean` | Whether this Pokémon can be shiny
-| **`imageWidth`** | `int`     | Image width in pixels
-| **`imageHeight`**| `int`     | Image height in pixels
+| Field            | Type         | Description
+|----------------- |------------- |---------------------
+| **`name`**       | `string`     | Pokémon name
+| **`image`**      | `string`     | Pokémon image URL (e.g., `https://pokemn.quest/pokemon/676-furfrou/pm676.icon.png`)
+| **`altText`**    | `string`     | Accessible alt text for the image
+| **`canBeShiny`** | `boolean`    | Whether this Pokémon can be shiny
+| **`dexNumber`**  | `int\|null`  | National Pokédex number, or `null` if unavailable
+| **`imageWidth`** | `int`        | Pokémon image width in pixels
+| **`imageHeight`**| `int`        | Pokémon image height in pixels
+| **`imageType`**  | `string`     | Image format (e.g., `"png"`)
 
 ## Scraper
 
@@ -100,5 +106,5 @@ Extracts the featured breakthrough reward Pokémon from the `.pkmn-list-flex` co
 
 - Research Breakthrough periods typically last one month
 - The `list` array contains all possible encounter rewards for the period
-- The top-level `name` and `image` fields may be overwritten with the primary featured Pokémon's data
+- The top-level `featuredName` and `featuredImage` fields contain the primary featured Pokémon's data
 - Shiny availability is cross-referenced with the shinies dataset

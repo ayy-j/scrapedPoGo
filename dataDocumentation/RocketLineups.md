@@ -15,7 +15,10 @@
         [
             {
                 "name": "Magikarp",
-                "image": "https://pokemn.quest/images/pokemon/pm129.png",
+                "image": "https://pokemn.quest/pokemon/129-magikarp/pm129.icon.png",
+                "imageWidth": 134,
+                "imageHeight": 146,
+                "imageType": "png",
                 "types": [
                     "water"
                 ],
@@ -33,7 +36,10 @@
         [
             {
                 "name": "Cradily",
-                "image": "https://pokemn.quest/images/pokemon/pm346.png",
+                "image": "https://pokemn.quest/pokemon/346-cradily/pm346.icon.png",
+                "imageWidth": 204,
+                "imageHeight": 181,
+                "imageType": "png",
                 "types": [
                     "rock",
                     "grass"
@@ -54,7 +60,10 @@
         [
             {
                 "name": "Tyranitar",
-                "image": "https://pokemn.quest/images/pokemon/pm248.png",
+                "image": "https://pokemn.quest/pokemon/248-tyranitar/pm248.icon.png",
+                "imageWidth": 237,
+                "imageHeight": 206,
+                "imageType": "png",
                 "types": [
                     "rock",
                     "dark"
@@ -98,8 +107,8 @@
 ```json
 {
     "name": "Magikarp",
-    "image": "https://pokemn.quest/images/pokemon/pm129.png",
-    "imageWidth": 256,
+    "image": "https://pokemn.quest/pokemon/129-magikarp/pm129.icon.png",
+    "imageWidth": 134,
     "imageHeight": 256,
     "imageType": "png",
     "types": [
@@ -123,6 +132,7 @@
 |------------------------- |----------- |---------------------
 | **`name`**               | `string`   | The name of the Shadow Pokemon.
 | **`image`**              | `string`   | The image of the Shadow Pokemon.
+| **`altText`**            | `string`   | Accessible alt text for the image.
 | **`imageWidth`**         | `int`      | The image width in pixels (when available).
 | **`imageHeight`**        | `int`      | The image height in pixels (when available).
 | **`imageType`**          | `string`   | The image format (e.g., `png`) when available.
@@ -231,6 +241,10 @@
           "format": "uri",
           "description": "The image of the Shadow Pokemon"
         },
+        "altText": {
+          "type": "string",
+          "description": "Accessible alt text for the image"
+        },
         "imageWidth": {
           "type": "integer",
           "description": "The image width in pixels"
@@ -249,10 +263,6 @@
             "gif",
             "webp"
           ]
-        },
-        "altText": {
-          "type": "string",
-          "description": "Accessible alt text for the image"
         },
         "types": {
           "type": "array",

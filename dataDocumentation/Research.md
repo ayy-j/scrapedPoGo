@@ -15,7 +15,7 @@
             "type": "item",
             "name": "Mysterious Component",
             "quantity": 1,
-            "image": "https://pokemn.quest/images/items/mysterious-component.png",
+            "image": "https://pokemn.quest/items/mysterious-component.png",
             "imageWidth": 512,
             "imageHeight": 512,
             "imageType": "png"
@@ -28,20 +28,20 @@
 
 ```json
 {
-    "text": "Earn a Candy exploring with your buddy",
-    "type": "buddy",
+    "text": "Catch 12 Pokémon",
+    "type": "catch",
     "rewards": [
         {
             "type": "encounter",
-            "name": "Fidough",
-            "image": "https://pokemn.quest/images/pokemon/pm926.png",
+            "name": "Darumaka",
+            "image": "https://pokemn.quest/pokemon/554-darumaka/pm554.icon.png",
             "canBeShiny": true,
             "combatPower": {
-                "min": 389,
-                "max": 422
+                "min": 576,
+                "max": 618
             },
-            "imageWidth": 91,
-            "imageHeight": 79,
+            "imageWidth": 117,
+            "imageHeight": 108,
             "imageType": "png"
         }
     ]
@@ -52,7 +52,7 @@
 | Field         | Type            | Description
 |-------------- |---------------- |---------------------
 | **`text`**    | `string`        | The research task text.
-| **`type`**    | `string\|null`  | The type of research (optional).<br />Can be `event`, `catch`, `throw`, `battle`, `explore`, `training`, `rocket`, `buddy`, `ar`, `sponsored`, or `null` if not specified
+| **`type`**    | `string\|null`  | The type of research.<br />Can be `event`, `catch`, `throw`, `battle`, `explore`, `training`, `rocket`, `buddy`, `ar`, `sponsored`, or `null` if not specified
 | **`rewards`** | `Reward[]`      | The rewards for completing the research task. See [Reward](#Reward)
 
 ## Other Objects
@@ -66,15 +66,15 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
 ```json
 {
     "type": "encounter",
-    "name": "Fidough",
-    "image": "https://pokemn.quest/images/pokemon/pm926.png",
+    "name": "Darumaka",
+    "image": "https://pokemn.quest/pokemon/554-darumaka/pm554.icon.png",
     "canBeShiny": true,
     "combatPower": {
-        "min": 389,
-        "max": 422
+        "min": 576,
+        "max": 618
     },
-    "imageWidth": 91,
-    "imageHeight": 79,
+    "imageWidth": 117,
+    "imageHeight": 108,
     "imageType": "png"
 }
 ```
@@ -86,7 +86,7 @@ Rewards can be one of three types: `encounter`, `item`, or `resource`. The field
     "type": "item",
     "name": "Mysterious Component",
     "quantity": 1,
-    "image": "https://pokemn.quest/images/items/mysterious-component.png",
+    "image": "https://pokemn.quest/items/mysterious-component.png",
     "imageWidth": 512,
     "imageHeight": 512,
     "imageType": "png"

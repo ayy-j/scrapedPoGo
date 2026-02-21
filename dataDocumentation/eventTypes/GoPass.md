@@ -4,7 +4,7 @@
 
 ## Description
 
-This file contains all GO Pass events, which are special paid events requiring tickets for participation. These typically include GO Fest, Safari Zone, and other premium events.
+This file contains all GO Pass events. GO Pass is a recurring system where Trainers collect GO Points by completing tasks and rank up to earn rewards. Each GO Pass period has a free track and optional paid Deluxe/Deluxe+ tiers with additional rewards.
 
 ## Data Structure
 
@@ -26,37 +26,45 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 ```json
 {
-  "eventID": "party-play-pass-paid-timed-research-february-2026",
-  "name": "Party Play Pass",
+  "eventID": "go-pass-february-2026",
+  "name": "GO Pass: February",
   "eventType": "go-pass",
   "heading": "Go Pass",
-  "image": "https://pokemn.quest/events/events-default-img.jpg",
-  "start": "2026-02-01T10:00:00.000",
-  "end": "2026-02-03T20:00:00.000",
+  "image": "https://pokemn.quest/events/2026-02-03-go-pass-february-2026.jpg",
+  "imageWidth": 640,
+  "imageHeight": 360,
+  "imageType": "jpg",
+  "start": "2026-02-03T10:00:00.000",
+  "end": "2026-03-03T10:00:00.000",
+  "isGlobal": false,
+  "eventStatus": "active",
   "pricing": {
-    "usd": "$2.99"
+    "deluxe": 7.99,
+    "deluxePlus": 9.99
   },
-  "pointTasks": [
-    {
-      "task": "Walk 1 km",
-      "points": 5
-    },
-    {
-      "task": "Catch 3 Pokémon with Party Play",
-      "points": 15
-    }
-  ],
-  "milestoneBonuses": [
-    {
-      "bonus": "3 Poké Balls",
-      "points": 0
-    },
-    {
-      "bonus": "500 Stardust",
-      "points": 10
-    }
-  ],
-  "description": "Party Play Pass holders will have access to special tasks and rewards."
+  "pointTasks": {
+    "daily": [],
+    "weekly": [
+      {
+        "task": "Catch 75 Pokémon",
+        "points": 200
+      },
+      {
+        "task": "Win a raid",
+        "points": 150
+      },
+      {
+        "task": "Make 20 Great Throws",
+        "points": 150
+      }
+    ],
+    "bonus": []
+  },
+  "milestoneBonuses": {
+    "free": [],
+    "deluxe": []
+  },
+  "description": "Trainers will automatically receive GO Pass: February on Tuesday, February 3, at 10:00 a.m. local time. You can collect GO Points and rank up to get additional rewards through Tuesday, March 3, at 10:00 a.m. local time."
 }
 ```
 
@@ -83,10 +91,10 @@ The file contains an array of event objects with the `eventType` field set to `"
 
 | Field               | Type     | Description
 |-------------------- |--------- |---------------------
-| **`pricing`**       | `object` | Price in different currencies (e.g., `{"usd": "$2.99"}`)
-| **`pointTasks`**    | `array`  | Tasks to earn points, each with `task` (string) and `points` (number)
-| **`milestoneBonuses`**| `array`| Rewards at point thresholds, each with `bonus` (string) and `points` (number)
-| **`description`**   | `string` | Full description of pass benefits
+| **`pricing`**       | `object` | Pricing per tier. Keys are tier names (`deluxe`, `deluxePlus`), values are numeric USD prices (e.g., `{"deluxe": 7.99, "deluxePlus": 9.99}`)
+| **`pointTasks`**    | `object` | Tasks to earn GO Points, grouped by cadence. Keys: `daily`, `weekly`, `bonus` — each an array of `{task, points}` objects
+| **`milestoneBonuses`**| `object`| Rewards earned at point thresholds, grouped by tier. Keys: `free`, `deluxe` — each an array of milestone reward objects
+| **`description`**   | `string` | Description of the GO Pass period and how to participate
 
 ## Additional Sections
 
@@ -96,7 +104,7 @@ GO Pass events may include detailed task and reward structures when scraped from
 
 ## Notes
 
-- GO Pass events require a purchased ticket to access exclusive features
-- These are typically the largest events in Pokémon GO
-- May include both in-person and global variants
-- Often feature exclusive Special Research storylines
+- Every GO Pass has a free track; Deluxe and Deluxe+ tiers unlock additional milestone rewards
+- `pointTasks` categories (`daily`, `weekly`, `bonus`) may be empty arrays when tasks have not yet been announced
+- `milestoneBonuses` tiers (`free`, `deluxe`) may be empty arrays when rewards have not yet been announced
+- Pricing values are numeric USD amounts (e.g., `7.99`), not formatted currency strings
