@@ -44,21 +44,34 @@ function loadShinyData() {
 		}
 		
 		const data = JSON.parse(fs.readFileSync(shinyFilePath, 'utf8'));
-		const shinyMap = new Map();
-		
-		// Handle both flat array format and wrapped {shinies: [...]} format
-		const entries = Array.isArray(data) ? data : (data.shinies && Array.isArray(data.shinies) ? data.shinies : []);
-		entries.forEach(entry => {
-			shinyMap.set(entry.dexNumber, entry);
-		});
-		
-		// Cache avoids re-reading ~400KB file; measured ~1.3ms per read+parse on local data.
-		shinyDataCache = shinyMap;
-		return shinyMap;
+		return setShinyData(data);
 	} catch (error) {
 		console.error('Error loading shiny data:', error.message);
 		return new Map();
 	}
+}
+
+/**
+ * Manually populates the shiny data cache.
+ * Useful for priming the cache with fresh data from a concurrent scrape,
+ * bypassing disk I/O.
+ *
+ * @param {Array<Object>} data - Array of shiny Pokemon objects
+ * @returns {Map<number, ShinyEntry>} Populated map
+ */
+function setShinyData(data) {
+    const shinyMap = new Map();
+
+    // Handle both flat array format and wrapped {shinies: [...]} format
+    const entries = Array.isArray(data) ? data : (data && data.shinies && Array.isArray(data.shinies) ? data.shinies : []);
+    entries.forEach(entry => {
+        if (entry && entry.dexNumber) {
+            shinyMap.set(entry.dexNumber, entry);
+        }
+    });
+
+    shinyDataCache = shinyMap;
+    return shinyMap;
 }
 
 /**
@@ -127,6 +140,7 @@ function hasShiny(shinyMap, dexNumber, form = null) {
 
 module.exports = {
 	loadShinyData,
+	setShinyData,
 	extractDexNumber,
 	hasShiny
 };

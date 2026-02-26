@@ -16,6 +16,7 @@ const rocketLineups = require('../pages/rocketLineups')
 const shinies = require('../pages/shinies')
 const { saveCache } = require('../utils/imageDimensions');
 const { initUrlMap } = require('../utils/blobUrls');
+const { setShinyData } = require('../utils/shinyData');
 
 dotenv.config();
 dotenv.config({ path: '.env.local' });
@@ -43,16 +44,28 @@ async function main()
     if (!fs.existsSync('data'))
         fs.mkdirSync('data');
 
-    // Events must be scraped first as Raids scraper depends on events data
-    await events.get();
+    // Events and Shinies can be scraped in parallel first.
+    // Shinies are needed for raids/research/eggs to verify shiny status.
+    // Events are needed for raids to determine event status.
+    const [_, shinyData] = await Promise.all([
+        events.get(),
+        shinies.get()
+    ]);
+
+    // Populate the in-memory shiny cache so subsequent scrapers
+    // don't need to read from disk.
+    if (shinyData && shinyData.length > 0) {
+        setShinyData(shinyData);
+        logger.info(`Primed shiny cache with ${shinyData.length} entries.`);
+    }
 
     // Run remaining scrapers in parallel
+    // These depend on the shiny data being available in memory (or on disk)
     await Promise.all([
         raids.get(),
         research.get(),
         eggs.get(),
-        rocketLineups.get(),
-        shinies.get()
+        rocketLineups.get()
     ]);
 
     await saveCache();

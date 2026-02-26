@@ -283,7 +283,7 @@ async function scrapeShinies() {
  * 
  * @async
  * @function get
- * @returns {Promise<void>}
+ * @returns {Promise<ShinyPokemon[]>} Array of shiny Pokemon data
  */
 async function get() {
     logger.start('Scraping shiny Pokemon data from PogoAssets...');
@@ -292,8 +292,10 @@ async function get() {
         const output = transformUrls(data);
         fs.writeFileSync('data/shinies.min.json', JSON.stringify(output));
         logger.success(`Successfully saved ${output.length} shinies to data/shinies.min.json`);
+        return output;
     } catch (error) {
         logger.error('Failed to scrape shinies:', error.message);
+        return [];
     }
 }
 
