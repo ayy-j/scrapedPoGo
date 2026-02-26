@@ -43,27 +43,62 @@ const { validateUrl } = require('./security');
 
 /**
  * Fetches content from a URL with a timeout and user-agent.
+ * Protects against SSRF by manually handling redirects and validating each target.
+ *
  * @param {string} url - URL to fetch
  * @param {number} [timeout=30000] - Timeout in milliseconds
  * @returns {Promise<string>} Response text
  */
 async function fetchUrl(url, timeout = 30000) {
-    if (!validateUrl(url)) {
-        throw new Error(`Invalid or blocked URL: ${url}`);
+    let currentUrl = url;
+    const maxRedirects = 5;
+
+    // Initial validation
+    if (!validateUrl(currentUrl)) {
+        throw new Error(`Invalid or blocked URL: ${currentUrl}`);
     }
+
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
+
     try {
-        const response = await fetch(url, {
-            signal: controller.signal,
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; ScrapedPoGo/1.0; +https://github.com/quantNebula/scrapedPoGo)'
+        for (let i = 0; i < maxRedirects; i++) {
+            const response = await fetch(currentUrl, {
+                signal: controller.signal,
+                redirect: 'manual', // Don't follow automatically
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (compatible; ScrapedPoGo/1.0; +https://github.com/quantNebula/scrapedPoGo)'
+                }
+            });
+
+            // Handle redirects (301, 302, 303, 307, 308)
+            if (response.status >= 300 && response.status < 400) {
+                const location = response.headers.get('location');
+                if (!location) {
+                    throw new Error(`Redirect with no location header at ${currentUrl}`);
+                }
+
+                // Resolve relative URLs
+                const nextUrl = new URL(location, currentUrl).href;
+
+                // Validate the redirect target
+                if (!validateUrl(nextUrl)) {
+                    throw new Error(`Blocked redirect to: ${nextUrl}`);
+                }
+
+                currentUrl = nextUrl;
+                continue; // Loop to fetch the new URL
             }
-        });
-        if (!response.ok) {
-            throw new Error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch ${currentUrl}: ${response.status} ${response.statusText}`);
+            }
+
+            return await response.text();
         }
-        return await response.text();
+
+        throw new Error(`Too many redirects (max ${maxRedirects})`);
+
     } finally {
         clearTimeout(id);
     }
