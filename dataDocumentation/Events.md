@@ -256,19 +256,19 @@ These boolean flags indicate what content is available for an event (flat at top
 | **`price`** | `number\|null` | Event ticket price, or `null` if free |
 | **`tasks`** | `array` | Research tasks (alternative structure) |
 | **`habitatRotation`** | `array` | GO Tour habitat rotation schedule |
-| **`megaRaidSchedule`** | `array` | Mega Raid boss schedule by day |
+| **`megaRaidSchedule`** | `object` | Mega Raid boss schedule by day |
 | **`bonusCategories`** | `array` | Categorized bonus groups (e.g., GO Tour bonus categories) |
 | **`branchingResearch`** | `object` | Branching Special Research paths |
 | **`costumedPokemon`** | `array` | Costumed Pokemon available during the event |
 | **`megaDebuts`** | `array` | New Mega Evolutions debuting during the event |
 | **`specialBackgrounds`** | `array` | Special backgrounds available during the event |
 | **`timedResearchRegions`** | `array` | Region-specific Timed Research details |
-| **`routes`** | `array` | Route-related Pokemon/information |
+| **`routes`** | `object` | Route-related Pokemon/information |
 | **`eventLocations`** | `array` | In-person event locations |
 | **`eventTags`** | `array` | Event categorization tags |
 | **`researchType`** | `string` | Type of research (special, masterwork, timed) |
 | **`expires`** | `boolean` | Whether the research expires |
-| **`webStoreInfo`** | `object` | Web store information/URL |
+| **`webStoreInfo`** | `string` | Web store information/URL |
 | **`promoCodes`** | `array` | Promotional codes for the event |
 
 **eventInfo Object Structure:**

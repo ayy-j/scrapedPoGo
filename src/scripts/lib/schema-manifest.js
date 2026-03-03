@@ -16,8 +16,8 @@ const eventTypes = [
   { slug: 'go-rocket-takeover', doc: 'GoRocketTakeover', dataOptional: true },
   { slug: 'max-battles', doc: 'MaxBattles' },
   { slug: 'max-mondays', doc: 'MaxMondays' },
-  { slug: 'pokemon-go-tour', doc: 'PokemonGoTour' },
-  { slug: 'pokemon-spotlight-hour', doc: 'PokemonSpotlightHour' },
+  { slug: 'pokemon-go-tour', doc: 'PokemonGoTour', dataOptional: true },
+  { slug: 'pokemon-spotlight-hour', doc: 'PokemonSpotlightHour', dataOptional: true },
   { slug: 'pokestop-showcase', doc: 'PokestopShowcase' },
   { slug: 'raid-battles', doc: 'RaidBattles' },
   { slug: 'raid-day', doc: 'RaidDay' },
@@ -80,7 +80,8 @@ const eventTypeEntries = eventTypes.map((et) => ({
 
 const auxiliaryFiles = [
   'dataDocumentation/API.md',
-  'dataDocumentation/Endpoints.md'
+  'dataDocumentation/Endpoints.md',
+  'dataDocumentation/DataFilesReadmeTable.md'
 ];
 
 module.exports = [...canonicalDatasets, ...eventTypeEntries];
