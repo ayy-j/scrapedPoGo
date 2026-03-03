@@ -149,10 +149,13 @@ Key shared utilities from `scraperUtils.js` — prefer these over rolling your o
 
 ### Event Type Dispatch (Stage 2)
 
-`detailedscrape.js` maps each `eventType` from `events.min.json` to a scraper module. The `generic.js` scraper always runs for metadata. Concurrency is limited to 5 simultaneous events.
+`detailedscrape.js` maps each `eventType` from `events.min.json` to a scraper module. Concurrency is limited to 5 simultaneous events.
+
+For **every** event, `generic.js` always runs to extract shared metadata (description, dates, location). In addition, a type-specific scraper runs based on the `eventType`:
 
 | `eventType` value | Scraper module |
 |-------------------|---------------|
+| _(all events)_ | `generic.js` (always runs for metadata) |
 | `research-breakthrough` | `breakthrough.js` |
 | `pokemon-spotlight-hour` | `spotlight.js` |
 | `community-day` | `communityday.js` |
